@@ -1479,6 +1479,8 @@ int Saig_ManBmcScalable( Aig_Man_t * pAig, Saig_ParBmc_t * pPars )
         pPars->nTimeOutOne = 0;
     nTimeToStopNG = pPars->nTimeOut ? pPars->nTimeOut * CLOCKS_PER_SEC + Abc_Clock(): 0;
     nTimeToStop   = Saig_ManBmcTimeToStop( pPars, nTimeToStopNG );
+    // [DGhosh] added on 29/06/2023    
+    int unDefTryOnce = 0;
     // create BMC manager
     p = Saig_Bmc3ManStart( pAig, pPars->nTimeOutOne, pPars->nConfLimit, pPars->fUseSatoko, pPars->fUseGlucose );
     p->pPars = pPars;
@@ -1639,9 +1641,9 @@ clkOther += Abc_Clock() - clk2;
             if ( p->pTime4Outs && p->pTime4Outs[i] == 0 )
                 continue;
             // add constraints for this output
-clk2 = Abc_Clock();
+            clk2 = Abc_Clock();
             Lit = Saig_ManBmcCreateCnf( p, pObj, f );
-clkOther += Abc_Clock() - clk2;
+            clkOther += Abc_Clock() - clk2;
             // solve this output
             fUnfinished = 0;
             if ( p->pSat ) sat_solver_compress( p->pSat );
@@ -1656,9 +1658,9 @@ clkOther += Abc_Clock() - clk2;
                 else
                     sat_solver_set_runtime_limit( p->pSat, p->pTime4Outs[i] + Abc_Clock() );
             }
-clk2 = Abc_Clock();
+            loopOnce: clk2 = Abc_Clock();
             status = Saig_ManCallSolver( p, Lit );
-clkSatRun = Abc_Clock() - clk2;
+            clkSatRun = Abc_Clock() - clk2;
             if ( pLogFile )
                 fprintf( pLogFile, "Frame %5d  Output %5d  Time(ms) %8d %8d\n", f, i, 
                     Lit < 2 ? 0 : (int)(clkSatRun * 1000 / CLOCKS_PER_SEC),
@@ -1673,7 +1675,7 @@ clkSatRun = Abc_Clock() - clk2;
             }
             if ( status == l_False )
             {
-nTimeUnsat += clkSatRun;
+                nTimeUnsat += clkSatRun;
                 if ( Lit != 0 )
                 {
                     // add final unit clause
@@ -1704,7 +1706,7 @@ nTimeUnsat += clkSatRun;
             }
             else if ( status == l_True )
             {
-nTimeSat += clkSatRun;
+                nTimeSat += clkSatRun;
                 RetValue = 0;
                 fFirst = 0;
                 if ( !pPars->fSolveAll )
@@ -1727,6 +1729,7 @@ nTimeSat += clkSatRun;
 //                        ABC_PRMn( "SAT", 42 * p->pSat->size + 16 * (int)p->pSat->stats.clauses + 4 * (int)p->pSat->stats.clauses_literals );
 //                        Abc_Print( 1, "S =%6d. ", p->nBufNum );
 //                        Abc_Print( 1, "D =%6d. ", p->nDupNum );
+                        Abc_Print( 1, "Status: %d \n", status );
                         Abc_Print( 1, "\n" );
                         fflush( stdout );
                     }
@@ -1772,6 +1775,7 @@ nTimeSat += clkSatRun;
                 // check if other outputs failed under the same counter-example
                 Saig_ManForEachPo( pAig, pObj, k )
                 {
+                    Abc_Cex_t * pCexDup;
                     if ( k >= Saig_ManPoNum(pAig) )
                         break;
                     // skip solved outputs
@@ -1807,14 +1811,45 @@ nTimeSat += clkSatRun;
                         Gia_ManToBridgeResult( stdout, 0, pCexNew0, pCexNew0->iPo );
                     }
                     // remember solved output
-                    Vec_PtrWriteEntry( p->vCexes, k, Abc_CexDup(pCexNew, Saig_ManRegNum(pAig)) );
+                    //Vec_PtrWriteEntry( p->vCexes, k, Abc_CexDup(pCexNew, Saig_ManRegNum(pAig)) );
+                    pCexDup = Abc_CexDup(pCexNew, Saig_ManRegNum(pAig));
+                    pCexDup->iPo = k;
+                    Vec_PtrWriteEntry( p->vCexes, k, pCexDup );
                 }
                 Abc_CexFreeP( &pCexNew0 );
                 Abc_CexFree( pCexNew );
             }
-            else 
+            else // status = l_Undef
             {
-nTimeUndec += clkSatRun;
+                nTimeUndec += clkSatRun;
+                // [DGhosh] added on 28/06/2023
+                if (nTimeUndec > 0.25*(pPars->nTimeOut) && unDefTryOnce == 0){
+                    printf("Running Once again status: %d nTimeUndec:%ld nTimeOut:%d tryOnce:%d\n", status, nTimeUndec, (pPars->nTimeOut), unDefTryOnce);
+                    nTimeUndec -= clkSatRun;
+                    // add constraints for this output
+                    clk2 = Abc_Clock();
+                    Lit = Saig_ManBmcCreateCnf( p, pObj, f );
+                    clkOther += Abc_Clock() - clk2;
+                    // add a frame limit
+                    //p->nFramesMax = f+1;
+                    // solve this output
+                    fUnfinished = 0;
+                    if ( p->pSat ) sat_solver_compress( p->pSat );
+                    if ( p->pTime4Outs )
+                    {
+                        assert( p->pTime4Outs[i] > 0 );
+                        clkOne = Abc_Clock();
+                        if ( p->pSat2 )
+                            satoko_set_runtime_limit( p->pSat2, 2*(p->pTime4Outs[i]) + Abc_Clock() );
+                        else if ( p->pSat3 )
+                            bmcg_sat_solver_set_runtime_limit( p->pSat3, 2*(p->pTime4Outs[i]) + Abc_Clock() );
+                        else
+                            sat_solver_set_runtime_limit( p->pSat, 2*(p->pTime4Outs[i]) + Abc_Clock() );
+                    }
+                    unDefTryOnce += 1;
+                    goto loopOnce;
+                }
+                //----
                 assert( status == l_Undef );
                 if ( pPars->nFramesJump )
                 {
@@ -1857,6 +1892,8 @@ nTimeUndec += clkSatRun;
 //            ABC_PRMn( "SAT", 42 * p->pSat->size + 16 * (int)p->pSat->stats.clauses + 4 * (int)p->pSat->stats.clauses_literals );
 //            Abc_Print( 1, "Simples = %6d. ", p->nBufNum );
 //            Abc_Print( 1, "Dups = %6d. ", p->nDupNum );
+
+            Abc_Print( 1, "Status: %d", status );
             Abc_Print( 1, "\n" );
             fflush( stdout );
         }

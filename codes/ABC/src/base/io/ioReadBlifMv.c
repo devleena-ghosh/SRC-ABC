@@ -585,7 +585,7 @@ char * Io_MvLoadFileBz2( char * pFileName, int * pnFileSize )
         p = pContents = ABC_ALLOC( char, nFileSize + 10 );
         buf = bufHead;
         do {
-            memcpy(p+nBytes,buf->buf,buf->nBuf);
+            memcpy(p+nBytes,buf->buf,(size_t)buf->nBuf);
             nBytes += buf->nBuf;
 //        } while((buf = buf->next));
             pNext = buf->next;
@@ -1351,7 +1351,8 @@ static int Io_MvParseLineSubckt( Io_MvMod_t * p, char * pLine )
     Abc_Ntk_t * pModel;
     Abc_Obj_t * pBox, * pNet, * pTerm;
     char * pToken, * pName, * pName2, ** ppNames;
-    int nEquals, Last, i, k;
+    int nEquals, i, k;
+    word Last;
 
     // split the line into tokens
     nEquals = Io_MvCountChars( pLine, '=' );
@@ -1404,9 +1405,9 @@ static int Io_MvParseLineSubckt( Io_MvMod_t * p, char * pLine )
         pName2 = NULL;
         pName = Abc_ObjName(Abc_ObjFanout0(pTerm));
         for ( k = 0; k < nEquals; k++ )
-            if ( !strcmp( ppNames[2*((k+Last)%nEquals)], pName ) )
+            if ( !strcmp( ppNames[2*(int)((k+Last)%nEquals)], pName ) )
             {
-                pName2 = ppNames[2*((k+Last)%nEquals)+1];
+                pName2 = ppNames[2*(int)((k+Last)%nEquals)+1];
                 Last = k+Last+1;
                 break;
             }
@@ -1420,8 +1421,8 @@ static int Io_MvParseLineSubckt( Io_MvMod_t * p, char * pLine )
 */
         if ( pName2 == NULL )
         {
-            Abc_Obj_t * pNode = Abc_NtkCreateNode( p->pNtk );
-            pNode->pData = Abc_SopRegister( (Mem_Flex_t *)p->pNtk->pManFunc, " 0\n" );
+            Abc_Obj_t * pNode = Abc_NtkCreateNodeConst0( p->pNtk );
+            //pNode->pData = Abc_SopRegister( (Mem_Flex_t *)p->pNtk->pManFunc, " 0\n" );
             pNet = Abc_NtkFindOrCreateNet( p->pNtk, Abc_ObjNameSuffix(pNode, "abc") );
             Abc_ObjAddFanin( pNet, pNode );
             pTerm = Abc_NtkCreateBi( p->pNtk );
@@ -1656,7 +1657,7 @@ static int Io_MvWriteValues( Abc_Obj_t * pNode, Vec_Str_t * vFunc )
 ***********************************************************************/
 static int Io_MvParseLiteralMv( Io_MvMod_t * p, Abc_Obj_t * pNode, char * pToken, Vec_Str_t * vFunc, int iLit )
 {
-    char Buffer[10];
+    char Buffer[16];
     Io_MvVar_t * pVar;
     Abc_Obj_t * pFanin, * pNet;
     char * pCur, * pNext;
@@ -2268,12 +2269,25 @@ static int Io_MvParseLineGateBlif( Io_MvMod_t * p, Vec_Ptr_t * vTokens )
     }
 
     // if this is the first line with gate, update the network type
-    if ( Abc_NtkNodeNum(p->pNtk) == 0 )
+    if ( Abc_NtkNodeNum(p->pNtk) == 0 && p->pNtk->ntkFunc == ABC_FUNC_SOP )
     {
         assert( p->pNtk->ntkFunc == ABC_FUNC_SOP );
         p->pNtk->ntkFunc = ABC_FUNC_MAP;
         Mem_FlexStop( (Mem_Flex_t *)p->pNtk->pManFunc, 0 );
         p->pNtk->pManFunc = pGenlib;
+        if ( p->pMan && p->pMan->pDesign && Vec_PtrSize(p->pMan->pDesign->vModules) > 0 )
+        {
+            Abc_Ntk_t * pModel; int k;
+            Vec_PtrForEachEntry( Abc_Ntk_t *, p->pMan->pDesign->vModules, pModel, k )
+            {
+                if ( pModel == p->pNtk )
+                    continue;
+                assert( pModel->ntkFunc == ABC_FUNC_SOP );
+                pModel->ntkFunc = ABC_FUNC_MAP;
+                Mem_FlexStop( (Mem_Flex_t *)pModel->pManFunc, 0 );
+                pModel->pManFunc = pGenlib;
+            }
+        }
     }
 
     // reorder the formal inputs to be in the same order as in the gate

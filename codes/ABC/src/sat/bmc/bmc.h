@@ -54,10 +54,15 @@ struct Bmc_EsPar_t_
     int        fMajority;
     int        fUseIncr;
     int        fOnlyAnd;
+    int        fDynConstr;
+    int        fDumpCnf;
     int        fGlucose;
     int        fOrderNodes;
     int        fEnumSols;
     int        fFewerVars;
+    int        fQuadrEnc;
+    int        fUniqFans;
+    int        RuntimeLim;
     int        fVerbose; 
     char *     pTtStr;
 };
@@ -72,10 +77,15 @@ static inline void Bmc_EsParSetDefault( Bmc_EsPar_t * pPars )
     pPars->fMajority   = 0; 
     pPars->fUseIncr    = 0;
     pPars->fOnlyAnd    = 0; 
+    pPars->fDynConstr  = 0; 
+    pPars->fDumpCnf    = 0; 
     pPars->fGlucose    = 0; 
     pPars->fOrderNodes = 0; 
     pPars->fEnumSols   = 0; 
     pPars->fFewerVars  = 0; 
+    pPars->fQuadrEnc   = 0; 
+    pPars->fUniqFans   = 0; 
+    pPars->RuntimeLim  = 0;
     pPars->fVerbose    = 1; 
 }
 
@@ -186,6 +196,7 @@ struct Bmc_ParFf_t_
     int        fNonStrict;
     int        fBasic;
     int        fFfOnly;
+    int        fCheckUntest;
     int        fDump;
     int        fDumpDelay;
     int        fDumpUntest;
@@ -217,6 +228,8 @@ extern Abc_Cex_t *       Bmc_CexCareExtendToObjects( Gia_Man_t * p, Abc_Cex_t * 
 extern Abc_Cex_t *       Bmc_CexCareMinimize( Aig_Man_t * p, int nRealPis, Abc_Cex_t * pCex, int nTryCexes, int fCheck, int fVerbose );
 extern Abc_Cex_t *       Bmc_CexCareMinimizeAig( Gia_Man_t * p, int nRealPis, Abc_Cex_t * pCex, int nTryCexes, int fCheck, int fVerbose );
 extern void              Bmc_CexCareVerify( Aig_Man_t * p, Abc_Cex_t * pCex, Abc_Cex_t * pCexMin, int fVerbose );
+extern Abc_Cex_t *       Bmc_CexCareSatBasedMinimize( Aig_Man_t * p, int nRealPis, Abc_Cex_t * pCex, int fHighEffort, int fCheck, int fVerbose );
+extern Abc_Cex_t *       Bmc_CexCareSatBasedMinimizeAig( Gia_Man_t * p, Abc_Cex_t * pCex, int fHighEffort, int fVerbose );
 /*=== bmcCexCut.c ==========================================================*/
 extern Gia_Man_t *       Bmc_GiaTargetStates( Gia_Man_t * p, Abc_Cex_t * pCex, int iFrBeg, int iFrEnd, int fCombOnly, int fGenAll, int fAllFrames, int fVerbose );
 extern Aig_Man_t *       Bmc_AigTargetStates( Aig_Man_t * p, Abc_Cex_t * pCex, int iFrBeg, int iFrEnd, int fCombOnly, int fGenAll, int fAllFrames, int fVerbose );

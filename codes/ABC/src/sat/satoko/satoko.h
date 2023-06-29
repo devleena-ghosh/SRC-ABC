@@ -143,6 +143,9 @@ extern int satoko_read_cex_varvalue(satoko_t *, int);
 extern abctime satoko_set_runtime_limit(satoko_t *, abctime);
 extern char satoko_var_polarity(satoko_t *, unsigned);
 
+// [DGhosh] added on 28/06/2023
+extern abctime satoko_get_runtime_limit(satoko_t *);
+
 
 ABC_NAMESPACE_HEADER_END
 #endif /* satoko__satoko_h */

@@ -18,10 +18,13 @@
 
 ***********************************************************************/
 
+#include <ctype.h>
+
 #include "gia.h"
 #include "misc/tim/tim.h"
 #include "proof/abs/abs.h"
 #include "opt/dar/dar.h"
+#include "misc/extra/extra.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -85,13 +88,18 @@ void Gia_ManStop( Gia_Man_t * p )
     assert( p->pManTime == NULL );
     Vec_PtrFreeFree( p->vNamesIn );
     Vec_PtrFreeFree( p->vNamesOut );
+    Vec_PtrFreeFree( p->vNamesNode );
     Vec_IntFreeP( &p->vSwitching );
     Vec_IntFreeP( &p->vSuper );
     Vec_IntFreeP( &p->vStore );
     Vec_IntFreeP( &p->vClassNew );
     Vec_IntFreeP( &p->vClassOld );
+    Vec_IntFreeP( &p->vPats );
+    Vec_BitFreeP( &p->vPolars );
     Vec_WrdFreeP( &p->vSims );
+    Vec_WrdFreeP( &p->vSimsT );
     Vec_WrdFreeP( &p->vSimsPi );
+    Vec_WrdFreeP( &p->vSimsPo );
     Vec_IntFreeP( &p->vTimeStamps );
     Vec_FltFreeP( &p->vTiming );
     Vec_VecFreeP( &p->vClockDoms );
@@ -122,6 +130,7 @@ void Gia_ManStop( Gia_Man_t * p )
     Vec_IntFreeP( &p->vVar2Obj );
     Vec_IntErase( &p->vCopiesTwo );
     Vec_IntErase( &p->vSuppVars );
+    Vec_IntErase( &p->vVarMap );
     Vec_WrdFreeP( &p->vSuppWords );
     Vec_IntFreeP( &p->vTtNums );
     Vec_IntFreeP( &p->vTtNodes );
@@ -140,6 +149,7 @@ void Gia_ManStop( Gia_Man_t * p )
     Vec_IntFreeP( &p->vCoReqs );
     Vec_IntFreeP( &p->vCoArrs );
     Vec_IntFreeP( &p->vCoAttrs );
+    Vec_IntFreeP( &p->vWeights );
     Gia_ManStopP( &p->pAigExtra );
     Vec_IntFree( p->vCis );
     Vec_IntFree( p->vCos );
@@ -194,6 +204,7 @@ double Gia_ManMemory( Gia_Man_t * p )
     Memory += Vec_FltMemory( p->vOutReqs );
     Memory += Vec_PtrMemory( p->vNamesIn );
     Memory += Vec_PtrMemory( p->vNamesOut );
+    Memory += Vec_PtrMemory( p->vNamesNode );
     return Memory;
 }
 
@@ -240,10 +251,10 @@ void Gia_ManPrintClasses_old( Gia_Man_t * p )
     {
         Gia_Man_t * pTemp;
         pTemp = Gia_ManDupFlopClass( p, 1 );
-        Gia_AigerWrite( pTemp, "dom1.aig", 0, 0 );
+        Gia_AigerWrite( pTemp, "dom1.aig", 0, 0, 0 );
         Gia_ManStop( pTemp );
         pTemp = Gia_ManDupFlopClass( p, 2 );
-        Gia_AigerWrite( pTemp, "dom2.aig", 0, 0 );
+        Gia_AigerWrite( pTemp, "dom2.aig", 0, 0, 0 );
         Gia_ManStop( pTemp );
     }
 }
@@ -441,14 +452,59 @@ int Gia_ManPrintEdges( Gia_Man_t * p )
   SeeAlso     []
 
 ***********************************************************************/
+/*
+void Gia_ManLogAigStats( Gia_Man_t * p, char * pDumpFile )
+{
+    FILE * pTable = fopen( pDumpFile, "wb" );
+    fprintf( pTable, "Name = %24s     ", p->pName );
+    fprintf( pTable, "In = %6d   ",      Gia_ManCiNum(p) );
+    fprintf( pTable, "Out = %6d   ",     Gia_ManCoNum(p) );
+    fprintf( pTable, "And = %8d   ",     Gia_ManAndNum(p) );
+    fprintf( pTable, "Lev = %6d",        Gia_ManLevelNum(p) );
+    fprintf( pTable, "\n" );
+    fclose( pTable );
+}
+*/
+void Gia_ManLogAigStats( Gia_Man_t * p, char * pDumpFile )
+{
+    FILE * pTable = fopen( pDumpFile, "wb" );
+    fprintf( pTable, "{\n" );
+    fprintf( pTable, "    \"name\" : \"%s\",\n", p->pName );
+    fprintf( pTable, "    \"input\" : %d,\n",    Gia_ManCiNum(p) );
+    fprintf( pTable, "    \"output\" : %d,\n",   Gia_ManCoNum(p) );
+    fprintf( pTable, "    \"and\" : %d,\n",      Gia_ManAndNum(p) );
+    fprintf( pTable, "    \"level\" : %d\n",     Gia_ManLevelNum(p) );
+    fprintf( pTable, "}\n" );
+    fclose( pTable );
+}
+
+/**Function*************************************************************
+
+  Synopsis    [Prints stats for the AIG.]
+
+  Description []
+               
+  SideEffects []
+
+  SeeAlso     []
+
+***********************************************************************/
 void Gia_ManPrintStats( Gia_Man_t * p, Gps_Par_t * pPars )
 {
     extern float Gia_ManLevelAve( Gia_Man_t * p );
+    int fHaveLevels = p->vLevels != NULL;
     if ( pPars && pPars->fMiter )
     {
         Gia_ManPrintStatsMiter( p, 0 );
         return;
     }
+    if ( pPars && pPars->fNoColor )
+    {
+        if ( p->pName )
+            Abc_Print( 1, "%-8s : ", p->pName );
+    }
+    else
+    {
 #ifdef WIN32
     SetConsoleTextAttribute( GetStdHandle(STD_OUTPUT_HANDLE), 15 ); // bright
     if ( p->pName )
@@ -458,6 +514,7 @@ void Gia_ManPrintStats( Gia_Man_t * p, Gps_Par_t * pPars )
     if ( p->pName )
         Abc_Print( 1, "%s%-8s%s : ", "\033[1;37m", p->pName, "\033[0m" );  // bright
 #endif
+    }
     Abc_Print( 1, "i/o =%7d/%7d", 
         Gia_ManPiNum(p) - Gia_ManBoxCiNum(p) - Gia_ManRegBoxNum(p), 
         Gia_ManPoNum(p) - Gia_ManBoxCoNum(p) - Gia_ManRegBoxNum(p) );
@@ -467,7 +524,14 @@ void Gia_ManPrintStats( Gia_Man_t * p, Gps_Par_t * pPars )
         Abc_Print( 1, "  ff =%7d", Gia_ManRegNum(p) );
     if ( Gia_ManRegBoxNum(p) )
         Abc_Print( 1, "  boxff =%d(%d)", Gia_ManRegBoxNum(p), Gia_ManClockDomainNum(p) );
-
+    if ( pPars && pPars->fNoColor )
+    {
+        Abc_Print( 1, "  %s =%8d", p->pMuxes? "nod" : "and", Gia_ManAndNum(p) );
+        Abc_Print( 1, "  lev =%5d", Gia_ManLevelNum(p) ); 
+        Abc_Print( 1, " (%.2f)", Gia_ManLevelAve(p) ); 
+    }
+    else
+    {
 #ifdef WIN32
     {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -475,7 +539,7 @@ void Gia_ManPrintStats( Gia_Man_t * p, Gps_Par_t * pPars )
     Abc_Print( 1, "  %s =%8d", p->pMuxes? "nod" : "and", Gia_ManAndNum(p) );
     SetConsoleTextAttribute( hConsole, 13 ); // magenta
     Abc_Print( 1, "  lev =%5d", Gia_ManLevelNum(p) ); 
-    Abc_Print( 1, " (%.2f)", Gia_ManLevelAve(p) ); 
+    Abc_Print( 1, " (%7.2f)", Gia_ManLevelAve(p) ); 
     SetConsoleTextAttribute( hConsole, 7 ); // normal
     }
 #else
@@ -483,7 +547,9 @@ void Gia_ManPrintStats( Gia_Man_t * p, Gps_Par_t * pPars )
     Abc_Print( 1, "  %slev =%5d%s", "\033[1;35m", Gia_ManLevelNum(p), "\033[0m" ); // magenta
     Abc_Print( 1, " %s(%.2f)%s",    "\033[1;35m", Gia_ManLevelAve(p), "\033[0m" ); 
 #endif
-    Vec_IntFreeP( &p->vLevels );
+    }
+    if ( !fHaveLevels ) 
+        Vec_IntFreeP( &p->vLevels );
     if ( pPars && pPars->fCut )
         Abc_Print( 1, "  cut = %d(%d)", Gia_ManCrossCut(p, 0), Gia_ManCrossCut(p, 1) );
     Abc_Print( 1, "  mem =%5.2f MB", Gia_ManMemory(p)/(1<<20) );
@@ -495,6 +561,8 @@ void Gia_ManPrintStats( Gia_Man_t * p, Gps_Par_t * pPars )
         Abc_Print( 1, "  bb = %d", Gia_ManBlackBoxNum(p) );
     if ( Gia_ManBufNum(p) )
         Abc_Print( 1, "  buf = %d", Gia_ManBufNum(p) );
+    if ( Gia_ManXorNum(p) && p->pMuxes == NULL )
+        Abc_Print( 1, "  xor = %d", Gia_ManXorNum(p) );
     if ( pPars && pPars->fMuxXor )
         printf( "\nXOR/MUX " ), Gia_ManPrintMuxStats( p );
     if ( pPars && pPars->fSwitch )
@@ -516,7 +584,9 @@ void Gia_ManPrintStats( Gia_Man_t * p, Gps_Par_t * pPars )
         Gia_ManEquivPrintClasses( p, 0, 0.0 );
     if ( Gia_ManHasMapping(p) && (pPars == NULL || !pPars->fSkipMap) )
         Gia_ManPrintMappingStats( p, pPars ? pPars->pDumpFile : NULL );
-    if ( pPars && pPars->fNpn && Gia_ManHasMapping(p) && Gia_ManLutSizeMax(p) <= 4 )
+    else if ( pPars && pPars->pDumpFile )
+        Gia_ManLogAigStats( p, pPars->pDumpFile );
+    if ( pPars && pPars->fNpn && Gia_ManHasMapping(p) )
         Gia_ManPrintNpnClasses( p );
     if ( p->vPacking )
         Gia_ManPrintPackingStats( p );
@@ -1120,6 +1190,272 @@ void Gia_ManDfsSlacksPrint( Gia_Man_t * p )
     Vec_IntFree( vCounts );
 }
 
+
+/**Function*************************************************************
+
+  Synopsis    [Compute arrival/required times.]
+
+  Description []
+               
+  SideEffects []
+
+  SeeAlso     []
+
+***********************************************************************/
+Vec_Bit_t * Gia_ManGenUsed( Gia_Man_t * p, int fBuf )
+{
+    Gia_Obj_t * pObj; int i;
+    Vec_Bit_t * vUsed = Vec_BitStart( Gia_ManObjNum(p) );
+    Gia_ManForEachAnd( p, pObj, i )
+    {
+        if ( fBuf )
+            Vec_BitWriteEntry( vUsed, i, 1 );
+        if ( Gia_ObjFaninC0(pObj) ^ fBuf )
+            Vec_BitWriteEntry( vUsed, Gia_ObjFaninId0(pObj, i), 1 );
+        if ( Gia_ObjFaninC1(pObj) ^ fBuf )
+            Vec_BitWriteEntry( vUsed, Gia_ObjFaninId1(pObj, i), 1 );
+    }
+    Gia_ManForEachCo( p, pObj, i )
+        if ( Gia_ObjFaninC0(pObj) ^ fBuf )
+            Vec_BitWriteEntry( vUsed, Gia_ObjFaninId0p(p, pObj), 1 );
+    Vec_BitWriteEntry( vUsed, 0, 0 ); // clean zero
+    return vUsed;
+}
+int Gia_ManNameIsLegalInVerilog( char * pName )
+{
+    // identifier ::= simple_identifier | escaped_identifier
+    // simple_identifier ::= [a-zA-Z_][a-zA-Z0-9_$]
+    // escaped_identifier ::= \ {Any_ASCII_character_except_white_space} white_space
+    // white_space ::= space | tab | newline
+    assert( pName != NULL && *pName != '\0' );
+    if ( *pName == '\\' )
+        return 1;
+    if ( (*pName < 'a' || *pName > 'z') && (*pName < 'A' || *pName > 'Z') && *pName != '_' )
+        return 0;
+    while ( *(++pName) )
+        if ( (*pName < 'a' || *pName > 'z') && (*pName < 'A' || *pName > 'Z') && (*pName < '0' || *pName > '9') && *pName != '_' && *pName != '$' ) 
+            return 0;
+    return 1;
+}
+char * Gia_ObjGetDumpName( Vec_Ptr_t * vNames, char c, int i, int d )
+{
+    static char pBuffer[10000];
+    if ( vNames )
+    {
+        char * pName = (char *)Vec_PtrEntry(vNames, i);
+        if ( Gia_ManNameIsLegalInVerilog(pName) )
+            sprintf( pBuffer, "%s", pName );
+        else
+            sprintf( pBuffer, "\\%s ", pName );
+    }
+    else
+        sprintf( pBuffer, "%c%0*d%c", c, d, i, c );
+    return pBuffer;
+}
+void Gia_ManWriteNames( FILE * pFile, char c, int n, Vec_Ptr_t * vNames, int Start, int Skip, Vec_Bit_t * vObjs )
+{
+    int Digits = Abc_Base10Log( n );
+    int Length = Start, i, fFirst = 1; 
+    char * pName;
+    for ( i = 0; i < n; i++ )
+    {
+        if ( vObjs && !Vec_BitEntry(vObjs, i) )
+            continue;
+        pName = Gia_ObjGetDumpName( vNames, c, i, Digits );
+        Length += strlen(pName) + 2;
+        if ( Length > 60 )
+        {
+            fprintf( pFile, ",\n    " );
+            Length = Skip;
+            fFirst = 1;
+        }
+        fprintf( pFile, "%s%s", fFirst ? "":", ", pName );
+        fFirst = 0;
+    }
+}
+void Gia_ManDumpVerilog( Gia_Man_t * p, char * pFileName, Vec_Int_t * vObjs, int fVerBufs )
+{
+    FILE * pFile;
+    Gia_Obj_t * pObj;
+    Vec_Bit_t * vInvs, * vUsed;
+    int nDigits  = Abc_Base10Log( Gia_ManObjNum(p) );
+    int nDigitsI = Abc_Base10Log( Gia_ManPiNum(p) );
+    int nDigitsO = Abc_Base10Log( Gia_ManPoNum(p) );
+    int i, k, iObj;
+    if ( Gia_ManRegNum(p) )
+    {
+        printf( "Currently cannot write sequential AIG.\n" );
+        return;
+    }
+    pFile = fopen( pFileName, "wb" );
+    if ( pFile == NULL )
+    {
+        printf( "Cannot open output file \"%s\".\n", pFileName );
+        return;
+    }
+
+    vInvs = Gia_ManGenUsed( p, 0 );
+    vUsed = Gia_ManGenUsed( p, 1 );
+
+    //fprintf( pFile, "// This Verilog file is written by ABC on %s\n\n", Extra_TimeStamp() );
+
+    fprintf( pFile, "module " );
+    for ( i = 0; i < (int)strlen(p->pName); i++ )
+        if ( isalpha(p->pName[i]) || isdigit(p->pName[i]) )
+            fprintf( pFile, "%c", p->pName[i] );
+        else
+            fprintf( pFile, "_" );
+
+    if ( fVerBufs )
+    {
+        fprintf( pFile, " (\n    " );
+        Gia_ManWriteNames( pFile, 'a', Gia_ManPiNum(p), NULL, 4, 4, NULL );
+        fprintf( pFile, ",\n    " );
+
+        Gia_ManWriteNames( pFile, 'y', Gia_ManPoNum(p), NULL, 4, 4, NULL );
+        fprintf( pFile, "\n  );\n\n" );
+
+        fprintf( pFile, "  input " );
+        Gia_ManWriteNames( pFile, 'a', Gia_ManPiNum(p), NULL, 8, 4, NULL );
+        fprintf( pFile, ";\n\n" );
+
+        fprintf( pFile, "  output " );
+        Gia_ManWriteNames( pFile, 'y', Gia_ManPoNum(p), NULL, 9, 4, NULL );
+        fprintf( pFile, ";\n\n" );
+
+        fprintf( pFile, "  wire " );
+        Gia_ManWriteNames( pFile, 'x', Gia_ManPiNum(p), p->vNamesIn, 8, 4, NULL );
+        fprintf( pFile, ";\n\n" );
+
+        fprintf( pFile, "  wire " );
+        Gia_ManWriteNames( pFile, 'z', Gia_ManPoNum(p), p->vNamesOut, 9, 4, NULL );
+        fprintf( pFile, ";\n\n" );
+
+        Gia_ManForEachPi( p, pObj, i )
+        {
+            fprintf( pFile, "  buf ( %s,", Gia_ObjGetDumpName(p->vNamesIn, 'x', i, nDigitsI) );
+            fprintf( pFile, " %s );\n", Gia_ObjGetDumpName(NULL, 'a', i, nDigitsI) );
+        }
+        fprintf( pFile, "\n" );
+
+        Gia_ManForEachPo( p, pObj, i )
+        {
+            fprintf( pFile, "  buf ( %s,", Gia_ObjGetDumpName(NULL, 'y', i, nDigitsO) );
+            fprintf( pFile, " %s );\n", Gia_ObjGetDumpName(p->vNamesOut, 'z', i, nDigitsO) );
+        }
+        fprintf( pFile, "\n" );
+    }
+    else
+    {
+        fprintf( pFile, " (\n    " );
+        Gia_ManWriteNames( pFile, 'x', Gia_ManPiNum(p), p->vNamesIn, 4, 4, NULL );
+        fprintf( pFile, ",\n    " );
+
+        Gia_ManWriteNames( pFile, 'z', Gia_ManPoNum(p), p->vNamesOut, 4, 4, NULL );
+        fprintf( pFile, "\n  );\n\n" );
+
+        fprintf( pFile, "  input " );
+        Gia_ManWriteNames( pFile, 'x', Gia_ManPiNum(p), p->vNamesIn, 8, 4, NULL );
+        fprintf( pFile, ";\n\n" );
+
+        fprintf( pFile, "  output " );
+        Gia_ManWriteNames( pFile, 'z', Gia_ManPoNum(p), p->vNamesOut, 9, 4, NULL );
+        fprintf( pFile, ";\n\n" );
+    }
+
+    if ( Vec_BitCount(vUsed) )
+    {
+        fprintf( pFile, "  wire " );
+        Gia_ManWriteNames( pFile, 'n', Gia_ManObjNum(p), NULL, 7, 4, vUsed );
+        fprintf( pFile, ";\n\n" );
+    }
+
+    if ( Vec_BitCount(vInvs) )
+    {
+        fprintf( pFile, "  wire " );
+        Gia_ManWriteNames( pFile, 'i', Gia_ManObjNum(p), NULL, 7, 4, vInvs );
+        fprintf( pFile, ";\n\n" );
+    }
+
+    if ( vObjs )
+    {
+        fprintf( pFile, "  wire " );
+        Vec_IntForEachEntry( vObjs, iObj, i )
+            fprintf( pFile, " t_%d%s", i, i==Vec_IntSize(vObjs)-1 ? "" : "," ); 
+        fprintf( pFile, ";\n\n" );
+        Vec_IntForEachEntry( vObjs, iObj, i )
+        {
+            fprintf( pFile, "  buf ( %s,", Gia_ObjGetDumpName(NULL, 'n', iObj, nDigits) );
+            fprintf( pFile, " t_%d );\n", i );
+        }
+        fprintf( pFile, "\n" );
+    }
+
+    // input inverters
+    Gia_ManForEachPi( p, pObj, i )
+    {
+        if ( Vec_BitEntry(vUsed, Gia_ObjId(p, pObj)) )
+        {
+            fprintf( pFile, "  buf ( %s,", Gia_ObjGetDumpName(NULL, 'n', Gia_ObjId(p, pObj), nDigits) );
+            fprintf( pFile, " %s );\n",   Gia_ObjGetDumpName(p->vNamesIn, 'x', i, nDigitsI) );
+        }
+        if ( Vec_BitEntry(vInvs, Gia_ObjId(p, pObj)) )
+        {
+            fprintf( pFile, "  not ( %s,", Gia_ObjGetDumpName(NULL, 'i', Gia_ObjId(p, pObj), nDigits) );
+            fprintf( pFile, " %s );\n",   Gia_ObjGetDumpName(p->vNamesIn, 'x', i, nDigitsI) );
+        }
+    }
+
+    // internal nodes and their inverters
+    fprintf( pFile, "\n" );
+    Gia_ManForEachAnd( p, pObj, i )
+    {
+        int fSkip = 0;
+        if ( vObjs )
+        {
+            Vec_IntForEachEntry( vObjs, iObj, k )
+                if ( iObj == i )
+                    break;
+            if ( k < Vec_IntSize(vObjs) )
+                fSkip = 1;
+        }
+        if ( !fSkip )
+        {
+            fprintf( pFile, "  and ( %s,", Gia_ObjGetDumpName(NULL, 'n', i, nDigits) );
+            fprintf( pFile, " %s,",       Gia_ObjGetDumpName(NULL, (char)(Gia_ObjFaninC0(pObj)? 'i':'n'), Gia_ObjFaninId0(pObj, i), nDigits) );
+            fprintf( pFile, " %s );\n",   Gia_ObjGetDumpName(NULL, (char)(Gia_ObjFaninC1(pObj)? 'i':'n'), Gia_ObjFaninId1(pObj, i), nDigits) );
+        }
+        if ( Vec_BitEntry(vInvs, i) )
+        {
+            fprintf( pFile, "  not ( %s,", Gia_ObjGetDumpName(NULL, 'i', i, nDigits) );
+            fprintf( pFile, " %s );\n",   Gia_ObjGetDumpName(NULL, 'n', i, nDigits) );
+        }
+    }
+    
+    // output drivers
+    fprintf( pFile, "\n" );
+    Gia_ManForEachPo( p, pObj, i )
+    {
+/*
+        fprintf( pFile, "  assign %s = ", Gia_ObjGetDumpName(p->vNamesOut, 'z', i, nDigits2) );
+        if ( Gia_ObjIsConst0(Gia_ObjFanin0(pObj)) )
+            fprintf( pFile, "1\'b%d;\n", Gia_ObjFaninC0(pObj) );
+        else 
+            fprintf( pFile, "%s;\n", Gia_ObjGetDumpName(NULL, (char)(Gia_ObjFaninC0(pObj)? 'i':'n'), Gia_ObjFaninId0p(p, pObj), nDigits) );
+*/
+        fprintf( pFile, "  buf ( %s, ", Gia_ObjGetDumpName(p->vNamesOut, 'z', i, nDigitsO) );
+        if ( Gia_ObjIsConst0(Gia_ObjFanin0(pObj)) )
+            fprintf( pFile, "1\'b%d );\n", Gia_ObjFaninC0(pObj) );
+        else 
+            fprintf( pFile, "%s );\n", Gia_ObjGetDumpName(NULL, (char)(Gia_ObjFaninC0(pObj)? 'i':'n'), Gia_ObjFaninId0p(p, pObj), nDigits) );
+    }
+
+    fprintf( pFile, "\nendmodule\n\n" );
+    fclose( pFile );
+
+    Vec_BitFree( vInvs );
+    Vec_BitFree( vUsed );
+}
 
 ////////////////////////////////////////////////////////////////////////
 ///                       END OF FILE                                ///

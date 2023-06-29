@@ -714,7 +714,9 @@ Abc_Cex_t * Saig_BmcGenerateCounterExample( Saig_Bmc_t * p )
   SeeAlso     []
 
 ***********************************************************************/
-int Saig_BmcSolveTargets( Saig_Bmc_t * p, int nStart, int * pnOutsSolved )
+// [DGhosh] added on 28/06/2023
+// int Saig_BmcSolveTargets( Saig_Bmc_t * p, int nStart, int * pnOutsSolved )
+int Saig_BmcSolveTargets( Saig_Bmc_t * p, int nStart, int nTimeOut, int * pnOutsSolved )
 {
     Aig_Obj_t * pObj;
     int i, k, VarNum, Lit, status, RetValue;
@@ -736,6 +738,10 @@ int Saig_BmcSolveTargets( Saig_Bmc_t * p, int nStart, int * pnOutsSolved )
             RetValue = satoko_solve_assumptions_limit( p->pSat2, &Lit, 1, p->nConfMaxOne );
         else
             RetValue = sat_solver_solve( p->pSat, &Lit, &Lit + 1, (ABC_INT64_T)p->nConfMaxOne, (ABC_INT64_T)0, (ABC_INT64_T)0, (ABC_INT64_T)0 );
+
+        // [DGhosh] added on 28/06/2023
+        printf( "Saig_BmcSolveTargets Ret %d l_False %d  l_True %d l_Undef %d\n", RetValue, l_False, l_True, l_Undef );
+
         if ( RetValue == l_False ) // unsat
         {
             // add final unit clause
@@ -760,8 +766,86 @@ int Saig_BmcSolveTargets( Saig_Bmc_t * p, int nStart, int * pnOutsSolved )
             }
             continue;
         }
-        if ( RetValue == l_Undef ) // undecided
-            return l_Undef;
+        if ( RetValue == l_Undef ) {// undecided
+            // [DGhosh] added on 28/06/2023  
+            // [DGhosh] added on 22/06/2023
+            // if ( p->pSat2 )
+            //     satoko_set_runtime_limit( p->pSat2, nTimeToStop_inc );
+            // else
+            //     sat_solver_set_runtime_limit( p->pSat, nTimeToStop_inc );
+            // nto = 2*nTimeOut;
+            // 
+            // 
+            // [DGhosh] added on 22/06/2023    
+            abctime nTimeToStop = 0;
+            if ( p->pSat2 ){
+                nTimeToStop = satoko_get_runtime_limit( p->pSat2);
+            }
+            else{
+                nTimeToStop = sat_solver_get_runtime_limit( p->pSat);
+            }
+
+            printf( "## Current timeout to (%d seconds).. %ld.\n",  nTimeOut, nTimeToStop );
+            if (1) //(nTimeToStop - Abc_Clock()) > 0.01*nTimeOut)
+            {
+                int nto = 2*nTimeOut;
+                abctime nTimeToStop_inc = nTimeOut ? nto * CLOCKS_PER_SEC + Abc_Clock(): 0;
+                // abctime nTimeToStop_inc = 0;
+                p->nFramesMax = (*pnOutsSolved); //+ 1 ;
+                abctime updatedTime = nTimeToStop_inc;
+                if ( p->pSat2 ){
+                    satoko_set_runtime_limit( p->pSat2, nTimeToStop_inc );
+                    updatedTime = satoko_get_runtime_limit( p->pSat2);
+                }
+                else{
+                    sat_solver_set_runtime_limit( p->pSat, nTimeToStop_inc );
+                    updatedTime = sat_solver_get_runtime_limit( p->pSat);
+                }
+
+                printf( "## Inreased timeout to (%d seconds).. %ld.\n",  nto, updatedTime );
+
+                // rerun the last frame once more with increased timeOut and a frameOut
+                if ( p->nConfMaxAll && (p->pSat ? p->pSat->stats.conflicts : satoko_conflictnum(p->pSat2)) > p->nConfMaxAll )
+                return l_Undef;
+                VarNum = Saig_BmcSatNum( p, Aig_Regular(pObj) );
+                Lit = toLitCond( VarNum, Aig_IsComplement(pObj) );
+                if ( p->pSat2 )
+                    RetValue = satoko_solve_assumptions_limit( p->pSat2, &Lit, 1, p->nConfMaxOne );
+                else
+                    RetValue = sat_solver_solve( p->pSat, &Lit, &Lit + 1, (ABC_INT64_T)p->nConfMaxOne, (ABC_INT64_T)0, (ABC_INT64_T)0, (ABC_INT64_T)0 );
+
+
+                // [DGhosh] added on 28/06/2023
+                printf( "Saig_BmcSolveTargets- In l_Undef: Ret %d l_False %d  l_True %d l_Undef %d\n", RetValue, l_False, l_True, l_Undef );
+
+                if ( RetValue == l_False )
+                {
+                    // // add final unit clause
+                    // Lit = lit_neg( Lit );
+                    // if ( p->pSat2 )
+                    //     status = satoko_add_clause( p->pSat2, &Lit, 1 );
+                    // else
+                    //     status = sat_solver_addclause( p->pSat, &Lit, &Lit + 1 );
+                    // assert( status );
+                    // if ( p->pSat )
+                    // {
+                    //     // add learned units
+                    //     for ( k = 0; k < veci_size(&p->pSat->unit_lits); k++ )
+                    //     {
+                    //         Lit = veci_begin(&p->pSat->unit_lits)[k];
+                    //         status = sat_solver_addclause( p->pSat, &Lit, &Lit + 1 );
+                    //         assert( status );
+                    //     }
+                    //     veci_resize(&p->pSat->unit_lits, 0);
+                    //     // propagate units
+                    //     sat_solver_compress( p->pSat );
+                    // }
+                    break;
+                }
+            }
+            if ( RetValue == l_Undef )
+                return l_Undef;
+        }
         // generate counter-example
         Saig_BmcDeriveFailed( p, i );
         p->pAig->pSeqModel = Saig_BmcGenerateCounterExample( p );
@@ -810,12 +894,13 @@ void Saig_BmcAddTargetsAsPos( Saig_Bmc_t * p )
 ***********************************************************************/
 int Saig_BmcPerform( Aig_Man_t * pAig, int nStart, int nFramesMax, int nNodesMax, int nTimeOut, int nConfMaxOne, int nConfMaxAll, int fVerbose, int fVerbOverwrite, int * piFrames, int fSilent, int fUseSatoko )
 {
-    Saig_Bmc_t * p;
+   Saig_Bmc_t * p;
     Aig_Man_t * pNew;
     Cnf_Dat_t * pCnf;
     int nOutsSolved = 0;
     int Iter, RetValue = -1;
     abctime nTimeToStop = nTimeOut ? nTimeOut * CLOCKS_PER_SEC + Abc_Clock(): 0;
+    abctime updatedTimeStop =  nTimeOut ? nTimeOut * CLOCKS_PER_SEC + Abc_Clock(): 0;
     abctime clk = Abc_Clock(), clk2, clkTotal = Abc_Clock();
     int Status = -1;
 /*
@@ -860,8 +945,11 @@ int Saig_BmcPerform( Aig_Man_t * pAig, int nStart, int nFramesMax, int nNodesMax
         Saig_BmcLoadCnf( p, pCnf );
         Cnf_DataFree( pCnf );
         Aig_ManStop( pNew );
-        // solve the targets
-        RetValue = Saig_BmcSolveTargets( p, nStart, &nOutsSolved );
+
+        // [DGhosh] added on 28/06/2023
+        //RetValue = Saig_BmcSolveTargets( p, nStart, &nOutsSolved );
+        RetValue = Saig_BmcSolveTargets( p, nStart, nTimeOut, &nOutsSolved );
+        // ---
         if ( fVerbose )
         {
             printf( "%4d : F =%5d. O =%4d.  And =%8d. Var =%8d. Conf =%7d. ", 
@@ -869,22 +957,38 @@ int Saig_BmcPerform( Aig_Man_t * pAig, int nStart, int nFramesMax, int nNodesMax
                 p->pSat ? (int)p->pSat->stats.conflicts : satoko_conflictnum(p->pSat2) );   
             printf( "%4.0f MB",     4.0*(p->iFrameLast+1)*p->nObjs/(1<<20) );
             printf( "%9.2f sec", (float)(Abc_Clock() - clkTotal)/(float)(CLOCKS_PER_SEC) );
+            // [DGhosh] added on 28/06/2023
+            // p->nFramesMax
+            printf( " OutsSolved %d Ret %d l_False %d  l_True %d", nOutsSolved, RetValue, l_False, l_True );
+            // --
             printf( "\n" );
             fflush( stdout );
         }
         if ( RetValue != l_False )
             break;
         // check the timeout
-        if ( nTimeOut && Abc_Clock() > nTimeToStop )
+
+        // [DGhosh] added on 28/06/2023
+        if ( p->pSat2 )
+            updatedTimeStop = satoko_get_runtime_limit(p->pSat2); //->nRuntimeLimit;
+        else
+            updatedTimeStop = sat_solver_get_runtime_limit(p->pSat);
+        printf("updatedTimeStop : %ld, nTimeToStop: %ld p->iFrameLast: %d, p->iOutputLast: %d\n", updatedTimeStop, nTimeToStop, p->iFrameLast, p->iOutputLast );
+        updatedTimeStop = updatedTimeStop > nTimeToStop ? updatedTimeStop: nTimeToStop;
+
+        if ( nTimeOut && Abc_Clock() > updatedTimeStop) //nTimeToStop )
         {
             if ( !fSilent )
-                printf( "Reached timeout (%d seconds).\n",  nTimeOut );
+                printf( "1. Reached timeout (%d seconds).\n",  nTimeOut );
             if ( piFrames )
                 *piFrames = p->iFrameLast-1;
             Saig_BmcManStop( p );
             return Status;
         }
     }
+
+    // [DGhosh] added on 28/06/2023
+    printf(" OutsSolved %d Ret %d l_False %d  l_True %d l_Undef %d Frames reached %d\n", nOutsSolved, RetValue, l_False, l_True, l_Undef , p->iFramePrev-1);
     if ( RetValue == l_True )
     {
         assert( p->iFrameFail * Saig_ManPoNum(p->pAig) + p->iOutputFail + 1 == nOutsSolved );
@@ -897,6 +1001,10 @@ int Saig_BmcPerform( Aig_Man_t * pAig, int nStart, int nFramesMax, int nNodesMax
     }
     else // if ( RetValue == l_False || RetValue == l_Undef )
     {
+        // if (piFrames  && p->iFrameLast > *piFrames){
+        //     }
+        // [DGhosh] added on 28/06/2023
+        printf("Frames reached %d \n ", p->iFramePrev-1);
         if ( !fSilent )
             Abc_Print( 1, "No output failed in %d frames.  ", Abc_MaxInt(p->iFramePrev-1, 0) );
         if ( piFrames )
@@ -924,7 +1032,7 @@ int Saig_BmcPerform( Aig_Man_t * pAig, int nStart, int nFramesMax, int nNodesMax
             else if ( p->nConfMaxAll && (p->pSat ? (int)p->pSat->stats.conflicts : satoko_conflictnum(p->pSat2)) > p->nConfMaxAll )
                 printf( "Reached global conflict limit (%d).\n", p->nConfMaxAll );
             else if ( nTimeOut && Abc_Clock() > nTimeToStop )
-                printf( "Reached timeout (%d seconds).\n", nTimeOut );
+                printf( "2. Reached timeout (%d seconds).\n", nTimeOut );
             else
                 printf( "Reached local conflict limit (%d).\n", p->nConfMaxOne );
         }

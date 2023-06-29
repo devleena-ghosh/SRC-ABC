@@ -259,7 +259,7 @@ int satoko_add_clause(solver_t *s, int *lits, int size)
     unsigned max_var;
     unsigned cref;
 
-    qsort((void *) lits, size, sizeof(unsigned), stk_uint_compare);
+    qsort((void *) lits, (size_t)size, sizeof(unsigned), stk_uint_compare);
     max_var = lit2var(lits[size - 1]);
     while (max_var >= vec_act_size(s->activity))
         satoko_add_variable(s, SATOKO_LIT_FALSE);
@@ -317,8 +317,8 @@ int satoko_solve(solver_t *s)
 
     assert(s);
     solver_clean_stats(s);
-    //if (s->opts.verbose)
-    //    print_opts(s);
+    if (s->opts.verbose)
+       print_opts(s);
     if (s->status == SATOKO_ERR) {
         printf("Satoko in inconsistent state\n");
         return SATOKO_UNDEC;
@@ -341,6 +341,9 @@ int satoko_solve(solver_t *s)
         print_stats(s);
     
     solver_cancel_until(s, vec_uint_size(s->assumptions));
+
+    // [DGhosh] added on 22/06/2023  
+    printf("satoko_solve status %d", status);
     return status;
 }
 
@@ -366,6 +369,7 @@ int satoko_solve_assumptions_limit(satoko_t *s, int * plits, int nlits, int ncon
     int temp = s->opts.conf_limit, status;
     s->opts.conf_limit = nconflim ? s->stats.n_conflicts + nconflim : 0;
     status = satoko_solve_assumptions(s, plits, nlits);
+
     s->opts.conf_limit = temp;
     return status;
 }
@@ -668,6 +672,14 @@ abctime satoko_set_runtime_limit(satoko_t* s, abctime Limit)
     s->nRuntimeLimit = Limit;
     return nRuntimeLimit;
 }
+
+// [DGhosh] added on 28/06/2023   
+abctime satoko_get_runtime_limit(satoko_t* s)
+{
+    abctime nRuntimeLimit = s->nRuntimeLimit;
+    return nRuntimeLimit;
+}
+//--
 
 char satoko_var_polarity(satoko_t *s, unsigned var)
 {

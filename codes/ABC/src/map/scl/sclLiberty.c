@@ -29,7 +29,7 @@ ABC_NAMESPACE_IMPL_START
 ///                        DECLARATIONS                              ///
 ////////////////////////////////////////////////////////////////////////
 
-#define ABC_MAX_LIB_STR_LEN 5000
+// #define ABC_MAX_LIB_STR_LEN 5000
 
 // entry types
 typedef enum { 
@@ -70,6 +70,7 @@ struct Scl_Tree_t_
     Scl_Item_t *    pItems;       // the items
     char *          pError;       // the error string
     abctime         clkStart;     // beginning time
+    Vec_Str_t *     vBuffer;      // temp string buffer
 };
 
 static inline Scl_Item_t *  Scl_LibertyRoot( Scl_Tree_t * p )                                      { return p->pItems;                                                 }
@@ -340,8 +341,11 @@ static inline Scl_Item_t * Scl_LibertyNewItem( Scl_Tree_t * p, int Type )
 ***********************************************************************/
 char * Scl_LibertyReadString( Scl_Tree_t * p, Scl_Pair_t Pair )   
 { 
-    static char Buffer[ABC_MAX_LIB_STR_LEN]; 
-    assert( Pair.End-Pair.Beg < ABC_MAX_LIB_STR_LEN );
+    // static char Buffer[ABC_MAX_LIB_STR_LEN]; 
+    char * Buffer;
+    if ( Pair.End - Pair.Beg + 2 > Vec_StrSize(p->vBuffer) )
+        Vec_StrFill( p->vBuffer, Pair.End - Pair.Beg + 100, '\0' );
+    Buffer = Vec_StrArray( p->vBuffer );
     strncpy( Buffer, p->pContents+Pair.Beg, Pair.End-Pair.Beg ); 
     if ( Pair.Beg < Pair.End && Buffer[0] == '\"' )
     {
@@ -572,6 +576,7 @@ Scl_Tree_t * Scl_LibertyStart( char * pFileName )
     p->pItems = ABC_CALLOC( Scl_Item_t, p->nItermAlloc );
     p->nItems = 0;
     p->nLines = 1;
+    p->vBuffer = Vec_StrStart( 10 );
     return p;
 }
 void Scl_LibertyStop( Scl_Tree_t * p, int fVerbose )
@@ -581,6 +586,7 @@ void Scl_LibertyStop( Scl_Tree_t * p, int fVerbose )
         printf( "Memory = %7.2f MB. ", 1.0 * (p->nContents + p->nItermAlloc * sizeof(Scl_Item_t))/(1<<20) );
         ABC_PRT( "Time", Abc_Clock() - p->clkStart );
     }
+    Vec_StrFree( p->vBuffer );
     ABC_FREE( p->pFileName );
     ABC_FREE( p->pContents );
     ABC_FREE( p->pItems );
@@ -626,6 +632,14 @@ int Scl_LibertyReadCellIsFlop( Scl_Tree_t * p, Scl_Item_t * pCell )
     Scl_ItemForEachChild( p, pCell, pAttr )
         if ( !Scl_LibertyCompare(p, pAttr->Key, "ff") ||
              !Scl_LibertyCompare(p, pAttr->Key, "latch") )
+            return 1;
+    return 0;
+}
+int Scl_LibertyReadCellIsDontUse( Scl_Tree_t * p, Scl_Item_t * pCell )
+{
+    Scl_Item_t * pAttr;
+    Scl_ItemForEachChild( p, pCell, pAttr )
+        if ( !Scl_LibertyCompare(p, pAttr->Key, "dont_use") )
             return 1;
     return 0;
 }
@@ -704,6 +718,11 @@ Vec_Str_t * Scl_LibertyReadGenlibStr( Scl_Tree_t * p, int fVerbose )
             if ( fVerbose )  printf( "Scl_LibertyReadGenlib() skipped sequential cell \"%s\".\n", Scl_LibertyReadString(p, pCell->Head) );
             continue;
         }
+        if ( Scl_LibertyReadCellIsDontUse(p, pCell) )
+        {
+            if ( fVerbose )  printf( "Scl_LibertyReadGenlib() skipped cell \"%s\" due to dont_use attribute.\n", Scl_LibertyReadString(p, pCell->Head) );
+            continue;
+        }
         if ( Scl_LibertyReadCellIsThreeState(p, pCell) )
         {
             if ( fVerbose )  printf( "Scl_LibertyReadGenlib() skipped three-state cell \"%s\".\n", Scl_LibertyReadString(p, pCell->Head) );
@@ -717,7 +736,7 @@ Vec_Str_t * Scl_LibertyReadGenlibStr( Scl_Tree_t * p, int fVerbose )
         // iterate through output pins
         Scl_ItemForEachChildName( p, pCell, pOutput, "pin" )
         {
-            if ( (pFormula = Scl_LibertyReadPinFormula(p, pOutput)) ) 
+            if ( !(pFormula = Scl_LibertyReadPinFormula(p, pOutput)) ) 
                 continue;
             if ( !strcmp(pFormula, "0") || !strcmp(pFormula, "1") )
             {
@@ -936,6 +955,8 @@ int Scl_LibertyReadPinDirection( Scl_Tree_t * p, Scl_Item_t * pPin )
             return 0;
         if ( !strcmp(pToken, "output") )
             return 1;
+        if ( !strcmp(pToken, "internal") )
+            return 2;
         break;
     }
     return -1;
@@ -1417,7 +1438,7 @@ Vec_Str_t * Scl_LibertyReadSclStr( Scl_Tree_t * p, int fVerbose, int fVeryVerbos
     Vec_Wrd_t * vTruth;
     char * pFormula, * pName;
     int i, k, Counter, nOutputs, nCells;
-    int nSkipped[3] = {0};
+    int nSkipped[4] = {0};
 
     // read delay-table templates
     vTemples = Scl_LibertyReadTemplates( p );
@@ -1451,6 +1472,12 @@ Vec_Str_t * Scl_LibertyReadSclStr( Scl_Tree_t * p, int fVerbose, int fVeryVerbos
             nSkipped[0]++;
             continue;
         }
+        if ( Scl_LibertyReadCellIsDontUse(p, pCell) )
+        {
+            if ( fVeryVerbose )  printf( "Scl_LibertyReadGenlib() skipped cell \"%s\" due to dont_use attribute.\n", Scl_LibertyReadString(p, pCell->Head) );
+            nSkipped[3]++;
+            continue;
+        }
         if ( Scl_LibertyReadCellIsThreeState(p, pCell) )
         {
             if ( fVeryVerbose )  printf( "Scl_LibertyReadGenlib() skipped three-state cell \"%s\".\n", Scl_LibertyReadString(p, pCell->Head) );
@@ -1472,6 +1499,8 @@ Vec_Str_t * Scl_LibertyReadSclStr( Scl_Tree_t * p, int fVerbose, int fVeryVerbos
     Scl_ItemForEachChildName( p, Scl_LibertyRoot(p), pCell, "cell" )
     {
         if ( Scl_LibertyReadCellIsFlop(p, pCell) )
+            continue;
+        if ( Scl_LibertyReadCellIsDontUse(p, pCell) )
             continue;
         if ( Scl_LibertyReadCellIsThreeState(p, pCell) )
             continue;
@@ -1498,7 +1527,7 @@ Vec_Str_t * Scl_LibertyReadSclStr( Scl_Tree_t * p, int fVerbose, int fVeryVerbos
             float CapOne, CapRise, CapFall;
             if ( Scl_LibertyReadPinFormula(p, pPin) != NULL ) // skip output pin
                 continue;
-            assert( Scl_LibertyReadPinDirection(p, pPin) == 0 );
+            assert( Scl_LibertyReadPinDirection(p, pPin) == 0 || Scl_LibertyReadPinDirection(p, pPin) == 2);
             pName = Scl_LibertyReadString(p, pPin->Head);
             Vec_PtrPush( vNameIns, Abc_UtilStrsav(pName) );
             Vec_StrPutS_( vOut, pName );
@@ -1518,6 +1547,8 @@ Vec_Str_t * Scl_LibertyReadSclStr( Scl_Tree_t * p, int fVerbose, int fVeryVerbos
         Scl_ItemForEachChildName( p, pCell, pPin, "pin" )
         {
             if ( !Scl_LibertyReadPinFormula(p, pPin) ) // skip input pin
+                continue;
+            if (Scl_LibertyReadPinDirection(p, pPin) == 2) // skip internal pin
                 continue;
             assert( Scl_LibertyReadPinDirection(p, pPin) == 1 );
             pName = Scl_LibertyReadString(p, pPin->Head);
@@ -1640,8 +1671,8 @@ Vec_Str_t * Scl_LibertyReadSclStr( Scl_Tree_t * p, int fVerbose, int fVeryVerbos
     {
         printf( "Library \"%s\" from \"%s\" has %d cells ", 
             Scl_LibertyReadString(p, Scl_LibertyRoot(p)->Head), p->pFileName, nCells );
-        printf( "(%d skipped: %d seq; %d tri-state; %d no func).  ", 
-            nSkipped[0]+nSkipped[1]+nSkipped[2], nSkipped[0], nSkipped[1], nSkipped[2] );
+        printf( "(%d skipped: %d seq; %d tri-state; %d no func; %d dont_use).  ", 
+            nSkipped[0]+nSkipped[1]+nSkipped[2], nSkipped[0], nSkipped[1], nSkipped[2], nSkipped[3] );
         Abc_PrintTime( 1, "Time", Abc_Clock() - p->clkStart );
     }
     return vOut;

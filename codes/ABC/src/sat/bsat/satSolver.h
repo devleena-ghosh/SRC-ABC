@@ -292,12 +292,39 @@ static inline int sat_solver_final(sat_solver* s, int ** ppArray)
     return s->conf_final.size;
 }
 
+static inline void sat_solver_randomize( sat_solver * pSat, int iVar, int nVars )
+{
+    int i, nPols = 0, * pVars = ABC_ALLOC( int, nVars );
+    for ( i = 0; i < nVars; i++ )
+        if ( Abc_Random(0) & 1 )
+            pVars[nPols++] = iVar + i;
+    sat_solver_set_polarity( pSat, pVars, nPols );
+    for ( i = 0; i < nVars; i++ )
+        pVars[i] = iVar + i;
+    for ( i = 0; i < nVars; i++ )
+    {
+        int j = Abc_Random(0) % nVars;
+        ABC_SWAP( int, pVars[i], pVars[j] );
+    }
+    sat_solver_set_var_activity( pSat, pVars, nVars );
+    ABC_FREE( pVars );
+}
+
 static inline abctime sat_solver_set_runtime_limit(sat_solver* s, abctime Limit)
 {
     abctime nRuntimeLimit = s->nRuntimeLimit;
     s->nRuntimeLimit = Limit;
     return nRuntimeLimit;
 }
+
+
+// [DGhosh] added on 28/06/2023   
+static inline abctime sat_solver_get_runtime_limit(sat_solver* s)
+{
+    abctime nRuntimeLimit = s->nRuntimeLimit;
+    return nRuntimeLimit;
+}
+//--
 
 static inline int sat_solver_set_random(sat_solver* s, int fNotUseRandom)
 {

@@ -81,7 +81,7 @@ char * Abc_SopStart( Mem_Flex_t * pMan, int nCubes, int nVars )
 
     Length = nCubes * (nVars + 3);
     pSopCover = Mem_FlexEntryFetch( pMan, Length + 1 );
-    memset( pSopCover, '-', Length );
+    memset( pSopCover, '-', (size_t)Length );
     pSopCover[Length] = 0;
 
     for ( i = 0; i < nCubes; i++ )
@@ -457,12 +457,21 @@ char * Abc_SopCreateFromIsop( Mem_Flex_t * pMan, int nVars, Vec_Int_t * vCover )
 char * Abc_SopCreateFromTruthIsop( Mem_Flex_t * pMan, int nVars, word * pTruth, Vec_Int_t * vCover )
 {
     char * pSop = NULL;
-    assert( nVars <= 6 );
-    if ( pTruth[0] == 0 )
-        pSop = Abc_SopRegister( pMan, " 0\n" );
-    else if ( ~pTruth[0] == 0 )
-        pSop = Abc_SopRegister( pMan, " 1\n" );
-    else
+    int w, nWords  = Abc_Truth6WordNum( nVars );
+    assert( nVars < 16 );
+
+    for ( w = 0; w < nWords; w++ )
+        if ( pTruth[w] )
+            break;
+    if ( w == nWords )
+        return Abc_SopRegister( pMan, " 0\n" );
+
+    for ( w = 0; w < nWords; w++ )
+        if ( ~pTruth[w] )
+            break;
+    if ( w == nWords )
+        return Abc_SopRegister( pMan, " 1\n" );
+
     {
         int RetValue = Kit_TruthIsop( (unsigned *)pTruth, nVars, vCover, 1 );
         assert( nVars > 0 );
@@ -898,6 +907,41 @@ int Abc_SopCheck( char * pSop, int nFanins )
     return 1;
 }
 
+/**Function*************************************************************
+
+  Synopsis    []
+
+  Description []
+               
+  SideEffects []
+
+  SeeAlso     []
+
+***********************************************************************/
+int Abc_SopCheckReadTruth( Vec_Ptr_t * vRes, char * pToken, int fHex )
+{
+    char * pBase; int nVars;
+    int Log2 = Abc_Base2Log( strlen(pToken) );
+    if ( (1 << Log2) != (int)strlen(pToken) )
+    {
+        printf( "The truth table length (%d) is not power-of-2.\n", (int)strlen(pToken) );
+        Vec_PtrFreeData( vRes );
+        Vec_PtrShrink( vRes, 0 );
+        return 0;
+    }
+    if ( Vec_PtrSize(vRes) == 0 )
+        return 1;
+    pBase = (char *)Vec_PtrEntry( vRes, 0 );
+    nVars = Abc_SopGetVarNum( pBase );
+    if ( nVars != Log2+2*fHex )
+    {
+        printf( "Truth table #1 has %d vars while truth table #%d has %d vars.\n", nVars, Vec_PtrSize(vRes)+1, Log2+2*fHex );
+        Vec_PtrFreeData( vRes );
+        Vec_PtrShrink( vRes, 0 );
+        return 0;
+    }   
+    return 1;
+}
 
 /**Function*************************************************************
 
@@ -955,8 +999,8 @@ char * Abc_SopFromTruthBin( char * pTruth )
     {
         pCube = pSopCover + i * (nVars + 3);
         for ( b = 0; b < nVars; b++ )
-            if ( Mint & (1 << (nVars-1-b)) )
-//            if ( Mint & (1 << b) )
+//            if ( Mint & (1 << (nVars-1-b)) )
+            if ( Mint & (1 << b) )
                 pCube[b] = '1';
             else
                 pCube[b] = '0';
@@ -966,6 +1010,21 @@ char * Abc_SopFromTruthBin( char * pTruth )
     }
     Vec_IntFree( vMints );
     return pSopCover;
+}
+Vec_Ptr_t * Abc_SopFromTruthsBin( char * pTruth )
+{
+    Vec_Ptr_t * vRes = Vec_PtrAlloc( 10 );
+    char * pCopy = Abc_UtilStrsav(pTruth);
+    char * pToken = strtok( pCopy, " \r\n\t|" );
+    while ( pToken )
+    {
+        if ( !Abc_SopCheckReadTruth( vRes, pToken, 0 ) )
+            break;
+        Vec_PtrPush( vRes, Abc_SopFromTruthBin(pToken) );
+        pToken = strtok( NULL, " \r\n\t|" );
+    }
+    ABC_FREE( pCopy );    
+    return vRes;
 }
 
 /**Function*************************************************************
@@ -1048,6 +1107,21 @@ char * Abc_SopFromTruthHex( char * pTruth )
 */
     Vec_IntFree( vMints );
     return pSopCover;
+}
+Vec_Ptr_t * Abc_SopFromTruthsHex( char * pTruth )
+{
+    Vec_Ptr_t * vRes = Vec_PtrAlloc( 10 );
+    char * pCopy = Abc_UtilStrsav(pTruth);
+    char * pToken = strtok( pCopy, " \r\n\t|" );
+    while ( pToken )
+    {
+        if ( !Abc_SopCheckReadTruth( vRes, pToken, 1 ) )
+            break;
+        Vec_PtrPush( vRes, Abc_SopFromTruthHex(pToken) );
+        pToken = strtok( NULL, " \r\n\t|" );
+    }
+    ABC_FREE( pCopy );
+    return vRes;
 }
 
 /**Function*************************************************************
