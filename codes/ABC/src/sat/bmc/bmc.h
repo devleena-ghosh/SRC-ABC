@@ -128,6 +128,8 @@ struct Saig_ParBmc_t_
     int(*pFuncOnFail)(int,Abc_Cex_t*); // called for a failed output in MO mode
     int         RunId;          // BMC id in this run 
     int(*pFuncStop)(int);       // callback to terminate
+    //[DG 03/07/2023]
+    int         fLastFrame;     // whether want to complete the last frame
 };
 
  

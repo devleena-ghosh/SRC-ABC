@@ -573,6 +573,7 @@ abctime bmcg_sat_solver_set_runtime_limit(bmcg_sat_solver* s, abctime Limit)
     return nRuntimeLimit;
 }
 
+
 void bmcg_sat_solver_set_conflict_budget(bmcg_sat_solver* s, int Limit)
 {
     if ( Limit > 0 ) 

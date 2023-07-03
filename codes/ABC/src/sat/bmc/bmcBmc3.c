@@ -1470,7 +1470,7 @@ int Saig_ManBmcScalable( Aig_Man_t * pAig, Saig_ParBmc_t * pPars )
     int i, f, k, Lit, status;
     abctime clk, clk2, clkSatRun, clkOther = 0, clkTotal = Abc_Clock();
     abctime nTimeUnsat = 0, nTimeSat = 0, nTimeUndec = 0, clkOne = 0;
-    abctime nTimeToStopNG, nTimeToStop;
+    abctime nTimeToStopNG, nTimeToStop, currTimeOut = 0;
     if ( pPars->pLogFileName )
         pLogFile = fopen( pPars->pLogFileName, "wb" );
     if ( pPars->nTimeOutOne && pPars->nTimeOut == 0 )
@@ -1479,6 +1479,7 @@ int Saig_ManBmcScalable( Aig_Man_t * pAig, Saig_ParBmc_t * pPars )
         pPars->nTimeOutOne = 0;
     nTimeToStopNG = pPars->nTimeOut ? pPars->nTimeOut * CLOCKS_PER_SEC + Abc_Clock(): 0;
     nTimeToStop   = Saig_ManBmcTimeToStop( pPars, nTimeToStopNG );
+    abctime newTimeOut = pPars->nTimeOut ? 2*(pPars->nTimeOut) * CLOCKS_PER_SEC + Abc_Clock(): 0;
     // [DGhosh] added on 29/06/2023    
     int unDefTryOnce = 0;
     // create BMC manager
@@ -1519,11 +1520,11 @@ int Saig_ManBmcScalable( Aig_Man_t * pAig, Saig_ParBmc_t * pPars )
     if ( nTimeToStop )
     {
         if ( p->pSat2 )
-            satoko_set_runtime_limit( p->pSat2, nTimeToStop );
+            currTimeOut = satoko_set_runtime_limit( p->pSat2, nTimeToStop );
         else if ( p->pSat3 )
-            bmcg_sat_solver_set_runtime_limit( p->pSat3, nTimeToStop );
+            currTimeOut = bmcg_sat_solver_set_runtime_limit( p->pSat3, nTimeToStop );
         else
-            sat_solver_set_runtime_limit( p->pSat, nTimeToStop );
+            currTimeOut = sat_solver_set_runtime_limit( p->pSat, nTimeToStop );
     }
     // perform frames
     Aig_ManRandom( 1 );
@@ -1592,10 +1593,12 @@ int Saig_ManBmcScalable( Aig_Man_t * pAig, Saig_ParBmc_t * pPars )
                     Abc_Print( 1, "Reached gap timeout (%d seconds).\n",  pPars->nTimeOutGap );
                     goto finish;
                 }
-                if ( nTimeToStop && Abc_Clock() > nTimeToStop )
+                // if ( nTimeToStop && Abc_Clock() > nTimeToStop )
+
+                if ( currTimeOut && Abc_Clock() > currTimeOut )
                 {
                     if ( !pPars->fSilent )
-                        Abc_Print( 1, "Reached timeout (%d seconds).\n",  pPars->nTimeOut );
+                        Abc_Print( 1, "1. Reached timeout (%d seconds).\n",  pPars->nTimeOut );
                     goto finish;
                 }
                 // skip solved outputs
@@ -1605,9 +1608,9 @@ int Saig_ManBmcScalable( Aig_Man_t * pAig, Saig_ParBmc_t * pPars )
                 if ( p->pTime4Outs && p->pTime4Outs[i] == 0 )
                     continue;
                 // add constraints for this output
-clk2 = Abc_Clock();
+                clk2 = Abc_Clock();
                 Saig_ManBmcCreateCnf( p, pObj, f );
-clkOther += Abc_Clock() - clk2;
+                clkOther += Abc_Clock() - clk2;
             }
         }
         // solve SAT
@@ -1650,17 +1653,24 @@ clkOther += Abc_Clock() - clk2;
             if ( p->pTime4Outs )
             {
                 assert( p->pTime4Outs[i] > 0 );
+                //  printf("pTime4Outs %ld", p->pTime4Outs[i]);
                 clkOne = Abc_Clock();
                 if ( p->pSat2 )
-                    satoko_set_runtime_limit( p->pSat2, p->pTime4Outs[i] + Abc_Clock() );
+                    currTimeOut = satoko_set_runtime_limit( p->pSat2, p->pTime4Outs[i] + Abc_Clock() );
                 else if ( p->pSat3 )
-                    bmcg_sat_solver_set_runtime_limit( p->pSat3, p->pTime4Outs[i] + Abc_Clock() );
+                    currTimeOut = bmcg_sat_solver_set_runtime_limit( p->pSat3, p->pTime4Outs[i] + Abc_Clock() );
                 else
-                    sat_solver_set_runtime_limit( p->pSat, p->pTime4Outs[i] + Abc_Clock() );
+                    currTimeOut = sat_solver_set_runtime_limit( p->pSat, p->pTime4Outs[i] + Abc_Clock() );
             }
-            loopOnce: clk2 = Abc_Clock();
+  
+ loopOnce:            clk2 = Abc_Clock();
             status = Saig_ManCallSolver( p, Lit );
             clkSatRun = Abc_Clock() - clk2;
+
+            // // [DGhosh] added on 03/07/2023
+            // printf("currTimeOut %ld Frame %5d  Output %5d  Time(ms) %8d, status %d, l_False %d, l_True %d, l_Undef %d\n", currTimeOut, f, i, 
+            //         Lit < 2 ? 0 : (int)(clkSatRun * 1000 / CLOCKS_PER_SEC), status, l_False, l_True, l_Undef);
+
             if ( pLogFile )
                 fprintf( pLogFile, "Frame %5d  Output %5d  Time(ms) %8d %8d\n", f, i, 
                     Lit < 2 ? 0 : (int)(clkSatRun * 1000 / CLOCKS_PER_SEC),
@@ -1765,11 +1775,11 @@ clkOther += Abc_Clock() - clk2;
                 if ( nTimeToStop )
                 {
                     if ( p->pSat2 )
-                        satoko_set_runtime_limit( p->pSat2, nTimeToStop );
+                        currTimeOut = satoko_set_runtime_limit( p->pSat2, nTimeToStop );
                     else if ( p->pSat3 )
-                        bmcg_sat_solver_set_runtime_limit( p->pSat3, nTimeToStop );
+                        currTimeOut = bmcg_sat_solver_set_runtime_limit( p->pSat3, nTimeToStop );
                     else
-                        sat_solver_set_runtime_limit( p->pSat, nTimeToStop );
+                        currTimeOut = sat_solver_set_runtime_limit( p->pSat, nTimeToStop );
                 }
 
                 // check if other outputs failed under the same counter-example
@@ -1822,29 +1832,23 @@ clkOther += Abc_Clock() - clk2;
             else // status = l_Undef
             {
                 nTimeUndec += clkSatRun;
+                
                 // [DGhosh] added on 28/06/2023
-                if (nTimeUndec > 0.25*(pPars->nTimeOut) && unDefTryOnce == 0){
-                    printf("Running Once again status: %d nTimeUndec:%ld nTimeOut:%d tryOnce:%d\n", status, nTimeUndec, (pPars->nTimeOut), unDefTryOnce);
+                //  printf("Undef status: %d nTimeUndec:%ld nTimeOut:%ld tryOnce:%d, fraction lost: %lf\n", 
+                //  status, nTimeUndec, nTimeToStop, unDefTryOnce, nTimeUndec/(1.0*nTimeToStop) );
+                // printf() 
+                if (nTimeUndec/(1.0*nTimeToStop) > 0.1 && !unDefTryOnce){
+                    printf("Running Once again status: %d nTimeUndec:%ld nTimeOut:%ld tryOnce:%d\n", status, nTimeUndec, nTimeToStop, unDefTryOnce);
                     nTimeUndec -= clkSatRun;
-                    // add constraints for this output
-                    clk2 = Abc_Clock();
-                    Lit = Saig_ManBmcCreateCnf( p, pObj, f );
-                    clkOther += Abc_Clock() - clk2;
-                    // add a frame limit
-                    //p->nFramesMax = f+1;
-                    // solve this output
-                    fUnfinished = 0;
-                    if ( p->pSat ) sat_solver_compress( p->pSat );
-                    if ( p->pTime4Outs )
+                    p->pPars->nFramesMax = f+1;
+                    if ( nTimeToStop )
                     {
-                        assert( p->pTime4Outs[i] > 0 );
-                        clkOne = Abc_Clock();
                         if ( p->pSat2 )
-                            satoko_set_runtime_limit( p->pSat2, 2*(p->pTime4Outs[i]) + Abc_Clock() );
+                            currTimeOut = satoko_set_runtime_limit( p->pSat2, newTimeOut );
                         else if ( p->pSat3 )
-                            bmcg_sat_solver_set_runtime_limit( p->pSat3, 2*(p->pTime4Outs[i]) + Abc_Clock() );
+                            currTimeOut = bmcg_sat_solver_set_runtime_limit( p->pSat3, newTimeOut );
                         else
-                            sat_solver_set_runtime_limit( p->pSat, 2*(p->pTime4Outs[i]) + Abc_Clock() );
+                            currTimeOut = sat_solver_set_runtime_limit( p->pSat, newTimeOut );
                     }
                     unDefTryOnce += 1;
                     goto loopOnce;
@@ -1893,9 +1897,12 @@ clkOther += Abc_Clock() - clk2;
 //            Abc_Print( 1, "Simples = %6d. ", p->nBufNum );
 //            Abc_Print( 1, "Dups = %6d. ", p->nDupNum );
 
-            Abc_Print( 1, "Status: %d", status );
+            // Abc_Print( 1, "Status: %d", status );
             Abc_Print( 1, "\n" );
             fflush( stdout );
+        }
+        if(unDefTryOnce){
+            break;
         }
     }
     // consider the next timeframe
@@ -1903,6 +1910,9 @@ clkOther += Abc_Clock() - clk2;
         pPars->iFrame = nJumpFrame - pPars->nFramesJump;
     else if ( RetValue == -1 && pPars->nStart == 0 )
         pPars->iFrame = f-1;
+        if (unDefTryOnce && status == l_True){
+             pPars->iFrame = f;
+        }
 //ABC_PRT( "CNF generation runtime", clkOther );
 finish:
     if ( pPars->fVerbose )
