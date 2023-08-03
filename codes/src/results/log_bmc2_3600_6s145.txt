@@ -1,0 +1,34 @@
+ABC command line: "read ../benchmark/HWMCC_15_17/6s145_n.aig; print_stats; &get; bmc2 -S     0 -T   3600 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s145_n:[0m i/o =  942/    1  lat = 1298  and =   9976  lev = 38
+Running "bmc2". AIG:  PI/PO/Reg = 942/1/1298.  Node =   9976. Lev =    38.
+Params: FramesMax = 0. NodesDelta = 2000. ConfMaxOne = 0. ConfMaxAll = 0.
+   0 : F =    9. O =   0.  And =    3640. Var =    1347. Conf =     41.    1 MB     0.01 sec
+   1 : F =   10. O =   0.  And =    6542. Var =    2796. Conf =    114.    1 MB     0.02 sec
+   2 : F =   11. O =   0.  And =   11098. Var =    4875. Conf =    225.    1 MB     0.03 sec
+   3 : F =   12. O =   0.  And =   17449. Var =    8114. Conf =    465.    1 MB     0.04 sec
+   4 : F =   13. O =   0.  And =   24965. Var =   12144. Conf =   1007.    1 MB     0.07 sec
+   5 : F =   14. O =   0.  And =   33595. Var =   16753. Conf =   2112.    1 MB     0.12 sec
+   6 : F =   15. O =   0.  And =   43257. Var =   21854. Conf =   4358.    1 MB     0.24 sec
+   7 : F =   16. O =   0.  And =   53073. Var =   27166. Conf =   7664.    1 MB     0.45 sec
+   8 : F =   17. O =   0.  And =   63047. Var =   32602. Conf =  13804.    1 MB     0.92 sec
+   9 : F =   18. O =   0.  And =   73021. Var =   37997. Conf =  23075.    1 MB     1.71 sec
+  10 : F =   19. O =   0.  And =   82995. Var =   43380. Conf =  35868.    1 MB     2.83 sec
+  11 : F =   20. O =   0.  And =   92969. Var =   48751. Conf =  56857.    1 MB     4.96 sec
+  12 : F =   21. O =   0.  And =  102943. Var =   54132. Conf =  91774.    1 MB     8.88 sec
+  13 : F =   22. O =   0.  And =  112917. Var =   59503. Conf = 144075.    1 MB    16.10 sec
+  14 : F =   23. O =   0.  And =  122891. Var =   64884. Conf = 233112.    1 MB    30.36 sec
+  15 : F =   24. O =   0.  And =  132865. Var =   70255. Conf = 398170.    1 MB    58.46 sec
+  16 : F =   25. O =   0.  And =  142839. Var =   75636. Conf = 619658.    1 MB   100.54 sec
+  17 : F =   26. O =   0.  And =  152813. Var =   81007. Conf = 955682.    1 MB   172.93 sec
+  18 : F =   27. O =   0.  And =  162787. Var =   86388. Conf =1466947.    1 MB   308.39 sec
+  19 : F =   28. O =   0.  And =  172761. Var =   91759. Conf =2026105.    1 MB   457.79 sec
+  20 : F =   29. O =   0.  And =  182735. Var =   97140. Conf =2854261.    2 MB   731.96 sec
+  21 : F =   30. O =   0.  And =  192709. Var =  102511. Conf =3757834.    2 MB  1031.48 sec
+  22 : F =   31. O =   0.  And =  202683. Var =  107892. Conf =5317641.    2 MB  1644.29 sec
+  23 : F =   32. O =   0.  And =  212657. Var =  113263. Conf =7137226.    2 MB  2460.30 sec
+## trying to complete the last frame with Inreased timeout to (7200 seconds).. 10800109646. current time 3600109646.
+  24 : F =   33. O =   0.  And =  222631. Var =  118644. Conf =9727675.    2 MB  3675.11 sec
+No output failed in 33 frames.  Time =  3675.11 sec
+Reached limit on the number of timeframes (33).
+[1;37m../benchmark/HWMCC_15_17/6s145_n:[0m i/o =  942/    1  lat = 1298  and =   9976  lev = 38

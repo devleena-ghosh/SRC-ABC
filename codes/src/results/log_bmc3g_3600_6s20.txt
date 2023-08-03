@@ -1,0 +1,21 @@
+ABC command line: "read ../benchmark/HWMCC_15_17/6s20_n.aig; print_stats; &get; bmc3 -g -S     0 -T   3600 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s20_n:[0m i/o =   49/    1  lat =  199  and =  10757  lev =1056
+Running "bmc3". PI/PO/Reg = 49/1/199. And =  10757. Lev =  1056. ObjNums =  5496.
+Params: FramesMax = 0. Start = 0. ConfLimit = 0. TimeOut = 3600. SolveAll = 0.
+   0 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   0 MB     0.02 sec 
+   1 + : Var =     683. Cla =     2476. Conf =      2. Learn =      1.    0 MB   0 MB     0.02 sec 
+   2 + : Var =    2316. Cla =     8530. Conf =     13. Learn =      9.    0 MB   0 MB     0.03 sec 
+   3 + : Var =    5936. Cla =    22472. Conf =    169. Learn =    151.    0 MB   0 MB     0.04 sec 
+   4 + : Var =    9845. Cla =    37976. Conf =   1005. Learn =    903.    0 MB   0 MB     0.08 sec 
+   5 + : Var =   13762. Cla =    53583. Conf =   6285. Learn =   5073.    0 MB   0 MB     0.45 sec 
+   6 + : Var =   17679. Cla =    69366. Conf =  24521. Learn =   8122.    0 MB   0 MB     2.17 sec 
+   7 + : Var =   21596. Cla =    85149. Conf =  96024. Learn =  24712.    0 MB   0 MB    11.91 sec 
+   8 + : Var =   25513. Cla =   100932. Conf = 469608. Learn =  79407.    0 MB   0 MB    84.01 sec 
+   9 + : Var =   29430. Cla =   116715. Conf = 948118. Learn = 115456.    0 MB   0 MB   196.71 sec  Status: 1 
+
+Runtime:  CNF = 0.0 sec (0.0 %)  UNSAT = 83.9 sec (42.7 %)  SAT = 112.7 sec (57.3 %)  UNDEC = 0.0 sec (0.0 %)
+LStart(P) = 0  LDelta(Q) = 0  LRatio(R) = 0  ReduceDB = 0  Vars = 29430  Used = 0 (0.00 %)
+Buffs = 1396. Dups = 0.   Hash hits = 65.  Hash misses = 29011.  UniProps = 0.
+Output 0 of miter "../benchmark/HWMCC_15_17/6s20_n" was asserted in frame 9. Time =   196.72 sec
+[1;37m../benchmark/HWMCC_15_17/6s20_n:[0m i/o =   49/    1  lat =  199  and =  10757  lev =1056
