@@ -351,7 +351,7 @@ class bandit:
 					return True
 				if r_exp > 0:
 					return False
-				if (i%M == M -1):
+				if (i > repeat_count and i%M == M -1):
 					return True
 			return False
 
@@ -703,7 +703,7 @@ def main(argv):
 	# 	print('filename', inputfile)
 
 	k = M # arms
-	iters = 1000 #int((TIMEOUT/T)) 
+	iters = 10000 #00 #int((TIMEOUT/T)) 
 	#iters = int(np.log((TIMEOUT/T)*(SC-1) +1)/(np.log(SC))) + 1 # time-steps
 	episodes = 1 #episodes
 	print('iters', iters)
