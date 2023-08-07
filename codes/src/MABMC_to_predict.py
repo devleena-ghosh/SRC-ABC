@@ -442,8 +442,6 @@ class bandit:
 					self.timeout[i] = min(self.timeout[i], TIMEOUT - totalTime)	
 				# else:
 
-
-
 			# --- completing engine selection ----- #
 				
 			if int(MAX_TIMEOUT - all_time) <= 0:		
