@@ -1,0 +1,7 @@
+Input file is : benchmark/HWMCC_15_17/6s7.aig
+../benchmark/HWMCC_15_17/6s7.aig ../benchmark/HWMCC_15_17/6s7_n.aig
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s7.aig; print_stats; &get; &dc2;&put;dretime;&get;&lcorr;&dc2;&put;dretime;&get;&scorr;&fraig;&dc2;&put;dretime;&put; print_stats; write ../benchmark/HWMCC_15_17/6s7_n.aig".
+
+[1;37m../benchmark/HWMCC_15_17/6s7  :[0m i/o =   45/    1  lat =  504  and =   2530  lev = 25
+[1;37m../benchmark/HWMCC_15_17/6s7  :[0m i/o =   45/    1  lat =  469  and =   2499  lev = 22
+
