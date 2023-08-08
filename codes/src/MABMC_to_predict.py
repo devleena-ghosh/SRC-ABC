@@ -543,6 +543,7 @@ class bandit:
 						conf_begin_phase = max_conf
 
 				else: #if not explore: # exploitation 
+					self.states = sm.ld
 					print('Adding ss -- exploitation', ss)
 					seq.append(ss)
 					totalTime += tp
@@ -579,8 +580,6 @@ class bandit:
 					explore = True
 					ocount = 0
 					print('#  Starting exploring --', i, ocount, pcount, r_exp)
-
-				
 
 			elif ending_explore(i, r_exp):
 				explore = False
