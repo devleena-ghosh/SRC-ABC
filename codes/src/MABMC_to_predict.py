@@ -130,7 +130,7 @@ class bandit:
 				new_to = fto(new_cla)
 				next_tm = np.max(new_to) #np.sum(new_to)
 				ndt += 5
-				print('Prediction for {0} frames'.format(ndt, new_frames, new_cla, new_to)
+				print('Prediction for {0} frames'.format(ndt), new_frames, new_cla, new_to)
 		if flag:
 			print('Prediction for action', a, Actions[a], next_tm, ndt)
 		return next_tm, ndt
