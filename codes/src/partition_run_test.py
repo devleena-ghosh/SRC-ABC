@@ -117,6 +117,8 @@ def runseq(fname, seq):
 	return (asrt, 'SAT' if asrt> 0 else 'TIMEOUT', frame, pt if asrt > 0 else tt, ar_tab)
 
 def get_next_time(frames, clauses, ttimes):
+	if len(frames)  == 0:
+		return -1, -1
 	sd = frames[0]
 	ld = frames[-1]
 	nd = max(5, (ld - sd) ) #/2)
@@ -216,7 +218,7 @@ def get_reward(asrt, frames, clauses, mems, times, ttimes ):
 		cu_re2 += to/(1+frame)
 		rewards[1].append(cu_re2)
 		cu_avg1 = -0.4*cu_re2/(j+1)
-		cu_avg2 = 0.2*(ky)
+		cu_avg2 = 0.2*(frame)
 		cu_avg3 = -0.2*nt/nd if (nt > -1 and nd > 0 and not math.isnan(nt)) else 0
 		cu_rewards[1].append(np.exp(cu_avg1 + cu_avg2 + cu_avg3))
 
