@@ -124,7 +124,7 @@ class bandit:
 			next_tm = np.max(new_to) #np.sum(new_to)
 			ndt = int(nd)+1
 			# if flag:
-			while (ttrain[-1] >= next_tm and new_cla[-1] < 1.5*ctrain[-1] ): # atleast 50% increment in clauses #next_tm < self.timeout[self.n]: #*SC:
+			while (ttrain[-1] >= next_tm and new_cla[-1] < 1.05*ctrain[-1] ): # atleast 50% increment in clauses #next_tm < self.timeout[self.n]: #*SC:
 				new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
 				new_cla = fcla(new_frames)
 				new_to = fto(new_cla)
