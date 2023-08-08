@@ -132,7 +132,7 @@ class bandit:
 				ndt += 5
 				print('Prediction for {0} frames'.format(ndt), new_frames, new_cla, new_to)
 		if flag:
-			print('Prediction for action', a, Actions[a], next_tm, ndt)
+			print('Prediction for action', a, Actions[a], 'time', next_tm, 'frames',ndt)
 		return next_tm, ndt
 
 	def cal_reward(self, a, sm, t, asrt, tt1, sd, ed = -1):
