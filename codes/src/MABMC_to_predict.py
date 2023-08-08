@@ -486,10 +486,40 @@ class bandit:
 			sd = self.states
 
 			ss = (Actions[a], tp, reward, totalTime, self.timeout[i], sd)
-			if blocker(sm, i):
-				explore = True
 
-			elif reward > 0: # frames unrolled > 0
+				# --- state of next run ----
+			p = np.random.rand()
+			if not ending and not explore:
+				if p < self.eps:
+					print('random exploration phase')
+					r_exp += 1
+					explore = True
+					ocount = 0
+					print('#  Starting exploring --', i, ocount, pcount, r_exp)
+				if (blocker(sm,i)) or reward < 0:
+					print('blocker -- exploration phase', reward, sm)
+					r_exp = 0
+					explore = True
+					ocount = 0
+					print('#  Starting exploring --', i, ocount, pcount, r_exp)
+				if (( sm and (sm.ld - self.states) < 2)):
+					print('current slowing down -- exploration phase',sm.ld, self.states)
+					r_exp += 1
+					explore = True
+					ocount = 0
+					print('#  Starting exploring --', i, ocount, pcount, r_exp)
+				if ((sm and next_to > 0  and abs(sm.tt - next_to)/sm.tt > 0.75)):
+					print('Incorrect prediction of next time -- exploration phase', abs(sm.tt - next_to)/next_to)
+					r_exp += 1
+					explore = True
+					ocount = 0
+					print('#  Starting exploring --', i, ocount, pcount, r_exp)
+
+			elif ending_explore(i, r_exp):
+				explore = False
+				print('#  Ending exploring --', i, ocount, pcount)
+			
+			if not blocker(sm, i) and reward > 0: # frames unrolled > 0
 				# count = 0
 				# print(i, 'sm', 'conf', sm.conf, 'cla', sm.cla, max(F*conf_begin_phase, 1e5), 'conf_begin_phase', conf_begin_phase, 'ocount', ocount, 'enter_critical', enter_critical, 'exit_critical', exit_critical, 'critical', critical, 'iter', (i+1)%self.k, 'repeat_count', repeat_count, 'M', M)
 
@@ -553,38 +583,6 @@ class bandit:
 				if all_ending:
 					totalTime += tp
 
-			# --- state of next run ----
-			p = np.random.rand()
-			if not ending and not explore:
-				if p < self.eps:
-					print('random exploration phase')
-					r_exp += 1
-					explore = True
-					ocount = 0
-					print('#  Starting exploring --', i, ocount, pcount, r_exp)
-				if (blocker(sm,i)) or reward < 0:
-					print('blocker -- exploration phase', reward, sm)
-					r_exp = 0
-					explore = True
-					ocount = 0
-					print('#  Starting exploring --', i, ocount, pcount, r_exp)
-				if (( sm and (sm.ld - self.states) < 2)):
-					print('current slowing down -- exploration phase',sm.ld, self.states)
-					r_exp += 1
-					explore = True
-					ocount = 0
-					print('#  Starting exploring --', i, ocount, pcount, r_exp)
-				if ((sm and next_to > 0  and abs(sm.tt - next_to)/sm.tt > 0.75)):
-					print('Incorrect prediction of next time -- exploration phase', abs(sm.tt - next_to)/next_to)
-					r_exp += 1
-					explore = True
-					ocount = 0
-					print('#  Starting exploring --', i, ocount, pcount, r_exp)
-
-			elif ending_explore(i, r_exp):
-				explore = False
-				print('#  Ending exploring --', i, ocount, pcount)
-		
 			self.reward[i] = self.mean_reward
 
 			print('#### iter ', i, a, Actions[a], 'time taken', tt, self.timeout[i], 'totalTime', totalTime, 'ss', ss, sm)
