@@ -1837,7 +1837,10 @@ int Saig_ManBmcScalable( Aig_Man_t * pAig, Saig_ParBmc_t * pPars )
                 //  printf("Undef status: %d nTimeUndec:%ld nTimeOut:%ld tryOnce:%d, fraction lost: %lf\n", 
                 //  status, nTimeUndec, nTimeToStop, unDefTryOnce, nTimeUndec/(1.0*nTimeToStop) );
                 // printf() 
-                if (nTimeUndec/(1.0*nTimeToStop) > 0.1 && !unDefTryOnce){
+
+                
+                //float min_extension = time_per_frame < 0.2*nTimeToStop ? 0.2*nTimeToStop: time_per_frame;
+                if (nTimeUndec/(1.0*nTimeToStop) > 0.2 && !unDefTryOnce){
                     printf("Running Once again status: %d nTimeUndec:%ld nTimeOut:%ld tryOnce:%d\n", status, nTimeUndec, nTimeToStop, unDefTryOnce);
                     nTimeUndec -= clkSatRun;
                     p->pPars->nFramesMax = f+1;

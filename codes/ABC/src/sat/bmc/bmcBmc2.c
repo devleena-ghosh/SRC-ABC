@@ -716,7 +716,7 @@ Abc_Cex_t * Saig_BmcGenerateCounterExample( Saig_Bmc_t * p )
 ***********************************************************************/
 // [DGhosh] added on 28/06/2023
 // int Saig_BmcSolveTargets( Saig_Bmc_t * p, int nStart, int * pnOutsSolved )
-int Saig_BmcSolveTargets( Saig_Bmc_t * p, int nStart, int nTimeOut, int * pnOutsSolved )
+int Saig_BmcSolveTargets( Saig_Bmc_t * p, int nStart, int nTimeOut, int * pnOutsSolved) //, float time_per_frame)
 {
     Aig_Obj_t * pObj;
     int i, k, VarNum, Lit, status, RetValue;
@@ -785,9 +785,9 @@ int Saig_BmcSolveTargets( Saig_Bmc_t * p, int nStart, int nTimeOut, int * pnOuts
             else{
                 nTimeToStop = sat_solver_get_runtime_limit( p->pSat);
             }
-
+            //float min_extension = time_per_frame < 0.2*nTimeToStop ? 0.2*nTimeToStop: time_per_frame;
             // printf( "## Current timeout to (%ld seconds).. %ld, diff %ld\n", nTimeToStop, (nTimeToStop - lastFrametime)/nTimeToStop );
-            if ((nTimeToStop - lastFrametime) > 0.1*nTimeToStop && !unDefTryOnce)
+            if ((nTimeToStop - lastFrametime) > 0.2*nTimeToStop && !unDefTryOnce)
             {
                 int nto = 2*nTimeOut;
                 abctime nTimeToStop_inc = nTimeOut ? nto * CLOCKS_PER_SEC + Abc_Clock(): 0;
@@ -909,6 +909,7 @@ int Saig_BmcPerform( Aig_Man_t * pAig, int nStart, int nFramesMax, int nNodesMax
     abctime updatedTimeStop =  nTimeOut ? nTimeOut * CLOCKS_PER_SEC + Abc_Clock(): 0;
     abctime clk = Abc_Clock(), clk2, clkTotal = Abc_Clock();
     int Status = -1;
+    //float prev_time = 0.0, cur_time = 0.0, time_per_frame = 0.0, time_per_frame_ratio = 1.0;
 /*
     Vec_Ptr_t * vSimInfo;
     vSimInfo = Abs_ManTernarySimulate( pAig, nFramesMax, fVerbose );
@@ -954,13 +955,28 @@ int Saig_BmcPerform( Aig_Man_t * pAig, int nStart, int nFramesMax, int nNodesMax
 
         // [DGhosh] added on 28/06/2023
         //RetValue = Saig_BmcSolveTargets( p, nStart, &nOutsSolved );
-        RetValue = Saig_BmcSolveTargets( p, nStart, nTimeOut, &nOutsSolved );
+        RetValue = Saig_BmcSolveTargets( p, nStart, nTimeOut, &nOutsSolved); //, time_per_frame_ratio*time_per_frame);
+
+        /*prev_time_frame = time_per_frame;
+        prev_time = cur_time;
+        cur_time =  (float)(Abc_Clock() - clkTotal)/(float)(CLOCKS_PER_SEC);
+        time_per_frame = (cur_time  - prev_time) > time_per_frame ? (cur_time  - prev_time): time_per_frame;
+        time_per_frame_ratio = prev_time_frame > 0 ? 
+                ((time_per_frame/prev_time_frame)> 1: time_per_frame/prev_time_frame: time_per_frame_ratio): time_per_frame_ratio;
+        */
         // ---
         if ( fVerbose )
         {
-            printf( "%4d : F =%5d. O =%4d.  And =%8d. Var =%8d. Conf =%7d. ", 
+            // [DG 04/07/2023]
+            // printf( "%4d : F =%5d. O =%4d.  And =%8d. Var =%8d. Conf =%7d. ", 
+            //     Iter, p->iFrameLast, p->iOutputLast, Aig_ManNodeNum(p->pFrm), p->nSatVars, 
+            //     p->pSat ? (int)p->pSat->stats.conflicts : satoko_conflictnum(p->pSat2) );  
+            printf( "%4d : F =%5d. O =%4d.  And =%8d. Var =%8d. Conf =%7d.  Cla =%7d. Learn =%7d.", 
                 Iter, p->iFrameLast, p->iOutputLast, Aig_ManNodeNum(p->pFrm), p->nSatVars, 
-                p->pSat ? (int)p->pSat->stats.conflicts : satoko_conflictnum(p->pSat2) );   
+                p->pSat ? (int)p->pSat->stats.conflicts : satoko_conflictnum(p->pSat2),
+                p->pSat ? (int)p->pSat->stats.clauses : satoko_clausenum(p->pSat2),
+                p->pSat ? (int)p->pSat->stats.learnts : satoko_learntnum(p->pSat2) );   
+             
             printf( "%4.0f MB",     4.0*(p->iFrameLast+1)*p->nObjs/(1<<20) );
             printf( "%9.2f sec", (float)(Abc_Clock() - clkTotal)/(float)(CLOCKS_PER_SEC) );
             // [DGhosh] added on 28/06/2023
@@ -1053,7 +1069,7 @@ int Saig_BmcPerform( Aig_Man_t * pAig, int nStart, int nFramesMax, int nNodesMax
             else if ( p->nConfMaxAll && (p->pSat ? (int)p->pSat->stats.conflicts : satoko_conflictnum(p->pSat2)) > p->nConfMaxAll )
                 printf( "Reached global conflict limit (%d).\n", p->nConfMaxAll );
             else if ( nTimeOut && Abc_Clock() > nTimeToStop )
-                printf( "2. Reached timeout (%d seconds).\n", nTimeOut );
+                printf( "Reached timeout (%d seconds).\n", nTimeOut );
             else
                 printf( "Reached local conflict limit (%d).\n", p->nConfMaxOne );
         }

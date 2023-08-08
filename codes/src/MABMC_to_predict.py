@@ -16,7 +16,7 @@ from abcBMCUtil import *
 DEBUG = True
 DEBUG = False
 OPT = True
-T = 30 
+T = 60 
 TIMEOUT = 3600#/2.0
 SC = 2
 DIFF = 1 # BMC depth absolute
@@ -489,38 +489,7 @@ class bandit:
 			all_time += tp #sm.tt if sm.asrt > 0 else tp
 
 			sd = self.states
-
-			# --- state of next run ----
-			p = np.random.rand()
-			if not ending and not explore:
-				# if p < self.eps:
-				# 	print('random exploration phase')
-				# 	r_exp += 1
-				# 	explore = True
-				# 	ocount = 0
-				# 	print('#  Starting exploring --', i, ocount, pcount, r_exp)
-				if (blocker(sm,i)) or reward < 0:
-					print('blocker -- exploration phase', reward, sm)
-					r_exp = 0
-					explore = True
-					ocount = 0
-					print('#  Starting exploring --', i, ocount, pcount, r_exp)
-				if (( sm and (sm.ld - self.states) < 2)):
-					print('current slowing down -- exploration phase',sm.ld, self.states)
-					r_exp += 1
-					explore = True
-					ocount = 0
-					print('#  Starting exploring --', i, ocount, pcount, r_exp)
-				if ((sm and next_to > 0  and (self.frameout[i] - sm.ld) >= 2 and abs(sm.tt - next_to)/sm.tt > 0.75)):
-					print('Incorrect prediction of next time -- exploration phase', abs(sm.tt - next_to)/next_to)
-					r_exp += 1
-					explore = True
-					ocount = 0
-					print('#  Starting exploring --', i, ocount, pcount, r_exp)
-
-			elif ending_explore(i, r_exp):
-				explore = False
-				print('#  Ending exploring --', i, ocount, pcount)
+			pre_state = self.states
 			
 			if not blocker(sm, i) and reward > 0: # frames unrolled > 0
 				# count = 0
@@ -542,6 +511,7 @@ class bandit:
 					ss = (Actions[a], tp, reward, totalTime, self.timeout[i], sd)
 					if len(best) == 0:
 						best = ss
+						best_sd = best[-1]
 
 					sd = sm.ld #Next(sm.ld, a)
 					if best_sd < sd:
@@ -588,6 +558,38 @@ class bandit:
 					#ss = (Actions[a], tp, reward, totalTime, self.timeout[i], sd)
 
 			self.reward[i] = self.mean_reward
+
+			# --- state of next run ----
+			p = np.random.rand()
+			if not ending and not explore:
+				# if p < self.eps:
+				# 	print('random exploration phase')
+				# 	r_exp += 1
+				# 	explore = True
+				# 	ocount = 0
+				# 	print('#  Starting exploring --', i, ocount, pcount, r_exp)
+				if (blocker(sm,i)) or reward < 0:
+					print('blocker -- exploration phase', reward, sm)
+					r_exp = 0
+					explore = True
+					ocount = 0
+					print('#  Starting exploring --', i, ocount, pcount, r_exp)
+				if (( sm and (sm.ld - pre_state) < 2)):
+					print('current slowing down -- exploration phase',sm.ld, pre_state, self.states)
+					r_exp += 1
+					explore = True
+					ocount = 0
+					print('#  Starting exploring --', i, ocount, pcount, r_exp)
+				if ((sm and next_to > 0  and (self.frameout[i] - sm.ld) >= 2 and abs(sm.tt - next_to)/sm.tt > 0.75)):
+					print('Incorrect prediction of next time -- exploration phase', abs(sm.tt - next_to)/next_to)
+					r_exp += 1
+					explore = True
+					ocount = 0
+					print('#  Starting exploring --', i, ocount, pcount, r_exp)
+
+			elif ending_explore(i, r_exp):
+				explore = False
+				print('#  Ending exploring --', i, ocount, pcount)
 
 			print('#### iter ', i, a, Actions[a], 'time taken', tt, self.timeout[i], 'totalTime', totalTime, 'ss', ss, sm)
 

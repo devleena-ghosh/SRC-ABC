@@ -93,7 +93,7 @@ def parse_bmc2(output, sd,t=0):
         tt1 = sm1[5] 
         if DEBUG:
             print(sm1, m1.group(1), m21.group(1), asrt)   
-        if sm1[3] > 0 and ( asrt > 0 and sm1[0] <= asrt) or (frame_count > 0 and sm1[0] <= frame_count+1 and frame_count >= sd): 
+        if sm1[4] > 0 and ( asrt > 0 and sm1[0] <= asrt) or (frame_count > 0 and sm1[0] <= frame_count+1 and frame_count >= sd): 
              
             tt = sm1[7] #if t == 0  else t
             to = max(0,tt - pretm)
