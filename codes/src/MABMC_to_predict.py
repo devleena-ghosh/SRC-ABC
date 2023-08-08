@@ -415,7 +415,7 @@ class bandit:
 
 					self.frameout[i] = 0 #-1
 
-				print('Calculating time out', self.timeout[i], 'total till now', totalTime)
+				print('Calculating time out explore', self.timeout[i], 'total till now', totalTime)
 
 			else: # for exploitation
 				# max_next_to = -1
@@ -436,7 +436,8 @@ class bandit:
 
 				self.timeout[i] = next_timeout
 				
-				print('Calculating time out', self.timeout[i], 'total till now', totalTime)
+				print('Calculating time out exploit', self.timeout[i], 'predicted', next_to, \
+					'previous', self.timeout[i-1],total till now', totalTime)
 
 				if self.timeout[i] > TIMEOUT - (totalTime + self.timeout[i]):
 					self.timeout[i] =  (TIMEOUT - totalTime) #self.timeout[i] +
