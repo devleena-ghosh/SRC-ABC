@@ -89,15 +89,15 @@ class bandit:
 	def get_next_time(self, a, ld, flag=0):
 		nd = max(5, (ld - self.states) ) #/2)
 		ar_tab = self.engine_res[a]
-		ftrain, ttrain, ttrain1 = [], [], []
+		ftrain, ctrain, ttrain = [], [], []
 		#frm = self.states
 		frm  = -1
 		for frm in ar_tab.keys():
 			sm1 = ar_tab[frm]
 			if sm1.cla > 0 and (sm1.cla not in ttrain):
 				ftrain.append(sm1.frame)
-				ttrain.append(sm1.cla)
-				ttrain1.append(sm1.tt)
+				ctrain.append(sm1.cla)
+				ttrain.append(sm1.tt)
 		next_tm = -1 #self.timeout[i]*SC
 		ndt = -1
 		if frm < 0:
@@ -109,13 +109,13 @@ class bandit:
 		# if len(frames) > 10:
 		#     ftrain, ttrain = frames[-11:], time_outs[-11:]
 		if flag:
-			print('Training for action', a, nd, len(ftrain), len(ttrain), len(ttrain1))
+			print('Training for action', a, nd, len(ftrain), len(ctrain), len(ttrain))
 		# print('Training data', (ftrain), (ttrain), (ttrain1))
 		
 		if len(ftrain) > 0:
 			# predict number of clauses then predict timeout for next frame
-			fcla = interpolate.interp1d(ftrain, ttrain, fill_value = 'extrapolate')
-			fto = interpolate.interp1d(ttrain, ttrain1, fill_value = 'extrapolate')
+			fcla = interpolate.interp1d(ftrain, ctrain, fill_value = 'extrapolate')
+			fto = interpolate.interp1d(ctrain, ttrain, fill_value = 'extrapolate')
 			new_frames = np.arange(last_frm+1, last_frm+int(nd)+1, 2) #if int(1 + nd/2) > 2 else [last_frm+int(nd)+1]
 			new_cla = fcla(new_frames)
 			new_to = fto(new_cla)
@@ -124,7 +124,7 @@ class bandit:
 			next_tm = np.max(new_to) #np.sum(new_to)
 			ndt = int(nd)+1
 			# if flag:
-			while (1.0*(new_cla[-1] - last_cla)/last_cla < 0.25): # atleast 25% increment in clauses #next_tm < self.timeout[self.n]: #*SC:
+			while (ttrain[-1] >= new_tm and new_cla[-1] < 1.5*ctrain[-1] ): # atleast 50% increment in clauses #next_tm < self.timeout[self.n]: #*SC:
 				new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
 				new_cla = fcla(new_frames)
 				new_to = fto(new_cla)
@@ -478,7 +478,7 @@ class bandit:
 			tt = math.ceil(sm.tt) #sm.tt if sm.asrt > 0 else self.timeout[i] #sm.tt if sm.asrt > 0  else math.ceil(sm.tt) # self.timeout[i]
 
 			tp = self.timeout[i]
-			if self.frameout[i]-1 == sm.ld or self.frameout[i] == sm.ld or sm.asrt > 0:
+			if self.timeout[i] < sm.tt or self.frameout[i]-1 == sm.ld or self.frameout[i] == sm.ld or sm.asrt > 0:
 				tp = sm.tt
 
 			all_time += tp #sm.tt if sm.asrt > 0 else tp
@@ -561,7 +561,7 @@ class bandit:
 				if (blocker(sm,i)) or reward < 0:
 					print('blocker -- exploration phase')
 					r_exp = 0
-				if (( sm and (sm.ld - self.states) < 5)):
+				if (( sm and (sm.ld - self.states) < 2)):
 					print('current slowing down -- exploration phase')
 					r_exp += 1
 				if ((sm and next_to > 0  and abs(sm.tt - next_to)/next_to > 0.75)):
