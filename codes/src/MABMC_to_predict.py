@@ -436,7 +436,7 @@ class bandit:
 
 				self.timeout[i] = next_timeout
 				
-				print('Calculating time out exploit', self.timeout[i], 'predicted', next_to, next_fo, 'previous', self.timeout[i-1],total till now', totalTime)
+				print('Calculating time out exploit', self.timeout[i], 'predicted', next_to, next_fo, 'previous', self.timeout[i-1],'total till now', totalTime)
 
 				if self.timeout[i] > TIMEOUT - (totalTime + self.timeout[i]):
 					self.timeout[i] =  (TIMEOUT - totalTime) #self.timeout[i] +
