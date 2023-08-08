@@ -259,7 +259,7 @@ class bandit:
 		#         del ar_tab_old[k]
 
 		# ft_vs_pt = {}/
-
+		sys.stdout.flush()
 		return reward, sm
 
 	def write_log(self, a, sm, reward):
@@ -457,7 +457,7 @@ class bandit:
 				# if self.timeout[i] > 3000:
 				# 	self.stt
 
-
+			print('Total time till now: ', totalTime)
 			print('Next time out', self.timeout[i], 'frame_out', self.frameout[i], 'for chosen action', a, Actions[a], 'ocount', ocount, \
 				'explore', explore, 'ending', ending)
 
@@ -490,9 +490,7 @@ class bandit:
 
 			sd = self.states
 
-			ss = (Actions[a], tp, reward, totalTime, self.timeout[i], sd)
-
-				# --- state of next run ----
+			# --- state of next run ----
 			p = np.random.rand()
 			if not ending and not explore:
 				if p < self.eps:
@@ -527,13 +525,6 @@ class bandit:
 			if not blocker(sm, i) and reward > 0: # frames unrolled > 0
 				# count = 0
 				# print(i, 'sm', 'conf', sm.conf, 'cla', sm.cla, max(F*conf_begin_phase, 1e5), 'conf_begin_phase', conf_begin_phase, 'ocount', ocount, 'enter_critical', enter_critical, 'exit_critical', exit_critical, 'critical', critical, 'iter', (i+1)%self.k, 'repeat_count', repeat_count, 'M', M)
-
-				sd = sm.ld #Next(sm.ld, a)
-				ss = (Actions[a], tp, reward, totalTime, self.timeout[i], sd)
-
-				if len(best) == 0:
-					best = ss
-
 				# if not explore: # and sm and reward > 0:
 				next_time = {}
 				for a2 in range(self.k):
@@ -548,6 +539,10 @@ class bandit:
 
 
 				if explore:
+					ss = (Actions[a], tp, reward, totalTime, self.timeout[i], sd)
+					if len(best) == 0:
+						best = ss
+
 					sd = sm.ld #Next(sm.ld, a)
 					if best_sd < sd:
 						best_sd = sd
@@ -569,24 +564,28 @@ class bandit:
 						# best_sd = max(best_sd, sd)
 						if self.states < best_sd:		
 							self.states = best_sd
-							ss = best #(Actions[a], tt, reward, totalTime, self.timeout[i], self.states)
+
+							totalTime += best[1]
+							ss = (best[0], best[1], best[2], totalTime, best[3], best[4])
+							#ss = best #(Actions[a], tt, reward, totalTime, self.timeout[i], self.states)
 
 							print('Adding ss -- ending_explore', ss)
 							seq.append(ss)
-							totalTime += tp
 						# if (i < repeat_count and i%self.k == self.k-1):
 						conf_begin_phase = max_conf
 
 				else: #if not explore: # exploitation 
 					self.states = sm.ld
+					totalTime += tp
+					ss = (Actions[a], tp, reward, totalTime, self.timeout[i], sd)
 					print('Adding ss -- exploitation', ss)
 					seq.append(ss)
-					totalTime += tp
 
 			else:
 				ss = (Actions[a], -1, reward, -1, self.timeout[i], sd)
 				if all_ending:
 					totalTime += tp
+					#ss = (Actions[a], tp, reward, totalTime, self.timeout[i], sd)
 
 			self.reward[i] = self.mean_reward
 
