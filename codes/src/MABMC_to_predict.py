@@ -493,12 +493,12 @@ class bandit:
 			# --- state of next run ----
 			p = np.random.rand()
 			if not ending and not explore:
-				if p < self.eps:
-					print('random exploration phase')
-					r_exp += 1
-					explore = True
-					ocount = 0
-					print('#  Starting exploring --', i, ocount, pcount, r_exp)
+				# if p < self.eps:
+				# 	print('random exploration phase')
+				# 	r_exp += 1
+				# 	explore = True
+				# 	ocount = 0
+				# 	print('#  Starting exploring --', i, ocount, pcount, r_exp)
 				if (blocker(sm,i)) or reward < 0:
 					print('blocker -- exploration phase', reward, sm)
 					r_exp = 0
@@ -511,7 +511,7 @@ class bandit:
 					explore = True
 					ocount = 0
 					print('#  Starting exploring --', i, ocount, pcount, r_exp)
-				if ((sm and next_to > 0  and abs(sm.tt - next_to)/sm.tt > 0.75)):
+				if ((sm and next_to > 0  and (self.frameout[i] - sm.ld) >= 2 and abs(sm.tt - next_to)/sm.tt > 0.75)):
 					print('Incorrect prediction of next time -- exploration phase', abs(sm.tt - next_to)/next_to)
 					r_exp += 1
 					explore = True
