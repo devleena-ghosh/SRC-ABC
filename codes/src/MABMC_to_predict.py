@@ -563,19 +563,19 @@ class bandit:
 					ocount = 0
 					print('#  Starting exploring --', i, ocount, pcount, r_exp)
 				if (blocker(sm,i)) or reward < 0:
-					print('blocker -- exploration phase')
+					print('blocker -- exploration phase', reward, sm)
 					r_exp = 0
 					explore = True
 					ocount = 0
 					print('#  Starting exploring --', i, ocount, pcount, r_exp)
 				if (( sm and (sm.ld - self.states) < 2)):
-					print('current slowing down -- exploration phase')
+					print('current slowing down -- exploration phase',sm.ld, self.states)
 					r_exp += 1
 					explore = True
 					ocount = 0
 					print('#  Starting exploring --', i, ocount, pcount, r_exp)
-				if ((sm and next_to > 0  and abs(sm.tt - next_to)/next_to > 0.75)):
-					print('Incorrect prediction of next time -- exploration phase')
+				if ((sm and next_to > 0  and abs(sm.tt - next_to)/sm.tt > 0.75)):
+					print('Incorrect prediction of next time -- exploration phase', abs(sm.tt - next_to)/next_to)
 					r_exp += 1
 					explore = True
 					ocount = 0
