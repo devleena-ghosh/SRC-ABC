@@ -419,6 +419,7 @@ class bandit:
 
 			else: # for exploitation
 				# max_next_to = -1
+				next_to, next_fo = -1, -1
 				if a in next_time.keys():
 					next_to, next_fo = next_time[a]
 				# 	if max_next_to < next_to:
