@@ -116,7 +116,7 @@ def runseq(fname, seq):
 	print('############### {0}: {1}, {2} ###################'.format( 'SAT' if asrt> 0 else 'TIMEOUT', asrt if asrt > 0  else sm.frame, pt if asrt > 0 else tt))
 	return (asrt, 'SAT' if asrt> 0 else 'TIMEOUT', frame, pt if asrt > 0 else tt, ar_tab)
 
-def get_next_time(frames, clauses, ttimes):
+def get_next_time(frames, clauses, ttimes, a = 0, flag = 0):
 	if len(frames)  == 0:
 		return -1, -1
 	sd = frames[0]
@@ -127,7 +127,7 @@ def get_next_time(frames, clauses, ttimes):
 	#frm = self.states
 	frm  = -1
 	ij = 0
-	for ij in range(frames):
+	for ij in range(len(frames)):
 		frm = frames[ij]
 		cla = clauses[ij]
 		tt = ttimes[ij]

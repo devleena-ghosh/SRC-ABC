@@ -5,3 +5,10 @@ Input file is : benchmark/HWMCC_15_17/6s7.aig
 [1;37m../benchmark/HWMCC_15_17/6s7  :[0m i/o =   45/    1  lat =  504  and =   2530  lev = 25
 [1;37m../benchmark/HWMCC_15_17/6s7  :[0m i/o =   45/    1  lat =  469  and =   2499  lev = 22
 
+Simplified model ../benchmark/HWMCC_15_17/6s7_n.aig
+filename 6s7
+[120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120] [300, 300, 300, 300, 300, 300] [60, 60, 120, 240, 480, 840]
+[120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120] [300, 300, 300, 300, 300, 300] [60, 60, 120, 240, 480, 840]
+##################################
+---- Running sequence (bmc2, 1800) ---- ../benchmark/HWMCC_15_17/6s7_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s7_n.aig; print_stats; &get; bmc2 -S     0 -T  1800 -F 0 -v -L stdout; print_stats"

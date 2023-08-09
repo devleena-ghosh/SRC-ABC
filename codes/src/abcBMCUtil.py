@@ -19,6 +19,36 @@ abc_result =  namedtuple('abc_result', ['frame', 'var', 'cla', 'conf', 'mem' ,'t
 # for m1 in m:
 #     print(m1)
 #     print(m1.group(1), m1.group(2), m1.group(3), m1.group(4), m1.group(5), m1.group(6), m1.group(7), m1.group(8), m1.group(9), m1.group(10)) 
+# print('In abcBMCutil')
+# ott = '121 : F =  291. O =   0.  And =14572918. Var = 7720646. Conf =  32322.  Cla =26789471. Learn =  20519. 262 MB    60.35 sec'
+# xx = r'[ \t]*([\d]+)[ \t]+[:][ \t]+F[ \t]+=[ \t]*([\d]+).[ \t]+O[ \t]+=[ \t]*([\d]+).[ \t]+And[ \t]+=[ \t]*([\d]+).[ \t]+Var[ \t]+=[ \t]*([\d]+).[ \t]+Conf[ \t]+=[ \t]*([\d]+).[ \t]+Cla[ \t]+=[ \t]*([\d]+).[ \t]+Learn[ \t]+=[ \t]*([\d]+).[ \t]+.*([\d]+)[ \t]+MB[ \t]+([\d]+[.][\d]+)[ \t]+sec'
+# m = re.finditer(xx, ott, re.M|re.I)
+# asrt = 0
+# frame_count = 292
+# sd = 0
+# pretm =0
+# print(ott)
+# for m1 in m:
+#     print(m1)
+#     sm1 = int(m1.group(2)), int(m1.group(5)), int(m1.group(4)), int(m1.group(6)), int(m1.group(7)), int(m1.group(8)), int(m1.group(9)), float(m1.group(10))
+#     tt1 = sm1[7] 
+#     print(sm1, tt1, m1.group(1))#, m21.group(1), asrt)  
+#     print(sm1[2], asrt, sm1[0], frame_count, sm1[0], sd) 
+#     print(sm1[2] > 0)
+#     print(( asrt > 0 and sm1[0] <= asrt))
+#     print((frame_count > 0 and sm1[0] <= frame_count+1 and frame_count >= sd))
+#     if sm1[2] > 0 and (( asrt > 0 and sm1[0] <= asrt) or (frame_count > 0 and sm1[0] <= frame_count+1 and frame_count >= sd)): 
+         
+#         tt = sm1[7] #if t == 0  else t
+#         to = max(0,tt - pretm)
+#         ld = sm1[0]
+#         if frame_count > 0:
+#             ld = frame_count
+#         # if asrt > 0:
+#         #     ld = asrt
+#         sm = abc_result(frame=sm1[0], var=sm1[1], cla=sm1[4], conf = sm1[3], mem = sm1[6], to=to, asrt=asrt, tt = tt, ld=ld) #, io=(sm2[0], sm2[1]), lat=sm2[2], ag = sm2[3], lev = sm2[4])
+#         print('sm', sm.frame, sm.var, sm.cla, sm.conf, sm.to, sm.tt, sm.ld)
+# #print(m)
 
 def run_cmd(command):
     start_time = time.time()
@@ -65,7 +95,7 @@ def simplify(fname, ofname):
 def parse_bmc2(output, sd,t=0):
     ar_tab = OrderedDict()
     sm = None
-    xx = r'[ \t]+([\d]+)[ \t]+[:][ \t]+F[ \t]+=[ \t]*([\d]+).[ \t]+O[ \t]+=[ \t]*([\d]+).[ \t]+And[ \t]+=[ \t]*([\d]+).[ \t]+Var[ \t]+=[ \t]*([\d]+).[ \t]+Conf[ \t]+=[ \t]*([\d]+).[ \t]+Cla[ \t]+=[ \t]*([\d]+).[ \t]+Learn[ \t]+=[ \t]*([\d]+).[ \t]+.*([\d]+)[ \t]+MB[ \t]+([\d]+[.][\d]+)[ \t]+sec'
+    xx = r'[ \t]*([\d]+)[ \t]+[:][ \t]+F[ \t]+=[ \t]*([\d]+).[ \t]+O[ \t]+=[ \t]*([\d]+).[ \t]+And[ \t]+=[ \t]*([\d]+).[ \t]+Var[ \t]+=[ \t]*([\d]+).[ \t]+Conf[ \t]+=[ \t]*([\d]+).[ \t]+Cla[ \t]+=[ \t]*([\d]+).[ \t]+Learn[ \t]+=[ \t]*([\d]+).[ \t]+.*([\d]+)[ \t]+MB[ \t]+([\d]+[.][\d]+)[ \t]+sec'
     m = re.finditer(xx, output, re.M|re.I)
     if DEBUG:
         print(m)
@@ -90,10 +120,15 @@ def parse_bmc2(output, sd,t=0):
     for m1 in m:
         # id: 1, frame: 2, out : 3, And: 4, Var : 5, Conf: 6, Cla: 7, Learn : 8, Mem: 9, tt: 10
         sm1 = int(m1.group(2)), int(m1.group(5)), int(m1.group(4)), int(m1.group(6)), int(m1.group(7)), int(m1.group(8)), int(m1.group(9)), float(m1.group(10))
-        tt1 = sm1[5] 
+        tt1 = sm1[7] 
         if DEBUG:
-            print(sm1, m1.group(1), m21.group(1), asrt)   
-        if sm1[4] > 0 and ( asrt > 0 and sm1[0] <= asrt) or (frame_count > 0 and sm1[0] <= frame_count+1 and frame_count >= sd): 
+            print('sm1', sm1, m1.group(1), frame_count, asrt)   
+            print(sm1, tt1, m1.group(1))#, m21.group(1), asrt)  
+            print(sm1[2], asrt, sm1[0], frame_count, sm1[0], sd) 
+            print(sm1[2] > 0)
+            print(( asrt > 0 and sm1[0] <= asrt))
+            print((frame_count > 0 and sm1[0] <= frame_count+1 and frame_count >= sd))
+        if sm1[2] > 0 and ( asrt > 0 and sm1[0] <= asrt) or (frame_count > 0 and sm1[0] <= frame_count+1 and frame_count >= sd): 
              
             tt = sm1[7] #if t == 0  else t
             to = max(0,tt - pretm)
@@ -327,3 +362,6 @@ def bmc3ru(ofname, sd, t=0, f=0):
     res = parse_bmc3(output,t)
     return res
 
+
+res = parse_bmc2(ott, 0)
+print(res)
