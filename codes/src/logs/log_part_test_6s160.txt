@@ -2659,3 +2659,100 @@ abc_result(frame=95, var=84105, cla=305464, conf=159936, mem=3, to=12.8299999999
 (99, 88519, 153896, 191529, 321594, 61783, 3, 61.26) 23 99 -1
 abc_result(frame=99, var=88519, cla=321594, conf=191529, mem=3, to=13.399999999999999, asrt=-1, tt=61.26, ld=99)
 abc_result(frame=99, var=88519, cla=321594, conf=191529, mem=3, to=13.399999999999999, asrt=-1, tt=61.26, ld=99)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc2 -S   100 -T   120 -F 0 -v -L stdout; print_stats"
+Cmd res: 0
+	----- Output: 0
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc2 -S   100 -T   120 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+Running "bmc2". AIG:  PI/PO/Reg = 149/1/559.  Node =   6943. Lev =    30.
+Params: FramesMax = 0. NodesDelta = 2000. ConfMaxOne = 0. ConfMaxAll = 0.
+   0 : F =    7. O =   0.  And =    2434. Var =    1298. Conf =      0.  Cla =   4255. Learn =      0.   0 MB     0.01 sec
+   1 : F =   11. O =   0.  And =    5755. Var =    3120. Conf =      0.  Cla =  10411. Learn =      0.   0 MB     0.02 sec
+   2 : F =   15. O =   0.  And =    9592. Var =    5237. Conf =      0.  Cla =  17853. Learn =      0.   1 MB     0.03 sec
+   3 : F =   19. O =   0.  And =   13928. Var =    7652. Conf =      0.  Cla =  26408. Learn =      0.   1 MB     0.04 sec
+   4 : F =   23. O =   0.  And =   18686. Var =   10310. Conf =      0.  Cla =  35927. Learn =      0.   1 MB     0.05 sec
+   5 : F =   27. O =   0.  And =   23853. Var =   13245. Conf =      0.  Cla =  46430. Learn =      0.   1 MB     0.06 sec
+   6 : F =   31. O =   0.  And =   29443. Var =   16411. Conf =      0.  Cla =  57834. Learn =      0.   1 MB     0.08 sec
+   7 : F =   35. O =   0.  And =   35441. Var =   19772. Conf =      0.  Cla =  70088. Learn =      0.   1 MB     0.09 sec
+   8 : F =   39. O =   0.  And =   41849. Var =   23396. Conf =      0.  Cla =  83283. Learn =      0.   1 MB     0.10 sec
+   9 : F =   43. O =   0.  And =   48680. Var =   27304. Conf =      0.  Cla =  97474. Learn =      0.   1 MB     0.12 sec
+  10 : F =   47. O =   0.  And =   55915. Var =   31424. Conf =      0.  Cla = 112553. Learn =      0.   2 MB     0.14 sec
+  11 : F =   51. O =   0.  And =   63381. Var =   35711. Conf =      0.  Cla = 128267. Learn =      0.   2 MB     0.15 sec
+  12 : F =   55. O =   0.  And =   70923. Var =   40080. Conf =      0.  Cla = 144301. Learn =      0.   2 MB     0.17 sec
+  13 : F =   59. O =   0.  And =   78466. Var =   44468. Conf =      0.  Cla = 160391. Learn =      0.   2 MB     0.19 sec
+  14 : F =   63. O =   0.  And =   86009. Var =   48857. Conf =      0.  Cla = 176480. Learn =      0.   2 MB     0.21 sec
+  15 : F =   67. O =   0.  And =   93552. Var =   53247. Conf =      0.  Cla = 192567. Learn =      0.   2 MB     0.22 sec
+  16 : F =   71. O =   0.  And =  101095. Var =   57646. Conf =      0.  Cla = 208675. Learn =      0.   2 MB     0.24 sec
+  17 : F =   75. O =   0.  And =  108638. Var =   62045. Conf =      0.  Cla = 224781. Learn =      0.   2 MB     0.26 sec
+  18 : F =   79. O =   0.  And =  116181. Var =   66457. Conf =      0.  Cla = 240925. Learn =      0.   3 MB     0.28 sec
+  19 : F =   83. O =   0.  And =  123724. Var =   70873. Conf =      0.  Cla = 257075. Learn =      0.   3 MB     0.29 sec
+  20 : F =   87. O =   0.  And =  131267. Var =   75278. Conf =      0.  Cla = 273194. Learn =      0.   3 MB     0.31 sec
+  21 : F =   91. O =   0.  And =  138810. Var =   79685. Conf =      0.  Cla = 289315. Learn =      0.   3 MB     0.33 sec
+  22 : F =   95. O =   0.  And =  146353. Var =   84105. Conf =      0.  Cla = 305466. Learn =      0.   3 MB     0.35 sec
+  23 : F =   99. O =   0.  And =  153896. Var =   88519. Conf =      0.  Cla = 321602. Learn =      0.   3 MB     0.37 sec
+  24 : F =  103. O =   0.  And =  161439. Var =   92944. Conf = 170550.  Cla = 337769. Learn =  58597.   3 MB    57.76 sec
+  25 : F =  107. O =   0.  And =  168982. Var =   97368. Conf = 239823.  Cla = 353922. Learn =  68679.   3 MB    87.76 sec
+## trying to complete the last frame with Inreased timeout to (240 seconds).. 360064963. current time 120064963.
+  26 : F =  111. O =   0.  And =  176525. Var =  101798. Conf = 318886.  Cla = 370086. Learn =  75739.   4 MB   123.05 sec
+No output failed in 111 frames.  Time =   123.05 sec
+Reached limit on the number of timeframes (111).
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+
+<callable_iterator object at 0x132407760>
+111
+(7, 1298, 2434, 0, 4255, 0, 0, 0.01) 0 111 -1
+abc_result(frame=7, var=1298, cla=4255, conf=0, mem=0, to=0.01, asrt=-1, tt=0.01, ld=111)
+(11, 3120, 5755, 0, 10411, 0, 0, 0.02) 1 111 -1
+abc_result(frame=11, var=3120, cla=10411, conf=0, mem=0, to=0.01, asrt=-1, tt=0.02, ld=111)
+(15, 5237, 9592, 0, 17853, 0, 1, 0.03) 2 111 -1
+abc_result(frame=15, var=5237, cla=17853, conf=0, mem=1, to=0.009999999999999998, asrt=-1, tt=0.03, ld=111)
+(19, 7652, 13928, 0, 26408, 0, 1, 0.04) 3 111 -1
+abc_result(frame=19, var=7652, cla=26408, conf=0, mem=1, to=0.010000000000000002, asrt=-1, tt=0.04, ld=111)
+(23, 10310, 18686, 0, 35927, 0, 1, 0.05) 4 111 -1
+abc_result(frame=23, var=10310, cla=35927, conf=0, mem=1, to=0.010000000000000002, asrt=-1, tt=0.05, ld=111)
+(27, 13245, 23853, 0, 46430, 0, 1, 0.06) 5 111 -1
+abc_result(frame=27, var=13245, cla=46430, conf=0, mem=1, to=0.009999999999999995, asrt=-1, tt=0.06, ld=111)
+(31, 16411, 29443, 0, 57834, 0, 1, 0.08) 6 111 -1
+abc_result(frame=31, var=16411, cla=57834, conf=0, mem=1, to=0.020000000000000004, asrt=-1, tt=0.08, ld=111)
+(35, 19772, 35441, 0, 70088, 0, 1, 0.09) 7 111 -1
+abc_result(frame=35, var=19772, cla=70088, conf=0, mem=1, to=0.009999999999999995, asrt=-1, tt=0.09, ld=111)
+(39, 23396, 41849, 0, 83283, 0, 1, 0.1) 8 111 -1
+abc_result(frame=39, var=23396, cla=83283, conf=0, mem=1, to=0.010000000000000009, asrt=-1, tt=0.1, ld=111)
+(43, 27304, 48680, 0, 97474, 0, 1, 0.12) 9 111 -1
+abc_result(frame=43, var=27304, cla=97474, conf=0, mem=1, to=0.01999999999999999, asrt=-1, tt=0.12, ld=111)
+(47, 31424, 55915, 0, 112553, 0, 2, 0.14) 10 111 -1
+abc_result(frame=47, var=31424, cla=112553, conf=0, mem=2, to=0.020000000000000018, asrt=-1, tt=0.14, ld=111)
+(51, 35711, 63381, 0, 128267, 0, 2, 0.15) 11 111 -1
+abc_result(frame=51, var=35711, cla=128267, conf=0, mem=2, to=0.009999999999999981, asrt=-1, tt=0.15, ld=111)
+(55, 40080, 70923, 0, 144301, 0, 2, 0.17) 12 111 -1
+abc_result(frame=55, var=40080, cla=144301, conf=0, mem=2, to=0.020000000000000018, asrt=-1, tt=0.17, ld=111)
+(59, 44468, 78466, 0, 160391, 0, 2, 0.19) 13 111 -1
+abc_result(frame=59, var=44468, cla=160391, conf=0, mem=2, to=0.01999999999999999, asrt=-1, tt=0.19, ld=111)
+(63, 48857, 86009, 0, 176480, 0, 2, 0.21) 14 111 -1
+abc_result(frame=63, var=48857, cla=176480, conf=0, mem=2, to=0.01999999999999999, asrt=-1, tt=0.21, ld=111)
+(67, 53247, 93552, 0, 192567, 0, 2, 0.22) 15 111 -1
+abc_result(frame=67, var=53247, cla=192567, conf=0, mem=2, to=0.010000000000000009, asrt=-1, tt=0.22, ld=111)
+(71, 57646, 101095, 0, 208675, 0, 2, 0.24) 16 111 -1
+abc_result(frame=71, var=57646, cla=208675, conf=0, mem=2, to=0.01999999999999999, asrt=-1, tt=0.24, ld=111)
+(75, 62045, 108638, 0, 224781, 0, 2, 0.26) 17 111 -1
+abc_result(frame=75, var=62045, cla=224781, conf=0, mem=2, to=0.020000000000000018, asrt=-1, tt=0.26, ld=111)
+(79, 66457, 116181, 0, 240925, 0, 3, 0.28) 18 111 -1
+abc_result(frame=79, var=66457, cla=240925, conf=0, mem=3, to=0.020000000000000018, asrt=-1, tt=0.28, ld=111)
+(83, 70873, 123724, 0, 257075, 0, 3, 0.29) 19 111 -1
+abc_result(frame=83, var=70873, cla=257075, conf=0, mem=3, to=0.009999999999999953, asrt=-1, tt=0.29, ld=111)
+(87, 75278, 131267, 0, 273194, 0, 3, 0.31) 20 111 -1
+abc_result(frame=87, var=75278, cla=273194, conf=0, mem=3, to=0.020000000000000018, asrt=-1, tt=0.31, ld=111)
+(91, 79685, 138810, 0, 289315, 0, 3, 0.33) 21 111 -1
+abc_result(frame=91, var=79685, cla=289315, conf=0, mem=3, to=0.020000000000000018, asrt=-1, tt=0.33, ld=111)
+(95, 84105, 146353, 0, 305466, 0, 3, 0.35) 22 111 -1
+abc_result(frame=95, var=84105, cla=305466, conf=0, mem=3, to=0.019999999999999962, asrt=-1, tt=0.35, ld=111)
+(99, 88519, 153896, 0, 321602, 0, 3, 0.37) 23 111 -1
+abc_result(frame=99, var=88519, cla=321602, conf=0, mem=3, to=0.020000000000000018, asrt=-1, tt=0.37, ld=111)
+(103, 92944, 161439, 170550, 337769, 58597, 3, 57.76) 24 111 -1
+abc_result(frame=103, var=92944, cla=337769, conf=170550, mem=3, to=57.39, asrt=-1, tt=57.76, ld=111)
+(107, 97368, 168982, 239823, 353922, 68679, 3, 87.76) 25 111 -1
+abc_result(frame=107, var=97368, cla=353922, conf=239823, mem=3, to=30.000000000000007, asrt=-1, tt=87.76, ld=111)
+(111, 101798, 176525, 318886, 370086, 75739, 4, 123.05) 26 111 -1
+abc_result(frame=111, var=101798, cla=370086, conf=318886, mem=4, to=35.28999999999999, asrt=-1, tt=123.05, ld=111)
+abc_result(frame=111, var=101798, cla=370086, conf=318886, mem=4, to=35.28999999999999, asrt=-1, tt=123.05, ld=111)

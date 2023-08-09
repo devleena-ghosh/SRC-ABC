@@ -363,5 +363,5 @@ def bmc3ru(ofname, sd, t=0, f=0):
     return res
 
 
-res = parse_bmc2(ott, 0)
-print(res)
+# res = parse_bmc2(ott, 0)
+# print(res)
