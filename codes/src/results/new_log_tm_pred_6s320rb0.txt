@@ -1,0 +1,497 @@
+Input file is : benchmark/HWMCC_15_17/6s320rb0.aig
+6s320rb0
+iters 10000
+---------------- Running bandit ucb1 ------------------
+---- episodes  0
+------Iteration 0 start ------
+Initial exploring select 0 bmc2
+Calculating time out explore 60.0 total till now 0
+Total time till now:  0
+Next time out 60.0 frame_out 0.0 for chosen action 0 bmc2 ocount 0 explore True ending 0
+../benchmark/HWMCC_15_17/6s320rb0.aig ../benchmark/HWMCC_15_17/6s320rb0_n.aig
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s320rb0.aig; print_stats; &get; &dc2;&put;dretime;&get;&lcorr;&dc2;&put;dretime;&get;&scorr;&fraig;&dc2;&put;dretime;&put; print_stats; write ../benchmark/HWMCC_15_17/6s320rb0_n.aig".
+
+[1;37m../benchmark/HWMCC_15_17/6s320rb0:[0m i/o =   49/    1  lat =  202  and =  30346  lev =2827
+[1;37m../benchmark/HWMCC_15_17/6s320rb0:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+
+Simplified model ../benchmark/HWMCC_15_17/6s320rb0_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s320rb0_n.aig; print_stats; &get; bmc2 -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s320rb0_n.aig; print_stats; &get; bmc2 -S     0 -T    60 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s320rb0_n:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+Running "bmc2". AIG:  PI/PO/Reg = 49/1/197.  Node =  10653. Lev =  1054.
+Params: FramesMax = 0. NodesDelta = 2000. ConfMaxOne = 0. ConfMaxAll = 0.
+   0 : F =    3. O =   0.  And =    2697. Var =    1219. Conf =     13.  Cla =   4642. Learn =     11.   0 MB     0.01 sec
+   1 : F =    4. O =   0.  And =    8993. Var =    4150. Conf =    105.  Cla =  16034. Learn =     99.   0 MB     0.02 sec
+   2 : F =    5. O =   0.  And =   17170. Var =    8405. Conf =    972.  Cla =  32444. Learn =    957.   0 MB     0.06 sec
+   3 : F =    6. O =   0.  And =   25392. Var =   12726. Conf =   4682.  Cla =  49070. Learn =   4649.   0 MB     0.29 sec
+   4 : F =    7. O =   0.  And =   33615. Var =   17044. Conf =  23081.  Cla =  65844. Learn =  16958.   0 MB     1.90 sec
+   5 : F =    8. O =   0.  And =   41838. Var =   21363. Conf =  97690.  Cla =  82624. Learn =  26906.   0 MB    11.37 sec
+## trying to complete the last frame with Inreased timeout to (120 seconds).. 180030508. current time 60030508.
+   6 : F =    9. O =   0.  And =   50061. Var =   25681. Conf = 657426.  Cla =  99401. Learn =  78543.   0 MB   108.30 sec
+No output failed in 9 frames.  Time =   108.30 sec
+Reached limit on the number of timeframes (9).
+[1;37m../benchmark/HWMCC_15_17/6s320rb0_n:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+
+In reward 0 9 980.67 10
+0 9 0.5336429243553887 abc_result(frame=9, var=25681, cla=99401, conf=657426, mem=0, to=96.92999999999999, asrt=-1, tt=108.3, ld=9)
+Action 0 reward 0.5336429243553887
+------- ## --------- Starting with depth 0  Ending depth 9
+Training for action 0 9 7 7 7
+Prediction for action 0 bmc2 time 980.67 frames 10
+next time out {0: (980.67, 10)}
+# exploring -- 0 explore True best_sd 9 max_conf 99401
+#### iter  0 0 bmc2 time taken 109 60.0 totalTime 0 ss ('bmc2', 108.3, 0.5336429243553887, 0, 60.0, 0) abc_result(frame=9, var=25681, cla=99401, conf=657426, mem=0, to=96.92999999999999, asrt=-1, tt=108.3, ld=9)
+--------- Iteration 0 end ------
+------Iteration 1 start ------
+Initial exploring select 1 bmc3
+Calculating time out explore 60.0 total till now 0
+Total time till now:  0
+Next time out 60.0 frame_out 0.0 for chosen action 1 bmc3 ocount 0 explore True ending 0
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s320rb0_n.aig; print_stats; &get; bmc3 -S     0 -T    60 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s320rb0_n:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+Running "bmc3". PI/PO/Reg = 49/1/197. And =  10653. Lev =  1054. ObjNums =  5390.
+Params: FramesMax = 0. Start = 0. ConfLimit = 0. TimeOut = 60. SolveAll = 0.
+   0 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   1 + : Var =      29. Cla =       72. Conf =      3. Learn =      2.    0 MB   4 MB     0.03 sec 
+   2 + : Var =    2160. Cla =     8045. Conf =     12. Learn =      9.    0 MB   4 MB     0.03 sec 
+   3 + : Var =    5732. Cla =    21906. Conf =     82. Learn =     71.    0 MB   4 MB     0.03 sec 
+   4 + : Var =    9605. Cla =    37471. Conf =   1014. Learn =    995.    0 MB   5 MB     0.08 sec 
+   5 + : Var =   13485. Cla =    53097. Conf =   5331. Learn =   5292.    0 MB   7 MB     0.34 sec 
+   6 + : Var =   17365. Cla =    68859. Conf =  21245. Learn =  14104.    0 MB   9 MB     1.70 sec 
+   7 + : Var =   21245. Cla =    84621. Conf = 117000. Learn =  36058.    0 MB  17 MB    13.45 sec 
+Running Once again status: 0 nTimeUndec:46639260 nTimeOut:60026291 tryOnce:0
+   8 + : Var =   25125. Cla =   100383. Conf = 730144. Learn =  81829.    0 MB  38 MB   112.41 sec 
+Runtime:  CNF = 0.0 sec (0.0 %)  UNSAT = 65.7 sec (58.5 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 0.0 sec (0.0 %)
+LStart(P) = 10000  LDelta(Q) = 2000  LRatio(R) = 80  ReduceDB = 38  Vars = 25125  Used = 25122 (99.99 %)
+Buffs = 850. Dups = 0.   Hash hits = 44.  Hash misses = 24762.  UniProps = 0.
+No output asserted in 9 frames. Resource limit reached (timeout 60 sec). Time =   112.42 sec
+[1;37m../benchmark/HWMCC_15_17/6s320rb0_n:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+
+9
+starting abc_result(frame=1, var=29, cla=72, conf=3, mem=4, to=0.03, asrt=-1, tt=0.03, ld=1)
+In reward 0 8 805.13 9
+0 8 0.5292225531760815 abc_result(frame=8, var=25125, cla=100383, conf=730144, mem=38, to=98.96, asrt=-1, tt=112.41, ld=8)
+Action 1 reward 0.5292225531760815
+------- ## --------- Starting with depth 0  Ending depth 8
+Training for action 0 8 7 7 7
+Prediction for action 0 bmc2 time 786.81 frames 9
+Training for action 1 8 8 8 8
+Prediction for action 1 bmc3 time 805.13 frames 9
+next time out {0: (786.81, 9), 1: (805.13, 9)}
+# exploring -- 1 explore True best_sd 9 max_conf 100383
+#### iter  1 1 bmc3 time taken 113 60.0 totalTime 0 ss ('bmc3', 112.41, 0.5292225531760815, 0, 60.0, 0) abc_result(frame=8, var=25125, cla=100383, conf=730144, mem=38, to=98.96, asrt=-1, tt=112.41, ld=8)
+--------- Iteration 1 end ------
+------Iteration 2 start ------
+Initial exploring select 2 bmc3s
+Calculating time out explore 60.0 total till now 0
+Total time till now:  0
+Next time out 60.0 frame_out 0.0 for chosen action 2 bmc3s ocount 0 explore True ending 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s320rb0_n.aig; print_stats; &get; bmc3 -s -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s320rb0_n.aig; print_stats; &get; bmc3 -s -S     0 -T    60 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s320rb0_n:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+Running "bmc3". PI/PO/Reg = 49/1/197. And =  10653. Lev =  1054. ObjNums =  5390.
+Params: FramesMax = 0. Start = 0. ConfLimit = 0. TimeOut = 60. SolveAll = 0.
+   0 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   0 MB     0.02 sec 
+satoko_solve status -1   1 + : Var =      29. Cla =       70. Conf =      2. Learn =      1.    0 MB   0 MB     0.02 sec 
+satoko_solve status -1   2 + : Var =    2160. Cla =     7832. Conf =     15. Learn =     12.    0 MB   0 MB     0.02 sec 
+satoko_solve status -1   3 + : Var =    5732. Cla =    20635. Conf =     98. Learn =     90.    0 MB   0 MB     0.03 sec 
+satoko_solve status -1   4 + : Var =    9605. Cla =    34588. Conf =    925. Learn =    906.    0 MB   0 MB     0.08 sec 
+satoko_solve status -1   5 + : Var =   13485. Cla =    49995. Conf =   4782. Learn =   3318.    0 MB   0 MB     0.37 sec 
+satoko_solve status -1   6 + : Var =   17365. Cla =    64324. Conf =  28799. Learn =   8369.    0 MB   0 MB     2.74 sec 
+satoko_solve status -1   7 + : Var =   21245. Cla =    78801. Conf = 129846. Learn =  31405.    0 MB   0 MB    16.68 sec 
+satoko_solve status 0Running Once again status: 0 nTimeUndec:43317781 nTimeOut:60026161 tryOnce:0
+satoko_solve status 0Runtime:  CNF = 0.0 sec (0.0 %)  UNSAT = 16.7 sec (13.9 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 60.0 sec (50.0 %)
+LStart(P) = 0  LDelta(Q) = 0  LRatio(R) = 0  ReduceDB = 0  Vars = 25125  Used = 0 (0.00 %)
+Buffs = 850. Dups = 0.   Hash hits = 44.  Hash misses = 24762.  UniProps = 0.
+No output asserted in 8 frames. Resource limit reached (timeout 60 sec). Time =   120.01 sec
+[1;37m../benchmark/HWMCC_15_17/6s320rb0_n:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+
+8
+starting abc_result(frame=1, var=29, cla=70, conf=2, mem=0, to=0.02, asrt=-1, tt=0.02, ld=1)
+In reward 0 7 114.25999999999999 8
+0 7 0.8842937400676654 abc_result(frame=7, var=21245, cla=78801, conf=129846, mem=0, to=13.94, asrt=-1, tt=16.68, ld=7)
+Action 2 reward 0.8842937400676654
+------- ## --------- Starting with depth 0  Ending depth 7
+Training for action 0 7 7 7 7
+Prediction for action 0 bmc2 time 786.81 frames 8
+Training for action 1 7 8 8 8
+Prediction for action 1 bmc3 time 805.13 frames 8
+Training for action 2 7 7 7 7
+Prediction for action 2 bmc3s time 114.25999999999999 frames 8
+next time out {0: (786.81, 8), 1: (805.13, 8), 2: (114.25999999999999, 8)}
+# exploring -- 2 explore True best_sd 9 max_conf 100383
+#### iter  2 2 bmc3s time taken 17 60.0 totalTime 0 ss ('bmc3s', 60.0, 0.8842937400676654, 0, 60.0, 0) abc_result(frame=7, var=21245, cla=78801, conf=129846, mem=0, to=13.94, asrt=-1, tt=16.68, ld=7)
+--------- Iteration 2 end ------
+------Iteration 3 start ------
+Initial exploring select 3 bmc3g
+Calculating time out explore 60.0 total till now 0
+Total time till now:  0
+Next time out 60.0 frame_out 0.0 for chosen action 3 bmc3g ocount 0 explore True ending 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s320rb0_n.aig; print_stats; &get; bmc3 -g -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s320rb0_n.aig; print_stats; &get; bmc3 -g -S     0 -T    60 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s320rb0_n:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+Running "bmc3". PI/PO/Reg = 49/1/197. And =  10653. Lev =  1054. ObjNums =  5390.
+Params: FramesMax = 0. Start = 0. ConfLimit = 0. TimeOut = 60. SolveAll = 0.
+   0 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   0 MB     0.02 sec 
+   1 + : Var =      29. Cla =       72. Conf =      2. Learn =      0.    0 MB   0 MB     0.02 sec 
+   2 + : Var =    2160. Cla =     8045. Conf =     14. Learn =      9.    0 MB   0 MB     0.02 sec 
+   3 + : Var =    5732. Cla =    21902. Conf =    170. Learn =    153.    0 MB   0 MB     0.03 sec 
+   4 + : Var =    9605. Cla =    37379. Conf =    946. Learn =    865.    0 MB   0 MB     0.07 sec 
+   5 + : Var =   13485. Cla =    52972. Conf =   5593. Learn =   4412.    0 MB   0 MB     0.38 sec 
+   6 + : Var =   17365. Cla =    68734. Conf =  22781. Learn =  13523.    0 MB   0 MB     1.79 sec 
+   7 + : Var =   21245. Cla =    84496. Conf =  99950. Learn =  28679.    0 MB   0 MB    10.34 sec 
+   8 + : Var =   25125. Cla =   100258. Conf = 428334. Learn =  81730.    0 MB   0 MB    55.98 sec 
+Runtime:  CNF = 0.0 sec (0.1 %)  UNSAT = 55.9 sec (93.1 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 4.1 sec (6.8 %)
+LStart(P) = 0  LDelta(Q) = 0  LRatio(R) = 0  ReduceDB = 0  Vars = 29005  Used = 0 (0.00 %)
+Buffs = 850. Dups = 0.   Hash hits = 44.  Hash misses = 28593.  UniProps = 0.
+No output asserted in 9 frames. Resource limit reached (timeout 60 sec). Time =    60.10 sec
+[1;37m../benchmark/HWMCC_15_17/6s320rb0_n:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+
+9
+starting abc_result(frame=1, var=29, cla=72, conf=2, mem=0, to=0.02, asrt=-1, tt=0.02, ld=1)
+In reward 0 8 375.46 9
+0 8 0.7256606356436841 abc_result(frame=8, var=25125, cla=100258, conf=428334, mem=0, to=45.64, asrt=-1, tt=55.98, ld=8)
+Action 3 reward 0.7256606356436841
+------- ## --------- Starting with depth 0  Ending depth 8
+Training for action 0 8 7 7 7
+Prediction for action 0 bmc2 time 786.81 frames 9
+Training for action 1 8 8 8 8
+Prediction for action 1 bmc3 time 805.13 frames 9
+Training for action 2 8 7 7 7
+Prediction for action 2 bmc3s time 114.25999999999999 frames 9
+Training for action 3 8 8 8 8
+Prediction for action 3 bmc3g time 375.46 frames 9
+next time out {0: (786.81, 9), 1: (805.13, 9), 2: (114.25999999999999, 9), 3: (375.46, 9)}
+# exploring -- 3 explore True best_sd 9 max_conf 100383
+#### iter  3 3 bmc3g time taken 56 60.0 totalTime 0 ss ('bmc3g', 60.0, 0.7256606356436841, 0, 60.0, 0) abc_result(frame=8, var=25125, cla=100258, conf=428334, mem=0, to=45.64, asrt=-1, tt=55.98, ld=8)
+--------- Iteration 3 end ------
+------Iteration 4 start ------
+Initial exploring select 4 bmcu
+Calculating time out explore 60.0 total till now 0
+Total time till now:  0
+Next time out 60.0 frame_out 0.0 for chosen action 4 bmcu ocount 0 explore True ending 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s320rb0_n.aig; print_stats; &get; bmc3 -u -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s320rb0_n.aig; print_stats; &get; bmc3 -u -S     0 -T    60 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s320rb0_n:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+Expanded 1 outputs into 2 outputs using OR decomposition.
+Running "bmc3". PI/PO/Reg = 49/2/197. And =  10652. Lev =  1054. ObjNums =  5392.
+Params: FramesMax = 0. Start = 0. ConfLimit = 0. TimeOut = 60. SolveAll = 0.
+   0 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.02 sec 
+   1 + : Var =      30. Cla =       74. Conf =      0. Learn =      0.    0 MB   4 MB     0.02 sec 
+   2 + : Var =    2162. Cla =     8049. Conf =     11. Learn =      8.    0 MB   4 MB     0.02 sec 
+   3 + : Var =    5735. Cla =    21912. Conf =     79. Learn =     69.    0 MB   4 MB     0.02 sec 
+   4 + : Var =    9609. Cla =    37507. Conf =    860. Learn =    834.    0 MB   5 MB     0.06 sec 
+   5 + : Var =   13490. Cla =    53148. Conf =   4891. Learn =   4858.    0 MB   6 MB     0.36 sec 
+   6 + : Var =   17371. Cla =    68912. Conf =  29451. Learn =  15432.    0 MB  10 MB     2.74 sec 
+   7 + : Var =   21252. Cla =    84676. Conf = 134932. Learn =  35458.    0 MB  16 MB    16.33 sec 
+Running Once again status: 0 nTimeUndec:43677669 nTimeOut:60025713 tryOnce:0
+Reached timeout (60 seconds).
+Runtime:  CNF = 0.0 sec (0.0 %)  UNSAT = 24.8 sec (36.2 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 0.0 sec (0.0 %)
+LStart(P) = 10000  LDelta(Q) = 2000  LRatio(R) = 80  ReduceDB = 31  Vars = 25132  Used = 25124 (99.97 %)
+Buffs = 850. Dups = 0.   Hash hits = 44.  Hash misses = 24769.  UniProps = 0.
+No output asserted in 8 frames. Resource limit reached (timeout 60 sec). Time =    68.47 sec
+[1;37m../benchmark/HWMCC_15_17/6s320rb0_n:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+
+8
+starting abc_result(frame=1, var=30, cla=74, conf=0, mem=4, to=0.02, asrt=-1, tt=0.02, ld=1)
+In reward 0 7 111.45999999999998 8
+0 7 0.8865784048019621 abc_result(frame=7, var=21252, cla=84676, conf=134932, mem=16, to=13.589999999999998, asrt=-1, tt=16.33, ld=7)
+Action 4 reward 0.8865784048019621
+------- ## --------- Starting with depth 0  Ending depth 7
+Training for action 0 7 7 7 7
+Prediction for action 0 bmc2 time 786.81 frames 8
+Training for action 1 7 8 8 8
+Prediction for action 1 bmc3 time 805.13 frames 8
+Training for action 2 7 7 7 7
+Prediction for action 2 bmc3s time 114.25999999999999 frames 8
+Training for action 3 7 8 8 8
+Prediction for action 3 bmc3g time 375.46 frames 8
+Training for action 4 7 7 7 7
+Prediction for action 4 bmcu time 111.45999999999998 frames 8
+next time out {0: (786.81, 8), 1: (805.13, 8), 2: (114.25999999999999, 8), 3: (375.46, 8), 4: (111.45999999999998, 8)}
+# exploring -- 4 explore True best_sd 9 max_conf 100383
+#### iter  4 4 bmcu time taken 17 60.0 totalTime 0 ss ('bmcu', 60.0, 0.8865784048019621, 0, 60.0, 0) abc_result(frame=7, var=21252, cla=84676, conf=134932, mem=16, to=13.589999999999998, asrt=-1, tt=16.33, ld=7)
+--------- Iteration 4 end ------
+------Iteration 5 start ------
+Initial exploring select 5 bmc3r
+Calculating time out explore 60.0 total till now 0
+Total time till now:  0
+Next time out 60.0 frame_out 0.0 for chosen action 5 bmc3r ocount 0 explore True ending 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s320rb0_n.aig; print_stats; &get; bmc3 -r -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s320rb0_n.aig; print_stats; &get; bmc3 -r -S     0 -T    60 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s320rb0_n:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+Running "bmc3". PI/PO/Reg = 49/1/197. And =  10653. Lev =  1054. ObjNums =  5390.
+Params: FramesMax = 0. Start = 0. ConfLimit = 0. TimeOut = 60. SolveAll = 0.
+   0 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.02 sec 
+   1 + : Var =      29. Cla =       72. Conf =      3. Learn =      2.    0 MB   4 MB     0.02 sec 
+   2 + : Var =    2160. Cla =     8045. Conf =     12. Learn =      9.    0 MB   4 MB     0.02 sec 
+   3 + : Var =    5732. Cla =    21906. Conf =     82. Learn =     71.    0 MB   4 MB     0.02 sec 
+   4 + : Var =    9605. Cla =    37471. Conf =    829. Learn =    807.    0 MB   5 MB     0.06 sec 
+   5 + : Var =   13485. Cla =    53097. Conf =   5250. Learn =   5215.    0 MB   7 MB     0.33 sec 
+   6 + : Var =   17365. Cla =    68859. Conf =  21807. Learn =  14591.    0 MB  10 MB     1.77 sec 
+   7 + : Var =   21245. Cla =    84621. Conf = 133808. Learn =  31245.    0 MB  16 MB    15.50 sec 
+Running Once again status: 0 nTimeUndec:44515110 nTimeOut:60024420 tryOnce:0
+Runtime:  CNF = 0.0 sec (0.0 %)  UNSAT = 15.5 sec (12.9 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 60.0 sec (50.0 %)
+LStart(P) = 10000  LDelta(Q) = 2000  LRatio(R) = 80  ReduceDB = 39  Vars = 25125  Used = 25121 (99.98 %)
+Buffs = 850. Dups = 0.   Hash hits = 44.  Hash misses = 24762.  UniProps = 0.
+No output asserted in 8 frames. Resource limit reached (timeout 60 sec). Time =   120.01 sec
+[1;37m../benchmark/HWMCC_15_17/6s320rb0_n:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+
+8
+starting abc_result(frame=1, var=29, cla=72, conf=3, mem=4, to=0.02, asrt=-1, tt=0.02, ld=1)
+In reward 0 7 111.61 8
+0 7 0.8927697852512982 abc_result(frame=7, var=21245, cla=84621, conf=133808, mem=16, to=13.73, asrt=-1, tt=15.5, ld=7)
+Action 5 reward 0.8927697852512982
+------- ## --------- Starting with depth 0  Ending depth 7
+Training for action 0 7 7 7 7
+Prediction for action 0 bmc2 time 786.81 frames 8
+Training for action 1 7 8 8 8
+Prediction for action 1 bmc3 time 805.13 frames 8
+Training for action 2 7 7 7 7
+Prediction for action 2 bmc3s time 114.25999999999999 frames 8
+Training for action 3 7 8 8 8
+Prediction for action 3 bmc3g time 375.46 frames 8
+Training for action 4 7 7 7 7
+Prediction for action 4 bmcu time 111.45999999999998 frames 8
+Training for action 5 7 7 7 7
+Prediction for action 5 bmc3r time 111.61 frames 8
+next time out {0: (786.81, 8), 1: (805.13, 8), 2: (114.25999999999999, 8), 3: (375.46, 8), 4: (111.45999999999998, 8), 5: (111.61, 8)}
+# exploring -- 5 explore True best_sd 9 max_conf 100383
+#### iter  5 5 bmc3r time taken 16 60.0 totalTime 0 ss ('bmc3r', 60.0, 0.8927697852512982, 0, 60.0, 0) abc_result(frame=7, var=21245, cla=84621, conf=133808, mem=16, to=13.73, asrt=-1, tt=15.5, ld=7)
+--------- Iteration 5 end ------
+------Iteration 6 start ------
+Initial exploring select 6 bmc3j2
+Calculating time out explore 60.0 total till now 0
+Total time till now:  0
+Next time out 60.0 frame_out 0.0 for chosen action 6 bmc3j2 ocount 0 explore True ending 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s320rb0_n.aig; print_stats; &get; bmc3  -S     0 -T    60 -F 0 -J 2 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s320rb0_n.aig; print_stats; &get; bmc3  -S     0 -T    60 -F 0 -J 2 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s320rb0_n:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+Running "bmc3". PI/PO/Reg = 49/1/197. And =  10653. Lev =  1054. ObjNums =  5390.
+Params: FramesMax = 0. Start = 0. ConfLimit = 0. TimeOut = 60. SolveAll = 0.
+   0 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.02 sec 
+   1 + : Var =      29. Cla =       72. Conf =      3. Learn =      2.    0 MB   4 MB     0.02 sec 
+   2 + : Var =    2160. Cla =     8045. Conf =     12. Learn =      9.    0 MB   4 MB     0.02 sec 
+   3 + : Var =    5732. Cla =    21906. Conf =     82. Learn =     71.    0 MB   4 MB     0.02 sec 
+   4 + : Var =    9605. Cla =    37471. Conf =   1014. Learn =    995.    0 MB   5 MB     0.07 sec 
+   5 + : Var =   13485. Cla =    53097. Conf =   5331. Learn =   5292.    0 MB   7 MB     0.33 sec 
+   6 + : Var =   17365. Cla =    68859. Conf =  21245. Learn =  14104.    0 MB   9 MB     1.67 sec 
+   7 + : Var =   21245. Cla =    84621. Conf = 117000. Learn =  36058.    0 MB  17 MB    13.33 sec 
+Running Once again status: 0 nTimeUndec:46665532 nTimeOut:60025192 tryOnce:0
+   8 - : Var =   25125. Cla =   100383. Conf = 787712. Learn =  84047.    0 MB  40 MB   120.01 sec 
+Runtime:  CNF = 0.0 sec (0.0 %)  UNSAT = 13.3 sec (11.1 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 60.0 sec (50.0 %)
+LStart(P) = 10000  LDelta(Q) = 2000  LRatio(R) = 80  ReduceDB = 39  Vars = 25125  Used = 25123 (99.99 %)
+Buffs = 850. Dups = 0.   Hash hits = 44.  Hash misses = 24762.  UniProps = 0.
+No output asserted in 9 frames. Resource limit reached (timeout 60 sec). Time =   120.01 sec
+[1;37m../benchmark/HWMCC_15_17/6s320rb0_n:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+
+9
+starting abc_result(frame=1, var=29, cla=72, conf=3, mem=4, to=0.02, asrt=-1, tt=0.02, ld=1)
+In reward 0 7 94.95 8
+0 7 0.906790771483327 abc_result(frame=7, var=21245, cla=84621, conf=117000, mem=17, to=11.66, asrt=-1, tt=13.33, ld=7)
+Action 6 reward 0.906790771483327
+------- ## --------- Starting with depth 0  Ending depth 7
+Training for action 0 7 7 7 7
+Prediction for action 0 bmc2 time 786.81 frames 8
+Training for action 1 7 8 8 8
+Prediction for action 1 bmc3 time 805.13 frames 8
+Training for action 2 7 7 7 7
+Prediction for action 2 bmc3s time 114.25999999999999 frames 8
+Training for action 3 7 8 8 8
+Prediction for action 3 bmc3g time 375.46 frames 8
+Training for action 4 7 7 7 7
+Prediction for action 4 bmcu time 111.45999999999998 frames 8
+Training for action 5 7 7 7 7
+Prediction for action 5 bmc3r time 111.61 frames 8
+Training for action 6 7 7 7 7
+Prediction for action 6 bmc3j2 time 94.95 frames 8
+next time out {0: (786.81, 8), 1: (805.13, 8), 2: (114.25999999999999, 8), 3: (375.46, 8), 4: (111.45999999999998, 8), 5: (111.61, 8), 6: (94.95, 8)}
+# exploring -- 6 explore True best_sd 9 max_conf 100383
+#### iter  6 6 bmc3j2 time taken 14 60.0 totalTime 0 ss ('bmc3j2', 60.0, 0.906790771483327, 0, 60.0, 0) abc_result(frame=7, var=21245, cla=84621, conf=117000, mem=17, to=11.66, asrt=-1, tt=13.33, ld=7)
+--------- Iteration 6 end ------
+------Iteration 7 start ------
+Initial exploring select 7 bmc3j3
+Calculating time out explore 60.0 total till now 0
+Total time till now:  0
+Next time out 60.0 frame_out 0.0 for chosen action 7 bmc3j3 ocount 0 explore True ending 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s320rb0_n.aig; print_stats; &get; bmc3  -S     0 -T    60 -F 0 -J 3 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s320rb0_n.aig; print_stats; &get; bmc3  -S     0 -T    60 -F 0 -J 3 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s320rb0_n:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+Running "bmc3". PI/PO/Reg = 49/1/197. And =  10653. Lev =  1054. ObjNums =  5390.
+Params: FramesMax = 0. Start = 0. ConfLimit = 0. TimeOut = 60. SolveAll = 0.
+   0 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.02 sec 
+   1 + : Var =      29. Cla =       72. Conf =      3. Learn =      2.    0 MB   4 MB     0.02 sec 
+   2 + : Var =    2160. Cla =     8045. Conf =     12. Learn =      9.    0 MB   4 MB     0.02 sec 
+   3 + : Var =    5732. Cla =    21906. Conf =     82. Learn =     71.    0 MB   4 MB     0.02 sec 
+   4 + : Var =    9605. Cla =    37471. Conf =   1014. Learn =    995.    0 MB   5 MB     0.07 sec 
+   5 + : Var =   13485. Cla =    53097. Conf =   5331. Learn =   5292.    0 MB   7 MB     0.33 sec 
+   6 + : Var =   17365. Cla =    68859. Conf =  21245. Learn =  14104.    0 MB   9 MB     1.67 sec 
+   7 + : Var =   21245. Cla =    84621. Conf = 117000. Learn =  36058.    0 MB  17 MB    13.33 sec 
+Running Once again status: 0 nTimeUndec:46700977 nTimeOut:60022043 tryOnce:0
+   8 - : Var =   25125. Cla =   100383. Conf = 776959. Learn =  82812.    0 MB  40 MB   120.03 sec 
+Runtime:  CNF = 0.0 sec (0.0 %)  UNSAT = 13.3 sec (11.1 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 60.0 sec (50.0 %)
+LStart(P) = 10000  LDelta(Q) = 2000  LRatio(R) = 80  ReduceDB = 39  Vars = 25125  Used = 25123 (99.99 %)
+Buffs = 850. Dups = 0.   Hash hits = 44.  Hash misses = 24762.  UniProps = 0.
+No output asserted in 9 frames. Resource limit reached (timeout 60 sec). Time =   120.03 sec
+[1;37m../benchmark/HWMCC_15_17/6s320rb0_n:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+
+9
+starting abc_result(frame=1, var=29, cla=72, conf=3, mem=4, to=0.02, asrt=-1, tt=0.02, ld=1)
+In reward 0 7 94.95 8
+0 7 0.906790771483327 abc_result(frame=7, var=21245, cla=84621, conf=117000, mem=17, to=11.66, asrt=-1, tt=13.33, ld=7)
+Action 7 reward 0.906790771483327
+------- ## --------- Starting with depth 0  Ending depth 7
+Training for action 0 7 7 7 7
+Prediction for action 0 bmc2 time 786.81 frames 8
+Training for action 1 7 8 8 8
+Prediction for action 1 bmc3 time 805.13 frames 8
+Training for action 2 7 7 7 7
+Prediction for action 2 bmc3s time 114.25999999999999 frames 8
+Training for action 3 7 8 8 8
+Prediction for action 3 bmc3g time 375.46 frames 8
+Training for action 4 7 7 7 7
+Prediction for action 4 bmcu time 111.45999999999998 frames 8
+Training for action 5 7 7 7 7
+Prediction for action 5 bmc3r time 111.61 frames 8
+Training for action 6 7 7 7 7
+Prediction for action 6 bmc3j2 time 94.95 frames 8
+Training for action 7 7 7 7 7
+Prediction for action 7 bmc3j3 time 94.95 frames 8
+next time out {0: (786.81, 8), 1: (805.13, 8), 2: (114.25999999999999, 8), 3: (375.46, 8), 4: (111.45999999999998, 8), 5: (111.61, 8), 6: (94.95, 8), 7: (94.95, 8)}
+# exploring -- 7 explore True best_sd 9 max_conf 100383
+#### iter  7 7 bmc3j3 time taken 14 60.0 totalTime 0 ss ('bmc3j3', 60.0, 0.906790771483327, 0, 60.0, 0) abc_result(frame=7, var=21245, cla=84621, conf=117000, mem=17, to=11.66, asrt=-1, tt=13.33, ld=7)
+--------- Iteration 7 end ------
+------Iteration 8 start ------
+Initial exploring select 8 bmc3j4
+Calculating time out explore 60.0 total till now 0
+Total time till now:  0
+Next time out 60.0 frame_out 0.0 for chosen action 8 bmc3j4 ocount 0 explore True ending 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s320rb0_n.aig; print_stats; &get; bmc3  -S     0 -T    60 -F 0 -J 4 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s320rb0_n.aig; print_stats; &get; bmc3  -S     0 -T    60 -F 0 -J 4 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s320rb0_n:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+Running "bmc3". PI/PO/Reg = 49/1/197. And =  10653. Lev =  1054. ObjNums =  5390.
+Params: FramesMax = 0. Start = 0. ConfLimit = 0. TimeOut = 60. SolveAll = 0.
+   0 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.02 sec 
+   1 + : Var =      29. Cla =       72. Conf =      3. Learn =      2.    0 MB   4 MB     0.02 sec 
+   2 + : Var =    2160. Cla =     8045. Conf =     12. Learn =      9.    0 MB   4 MB     0.02 sec 
+   3 + : Var =    5732. Cla =    21906. Conf =     82. Learn =     71.    0 MB   4 MB     0.02 sec 
+   4 + : Var =    9605. Cla =    37471. Conf =   1014. Learn =    995.    0 MB   5 MB     0.07 sec 
+   5 + : Var =   13485. Cla =    53097. Conf =   5331. Learn =   5292.    0 MB   7 MB     0.33 sec 
+   6 + : Var =   17365. Cla =    68859. Conf =  21245. Learn =  14104.    0 MB   9 MB     1.68 sec 
+   7 + : Var =   21245. Cla =    84621. Conf = 117000. Learn =  36058.    0 MB  17 MB    13.35 sec 
+Running Once again status: 0 nTimeUndec:46666283 nTimeOut:60026733 tryOnce:0
+   8 - : Var =   25125. Cla =   100383. Conf = 787887. Learn =  84222.    0 MB  40 MB   120.01 sec 
+Runtime:  CNF = 0.0 sec (0.0 %)  UNSAT = 13.3 sec (11.1 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 60.0 sec (50.0 %)
+LStart(P) = 10000  LDelta(Q) = 2000  LRatio(R) = 80  ReduceDB = 39  Vars = 25125  Used = 25123 (99.99 %)
+Buffs = 850. Dups = 0.   Hash hits = 44.  Hash misses = 24762.  UniProps = 0.
+No output asserted in 9 frames. Resource limit reached (timeout 60 sec). Time =   120.01 sec
+[1;37m../benchmark/HWMCC_15_17/6s320rb0_n:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+
+9
+starting abc_result(frame=1, var=29, cla=72, conf=3, mem=4, to=0.02, asrt=-1, tt=0.02, ld=1)
+In reward 0 7 95.04 8
+0 7 0.9066519875989743 abc_result(frame=7, var=21245, cla=84621, conf=117000, mem=17, to=11.67, asrt=-1, tt=13.35, ld=7)
+Action 8 reward 0.9066519875989743
+------- ## --------- Starting with depth 0  Ending depth 7
+Training for action 0 7 7 7 7
+Prediction for action 0 bmc2 time 786.81 frames 8
+Training for action 1 7 8 8 8
+Prediction for action 1 bmc3 time 805.13 frames 8
+Training for action 2 7 7 7 7
+Prediction for action 2 bmc3s time 114.25999999999999 frames 8
+Training for action 3 7 8 8 8
+Prediction for action 3 bmc3g time 375.46 frames 8
+Training for action 4 7 7 7 7
+Prediction for action 4 bmcu time 111.45999999999998 frames 8
+Training for action 5 7 7 7 7
+Prediction for action 5 bmc3r time 111.61 frames 8
+Training for action 6 7 7 7 7
+Prediction for action 6 bmc3j2 time 94.95 frames 8
+Training for action 7 7 7 7 7
+Prediction for action 7 bmc3j3 time 94.95 frames 8
+Training for action 8 7 7 7 7
+Prediction for action 8 bmc3j4 time 95.04 frames 8
+next time out {0: (786.81, 8), 1: (805.13, 8), 2: (114.25999999999999, 8), 3: (375.46, 8), 4: (111.45999999999998, 8), 5: (111.61, 8), 6: (94.95, 8), 7: (94.95, 8), 8: (95.04, 8)}
+# exploring -- 8 explore True best_sd 9 max_conf 100383
+#  at the end of exploration
+Adding ss -- ending_explore ('bmc2', 108.3, 0.5336429243553887, 108.3, 0, 60.0)
+#  Ending exploring -- 8 0 0
+#### iter  8 8 bmc3j4 time taken 14 60.0 totalTime 108.3 ss ('bmc2', 108.3, 0.5336429243553887, 108.3, 0, 60.0) abc_result(frame=7, var=21245, cla=84621, conf=117000, mem=17, to=11.67, asrt=-1, tt=13.35, ld=7)
+--------- Iteration 8 end ------
+------Iteration 9 start ------
+Action 6 All reward [0.53364292 0.52922255 0.88429374 0.72566064 0.8865784  0.89276979
+ 0.90679077 0.90679077 0.90665199]
+exploiting select 6 bmc3j2
+Calculating time out exploit 94.95 predicted 94.95 8 previous 60.0 total till now 108.3
+Total time till now:  108.3
+Next time out 94.95 frame_out 17.0 for chosen action 6 bmc3j2 ocount 0 explore False ending 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s320rb0_n.aig; print_stats; &get; bmc3  -S    10 -T    94 -F 17 -J 2 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s320rb0_n.aig; print_stats; &get; bmc3  -S    10 -T    94 -F 17 -J 2 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s320rb0_n:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+Running "bmc3". PI/PO/Reg = 49/1/197. And =  10653. Lev =  1054. ObjNums =  5390.
+Params: FramesMax = 17. Start = 10. ConfLimit = 0. TimeOut = 94. SolveAll = 0.
+  10 + : Var =   32876. Cla =   132658. Conf = 123941. Learn =  41015.    0 MB  21 MB    13.08 sec  Status: 1 
+
+Runtime:  CNF = 0.0 sec (0.1 %)  UNSAT = 0.0 sec (0.0 %)  SAT = 13.0 sec (99.7 %)  UNDEC = 0.0 sec (0.0 %)
+LStart(P) = 10000  LDelta(Q) = 2000  LRatio(R) = 80  ReduceDB = 16  Vars = 32876  Used = 32876 (100.00 %)
+Buffs = 850. Dups = 0.   Hash hits = 44.  Hash misses = 32415.  UniProps = 0.
+Output 0 of miter "../benchmark/HWMCC_15_17/6s320rb0_n" was asserted in frame 10. Time =    13.08 sec
+[1;37m../benchmark/HWMCC_15_17/6s320rb0_n:[0m i/o =   49/    1  lat =  197  and =  10653  lev =1054
+
+-1
+starting abc_result(frame=10, var=32876, cla=132658, conf=123941, mem=21, to=13.08, asrt=10, tt=13.08, ld=10)
+In reward 10 10 71.63000000000001 6
+10 10 2.038759202371189 abc_result(frame=10, var=32876, cla=132658, conf=123941, mem=21, to=13.08, asrt=10, tt=13.08, ld=10)
+Action 6 reward 2.038759202371189
+------- ## --------- Starting with depth 9  Ending depth 10
+Training for action 0 5 7 7 7
+Prediction for action 0 bmc2 time 592.9499999999999 frames 6
+Training for action 1 5 8 8 8
+Prediction for action 1 bmc3 time 607.2099999999999 frames 6
+Training for action 2 5 7 7 7
+Prediction for action 2 bmc3s time 86.37999999999998 frames 6
+Training for action 3 5 8 8 8
+Prediction for action 3 bmc3g time 284.18 frames 6
+Training for action 4 5 7 7 7
+Prediction for action 4 bmcu time 84.27999999999999 frames 6
+Training for action 5 5 7 7 7
+Prediction for action 5 bmc3r time 84.14999999999999 frames 6
+Training for action 6 5 7 7 7
+Prediction for action 6 bmc3j2 time 71.63000000000001 frames 6
+Training for action 7 5 7 7 7
+Prediction for action 7 bmc3j3 time 71.63000000000001 frames 6
+Training for action 8 5 7 7 7
+Prediction for action 8 bmc3j4 time 71.7 frames 6
+next time out {0: (592.9499999999999, 6), 1: (607.2099999999999, 6), 2: (86.37999999999998, 6), 3: (284.18, 6), 4: (84.27999999999999, 6), 5: (84.14999999999999, 6), 6: (71.63000000000001, 6), 7: (71.63000000000001, 6), 8: (71.7, 6)}
+Adding ss -- exploitation ('bmc3j2', 13.08, 2.038759202371189, 121.38, 94.95, 9)
+current slowing down -- exploration phase 10 9 10
+#  Starting exploring -- 9 0 1 1
+Incorrect prediction of next time -- exploration phase 0.8622432859399685
+#  Starting exploring -- 9 0 1 2
+#### iter  9 6 bmc3j2 time taken 14 94.95 totalTime 121.38 ss ('bmc3j2', 13.08, 2.038759202371189, 121.38, 94.95, 9) abc_result(frame=10, var=32876, cla=132658, conf=123941, mem=21, to=13.08, asrt=10, tt=13.08, ld=10)
+--------- Iteration 9 end ------
+Output asserted at frame  10 tt 14 totalTime 121.38
+Stopping iteration
+9 BMC-depth reached  10 totalTime 121.38
+9 Sequence of actions and BMC depth: [('bmc2', 108.3, 0.5336429243553887, 108.3, 0, 60.0), ('bmc3j2', 13.08, 2.038759202371189, 121.38, 94.95, 9)]
+time by bandit  ucb1 984.718668460846
+Memory by bandit  ucb1 (1.9349632263183594, 2.4917430877685547)
+-------------------------------------------
+
+Bandit policy: 	 BMC depth 	 time 	 sequence
+Bandit policy: 	 BMC depth 	 time 	 sequence
+ucb1: 	 10 (assert) 	 time: 121.38 s, real: 984.72s, Memory: 1.93MB,2.49MB 38MB 	 [('bmc2', 108.3, 0.5336429243553887, 108.3, 0, 60.0), ('bmc3j2', 13.08, 2.038759202371189, 121.38, 94.95, 9)] 
+Percentage of actions selected:
+      bmc2  bmc3  bmc3s  bmc3g  bmcu  bmc3r  bmc3j2  bmc3j3  bmc3j4
+ucb1  0.01  0.01   0.01   0.01  0.01   0.01    0.02    0.01    0.01
+Code Running duration:  0.273554364045461  hrs

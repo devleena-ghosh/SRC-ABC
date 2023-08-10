@@ -358,20 +358,6 @@ class bandit:
 
 		for i in range(4*self.iters):
 
-			if ending or int(1.25*MAX_TIMEOUT - all_time) <= 0:		
-				end_frame = self.states, asrt, totalTime, seq, MAX_mem
-				print('BMC-depth reached ', self.states, 'totalTime', totalTime, 'all_time', all_time)
-				print('Stopping iteration -- all timeout')
-				all_ending = True
-				break
-				
-			if int(TIMEOUT - totalTime) <= 0:
-				end_frame = self.states, asrt, totalTime, seq, MAX_mem
-				print('BMC-depth reached ', self.states, 'totalTime', totalTime)
-				print('Stopping iteration -- seq timeout')
-				all_ending = True
-				break
-
 			print('------Iteration {0} start ------'.format(i))
 
 			''' ----- select engine for iteration i '''
@@ -528,7 +514,7 @@ class bandit:
 					max_conf = max(max_conf, sm.cla)
 
 					print('# exploring --', i, 'explore', explore, 'best_sd', best_sd, 'max_conf', max_conf)
-					if (ending_explore(i)): #enter_critical and ocount >= M-1) or (i < repeat_count and sm.asrt > 0) or (enter_critical and sm.asrt > 0):
+					if (ending_explore(i) or int(MAX_TIMEOUT - all_time) <= 0): #enter_critical and ocount >= M-1) or (i < repeat_count and sm.asrt > 0) or (enter_critical and sm.asrt > 0):
 						# end of exploration --- pick the best one
 						print('#  at the end of exploration')
 						# sd = sm.frame+1 if sm.frame > 0 else sm.frame
@@ -540,7 +526,7 @@ class bandit:
 							ss = (best[0], best[1], best[2], totalTime, best[3], best[4])
 							#ss = best #(Actions[a], tt, reward, totalTime, self.timeout[i], self.states)
 
-							print('Adding ss -- ending_explore', ss)
+							print('Adding ss -- ending_explore', ss, 'Current state', self.states)
 							seq.append(ss)
 						# if (i < repeat_count and i%self.k == self.k-1):
 						conf_begin_phase = max_conf
@@ -592,7 +578,7 @@ class bandit:
 				explore = False
 				print('#  Ending exploring --', i, ocount, pcount)
 
-			print('#### iter ', i, a, Actions[a], 'time taken', tt, self.timeout[i], 'totalTime', totalTime, 'ss', ss, sm)
+			print('#### iter ', i, a, Actions[a], 'current state', self.states,'time taken', tt, self.timeout[i], 'totalTime', totalTime, 'ss', ss, sm)
 
 			print('--------- Iteration {0} end ------'.format(i))
 
@@ -602,6 +588,20 @@ class bandit:
 				end_frame = self.states, asrt, totalTime, seq, MAX_mem
 				print('Output asserted at frame ', sm.asrt, 'tt', tt, 'totalTime', totalTime)
 				print('Stopping iteration')
+				break
+
+			if ending or int(1.25*MAX_TIMEOUT - all_time) <= 0:		
+				end_frame = self.states, asrt, totalTime, seq, MAX_mem
+				print('BMC-depth reached ', self.states, 'totalTime', totalTime, 'all_time', all_time)
+				print('Stopping iteration -- all timeout')
+				all_ending = True
+				break
+				
+			if int(TIMEOUT - totalTime) <= 0:
+				end_frame = self.states, asrt, totalTime, seq, MAX_mem
+				print('BMC-depth reached ', self.states, 'totalTime', totalTime)
+				print('Stopping iteration -- seq timeout')
+				all_ending = True
 				break
 
 		# while i < self.iters:
@@ -654,9 +654,9 @@ class ucb1_bandit(bandit):
 		if count < 0:
 			c = 0
 			self.k_ucb_reward = self.k_reward + c * np.sqrt((np.log(self.n)) / self.k_n)
-		elif count > 0:
-			c = self.c * np.exp(-0.01* count)
-			self.k_ucb_reward = self.k_reward + c * np.sqrt((np.log(self.n)) / self.k_n)
+		# elif count > 0:
+		# 	c = self.c * np.exp(-0.01* count)
+		# 	self.k_ucb_reward = self.k_reward + c * np.sqrt((np.log(self.n)) / self.k_n)
 		
 		a = np.argmax(self.k_ucb_reward)
 
