@@ -906,7 +906,7 @@ int Saig_BmcPerform( Aig_Man_t * pAig, int nStart, int nFramesMax, int nNodesMax
     int nOutsSolved = 0;
     int Iter, RetValue = -1;
     abctime nTimeToStop = nTimeOut ? nTimeOut * CLOCKS_PER_SEC + Abc_Clock(): 0;
-    abctime updatedTimeStop =  nTimeOut ? nTimeOut * CLOCKS_PER_SEC + Abc_Clock(): 0;
+    abctime updatedTimeStop =  nTimeOut ? 1.1*nTimeOut * CLOCKS_PER_SEC + Abc_Clock(): 0;
     abctime clk = Abc_Clock(), clk2, clkTotal = Abc_Clock();
     int Status = -1;
     //float prev_time = 0.0, cur_time = 0.0, time_per_frame = 0.0, time_per_frame_ratio = 1.0;
