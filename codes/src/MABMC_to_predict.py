@@ -89,7 +89,7 @@ class bandit:
 	def get_next_time(self, a, ld, flag=0):
 		nd = max(5, (ld - self.states) ) #/2)
 		ar_tab = self.engine_res[a]
-		ftrain, ctrain, ttrain = [], [], []
+		ftrain, ctrain, conftrain, ttrain = [], [], [], []
 		#frm = self.states
 		frm  = -1
 		for frm in ar_tab.keys():
@@ -97,6 +97,7 @@ class bandit:
 			if sm1.cla > 0 and (sm1.cla not in ctrain):
 				ftrain.append(sm1.frame)
 				ctrain.append(sm1.cla)
+				conftrain.append(sm1.conf)
 				ttrain.append(sm1.tt)
 		next_tm = -1 #self.timeout[i]*SC
 		ndt = -1
@@ -109,16 +110,25 @@ class bandit:
 		# if len(frames) > 10:
 		#     ftrain, ttrain = frames[-11:], time_outs[-11:]
 		if flag:
-			print('Training for action', a, nd, len(ftrain), len(ctrain), len(ttrain))
+			print('Training for action', a, nd, len(ftrain), len(ctrain), len(conftrain), len(ttrain))
 		# print('Training data', (ftrain), (ttrain), (ttrain1))
 		
 		if len(ftrain) > 0:
 			# predict number of clauses then predict timeout for next frame
 			fcla = interpolate.interp1d(ftrain, ctrain, fill_value = 'extrapolate')
-			fto = interpolate.interp1d(ctrain, ttrain, fill_value = 'extrapolate')
+			# changed on 10/08
+			#fto = interpolate.interp1d(ctrain, ttrain, fill_value = 'extrapolate')
+			# predict number of conflict clauses from cluases then predict timeout for next frame
+			fconf = interpolate.interp1d(ctrain, conftrain, fill_value = 'extrapolate')
+			fto = interpolate.interp1d(conftrain, ttrain, fill_value = 'extrapolate')
+
 			new_frames = np.arange(last_frm+1, last_frm+int(nd)+1, 2) #if int(1 + nd/2) > 2 else [last_frm+int(nd)+1]
 			new_cla = fcla(new_frames)
-			new_to = fto(new_cla)
+			new_conf = fconf(new_cla)
+			# changed on 10/08
+			#new_to = fto(new_cla)
+			new_to = fto(new_conf)
+			#-----
 			# new_cla = np.interp(new_frames, ftrain, ttrain)
 			# new_to = np.interp(new_cla, ftrain, ttrain1)
 			next_tm = np.max(new_to) #np.sum(new_to)
@@ -174,7 +184,7 @@ class bandit:
 
 				reward = np.exp(-0.4*wa)  # + nd/nt)#(reward + np.exp(-pen/MAX_TIME))/cn
 				if sd > 0:
-					reward += np.exp(0.2*(ky-sd)/(1+sd)) # total number of frames explored --> more frames more reward
+					reward += np.exp(0.8*(ky-sd)/(1+sd)) # total number of frames explored --> more frames more reward
 					reward += np.exp(-0.2*nt/nd) if (nt > -1 and nd > 0 and not math.isnan(nt)) else 0 # reward based on future prediction
 				if sd > sm.frame:
 					reward = -0.2 * np.exp(t/MAX_TIME) # no exploration --> penalty
@@ -360,6 +370,8 @@ class bandit:
 
 			print('------Iteration {0} start ------'.format(i))
 
+			print('Total time till now -- starting: ', totalTime)
+
 			''' ----- select engine for iteration i '''
 			if i < (repeat_count):
 				a = i%(self.k)
@@ -421,15 +433,15 @@ class bandit:
 					next_timeout = self.timeout[i-1] * SC
 					self.frameout[i] = 0
 
-				self.timeout[i] = next_timeout
+				# self.timeout[i] = 
 				
-				print('Calculating time out exploit', self.timeout[i], 'predicted', next_to, next_fo, 'previous', self.timeout[i-1],'total till now', totalTime)
+				print('Calculating time out exploit', next_timeout, 'predicted', next_to, next_fo, 'previous', self.timeout[i-1],'total till now', totalTime)
 
-				if self.timeout[i] > TIMEOUT - (totalTime + self.timeout[i]):
+				if self.timeout[i] > TIMEOUT - (totalTime + next_timeout):
 					self.timeout[i] =  (TIMEOUT - totalTime) #self.timeout[i] +
 					ending = 1
 				else:
-					self.timeout[i] = min(self.timeout[i], TIMEOUT - totalTime)	
+					self.timeout[i] = min(next_timeout, TIMEOUT - totalTime)	
 				# else:
 
 			# --- completing engine selection ----- #
@@ -444,7 +456,6 @@ class bandit:
 				# if self.timeout[i] > 3000:
 				# 	self.stt
 
-			print('Total time till now: ', totalTime)
 			print('Next time out', self.timeout[i], 'frame_out', self.frameout[i], 'for chosen action', a, Actions[a], 'ocount', ocount, \
 				'explore', explore, 'ending', ending)
 
@@ -525,7 +536,7 @@ class bandit:
 							totalTime += best[1]
 							ss = (best[0], best[1], best[2], totalTime, best[3], best[4])
 							#ss = best #(Actions[a], tt, reward, totalTime, self.timeout[i], self.states)
-
+							#print('Total time till now: ', totalTime)
 							print('Adding ss -- ending_explore', ss, 'Current state', self.states)
 							seq.append(ss)
 						# if (i < repeat_count and i%self.k == self.k-1):
@@ -535,6 +546,7 @@ class bandit:
 					self.states = sm.ld
 					totalTime += tp
 					ss = (Actions[a], tp, reward, totalTime, self.timeout[i], sd)
+					#print('Total time till now: ', totalTime)
 					print('Adding ss -- exploitation', ss)
 					seq.append(ss)
 
@@ -543,9 +555,11 @@ class bandit:
 				if all_ending:
 					totalTime += tp
 					#ss = (Actions[a], tp, reward, totalTime, self.timeout[i], sd)
+					#print('Total time till now: ', totalTime)
 
 			self.reward[i] = self.mean_reward
 
+			print('Total time till now: ', totalTime)
 			# --- state of next run ----
 			p = np.random.rand()
 			if not ending and not explore:
