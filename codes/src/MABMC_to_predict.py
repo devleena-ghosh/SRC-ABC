@@ -107,7 +107,7 @@ class bandit:
 		# current state of the run; eg - bmc depth
 		self.states = 0
 
-	def get_next_time(self, a, ld, r_flag=1):
+	def get_next_time(self, a, ld, r_flag=1, flag = 0):
 		nd = max(5, (ld - self.states) ) #/2)
 		ar_tab = self.engine_res[a]
 		ftrain, ctrain, conftrain, ttrain = [], [], [], []
@@ -149,9 +149,9 @@ class bandit:
 
 			## inverse prediction
 			# predict number of frames solved in a given timeout
-			ifconf = interpolate.interp1d(ttrain, conftrain, fill_value = 'extrapolate')
-			ifcls = interpolate.interp1d(conftrain, ctrain, fill_value = 'extrapolate')
-			iffrm = interpolate.interp1d(ctrain, ftrain, fill_value = 'extrapolate')
+			# ifconf = interpolate.interp1d(ttrain, conftrain, fill_value = 'extrapolate')
+			# ifcls = interpolate.interp1d(conftrain, ctrain, fill_value = 'extrapolate')
+			# iffrm = interpolate.interp1d(ctrain, ftrain, fill_value = 'extrapolate')
 
 			new_frames = np.arange(last_frm+1, last_frm+int(nd)+1, 2) #if int(1 + nd/2) > 2 else [last_frm+int(nd)+1]
 			# new_cla = fcla(new_frames)
@@ -162,21 +162,26 @@ class bandit:
 
 			next_tm, ndt = new_to, int(nd)+1
 
+			fpt = ndt/next_tm if next_tm > 0 else 1/ttrain[-1]
+
 			## inverse pred
 			i_next_to = last_tm*1.5
-			i_cla = ifcls(ifconf(i_next_to))
-			i_frame = iffrm(i_cla)
+			# i_cla = ifcls(ifconf(i_next_to))
+			# i_frame = iffrm(i_cla)
+			i_frame = int(fpt*i_next_to)
 			#---
 			if r_flag:
 				next_tm = ttrain[-1]+ np.max(new_to) #np.sum(new_to)
 				ndt = int(nd)+1
-				print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt))
+				if flag:
+					print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt))
 			else:
 				#next_tm = ttrain[-1] + i_next_to #np.sum(new_to)
 				ndt = max(nd, i_frame-last_frm)+ 1 #- ftrain[-1]+1
 				new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
 				next_tm = last_tm + np.max(fto(fconf(fcla(ndt))))
-				print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt))
+				if flag:
+					print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt))
 			# if flag:
 			
 			#-----
@@ -229,7 +234,7 @@ class bandit:
 						cn += 1
 				wa = (reward/cn) if cn > 0 else 0
 
-				nt, nd = self.get_next_time(a, sm.ld, r_flag = 1)
+				nt, nd = self.get_next_time(a, sm.ld, r_flag = 1, flag = 1)
 				print('In reward', sd, sm.frame, nt, nd)
 
 				reward = np.exp(-0.5*wa)  # + nd/nt)#(reward + np.exp(-pen/MAX_TIME))/cn
@@ -324,7 +329,7 @@ class bandit:
 				tm = ar_tab_old[ky].to
 				mem = ar_tab_old[ky].mem
 
-				nt, nd =  self.get_next_time(a, sm.ld, r_flag=1)
+				nt, nd =  self.get_next_time(a, sm.ld, r_flag=1, flag = 0)
 				if self.states <= ky: 
 					row.append(Actions[a])
 					# row.append(fname)
@@ -528,7 +533,7 @@ class bandit:
 				# if not explore: # and sm and reward > 0:
 				next_time = {}
 				for a2 in range(self.k):
-					next_tm, ndt = self.get_next_time(a2, sm.ld, r_flag =0)
+					next_tm, ndt = self.get_next_time(a2, sm.ld, r_flag =0, flag = 1)
 						# next_time.update({new_frames[0]: new_to[0]})
 						# print('predicted time out for next frame', new_frames, new_to)
 					# else:
