@@ -160,9 +160,9 @@ class bandit:
 			#new_to = fto(new_cla)
 			new_to = fto(fconf(fcla(new_frames)))
 
-			next_tm, ndt = new_to, int(nd)+1
+			next_tm, ndt = max(new_to), int(nd)+1
 
-			fpt = ndt/next_tm if next_tm > 0 else 1/ttrain[-1]
+			fpt = (ndt)/(next_tm) if next_tm > 0 else 1/ttrain[-1]
 
 			## inverse pred
 			i_next_to = last_tm*1.5
