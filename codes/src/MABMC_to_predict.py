@@ -804,6 +804,7 @@ def main(argv):
 	fname = (inputfile.split('/')[-1]).split('.')[0]
 	print(fname)
 	filename = "results/new_results_MABMC_tm_pred_{0}_{1}.csv".format(TIMEOUT, fname)
+	ofname = os.path.join(PATH, (self.fname.split('.')[0])+'_n.'+( self.fname.split('.')[1]))
 	# # header = ['Design', 'Frame', 'Clauses', 'Mem', 'time']
 	# # writing to csv file 
 	# with open(filename, 'w+') as csvfile: 
