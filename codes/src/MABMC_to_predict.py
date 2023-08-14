@@ -226,9 +226,9 @@ class bandit:
 				nt, nd = self.get_next_time(a, sm.ld, r_flag = 1)
 				print('In reward', sd, sm.frame, nt, nd)
 
-				reward = np.exp(-0.4*wa)  # + nd/nt)#(reward + np.exp(-pen/MAX_TIME))/cn
+				reward = np.exp(-0.5*wa)  # + nd/nt)#(reward + np.exp(-pen/MAX_TIME))/cn
 				if sd > 0:
-					reward += np.exp(0.8*(ky-sd)/(1+sd)) # total number of frames explored --> more frames more reward
+					reward += np.exp(0.5*(ky-sd)/(1+sd)) # total number of frames explored --> more frames more reward
 					reward += np.exp(-0.2*nt/nd) if (nt > -1 and nd > 0 and not math.isnan(nt)) else 0 # reward based on future prediction
 				if sd > sm.frame:
 					reward = -0.2 * np.exp(t/MAX_TIME) # no exploration --> penalty
