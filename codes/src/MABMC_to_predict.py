@@ -113,13 +113,16 @@ class bandit:
 		ftrain, ctrain, conftrain, ttrain = [], [], [], []
 		#frm = self.states
 		frm  = -1
+		prev = 0, 0, 0, 0
 		for frm in ar_tab.keys():
 			sm1 = ar_tab[frm]
 			if sm1.cla > 0 and (sm1.cla not in ctrain):
 				ftrain.append(sm1.frame)
-				ctrain.append(sm1.cla)
-				conftrain.append(sm1.conf)
-				ttrain.append(sm1.tt)
+				ctrain.append(sm1.cla - prev[1])
+				conftrain.append(sm1.conf - prev[2])
+				ttrain.append(sm1.tt - prev[3])
+				prev = sm1.frame, sm1.cla, sm1.conf, sm1.tt
+
 		next_tm = -1 #self.timeout[i]*SC
 		ndt = -1
 		if frm < 0:
@@ -135,11 +138,11 @@ class bandit:
 		# print('Training data', (ftrain), (ttrain), (ttrain1))
 		
 		if len(ftrain) > 0:
-			# predict number of clauses then predict timeout for next frame
+			# predict number of new clauses then predict timeout for next frame
 			fcla = interpolate.interp1d(ftrain, ctrain, fill_value = 'extrapolate')
 			# changed on 10/08
 			#fto = interpolate.interp1d(ctrain, ttrain, fill_value = 'extrapolate')
-			# predict number of conflict clauses from cluases then predict timeout for next frame
+			# predict number of new conflict clauses from new cluases then predict time to be taken for next frame
 			fconf = interpolate.interp1d(ctrain, conftrain, fill_value = 'extrapolate')
 			fto = interpolate.interp1d(conftrain, ttrain, fill_value = 'extrapolate')
 
@@ -159,7 +162,7 @@ class bandit:
 			next_tm, ndt = new_to, int(nd)+1
 
 			## inverse pred
-			i_next_to = ttrain[-1]*2.0
+			i_next_to = ttrain[-1] #*2.0
 			i_cla = ifcls(ifconf(i_next_to))
 			i_frame = iffrm(i_cla)
 			#---
@@ -168,7 +171,7 @@ class bandit:
 				ndt = int(nd)+1
 				print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt))
 			else:
-				next_tm = i_next_to #np.sum(new_to)
+				next_tm = ttrain[-1] + i_next_to #np.sum(new_to)
 				ndt = i_frame - ftrain[-1]+1
 				print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt))
 			# if flag:
