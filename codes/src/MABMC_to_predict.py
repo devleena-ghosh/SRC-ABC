@@ -130,6 +130,7 @@ class bandit:
 
 		last_frm = frm
 		last_cla = sm1.cla #ar_tab[frm].cla
+		last_tm = sm1.tt
 
 		# if len(frames) > 10:
 		#     ftrain, ttrain = frames[-11:], time_outs[-11:]
@@ -162,17 +163,19 @@ class bandit:
 			next_tm, ndt = new_to, int(nd)+1
 
 			## inverse pred
-			i_next_to = ttrain[-1] #*2.0
+			i_next_to = last_tm*1.5
 			i_cla = ifcls(ifconf(i_next_to))
 			i_frame = iffrm(i_cla)
 			#---
 			if r_flag:
-				next_tm = np.max(new_to) #np.sum(new_to)
+				next_tm = ttrain[-1]+ np.max(new_to) #np.sum(new_to)
 				ndt = int(nd)+1
 				print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt))
 			else:
-				next_tm = ttrain[-1] + i_next_to #np.sum(new_to)
-				ndt = i_frame - ftrain[-1]+1
+				#next_tm = ttrain[-1] + i_next_to #np.sum(new_to)
+				ndt = max(nd, i_frame-last_frm)+ 1 #- ftrain[-1]+1
+				new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
+				next_tm = last_tm + np.max(fto(fconf(fcla(ndt1))))
 				print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt))
 			# if flag:
 			
