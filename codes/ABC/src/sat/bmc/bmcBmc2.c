@@ -789,7 +789,7 @@ int Saig_BmcSolveTargets( Saig_Bmc_t * p, int nStart, int nTimeOut, int * pnOuts
             // printf( "## Current timeout to (%ld seconds).. %ld, diff %ld\n", nTimeToStop, (nTimeToStop - lastFrametime)/nTimeToStop );
             if ((nTimeToStop - lastFrametime) > 0.2*nTimeToStop && !unDefTryOnce)
             {
-                int nto = 2*nTimeOut;
+                int nto = 1.2*nTimeOut;
                 abctime nTimeToStop_inc = nTimeOut ? nto * CLOCKS_PER_SEC + Abc_Clock(): 0;
                 // abctime nTimeToStop_inc = 0;
                 p->nFramesMax = (*pnOutsSolved); //+ 1 ;
@@ -803,7 +803,7 @@ int Saig_BmcSolveTargets( Saig_Bmc_t * p, int nStart, int nTimeOut, int * pnOuts
                     updatedTime = sat_solver_get_runtime_limit( p->pSat);
                 }
 
-                printf( "## trying to complete the last frame with Inreased timeout to (%d seconds).. %ld. current time %ld.\n",  nto, updatedTime, Abc_Clock() );
+                printf( "## trying to complete the last frame with Increased timeout to (%d seconds).. %ld. current time %ld.\n",  nto, updatedTime, Abc_Clock() );
                 unDefTryOnce += 1;
                 goto loopOnce;
                 // // rerun the last frame once more with increased timeOut and a frameOut
@@ -906,7 +906,7 @@ int Saig_BmcPerform( Aig_Man_t * pAig, int nStart, int nFramesMax, int nNodesMax
     int nOutsSolved = 0;
     int Iter, RetValue = -1;
     abctime nTimeToStop = nTimeOut ? nTimeOut * CLOCKS_PER_SEC + Abc_Clock(): 0;
-    abctime updatedTimeStop =  nTimeOut ? 1.1*nTimeOut * CLOCKS_PER_SEC + Abc_Clock(): 0;
+    abctime updatedTimeStop =  nTimeOut ? nTimeOut * CLOCKS_PER_SEC + Abc_Clock(): 0;
     abctime clk = Abc_Clock(), clk2, clkTotal = Abc_Clock();
     int Status = -1;
     //float prev_time = 0.0, cur_time = 0.0, time_per_frame = 0.0, time_per_frame_ratio = 1.0;

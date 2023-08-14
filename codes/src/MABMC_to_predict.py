@@ -48,6 +48,27 @@ while tot < TIMEOUT:
 
 M = int(len(Actions))
 
+def run_engine(ofname, a, sd, t=0, f=0):
+	if a == 0:    #ABC bmc2
+		asrt, sm, ar_tab, tt1 = bmc2(ofname, sd, t=t, f=f)
+	elif a == 1: #ABC bmc3
+		asrt, sm, ar_tab, tt1 = bmc3(ofname, sd,  t=t, f=f)
+	elif a == 2: #ABC bmc3rs
+		asrt, sm, ar_tab, tt1 = bmc3rs(ofname, sd,  t=t, f=f)
+	elif a == 3: #ABC bmc3g
+		asrt, sm, ar_tab, tt1 = bmc3rg(ofname, sd,  t=t, f=f)
+	elif a == 4: #ABC bmc3u
+		asrt, sm, ar_tab, tt1 = bmc3ru(ofname, sd,  t=t, f=f)
+	elif a == 5: #ABC bmc3r
+		asrt, sm, ar_tab, tt1 = bmc3r(ofname, sd,  t=t, f=f)
+	elif a == 6: #ABC bmc3j=2
+		asrt, sm, ar_tab, tt1 = bmc3j(ofname, sd, j = 2,  t=t, f=f)
+	elif a == 7: #ABC bmc3j=3
+		asrt, sm, ar_tab, tt1 = bmc3j(ofname, sd, j = 3, t=t, f=f)
+	elif a == 8: #ABC bmc3j=4
+		asrt, sm, ar_tab, tt1 = bmc3j(ofname, sd, j = 4, t=t, f=f)
+	return asrt, sm, ar_tab, tt1
+
 class bandit:
 
 	def __init__(self, k, iters, alpha, reward=0, fname = ''):
@@ -86,7 +107,7 @@ class bandit:
 		# current state of the run; eg - bmc depth
 		self.states = 0
 
-	def get_next_time(self, a, ld, flag=0):
+	def get_next_time(self, a, ld, r_flag=1):
 		nd = max(5, (ld - self.states) ) #/2)
 		ar_tab = self.engine_res[a]
 		ftrain, ctrain, conftrain, ttrain = [], [], [], []
@@ -109,7 +130,7 @@ class bandit:
 
 		# if len(frames) > 10:
 		#     ftrain, ttrain = frames[-11:], time_outs[-11:]
-		if flag:
+		if r_flag:
 			print('Training for action', a, nd, len(ftrain), len(ctrain), len(conftrain), len(ttrain))
 		# print('Training data', (ftrain), (ttrain), (ttrain1))
 		
@@ -122,27 +143,50 @@ class bandit:
 			fconf = interpolate.interp1d(ctrain, conftrain, fill_value = 'extrapolate')
 			fto = interpolate.interp1d(conftrain, ttrain, fill_value = 'extrapolate')
 
+			## inverse prediction
+			# predict number of frames solved in a given timeout
+			ifconf = interpolate.interp1d(ttrain, conftrain, fill_value = 'extrapolate')
+			ifcls = interpolate.interp1d(conftrain, ctrain, fill_value = 'extrapolate')
+			iffrm = interpolate.interp1d(ctrain, ftrain, fill_value = 'extrapolate')
+
 			new_frames = np.arange(last_frm+1, last_frm+int(nd)+1, 2) #if int(1 + nd/2) > 2 else [last_frm+int(nd)+1]
-			new_cla = fcla(new_frames)
-			new_conf = fconf(new_cla)
+			# new_cla = fcla(new_frames)
+			# new_conf = fconf(new_cla)
 			# changed on 10/08
 			#new_to = fto(new_cla)
-			new_to = fto(new_conf)
+			new_to = fto(fconf(fcla(new_frames)))
+
+			next_tm, ndt = new_to, int(nd)+1
+
+			## inverse pred
+			i_next_to = ttrain[-1]*2.0
+			i_cla = ifcls(ifconf(i_next_to))
+			i_frame = iffrm(i_cla)
+			#---
+			if r_flag:
+				next_tm = np.max(new_to) #np.sum(new_to)
+				ndt = int(nd)+1
+				print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt))
+			else:
+				next_tm = i_next_to #np.sum(new_to)
+				ndt = i_frame - ftrain[-1]+1
+				print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt))
+			# if flag:
+			
 			#-----
 			# new_cla = np.interp(new_frames, ftrain, ttrain)
 			# new_to = np.interp(new_cla, ftrain, ttrain1)
-			next_tm = np.max(new_to) #np.sum(new_to)
-			ndt = int(nd)+1
-			# if flag:
-			while (ttrain[-1] >= next_tm and new_cla[-1] < 1.05*ctrain[-1] ): # atleast 50% increment in clauses #next_tm < self.timeout[self.n]: #*SC:
-				new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
-				new_cla = fcla(new_frames)
-				new_to = fto(new_cla)
-				next_tm = np.max(new_to) #np.sum(new_to)
-				ndt += 5
-				print('Prediction for {0} frames'.format(ndt), new_frames, new_cla, new_to)
-		if flag:
-			print('Prediction for action', a, Actions[a], 'time', next_tm, 'frames',ndt)
+			# next_tm = np.max(new_to) #np.sum(new_to)
+			# ndt = int(nd)+1
+			# # if flag:
+			# while (ttrain[-1] >= next_tm and new_cla[-1] < 1.05*ctrain[-1] ): # atleast 50% increment in clauses #next_tm < self.timeout[self.n]: #*SC:
+			# 	new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
+			# 	new_cla = fcla(new_frames)
+			# 	new_to = fto(new_cla)
+			# 	next_tm = np.max(new_to) #np.sum(new_to)
+			# 	ndt += 5
+			# 	print('Prediction for {0} frames'.format(ndt), new_frames, new_cla, new_to)
+		# if r_flag:
 		return next_tm, ndt
 
 	def cal_reward(self, a, sm, t, asrt, tt1, sd, ed = -1):
@@ -179,7 +223,7 @@ class bandit:
 						cn += 1
 				wa = (reward/cn) if cn > 0 else 0
 
-				nt, nd = self.get_next_time(a, sm.ld)
+				nt, nd = self.get_next_time(a, sm.ld, r_flag = 1)
 				print('In reward', sd, sm.frame, nt, nd)
 
 				reward = np.exp(-0.4*wa)  # + nd/nt)#(reward + np.exp(-pen/MAX_TIME))/cn
@@ -227,24 +271,7 @@ class bandit:
 		sm = None
 		asrt = -1
 		ar_tab = {}
-		if a == 0:    #ABC bmc2
-			asrt, sm, ar_tab, tt1 = bmc2(ofname, sd, t=t, f=f)
-		elif a == 1: #ABC bmc3
-			asrt, sm, ar_tab, tt1 = bmc3(ofname, sd,  t=t, f=f)
-		elif a == 2: #ABC bmc3rs
-			asrt, sm, ar_tab, tt1 = bmc3rs(ofname, sd,  t=t, f=f)
-		elif a == 3: #ABC bmc3g
-			asrt, sm, ar_tab, tt1 = bmc3rg(ofname, sd,  t=t, f=f)
-		elif a == 4: #ABC bmc3u
-			asrt, sm, ar_tab, tt1 = bmc3ru(ofname, sd,  t=t, f=f)
-		elif a == 5: #ABC bmc3r
-			asrt, sm, ar_tab, tt1 = bmc3r(ofname, sd,  t=t, f=f)
-		elif a == 6: #ABC bmc3j=2
-			asrt, sm, ar_tab, tt1 = bmc3j(ofname, sd, j = 2,  t=t, f=f)
-		elif a == 7: #ABC bmc3j=3
-			asrt, sm, ar_tab, tt1 = bmc3j(ofname, sd, j = 3, t=t, f=f)
-		elif a == 8: #ABC bmc3j=4
-			asrt, sm, ar_tab, tt1 = bmc3j(ofname, sd, j = 4, t=t, f=f)
+		asrt, sm, ar_tab, tt1 = run_engine(ofname, a, sd, t, f)
 			#asrt, sm, ar_tab, tt1 = pdr(ofname, t)
 		
 		# min_t = MAX_TIME
@@ -291,7 +318,7 @@ class bandit:
 				tm = ar_tab_old[ky].to
 				mem = ar_tab_old[ky].mem
 
-				nt, nd =  self.get_next_time(a, sm.ld)
+				nt, nd =  self.get_next_time(a, sm.ld, r_flag=1)
 				if self.states <= ky: 
 					row.append(Actions[a])
 					# row.append(fname)
@@ -495,7 +522,7 @@ class bandit:
 				# if not explore: # and sm and reward > 0:
 				next_time = {}
 				for a2 in range(self.k):
-					next_tm, ndt = self.get_next_time(a2, sm.ld, 1)
+					next_tm, ndt = self.get_next_time(a2, sm.ld, r_flag =0)
 						# next_time.update({new_frames[0]: new_to[0]})
 						# print('predicted time out for next frame', new_frames, new_to)
 					# else:
@@ -525,7 +552,7 @@ class bandit:
 					max_conf = max(max_conf, sm.cla)
 
 					print('# exploring --', i, 'explore', explore, 'best_sd', best_sd, 'max_conf', max_conf)
-					if (ending_explore(i) or int(MAX_TIMEOUT - all_time) <= 0): #enter_critical and ocount >= M-1) or (i < repeat_count and sm.asrt > 0) or (enter_critical and sm.asrt > 0):
+					if (ending_explore(i) or int(MAX_TIMEOUT - all_time) <= 0 or sm.asrt > 0): #enter_critical and ocount >= M-1) or (i < repeat_count and sm.asrt > 0) or (enter_critical and sm.asrt > 0):
 						# end of exploration --- pick the best one
 						print('#  at the end of exploration')
 						# sd = sm.frame+1 if sm.frame > 0 else sm.frame
@@ -701,7 +728,58 @@ class ucb1_bandit(bandit):
 		print('Action {0} reward {1}'.format(a, reward))
 
 		return a, reward, sm
+
+def runseq(fname, seq):
+
+	#ofname = os.path.join(PATH,(self.fname.split('/')[-1]),'new', ((self.fname.split('/')[-1]).split('.')[0])+'_n.'+( ((self.fname.split('/')[-1])).split('.')[1]))
+	#ofname = os.path.join(PATH, (fn.split('.')[0])+'_n.'+(fn.split('.')[1]))
+	seq_list = ['({0}, {1})'.format(Actions[t[0]], t[1]) for t in seq]
+	sequence = ';'.join(seq_list)
+	print('##################################')
+	print('---- Running sequence {0} ----'.format(sequence), fname)
+	ofname = fname
+
+	#starting state
+	sd = 0
+	asrt = -1
+	sm = None
+	tt = 0
+	pt = 0
+	f = 0
+	ar_tab = {}
+	ar_tab1 = {}
+	for item in seq:
+		a, t = item
+		asrt, sm, ar_tab, tt1 = run_engine(ofname, a, sd, t, f)
+
+		for ky in ar_tab1:
+			ar_tab.update({ky: ar_tab1[ky]})
+
+		if sm:
+			sd = sm.ld+1 if sm.ld > 0 else sm.ld
+			# if a == 0:
+			# 	sd = sm.frame #if sm.frame > 0 else sm.frame
+		else:
+			sm =  abc_result(frame=max(0, sd-1), conf=0, var=0, cla=0, mem = -1, to=-1, asrt = asrt, tt = tt1, ld = max(0, sd-1))
+		print(sm)
+		sys.stdout.flush()
+		
+		
+		tt += sm.tt
+		
+		if asrt > 0:
+			pt += sm.tt
+			print('Output asserted at frame ', asrt, 'time', pt)
+			print('Stopping iteration')
+			
+			break
+		else:
+			pt += t
 	
+	frame = asrt if asrt > 0  else sm.frame
+	print('############### {0}: {1}, {2} ###################'.format( 'SAT' if asrt> 0 else 'TIMEOUT', asrt if asrt > 0  else sm.frame, pt if asrt > 0 else tt))
+	return (asrt, 'SAT' if asrt> 0 else 'TIMEOUT', frame, pt if asrt > 0 else tt, ar_tab)
+
 def main(argv):
 	
 	inputfile = ''
@@ -818,11 +896,23 @@ def main(argv):
 			plt.legend(bbox_to_anchor=(1.3, 0.5))
 
 		to_plot = [[],[]]
+		res_seq = []
+		total_t = 0
 		for ss in seq:
 			ac, tt, rw, tt, t, frame =  ss
 			to_plot[0].append(frame)
 			to_plot[1].append(rw)
+			ftt = min(TIMEOUT - total_t, tt)
+			res_seq.append((ac, ftt))
+			total_t += ftt
 		all_plots.append(to_plot)
+
+		as1, cond1, sd1, tt1, ar_tab1 = runseq(ofname, seq)
+		w1 = max(0, TIMEOUT - tt1)
+		tot1 = tt1 if as1 > 0 else TIMEOUT
+
+		string = '\t {0}  {1:0.2f}  {2:0.2f}\t'.format( sd1, tot1, w1) 
+		print(string)
 
 	if PLOT:
 		plt.xlabel("Iterations")

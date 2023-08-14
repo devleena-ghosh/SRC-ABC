@@ -1479,7 +1479,7 @@ int Saig_ManBmcScalable( Aig_Man_t * pAig, Saig_ParBmc_t * pPars )
         pPars->nTimeOutOne = 0;
     nTimeToStopNG = pPars->nTimeOut ? pPars->nTimeOut * CLOCKS_PER_SEC + Abc_Clock(): 0;
     nTimeToStop   = Saig_ManBmcTimeToStop( pPars, nTimeToStopNG );
-    abctime newTimeOut = pPars->nTimeOut ? 1.1*(pPars->nTimeOut) * CLOCKS_PER_SEC + Abc_Clock(): 0;
+    abctime newTimeOut = pPars->nTimeOut ? 1.2*(pPars->nTimeOut) * CLOCKS_PER_SEC + Abc_Clock(): 0;
     // [DGhosh] added on 29/06/2023    
     int unDefTryOnce = 0;
     // create BMC manager
