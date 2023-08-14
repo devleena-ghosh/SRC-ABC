@@ -134,7 +134,7 @@ class bandit:
 
 		# if len(frames) > 10:
 		#     ftrain, ttrain = frames[-11:], time_outs[-11:]
-		if r_flag:
+		if flag:
 			print('Training for action', a, nd, len(ftrain), len(ctrain), len(conftrain), len(ttrain))
 		# print('Training data', (ftrain), (ttrain), (ttrain1))
 		
