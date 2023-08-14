@@ -175,7 +175,7 @@ class bandit:
 				#next_tm = ttrain[-1] + i_next_to #np.sum(new_to)
 				ndt = max(nd, i_frame-last_frm)+ 1 #- ftrain[-1]+1
 				new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
-				next_tm = last_tm + np.max(fto(fconf(fcla(ndt1))))
+				next_tm = last_tm + np.max(fto(fconf(fcla(ndt))))
 				print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt))
 			# if flag:
 			
