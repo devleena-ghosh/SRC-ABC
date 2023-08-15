@@ -152,12 +152,12 @@ class bandit:
 			regr1 = MLPRegressor(random_state=1, max_iter=500).fit(np.array(ftrain).reshape(-1, 1), np.array(ctrain))
 			regr2 = MLPRegressor(random_state=1, max_iter=500).fit(np.array(ctrain).reshape(-1, 1), np.array(conftrain))
 			regr3 = MLPRegressor(random_state=1, max_iter=500).fit(np.array(conftrain).reshape(-1, 1), np.array(ttrain))
-			next_tm = max(regr3.predict(regr2.predict(regr1.predict(np.array(f_test).reshape(-1, 1)))))
+			next_tm = max(regr3.predict(regr2.predict(regr1.predict(np.array(f_test).reshape(-1, 1)).reshape(-1, 1)).reshape(-1, 1)))
 
 			if flag:q
 				print('Neural network prediction', f_test, next_tm)
 
-			next_tm1 = max(regr3.predict(regr2.predict(regr1.predict(np.array([last_frm+1]).reshape(1, -1)))))
+			next_tm1 = max(regr3.predict(regr2.predict(regr1.predict(np.array([last_frm+1]).reshape(1, -1)).reshape(-1, 1)).reshape(-1, 1)))
 
 			if flag:
 				print('Neural network prediction 1 frame', last_frm+1, next_tm1)
@@ -185,7 +185,7 @@ class bandit:
 				#next_tm = ttrain[-1] + i_next_to #np.sum(new_to)
 				ndt = max(nd, i_frame-last_frm)+ 1 #- ftrain[-1]+1
 				new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
-				next_tm = max(regr3.predict(regr2.predict(regr1.predict(np.array(new_frames).reshape(-1, 1))))) #last_tm + 
+				next_tm = max(regr3.predict(regr2.predict(regr1.predict(np.array(new_frames).reshape(-1, 1)).reshape(-1, 1)).reshape(-1, 1))) #last_tm + 
 				if partition_flag:
 					next_tm, ndt = -1, -1 
 				if flag:
