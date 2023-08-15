@@ -252,7 +252,7 @@ class bandit:
 			else:
 				reward = -1 * np.exp(t/MAX_TIME) #np.log(t)
 
-		print(sd, sm.frame, reward, sm)
+		print('cal_reward', sd, sm.frame, reward, sm)
 		return reward, sm
 
 	def get_reward(self, a, t1 = -1):
@@ -630,18 +630,19 @@ class bandit:
 					ocount = 0
 					print('#  Starting exploring --', i, ocount, pcount, r_exp)
 
-				elif (( sm  and (sm.ld - pre_state) < 2)):
-					print('current slowing down -- exploration phase',sm.ld, pre_state, self.states)
-					r_exp += 1
-					explore = True
-					ocount = 0
-					print('#  Starting exploring --', i, ocount, pcount, r_exp)
+				# elif (( sm  and (sm.ld - pre_state) < 2)):
+				# 	print('current slowing down -- exploration phase',sm.ld, pre_state, self.states)
+				# 	r_exp += 1
+				# 	explore = True
+				# 	ocount = 0
+				# 	print('#  Starting exploring --', i, ocount, pcount, r_exp)
 				
 
 			elif ending_explore(i, r_exp):
 				explore = False
 				print('#  Ending exploring --', i, ocount, pcount)
 
+			print()
 			print('#### iter ', i, a, Actions[a], 'current state', self.states,'time taken', tt, self.timeout[i], 'totalTime', totalTime, 'ss', ss, sm)
 
 			print('--------- Iteration {0} end ------'.format(i))
@@ -716,8 +717,8 @@ class ucb1_bandit(bandit):
 		
 		self.k_ucb_reward = self.k_reward + c * np.sqrt((np.log(self.n)) / self.k_n)
 		if count < 0:
-			c = 0
-			self.k_ucb_reward = self.k_reward + c * np.sqrt((np.log(self.n)) / self.k_n)
+			#c = 0
+			self.k_ucb_reward = self.k_reward #+ c * np.sqrt((np.log(self.n)) / self.k_n)
 		# elif count > 0:
 		# 	c = self.c * np.exp(-0.01* count)
 		# 	self.k_ucb_reward = self.k_reward + c * np.sqrt((np.log(self.n)) / self.k_n)
@@ -836,9 +837,10 @@ def main(argv):
 	print('iters', iters)
 	alpha = 0.6
 	reward = 0
+	c = 2
 	# Initialize bandits
 
-	ucb1 = ucb1_bandit(k, 10, iters, 1,  reward, inputfile)
+	ucb1 = ucb1_bandit(k, c, iters, 1,  reward, inputfile)
 
 	options = [ucb1]
 	labels = [r'ucb1']
