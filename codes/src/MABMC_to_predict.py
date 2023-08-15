@@ -442,17 +442,21 @@ class bandit:
 			''' --- select time slot for iteration i ---- '''
 			if explore: # for exploration
 				if i == 0:
-					self.timeout[i] = T
+					next_timeout = T
 						
 				else:
 					if blocker(sm, i):
-						self.timeout[i] = self.timeout[i-1] * SC
+						next_timeout = self.timeout[i-1] * SC
 					else:
-						self.timeout[i] = self.timeout[i-1] 
+						next_timeout = self.timeout[i-1] 
 
 					self.frameout[i] = 0 #-1
 
-				print('Calculating time out explore', self.timeout[i], 'total till now', totalTime)
+				self.timeout[i] = min(next_timeout, TIMEOUT - totalTime)	
+				if self.timeout[i] > TIMEOUT - (totalTime + self.timeout[i]):
+					ending = 1
+
+				print('Calculating time out explore', self.timeout[i], next_timeout, 'total till now', totalTime)
 
 			else: # for exploitation
 				# max_next_to = -1
@@ -474,14 +478,13 @@ class bandit:
 
 				# self.timeout[i] = 
 				
+				self.timeout[i] = min(next_timeout, TIMEOUT - totalTime)	
+				if self.timeout[i] > TIMEOUT - (totalTime + self.timeout[i]):
+					ending = 1
+				# else:
+
 				print('Calculating time out exploit', next_timeout, 'predicted', next_to, next_fo, 'previous', self.timeout[i-1],'total till now', totalTime)
 
-				if self.timeout[i] > TIMEOUT - (totalTime + next_timeout):
-					self.timeout[i] =  (TIMEOUT - totalTime) #self.timeout[i] +
-					ending = 1
-				else:
-					self.timeout[i] = min(next_timeout, TIMEOUT - totalTime)	
-				# else:
 
 			# --- completing engine selection ----- #
 				
@@ -758,14 +761,14 @@ def runseq(fname, seq):
 	tt = 0
 	pt = 0
 	f = 0
-	ar_tab = {}
-	ar_tab1 = {}
+	# ar_tab = {}
+	# ar_tab1 = {}
 	for item in seq:
-		a, t = item
+		a, t = item[0], item[1]
 		asrt, sm, ar_tab, tt1 = run_engine(ofname, a, sd, t, f)
 
-		for ky in ar_tab1:
-			ar_tab.update({ky: ar_tab1[ky]})
+		# for ky in ar_tab1:
+		# 	ar_tab.update({ky: ar_tab1[ky]})
 
 		if sm:
 			sd = sm.ld+1 if sm.ld > 0 else sm.ld
@@ -790,7 +793,7 @@ def runseq(fname, seq):
 	
 	frame = asrt if asrt > 0  else sm.frame
 	print('############### {0}: {1}, {2} ###################'.format( 'SAT' if asrt> 0 else 'TIMEOUT', asrt if asrt > 0  else sm.frame, pt if asrt > 0 else tt))
-	return (asrt, 'SAT' if asrt> 0 else 'TIMEOUT', frame, pt if asrt > 0 else tt, ar_tab)
+	return (asrt, 'SAT' if asrt> 0 else 'TIMEOUT', frame, pt if asrt > 0 else tt)#, ar_tab)
 
 def main(argv):
 	
@@ -923,7 +926,7 @@ def main(argv):
 		seq_list = ['({0}, {1})'.format(Actions[t[0]], t[1]) for t in seq]
 		sequence = ';'.join(seq_list)
 		print('Optimal sequence:', sequence)
-		r_as1, r_cond1, r_sd1, r_tt1, r_ar_tab1 = runseq(ofname, seq)
+		r_as1, r_cond1, r_sd1, r_tt1 = runseq(ofname, res_seq)
 		r_w1 = max(0, TIMEOUT - r_tt1)
 		r_tot1 = r_tt1 if r_as1 > 0 else TIMEOUT
 
