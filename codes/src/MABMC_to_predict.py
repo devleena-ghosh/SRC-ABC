@@ -49,6 +49,7 @@ while tot < TIMEOUT:
 M = int(len(Actions))
 
 def run_engine(ofname, a, sd, t=0, f=0):
+	print('run_engine --', a, sd, t, f)
 	if a == 0:    #ABC bmc2
 		asrt, sm, ar_tab, tt1 = bmc2(ofname, sd, t=t, f=f)
 	elif a == 1: #ABC bmc3
@@ -383,6 +384,8 @@ class bandit:
 		max_conf = 0
 		r_exp = 0
 
+		repeated_blocker = 0
+
 		av = []
 		repeat_count= self.k
 		M = int(2*self.k/3.0)
@@ -445,7 +448,7 @@ class bandit:
 					next_timeout = T
 						
 				else:
-					if blocker(sm, i):
+					if blocker(sm, i) and repeated_blocker > 3:
 						next_timeout = self.timeout[i-1] * SC
 					else:
 						next_timeout = self.timeout[i-1] 
@@ -591,9 +594,11 @@ class bandit:
 					#print('Total time till now: ', totalTime)
 					print('Adding ss -- exploitation', ss)
 					seq.append(ss)
+					repeated_blocker = 0
 
 			else:
 				ss = (a, -1, reward, -1, self.timeout[i], sd)
+				repeated_blocker += 1
 				if all_ending:
 					totalTime += tp
 					#ss = (Actions[a], tp, reward, totalTime, self.timeout[i], sd)
@@ -617,18 +622,21 @@ class bandit:
 					explore = True
 					ocount = 0
 					print('#  Starting exploring --', i, ocount, pcount, r_exp)
-				if (( sm and (sm.ld - pre_state) < 2)):
-					print('current slowing down -- exploration phase',sm.ld, pre_state, self.states)
-					r_exp += 1
-					explore = True
-					ocount = 0
-					print('#  Starting exploring --', i, ocount, pcount, r_exp)
-				if ((sm and next_to > 0 and sm.tt > 0  and (self.frameout[i] - sm.ld) >= 2  and abs(sm.tt - next_to)/sm.tt > 0.75)):
+
+				eliif ((sm and next_to > 0 and sm.tt > 0  and (self.frameout[i] - sm.ld) >= 2  and abs(sm.tt - next_to)/sm.tt > 0.75)):
 					print('Incorrect prediction of next time -- exploration phase', abs(sm.tt - next_to)/sm.tt)
 					r_exp += 1
 					explore = True
 					ocount = 0
 					print('#  Starting exploring --', i, ocount, pcount, r_exp)
+
+				elif (( sm  and (sm.ld - pre_state) < 2)):
+					print('current slowing down -- exploration phase',sm.ld, pre_state, self.states)
+					r_exp += 1
+					explore = True
+					ocount = 0
+					print('#  Starting exploring --', i, ocount, pcount, r_exp)
+				
 
 			elif ending_explore(i, r_exp):
 				explore = False
@@ -771,14 +779,13 @@ def runseq(fname, seq):
 		# 	ar_tab.update({ky: ar_tab1[ky]})
 
 		if sm:
-			sd = sm.ld+1 if sm.ld > 0 else sm.ld
+			sd = int(sm.ld+1) if sm.ld > 0 else int(sm.ld)
 			# if a == 0:
 			# 	sd = sm.frame #if sm.frame > 0 else sm.frame
 		else:
 			sm =  abc_result(frame=max(0, sd-1), conf=0, var=0, cla=0, mem = -1, to=-1, asrt = asrt, tt = tt1, ld = max(0, sd-1))
 		print(sm)
 		sys.stdout.flush()
-		
 		
 		tt += sm.tt
 		
@@ -915,10 +922,10 @@ def main(argv):
 		res_seq = []
 		total_t = 0
 		for ss in seq:
-			ac, tt, rw, tt, t, frame =  ss
+			ac, tp, rw, tt, t, frame =  ss
 			to_plot[0].append(frame)
 			to_plot[1].append(rw)
-			ftt = min(TIMEOUT - total_t, tt)
+			ftt = min(TIMEOUT - total_t, tp)
 			res_seq.append((int(ac), ftt))
 			total_t += ftt
 		all_plots.append(to_plot)
