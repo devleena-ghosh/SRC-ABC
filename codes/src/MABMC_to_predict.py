@@ -920,12 +920,12 @@ def main(argv):
 			total_t += ftt
 		all_plots.append(to_plot)
 
-		as1, cond1, sd1, tt1, ar_tab1 = runseq(ofname, seq)
-		w1 = max(0, TIMEOUT - tt1)
-		tot1 = tt1 if as1 > 0 else TIMEOUT
+		r_as1, r_cond1, r_sd1, r_tt1, r_ar_tab1 = runseq(ofname, seq)
+		r_w1 = max(0, TIMEOUT - r_tt1)
+		r_tot1 = r_tt1 if r_as1 > 0 else TIMEOUT
 
-		string = '\t {0}  {1:0.2f}  {2:0.2f}\t'.format( sd1, tot1, w1) 
-		print(string)
+		res_str = 'Sequence execution result: {0}  {1:0.2f}  {2:0.2f}\t'.format(r_sd1, r_tot1, r_w1) 
+		print(res_str)
 
 	if PLOT:
 		plt.xlabel("Iterations")
