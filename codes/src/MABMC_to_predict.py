@@ -545,7 +545,7 @@ class bandit:
 
 
 				if explore:
-					ss = (Actions[a], tp, reward, totalTime, self.timeout[i], sd)
+					ss = (a, tp, reward, totalTime, self.timeout[i], sd)
 					if len(best) == 0:
 						best = ss
 						best_sd = best[-1]
@@ -584,13 +584,13 @@ class bandit:
 				else: #if not explore: # exploitation 
 					self.states = sm.ld
 					totalTime += tp
-					ss = (Actions[a], tp, reward, totalTime, self.timeout[i], sd)
+					ss = (a, tp, reward, totalTime, self.timeout[i], sd)
 					#print('Total time till now: ', totalTime)
 					print('Adding ss -- exploitation', ss)
 					seq.append(ss)
 
 			else:
-				ss = (Actions[a], -1, reward, -1, self.timeout[i], sd)
+				ss = (a, -1, reward, -1, self.timeout[i], sd)
 				if all_ending:
 					totalTime += tp
 					#ss = (Actions[a], tp, reward, totalTime, self.timeout[i], sd)
@@ -916,10 +916,13 @@ def main(argv):
 			to_plot[0].append(frame)
 			to_plot[1].append(rw)
 			ftt = min(TIMEOUT - total_t, tt)
-			res_seq.append((ac, ftt))
+			res_seq.append((int(ac), ftt))
 			total_t += ftt
 		all_plots.append(to_plot)
 
+		seq_list = ['({0}, {1})'.format(Actions[t[0]], t[1]) for t in seq]
+		sequence = ';'.join(seq_list)
+		print('Optimal sequence:', sequence)
 		r_as1, r_cond1, r_sd1, r_tt1, r_ar_tab1 = runseq(ofname, seq)
 		r_w1 = max(0, TIMEOUT - r_tt1)
 		r_tot1 = r_tt1 if r_as1 > 0 else TIMEOUT
