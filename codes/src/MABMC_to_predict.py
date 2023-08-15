@@ -116,7 +116,7 @@ class bandit:
 		prev = 0, 0, 0, 0
 		for frm in ar_tab.keys():
 			sm1 = ar_tab[frm]
-			if sm1.cla > 0 and (sm1.cla not in ctrain):
+			if sm1.cla > 0 and (sm1.cla not in ctrain) and (sm1.tt - prev[3] > 0):
 				ftrain.append(sm1.frame)
 				ctrain.append(sm1.cla - prev[1])
 				conftrain.append(sm1.conf - prev[2])
