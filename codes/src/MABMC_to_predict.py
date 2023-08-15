@@ -180,7 +180,7 @@ class bandit:
 				# next_tm = np.max(new_to) #ttrain[-1]+  np.sum(new_to)
 				# ndt = int(nd)+1
 				if flag:
-					print(r_flag, 'NN Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), new_frames)
+					print(r_flag, 'NN Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), f_test)
 			else:
 				#next_tm = ttrain[-1] + i_next_to #np.sum(new_to)
 				ndt = max(nd, i_frame-last_frm)+ 1 #- ftrain[-1]+1
