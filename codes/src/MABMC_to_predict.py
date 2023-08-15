@@ -136,6 +136,7 @@ class bandit:
 		#     ftrain, ttrain = frames[-11:], time_outs[-11:]
 		if flag:
 			print('Training for action', a, nd, len(ftrain), len(ctrain), len(conftrain), len(ttrain))
+			print('Last frame', prev)
 		# print('Training data', (ftrain), (ttrain), (ttrain1))
 		
 		if len(ftrain) > 0:
@@ -171,17 +172,17 @@ class bandit:
 			i_frame = int(fpt*i_next_to)
 			#---
 			if r_flag:
-				next_tm = np.max(new_to) #ttrain[-1]+  np.sum(new_to)
-				ndt = int(nd)+1
+				# next_tm = np.max(new_to) #ttrain[-1]+  np.sum(new_to)
+				# ndt = int(nd)+1
 				if flag:
-					print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt))
+					print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), new_frames)
 			else:
 				#next_tm = ttrain[-1] + i_next_to #np.sum(new_to)
 				ndt = max(nd, i_frame-last_frm)+ 1 #- ftrain[-1]+1
 				new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
-				next_tm = np.max(fto(fconf(fcla(ndt)))) #last_tm + 
+				next_tm = np.max(fto(fconf(fcla(new_frames)))) #last_tm + 
 				if flag:
-					print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt))
+					print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), new_frames, i_frame)
 			# if flag:
 			
 			#-----
