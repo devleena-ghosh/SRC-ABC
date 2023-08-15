@@ -116,9 +116,13 @@ class bandit:
 		#frm = self.states
 		frm  = -1
 		prev = 0, 0, 0, 0
+		partition_flag = 0
 		for frm in ar_tab.keys():
 			sm1 = ar_tab[frm]
 			if sm1.cla > 0 and (sm1.cla not in ctrain): # and (sm1.tt - prev[3] > 0):
+				if prev[0] < sm1.frame and prev[-1] > sm1.tt:
+					ftrain, ctrain, conftrain, ttrain = [], [], [], []
+					partition_flag = 1
 				ftrain.append(sm1.frame)
 				ctrain.append(sm1.cla)# - prev[1])
 				conftrain.append(sm1.conf)# - prev[2])
@@ -167,7 +171,7 @@ class bandit:
 			fpt1 = (ndt)/(next_tm) if next_tm > 0 else next_tm1
 
 			## inverse pred
-			i_next_to = last_tm*2.0
+			i_next_to = last_tm*2.0 #if partition_flag == 0 else 
 			# i_cla = ifcls(ifconf(i_next_to))
 			# i_frame = iffrm(i_cla)
 			i_frame = int(fpt*i_next_to)
@@ -181,7 +185,9 @@ class bandit:
 				#next_tm = ttrain[-1] + i_next_to #np.sum(new_to)
 				ndt = max(nd, i_frame-last_frm)+ 1 #- ftrain[-1]+1
 				new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
-				next_tm = max(regr3.predict(regr2.predict(regr1.predict(np.array([new_frames])))) #last_tm + 
+				next_tm = max(regr3.predict(regr2.predict(regr1.predict(np.array([new_frames]))))) #last_tm + 
+				if partition_flag:
+					next_tm, ndt = -1, -1 
 				if flag:
 					print(r_flag, 'NN Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), new_frames, i_frame)
 			
@@ -231,6 +237,8 @@ class bandit:
 				ndt = max(nd, i_frame-last_frm)+ 1 #- ftrain[-1]+1
 				new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
 				next_tm = np.max(fto(fconf(fcla(new_frames)))) #last_tm + 
+				if partition_flag:
+					next_tm, ndt = -1, -1 
 				if flag:
 					print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), new_frames, i_frame)
 			# if flag:
@@ -523,10 +531,14 @@ class bandit:
 				if next_to > 0: # predicted time 
 					self.frameout[i] = self.states + next_fo
 					next_timeout = max(next_to, self.timeout[i-1])# * SC)
-
-				elif blocker(sm,i):
-					next_timeout = self.timeout[i-1] * SC
+					
+				elif next_to <= 0:
+					self.timeout[i] = (TIMEOUT - totalTime)	
 					self.frameout[i] = 0
+
+					if blocker(sm,i):
+						next_timeout = self.timeout[i-1] * SC
+						self.frameout[i] = 0
 
 				# self.timeout[i] = 
 				
@@ -594,8 +606,8 @@ class bandit:
 						# print('predicted time out for next frame', new_frames, new_to)
 					# else:
 					#     next_to = -1
-					if ndt > 0:
-						next_time.update({a2:(next_tm, ndt)})
+					#if ndt > 0:
+					next_time.update({a2:(next_tm, ndt)})
 				print('next time out', next_time)
 
 
