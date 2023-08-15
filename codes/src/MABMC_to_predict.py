@@ -147,49 +147,49 @@ class bandit:
 		
 		if len(ftrain) > 0:
 
-			f_test = np.arange(last_frm+1, last_frm+int(nd)+1, 1)
+			# f_test = np.arange(last_frm+1, last_frm+int(nd)+1, 1)
 
-			regr1 = MLPRegressor(random_state=1, max_iter=500).fit(np.array(ftrain).reshape(-1, 1), np.array(ctrain))
-			regr2 = MLPRegressor(random_state=1, max_iter=500).fit(np.array(ctrain).reshape(-1, 1), np.array(conftrain))
-			regr3 = MLPRegressor(random_state=1, max_iter=500).fit(np.array(conftrain).reshape(-1, 1), np.array(ttrain))
-			next_tm = max(regr3.predict(regr2.predict(regr1.predict(np.array(f_test).reshape(-1, 1)).reshape(-1, 1)).reshape(-1, 1)))
+			# regr1 = MLPRegressor(random_state=1, max_iter=500).fit(np.array(ftrain).reshape(-1, 1), np.array(ctrain))
+			# regr2 = MLPRegressor(random_state=1, max_iter=500).fit(np.array(ctrain).reshape(-1, 1), np.array(conftrain))
+			# regr3 = MLPRegressor(random_state=1, max_iter=500).fit(np.array(conftrain).reshape(-1, 1), np.array(ttrain))
+			# next_tm = max(regr3.predict(regr2.predict(regr1.predict(np.array(f_test).reshape(-1, 1)).reshape(-1, 1)).reshape(-1, 1)))
 
-			if flag:
-				print('Neural network prediction', f_test, next_tm)
+			# if flag:
+			# 	print('Neural network prediction', f_test, next_tm)
 
-			next_tm1 = max(regr3.predict(regr2.predict(regr1.predict(np.array([last_frm+1]).reshape(1, -1)).reshape(-1, 1)).reshape(-1, 1)))
+			# next_tm1 = max(regr3.predict(regr2.predict(regr1.predict(np.array([last_frm+1]).reshape(1, -1)).reshape(-1, 1)).reshape(-1, 1)))
 
-			if flag:
-				print('Neural network prediction 1 frame', last_frm+1, next_tm1)
+			# if flag:
+			# 	print('Neural network prediction 1 frame', last_frm+1, next_tm1)
 
-			ndt = int(nd)+1
+			# ndt = int(nd)+1
 
-			fpt1 = (ndt)/(next_tm) if next_tm > 0 else next_tm1
-			if flag:
-				print('Neural network prediction frame per time', fpt1)
+			# fpt1 = (ndt)/(next_tm) if next_tm > 0 else next_tm1
+			# if flag:
+			# 	print('Neural network prediction frame per time', fpt1)
 
 		
 
-			## inverse pred
-			i_next_to = last_tm*2.0 #if partition_flag == 0 else 
-			# i_cla = ifcls(ifconf(i_next_to))
-			# i_frame = iffrm(i_cla)
-			i_frame = int(fpt1*i_next_to)
-			#---
-			if r_flag:
-				# next_tm = np.max(new_to) #ttrain[-1]+  np.sum(new_to)
-				# ndt = int(nd)+1
-				if flag:
-					print(r_flag, 'NN Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), f_test)
-			else:
-				#next_tm = ttrain[-1] + i_next_to #np.sum(new_to)
-				ndt = max(nd, i_frame-last_frm)+ 1 #- ftrain[-1]+1
-				new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
-				next_tm = max(regr3.predict(regr2.predict(regr1.predict(np.array(new_frames).reshape(-1, 1)).reshape(-1, 1)).reshape(-1, 1))) #last_tm + 
-				if partition_flag:
-					next_tm, ndt = -1, -1 
-				if flag:
-					print(r_flag, 'NN Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), new_frames, i_frame)
+			# ## inverse pred
+			# i_next_to = last_tm*2.0 #if partition_flag == 0 else 
+			# # i_cla = ifcls(ifconf(i_next_to))
+			# # i_frame = iffrm(i_cla)
+			# i_frame = int(fpt1*i_next_to)
+			# #---
+			# if r_flag:
+			# 	# next_tm = np.max(new_to) #ttrain[-1]+  np.sum(new_to)
+			# 	# ndt = int(nd)+1
+			# 	if flag:
+			# 		print(r_flag, 'NN Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), f_test)
+			# else:
+			# 	#next_tm = ttrain[-1] + i_next_to #np.sum(new_to)
+			# 	ndt = max(nd, i_frame-last_frm)+ 1 #- ftrain[-1]+1
+			# 	new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
+			# 	next_tm = max(regr3.predict(regr2.predict(regr1.predict(np.array(new_frames).reshape(-1, 1)).reshape(-1, 1)).reshape(-1, 1))) #last_tm + 
+			# 	if partition_flag:
+			# 		next_tm, ndt = -1, -1 
+			# 	if flag:
+			# 		print(r_flag, 'NN Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), new_frames, i_frame)
 			
 
 			# predict number of new clauses then predict timeout for next frame
