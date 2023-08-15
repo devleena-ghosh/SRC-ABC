@@ -162,13 +162,13 @@ class bandit:
 			if flag:
 				print('Neural network prediction 1 frame', last_frm+1, next_tm1)
 
-
-			if flag:
-				print('Neural network prediction frame per time', fpt1)
-
 			ndt = int(nd)+1
 
 			fpt1 = (ndt)/(next_tm) if next_tm > 0 else next_tm1
+			if flag:
+				print('Neural network prediction frame per time', fpt1)
+
+		
 
 			## inverse pred
 			i_next_to = last_tm*2.0 #if partition_flag == 0 else 
