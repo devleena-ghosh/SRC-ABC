@@ -174,7 +174,7 @@ class bandit:
 			i_next_to = last_tm*2.0 #if partition_flag == 0 else 
 			# i_cla = ifcls(ifconf(i_next_to))
 			# i_frame = iffrm(i_cla)
-			i_frame = int(fpt*i_next_to)
+			i_frame = int(fpt1*i_next_to)
 			#---
 			if r_flag:
 				# next_tm = np.max(new_to) #ttrain[-1]+  np.sum(new_to)
