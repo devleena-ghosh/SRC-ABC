@@ -242,7 +242,7 @@ class bandit:
 				#next_tm = ttrain[-1] + i_next_to #np.sum(new_to)
 				fpt = (ndt)/(next_tm) if next_tm > 0 else ftrain[-1]/ttrain[-1]
 				# ## inverse pred
-				i_next_to = last_tm*2.0
+				i_next_to = last_tm*SC
 				# # i_cla = ifcls(ifconf(i_next_to))
 				#i_frame = iffrm(i_cla)
 				i_frame = int(fpt*i_next_to)
@@ -263,7 +263,7 @@ class bandit:
 					print(r_flag, 'Prediction ', new_cla[-1], ctrain[-1], new_cla[-1]/ctrain[-1] )
 				ndt = int(nd)+1
 				# if flag:
-				while (ttrain[-1] >= next_tm and new_cla[-1] < 1.05*ctrain[-1] ): # atleast 5% increment in clauses #next_tm < self.timeout[self.n]: #*SC:
+				while (SC*ttrain[-1] >= next_tm and new_cla[-1] < 1.05*ctrain[-1] ): # atleast 5% increment in clauses #next_tm < self.timeout[self.n]: #*SC:
 					new_frames = np.arange(last_frm+1, last_frm+int(ndt), 2)
 					new_cla = fcla(new_frames)
 					new_conf = fconf(new_cla)
