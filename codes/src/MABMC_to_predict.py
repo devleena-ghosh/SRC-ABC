@@ -127,8 +127,9 @@ class bandit:
 					ftrain, ctrain, conftrain, ttrain = [], [], [], []
 				elif prev[0] == sm1.frame-1 and prev[0]> 60.0 and sm1.tt/prev[-1] > 1.5:
 					partition_flag = 1
-				print('current ', sm1.frame, sm1.cla, sm1.conf, sm1.tt)
-				print('prev', prev)	
+				if flag and !r_flag:
+					print('current ', sm1.frame, sm1.cla, sm1.conf, sm1.tt)
+					print('prev', prev)	
 				ftrain.append(sm1.frame)
 				ctrain.append(sm1.cla)# - prev[1])
 				conftrain.append(sm1.conf)# - prev[2])
