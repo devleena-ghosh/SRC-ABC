@@ -706,7 +706,7 @@ class bandit:
 					ocount = 0
 					print('#  Starting exploring --', i, ocount, pcount, r_exp)
 
-				eliif ((sm and next_to > 0 and sm.tt > 0  and (self.frameout[i] - sm.ld) >= 2  and abs(sm.tt - next_to)/sm.tt > 0.75)):
+				elif ((sm and next_to > 0 and sm.tt > 0  and (self.frameout[i] - sm.ld) >= 2  and abs(sm.tt - next_to)/sm.tt > 0.75)):
 					print('Incorrect prediction of next time -- exploration phase', abs(sm.tt - next_to)/sm.tt)
 					r_exp += 1
 					explore = True
