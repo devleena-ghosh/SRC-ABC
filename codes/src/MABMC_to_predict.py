@@ -258,13 +258,15 @@ class bandit:
 				# -----
 				# new_cla = np.interp(new_frames, ftrain, ttrain)
 				# new_to = np.interp(new_cla, ftrain, ttrain1)
+				new_cla = fcla(new_frames)
 				#next_tm = np.max(new_to) #np.sum(new_to)
 				ndt = int(nd)+1
 				# if flag:
 				while (ttrain[-1] >= next_tm and new_cla[-1] < 1.05*ctrain[-1] ): # atleast 5% increment in clauses #next_tm < self.timeout[self.n]: #*SC:
 					new_frames = np.arange(last_frm+1, last_frm+int(ndt), 2)
 					new_cla = fcla(new_frames)
-					new_to = fto(new_cla)
+					new_conf = fconf(new_cla)
+					new_to = fto(new_conf)
 					next_tm = np.max(new_to) #np.sum(new_to)
 					ndt += 5
 					if DEBUG:
@@ -561,8 +563,13 @@ class bandit:
 					if blocker(sm,i):
 						next_timeout = self.timeout[i-1] * SC
 						self.frameout[i] = 0
-
 				# self.timeout[i] = 
+
+				if blocker(sm, i) and self.timeout[i-1] > 0.25*TIMEOUT:
+					next_timeout = TIMEOUT - totalTime
+					self.frameout[i] = 0
+					all_ending = True
+					ending = True
 				
 				self.timeout[i] = min(next_timeout, TIMEOUT - totalTime)	
 				# if self.timeout[i] > TIMEOUT - (totalTime + self.timeout[i]):
@@ -692,7 +699,7 @@ class bandit:
 			print('Total time till now: ', totalTime)
 			# --- state of next run ----
 			p = np.random.rand()
-			if not ending and not explore:
+			if not ending and not explore and self.timeout[i] < 0.25*TIMEOUT:
 				# if p < self.eps:
 				# 	print('random exploration phase')
 				# 	r_exp += 1
