@@ -47,7 +47,7 @@ while tot < TIMEOUT:
 	st = min(st*SC,  TIMEOUT - tot)
 	Iters += 1
 
-M = 6 #int(len(Actions))
+M = int(len(Actions))
 
 def run_engine(ofname, a, sd, t=0, f=0):
 	print('run_engine --', a, sd, t, f)
@@ -69,6 +69,8 @@ def run_engine(ofname, a, sd, t=0, f=0):
 		asrt, sm, ar_tab, tt1 = bmc3j(ofname, sd, j = 3, t=t, f=f)
 	elif a == 8: #ABC bmc3j=4
 		asrt, sm, ar_tab, tt1 = bmc3j(ofname, sd, j = 4, t=t, f=f)
+
+	sys.stdout.flush()
 	return asrt, sm, ar_tab, tt1
 
 class bandit:
@@ -125,7 +127,7 @@ class bandit:
 					# print('current ', sm1.frame, sm1.cla, sm1.conf, sm1.tt)
 					# print('prev', prev)	
 					ftrain, ctrain, conftrain, ttrain = [], [], [], []
-				elif prev[0] == sm1.frame-1 and prev[-1]> 60.0 and sm1.tt/prev[-1] > 1.5:
+				elif prev[0] == sm1.frame-1 and prev[-1]> 60.0 and sm1.tt/prev[-1] > 1.1:
 					partition_flag = 1
 				if flag and r_flag == 0 and prev[-1]> 60.0:
 					print(Actions[a], 'current (', sm1.frame, sm1.cla, sm1.conf, sm1.tt,  ') prev', prev, sm1.tt/prev[-1], partition_flag)	
@@ -134,6 +136,8 @@ class bandit:
 				conftrain.append(sm1.conf)# - prev[2])
 				ttrain.append(sm1.tt)# - prev[3])
 				prev = sm1.frame, sm1.cla, sm1.conf, sm1.tt
+
+				sys.stdout.flush()
 
 		next_tm = -1 #self.timeout[i]*SC
 		ndt = -1
@@ -263,6 +267,7 @@ class bandit:
 			# 	ndt += 5
 			# 	print('Prediction for {0} frames'.format(ndt), new_frames, new_cla, new_to)
 		# if r_flag:
+		sys.stdout.flush()
 		return next_tm, ndt
 
 	def cal_reward(self, a, sm, t, asrt, tt1, sd, ed = -1):
@@ -316,6 +321,8 @@ class bandit:
 				reward = -1 * np.exp(t/MAX_TIME) #np.log(t)
 
 		print('cal_reward', sd, sm.frame, reward, sm)
+
+		sys.stdout.flush()
 		return reward, sm
 
 	def get_reward(self, a, t1 = -1):
@@ -543,7 +550,7 @@ class bandit:
 					next_timeout = max(next_to, self.timeout[i-1])# * SC)
 
 				elif next_to <= 0:
-					self.timeout[i] = (TIMEOUT - totalTime)	
+					next_timeout = (TIMEOUT - totalTime)	
 					self.frameout[i] = 0
 
 					if blocker(sm,i):
