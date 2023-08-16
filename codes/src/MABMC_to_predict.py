@@ -241,25 +241,26 @@ class bandit:
 			else:
 				#next_tm = ttrain[-1] + i_next_to #np.sum(new_to)
 				fpt = (ndt)/(next_tm) if next_tm > 0 else ftrain[-1]/ttrain[-1]
-				## inverse pred
+				# ## inverse pred
 				i_next_to = last_tm*2.0
-				# i_cla = ifcls(ifconf(i_next_to))
-				# i_frame = iffrm(i_cla)
-				i_frame = int(fpt*i_next_to)
-				ndt = max(nd, i_frame-last_frm)+ 1 #- ftrain[-1]+1
-				new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
-				next_tm = np.max(fto(fconf(fcla(new_frames)))) #last_tm + 
+				# # i_cla = ifcls(ifconf(i_next_to))
+				i_frame = iffrm(i_cla)
+				# i_frame = int(fpt*i_next_to)
+				# ndt = max(nd, i_frame-last_frm)+ 1 #- ftrain[-1]+1
+				# new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
+				# next_tm = np.max(fto(fconf(fcla(new_frames)))) #last_tm + 
 				if partition_flag:
 					next_tm, ndt = -1, -1 
 				if flag:
 					print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), new_frames[-1], i_frame)
-				# if flag:
 				
 				# -----
 				# new_cla = np.interp(new_frames, ftrain, ttrain)
 				# new_to = np.interp(new_cla, ftrain, ttrain1)
 				new_cla = fcla(new_frames)
 				#next_tm = np.max(new_to) #np.sum(new_to)
+				if flag:
+					print(r_flag, 'Prediction ', new_cla[-1], ctrain[-1], new_cla[-1]/ctrain[-1] )
 				ndt = int(nd)+1
 				# if flag:
 				while (ttrain[-1] >= next_tm and new_cla[-1] < 1.05*ctrain[-1] ): # atleast 5% increment in clauses #next_tm < self.timeout[self.n]: #*SC:
@@ -581,15 +582,15 @@ class bandit:
 
 			# --- completing engine selection ----- #
 				
-			if int(MAX_TIMEOUT - all_time) <= 0:		
-				a = self.pull(av, count=r_exp)
-				self.timeout[i] = min(0.5*MAX_TIMEOUT, TIMEOUT - totalTime)
-				self.frameout[i] = 0
-				print('More than {0} hrs spent in learning --- closing iterations now'.format(MAX_TIMEOUT/TIMEOUT))
-				all_ending = True
-				# break
-				# if self.timeout[i] > 3000:
-				# 	self.stt
+			# if int(MAX_TIMEOUT - all_time) <= 0:		
+			# 	a = self.pull(av, count=r_exp)
+			# 	self.timeout[i] = min(0.5*MAX_TIMEOUT, TIMEOUT - totalTime)
+			# 	self.frameout[i] = 0
+			# 	print('More than {0} hrs spent in learning --- closing iterations now'.format(MAX_TIMEOUT/TIMEOUT))
+			# 	all_ending = True
+			# 	# break
+			# 	# if self.timeout[i] > 3000:
+			# 	# 	self.stt
 
 			print('Next time out', self.timeout[i], 'frame_out', self.frameout[i], 'for chosen action', a, Actions[a], 'ocount', ocount, \
 				'explore', explore, 'ending', ending)
@@ -745,12 +746,12 @@ class bandit:
 				print('Stopping iteration')
 				break
 
-			if ending or int(1.5*MAX_TIMEOUT - all_time) <= 0:		
-				end_frame = self.states, asrt, totalTime, seq, MAX_mem
-				print('BMC-depth reached ', self.states, 'totalTime', totalTime, 'all_time', all_time)
-				print('Stopping iteration -- all timeout')
-				all_ending = True
-				break
+			# if ending or int(1.5*MAX_TIMEOUT - all_time) <= 0:		
+			# 	end_frame = self.states, asrt, totalTime, seq, MAX_mem
+			# 	print('BMC-depth reached ', self.states, 'totalTime', totalTime, 'all_time', all_time)
+			# 	print('Stopping iteration -- all timeout')
+			# 	all_ending = True
+			# 	break
 				
 			if int(TIMEOUT - totalTime) <= 0:
 				end_frame = self.states, asrt, totalTime, seq, MAX_mem
