@@ -128,8 +128,7 @@ class bandit:
 				elif prev[0] == sm1.frame-1 and prev[0]> 60.0 and sm1.tt/prev[-1] > 1.5:
 					partition_flag = 1
 				if flag and r_flag == 0:
-					print('current ', sm1.frame, sm1.cla, sm1.conf, sm1.tt)
-					print('prev', prev)	
+					print(Actions[a], 'current (', sm1.frame, sm1.cla, sm1.conf, sm1.tt,  ') prev', prev)	
 				ftrain.append(sm1.frame)
 				ctrain.append(sm1.cla)# - prev[1])
 				conftrain.append(sm1.conf)# - prev[2])
