@@ -244,8 +244,8 @@ class bandit:
 				# ## inverse pred
 				i_next_to = last_tm*2.0
 				# # i_cla = ifcls(ifconf(i_next_to))
-				i_frame = iffrm(i_cla)
-				# i_frame = int(fpt*i_next_to)
+				#i_frame = iffrm(i_cla)
+				i_frame = int(fpt*i_next_to)
 				# ndt = max(nd, i_frame-last_frm)+ 1 #- ftrain[-1]+1
 				# new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
 				# next_tm = np.max(fto(fconf(fcla(new_frames)))) #last_tm + 
