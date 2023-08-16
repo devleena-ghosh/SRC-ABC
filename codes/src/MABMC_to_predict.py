@@ -15,7 +15,7 @@ from sklearn.neural_network import MLPRegressor
 from abcBMCUtil import *
 
 DEBUG = True
-#DEBUG = False
+DEBUG = False
 OPT = True
 T = 60 
 TIMEOUT = 3600#/2.0
