@@ -486,7 +486,7 @@ class bandit:
 
 			print('------Iteration {0} start ------'.format(i))
 
-			print('Total time till now -- starting: ', totalTime)
+			print('Total time till now -- starting: ', totalTime, 'repeated_blocker', repeated_blocker)
 
 			''' ----- select engine for iteration i '''
 			if i < (repeat_count):
