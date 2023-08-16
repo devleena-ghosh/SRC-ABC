@@ -121,8 +121,10 @@ class bandit:
 			sm1 = ar_tab[frm]
 			if sm1.cla > 0 and (sm1.cla not in ctrain): # and (sm1.tt - prev[3] > 0):
 				if prev[0] < sm1.frame and prev[-1] > sm1.tt:
-					ftrain, ctrain, conftrain, ttrain = [], [], [], []
 					partition_flag = 1
+					print('current ', sm1.frame, sm1.cla, sm1.conf, sm1.tt)
+					print('prev', prev)	
+					ftrain, ctrain, conftrain, ttrain = [], [], [], []
 				ftrain.append(sm1.frame)
 				ctrain.append(sm1.cla)# - prev[1])
 				conftrain.append(sm1.conf)# - prev[2])
@@ -142,7 +144,7 @@ class bandit:
 		#     ftrain, ttrain = frames[-11:], time_outs[-11:]
 		if flag:
 			print('Training for action', a, nd, len(ftrain), len(ctrain), len(conftrain), len(ttrain))
-			print('Last frame', prev)
+			print('Last frame', prev, partition_flag)
 		# print('Training data', (ftrain), (ttrain), (ttrain1))
 		
 		if len(ftrain) > 0:
@@ -988,9 +990,14 @@ def main(argv):
 			ac, tp, rw, tt, t, frame =  ss
 			to_plot[0].append(frame)
 			to_plot[1].append(rw)
-			ftt = min(TIMEOUT - total_t, tp)
-			res_seq.append((int(ac), ftt))
+			ftt = min(TIMEOUT - total_t, math.ceil(tp))
+			res_seq.append((int(ac), math.ceil(ftt)))
 			total_t += ftt
+		if total_t < TIMEOUT:
+			ftt = (TIMEOUT - total_t)
+			res_seq.append((int(ac), math.ceil(ftt)))
+			total_t += ftt
+
 		all_plots.append(to_plot)
 
 		seq_list = ['({0}, {1})'.format(Actions[t[0]], t[1]) for t in seq]
