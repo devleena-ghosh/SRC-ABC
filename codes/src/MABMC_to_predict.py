@@ -15,7 +15,7 @@ from sklearn.neural_network import MLPRegressor
 from abcBMCUtil import *
 
 DEBUG = True
-DEBUG = False
+#DEBUG = False
 OPT = True
 T = 60 
 TIMEOUT = 3600#/2.0
@@ -47,7 +47,7 @@ while tot < TIMEOUT:
 	st = min(st*SC,  TIMEOUT - tot)
 	Iters += 1
 
-M = int(len(Actions))
+M = 6 #int(len(Actions))
 
 def run_engine(ofname, a, sd, t=0, f=0):
 	print('run_engine --', a, sd, t, f)
@@ -125,9 +125,9 @@ class bandit:
 					# print('current ', sm1.frame, sm1.cla, sm1.conf, sm1.tt)
 					# print('prev', prev)	
 					ftrain, ctrain, conftrain, ttrain = [], [], [], []
-				elif prev[0] == sm1.frame-1 and prev[0]> 60.0 and sm1.tt/prev[-1] > 1.5:
+				elif prev[0] == sm1.frame-1 and prev[-1]> 60.0 and sm1.tt/prev[-1] > 1.5:
 					partition_flag = 1
-				if flag and r_flag == 0:
+				if flag and r_flag == 0 and prev[-1]> 60.0:
 					print(Actions[a], 'current (', sm1.frame, sm1.cla, sm1.conf, sm1.tt,  ') prev', prev, sm1.tt/prev[-1], partition_flag)	
 				ftrain.append(sm1.frame)
 				ctrain.append(sm1.cla)# - prev[1])
@@ -358,9 +358,13 @@ class bandit:
 		ar_tab_old = self.engine_res[a]
 		for ky in ar_tab.keys():
 			sm1 = ar_tab[ky]
+			if DEBUG:
+				print('get_reward: explored frame', sm1)
 			if sm1 and  sm1.frame > sd:
 				sm = sm1
 				ar_tab_old.update({ky:sm})
+				if DEBUG:
+					print('get_reward: added frame', sm1)
 
 		self.engine_res[a] = ar_tab_old
 		reward, sm = self.cal_reward(a, sm, t, asrt, tt1, sd)
