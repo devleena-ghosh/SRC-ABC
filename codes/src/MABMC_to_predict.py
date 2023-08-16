@@ -116,7 +116,7 @@ class bandit:
 		#frm = self.states
 		frm  = -1
 		prev = 0, 0, 0, 0
-		partition_flag = 1
+		partition_flag = 0
 		for frm in ar_tab.keys():
 			sm1 = ar_tab[frm]
 			if sm1.cla > 0 and (sm1.cla not in ctrain): # and (sm1.tt - prev[3] > 0):
@@ -125,6 +125,10 @@ class bandit:
 					print('current ', sm1.frame, sm1.cla, sm1.conf, sm1.tt)
 					print('prev', prev)	
 					ftrain, ctrain, conftrain, ttrain = [], [], [], []
+				elif prev[0] < sm1.frame and prev[0]> 60.0 and sm1.tt/prev[-1] > 1.5:
+					partition_flag = 1
+					print('current ', sm1.frame, sm1.cla, sm1.conf, sm1.tt)
+					print('prev', prev)	
 				ftrain.append(sm1.frame)
 				ctrain.append(sm1.cla)# - prev[1])
 				conftrain.append(sm1.conf)# - prev[2])
@@ -303,7 +307,7 @@ class bandit:
 					reward += np.exp(0.5*(ky-sd)/(1+sd)) # total number of frames explored --> more frames more reward
 					reward += np.exp(-0.2*nt/nd) if (nt > -1 and nd > 0 and not math.isnan(nt)) else 0 # reward based on future prediction
 				if sd > sm.frame:
-					reward = -0.5 * np.exp(t/MAX_TIME) # no exploration --> penalty
+					reward = -5.0 * np.exp(t/MAX_TIME) # no exploration --> penalty
 		else:
 			sm =  abc_result(frame=sd, conf=0, var=0, cla=0, mem = -1, to=-1, asrt = asrt, tt = tt1,ld= sd)
 			if asrt > 0:
