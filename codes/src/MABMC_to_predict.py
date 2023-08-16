@@ -576,7 +576,7 @@ class bandit:
 				
 			if int(MAX_TIMEOUT - all_time) <= 0:		
 				a = self.pull(av, count=r_exp)
-				self.timeout[i] = min(0.25*MAX_TIMEOUT, TIMEOUT - totalTime)
+				self.timeout[i] = min(0.5*MAX_TIMEOUT, TIMEOUT - totalTime)
 				self.frameout[i] = 0
 				print('More than {0} hrs spent in learning --- closing iterations now'.format(MAX_TIMEOUT/TIMEOUT))
 				all_ending = True
@@ -738,7 +738,7 @@ class bandit:
 				print('Stopping iteration')
 				break
 
-			if ending or int(1.25*MAX_TIMEOUT - all_time) <= 0:		
+			if ending or int(1.5*MAX_TIMEOUT - all_time) <= 0:		
 				end_frame = self.states, asrt, totalTime, seq, MAX_mem
 				print('BMC-depth reached ', self.states, 'totalTime', totalTime, 'all_time', all_time)
 				print('Stopping iteration -- all timeout')
