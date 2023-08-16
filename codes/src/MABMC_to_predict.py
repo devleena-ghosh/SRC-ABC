@@ -116,12 +116,12 @@ class bandit:
 		#frm = self.states
 		frm  = -1
 		prev = 0, 0, 0, 0
-		partition_flag = 0
+		partition_flag = 1
 		for frm in ar_tab.keys():
 			sm1 = ar_tab[frm]
 			if sm1.cla > 0 and (sm1.cla not in ctrain): # and (sm1.tt - prev[3] > 0):
 				if prev[0] < sm1.frame and prev[-1] > sm1.tt:
-					partition_flag = 1
+					partition_flag = 0
 					print('current ', sm1.frame, sm1.cla, sm1.conf, sm1.tt)
 					print('prev', prev)	
 					ftrain, ctrain, conftrain, ttrain = [], [], [], []
@@ -233,7 +233,7 @@ class bandit:
 				# next_tm = np.max(new_to) #ttrain[-1]+  np.sum(new_to)
 				# ndt = int(nd)+1
 				if flag:
-					print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), new_frames)
+					print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), new_frames[0], new_frames[-1])
 			else:
 				#next_tm = ttrain[-1] + i_next_to #np.sum(new_to)
 				ndt = max(nd, i_frame-last_frm)+ 1 #- ftrain[-1]+1
@@ -242,7 +242,7 @@ class bandit:
 				if partition_flag:
 					next_tm, ndt = -1, -1 
 				if flag:
-					print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), new_frames, i_frame)
+					print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), new_frames[-1], i_frame)
 			# if flag:
 			
 			#-----
@@ -303,7 +303,7 @@ class bandit:
 					reward += np.exp(0.5*(ky-sd)/(1+sd)) # total number of frames explored --> more frames more reward
 					reward += np.exp(-0.2*nt/nd) if (nt > -1 and nd > 0 and not math.isnan(nt)) else 0 # reward based on future prediction
 				if sd > sm.frame:
-					reward = -0.2 * np.exp(t/MAX_TIME) # no exploration --> penalty
+					reward = -0.5 * np.exp(t/MAX_TIME) # no exploration --> penalty
 		else:
 			sm =  abc_result(frame=sd, conf=0, var=0, cla=0, mem = -1, to=-1, asrt = asrt, tt = tt1,ld= sd)
 			if asrt > 0:
@@ -900,7 +900,7 @@ def main(argv):
 	print('iters', iters)
 	alpha = 0.6
 	reward = 0
-	c = 2
+	c = 1.0
 	# Initialize bandits
 
 	ucb1 = ucb1_bandit(k, c, iters, 1,  reward, inputfile)
