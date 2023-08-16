@@ -255,7 +255,7 @@ class bandit:
 					print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), new_frames[-1], i_frame)
 				# if flag:
 				
-				-----
+				# -----
 				# new_cla = np.interp(new_frames, ftrain, ttrain)
 				# new_to = np.interp(new_cla, ftrain, ttrain1)
 				#next_tm = np.max(new_to) #np.sum(new_to)
