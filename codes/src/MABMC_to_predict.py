@@ -36,7 +36,7 @@ MAX_TIMEOUT = 4*MAX_TIME
 F = 3
 
 time_outs = {}
-Actions = ['bmc2', 'bmc3', 'bmc3s', 'bmc3g', 'bmcu', 'bmc3r', 'bmc3j2', 'bmc3j3', 'bmc3j4'] # 'pdr']
+Actions = ['bmc2', 'bmc3', 'bmc3s', 'bmc3g', 'bmcu', 'bmc3r', 'bmc3j2'] #, 'bmc3j3', 'bmc3j4'] # 'pdr']
 To1 = []
 st = 30
 tot = 0
@@ -932,7 +932,7 @@ def main(argv):
 	print('iters', iters)
 	alpha = 0.6
 	reward = 0
-	c = 1.0
+	c = 2.0
 	# Initialize bandits
 
 	ucb1 = ucb1_bandit(k, c, iters, 1,  reward, inputfile)
