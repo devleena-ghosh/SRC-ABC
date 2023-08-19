@@ -124,13 +124,15 @@ class bandit:
 			sm1 = ar_tab[frm]
 			if sm1.cla > 0 and (sm1.cla not in ctrain): # and (sm1.tt - prev[3] > 0):
 				diff = sm1.tt-prev[-1]
-				if prev[0] <= sm1.frame-1 and prev[-1] > sm1.tt:
+				if prev[0] <= sm1.frame-1 and prev[-1] > sm1.tt: #or prev[2] < sm1.conf:
 					partition_flag = 0
 					# print('current ', sm1.frame, sm1.cla, sm1.conf, sm1.tt)
 					# print('prev', prev)	
 					ftrain, ctrain, conftrain, ttrain = [], [], [], []
-				elif prev[0] == sm1.frame-1 and (prev[-1]> 5.0 and (sm1.tt/prev[-1] > 10.0 or (diff/pre_dif > 10.0))) and \
-					(prev[-1]> 60.0 and (sm1.tt/prev[-1] > 1.1 or (diff/pre_dif > 1.2))):
+				if prev[0] == sm1.frame-1 and ((prev[-1]> 5.0 and prev[2] < sm1.conf) or
+				#  and
+				(prev[-1]> 5.0 and (sm1.tt/prev[-1] > 10.0 or (diff/pre_dif > 10.0))) or \
+					(prev[-1]> 60.0 and (sm1.tt/prev[-1] > 1.1 or (diff/pre_dif > 1.2)))):
 					partition_flag = 1
 				if flag and prev[-1]> 60.0: #and r_flag == 0 
 					print(Actions[a], 'current (', sm1.frame, sm1.cla, sm1.conf, sm1.tt,  ') prev', prev, sm1.tt/prev[-1], partition_flag)	
@@ -219,11 +221,12 @@ class bandit:
 			# ifcls = interpolate.interp1d(conftrain, ctrain, fill_value = 'extrapolate')
 			# iffrm = interpolate.interp1d(ctrain, ftrain, fill_value = 'extrapolate')
 			next_frm = last_frm+1
-			next_to = fto(fconf(fcla(next_frm)))
+			next_cla = fcla(next_frm) #next_vc[1] if next_vc[1] > 0 else fcla(next_frm)
+			next_to = fto(fconf(next_cla))
 			if flag:
 				print('Next frame', next_frm, 'Next time out', next_to)
 
-			new_frames = np.arange(last_frm+1, last_frm+int(nd)+1, 2) #if int(1 + nd/2) > 2 else [last_frm+int(nd)+1]
+			new_frames = np.arange(last_frm+1, last_frm+int(nd)+1, 1) #if int(1 + nd/2) > 2 else [last_frm+int(nd)+1]
 			# new_cla = fcla(new_frames)
 			# new_conf = fconf(new_cla)
 			# changed on 10/08
@@ -249,29 +252,40 @@ class bandit:
 				# ndt = max(nd, i_frame-last_frm)+ 1 #- ftrain[-1]+1
 				# new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
 				# next_tm = np.max(fto(fconf(fcla(new_frames)))) #last_tm + 
+				new_frames = np.arange(last_frm+1, last_frm+int(nd)+1, 1) #if int(1 + nd/2) > 2 else [last_frm+int(nd)+1]
+				# new_cla = fcla(new_frames)
+				# new_conf = fconf(new_cla)
+				# changed on 10/08
+				#new_to = fto(new_cla)
+				new_to = fto(fconf(fcla(new_frames)))
 				if partition_flag:
 					next_tm, ndt = -1, -1 
+				
+				else:
+					# -----
+					# new_cla = np.interp(new_frames, ftrain, ttrain)
+					# new_to = np.interp(new_cla, ftrain, ttrain1)
+					new_cla = fcla(new_frames)
+					new_conf = fconf(new_cla)
+					#next_tm = np.max(new_to) #np.sum(new_to)
+					if flag:
+						print('new frames', np.arange(last_frm+1, last_frm+int(nd)+1, 1))
+						print(r_flag, 'Prediction ', new_frames, new_cla, new_conf, conftrain[-1], new_conf/conftrain[-1])
+					ndt = int(nd)+1
+					# if flag:
+					while (SC*ttrain[-1] >= next_tm and new_conf[-1] < 2*conftrain[-1] ): # atleast 5% increment in clauses #next_tm < self.timeout[self.n]: #*SC:
+						new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
+						new_cla = fcla(new_frames)
+						new_conf = fconf(new_cla)
+						new_to = fto(new_conf)
+						next_tm = np.max(new_to) #np.sum(new_to)
+						ndt += 5
+						if DEBUG:
+							print('Prediction for {0} frames'.format(ndt), new_frames, new_cla, new_to)
+
 				if flag:
 					print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), new_frames[-1], i_frame)
 				
-				# -----
-				# new_cla = np.interp(new_frames, ftrain, ttrain)
-				# new_to = np.interp(new_cla, ftrain, ttrain1)
-				new_cla = fcla(new_frames)
-				#next_tm = np.max(new_to) #np.sum(new_to)
-				if flag:
-					print(r_flag, 'Prediction ', new_cla[-1], ctrain[-1], new_cla[-1]/ctrain[-1] )
-				ndt = int(nd)+1
-				# if flag:
-				while (SC*ttrain[-1] >= next_tm and new_cla[-1] < 1.05*ctrain[-1] ): # atleast 5% increment in clauses #next_tm < self.timeout[self.n]: #*SC:
-					new_frames = np.arange(last_frm+1, last_frm+int(ndt), 2)
-					new_cla = fcla(new_frames)
-					new_conf = fconf(new_cla)
-					new_to = fto(new_conf)
-					next_tm = np.max(new_to) #np.sum(new_to)
-					ndt += 5
-					if DEBUG:
-						print('Prediction for {0} frames'.format(ndt), new_frames, new_cla, new_to)
 		# if r_flag:
 		sys.stdout.flush()
 		return next_tm, ndt
@@ -310,7 +324,7 @@ class bandit:
 						cn += 1
 				wa = (reward/cn) if cn > 0 else 0
 
-				nt, nd = self.get_next_time(a, sm.ld, r_flag = 1, flag = 1)
+				nt, nd = self.get_next_time(a, sm.ld, r_flag = 1, flag = 0)
 				print('In reward', sd, sm.frame, nt, nd)
 
 				reward = np.exp(-0.5*wa)  # + nd/nt)#(reward + np.exp(-pen/MAX_TIME))/cn
@@ -382,7 +396,7 @@ class bandit:
 					print('get_reward: added frame', sm1)
 
 		self.engine_res[a] = ar_tab_old
-		reward, sm = self.cal_reward(a, sm, t, asrt, tt1, sd)
+		reward, sm = self.cal_reward(a, sm, t, asrt, tt1, sd) #, next_vc)
 		
 		#todo: clean up the directory and store it in a file
 		# for k in list(ar_tab_old):
@@ -595,7 +609,7 @@ class bandit:
 			print('Next time out', self.timeout[i], 'frame_out', self.frameout[i], 'for chosen action', a, Actions[a], 'ocount', ocount, \
 				'explore', explore, 'ending', ending)
 
-			if self.timeout[i] < 10.0:
+			if self.timeout[i] < 10.0 or repeated_blocker > 5:
 				end_frame = self.states, asrt, totalTime, seq, MAX_mem
 				print('BMC-depth reached ', self.states, 'totalTime', totalTime)
 				print('Stopping iteration - condition with timeout < ', 1.0)
@@ -697,7 +711,7 @@ class bandit:
 
 			self.reward[i] = self.mean_reward
 
-			print('Total time till now: ', totalTime)
+			print('Total time till now: ', totalTime, 'Current time out ', self.timeout[i])
 			# --- state of next run ----
 			p = np.random.rand()
 			if not ending and not explore and self.timeout[i] < 0.25*TIMEOUT:

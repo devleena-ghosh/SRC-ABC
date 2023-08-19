@@ -107,6 +107,8 @@ def parse_bmc2(output, sd,t=0):
             print(m21.group(1)) 
         frame_count = int(m21.group(1))
 
+    next_var, next_clause = -1, -1
+
     #Output 0 of miter "../benchmark/HWMCC15/6s20_n" was asserted in frame 9
     xx2 = r'Output.+was[ \t]+asserted[ \t]+in[ \t]+frame[ \t]+([\d]+).[.]*'
     m3 = re.finditer(xx2, output, re.M|re.I)
@@ -140,7 +142,8 @@ def parse_bmc2(output, sd,t=0):
             sm = abc_result(frame=sm1[0], var=sm1[1], cla=sm1[4], conf = sm1[3], mem = sm1[6], to=to, asrt=asrt, tt = tt, ld=ld) #, io=(sm2[0], sm2[1]), lat=sm2[2], ag = sm2[3], lev = sm2[4])
             if DEBUG:
                 print(sm)
-            ar_tab.update({sm.frame:sm})  
+            ar_tab.update({sm.frame:sm}) 
+        next_var, next_clause = sm1[1], sm1[4] 
         pretm = sm1[7]
 
     if frame_count > 0:
@@ -157,7 +160,7 @@ def parse_bmc2(output, sd,t=0):
     else:
         sm_res = sm
     # print('sm_res', sm_res)
-    res =  asrt, sm_res, ar_tab, tt1
+    res =  asrt, sm_res, ar_tab, tt1 #, (next_var, next_clause)
     return res
 
 def parse_bmc3(output, t=0, scale = 1):
@@ -170,6 +173,14 @@ def parse_bmc3(output, t=0, scale = 1):
         print(m)
     xxm = r'[ \t]*([\d]+)[ \t]+[-][ \t]+[:][ \t]+Var[ \t]+=[ \t]*([\d]+).[ \t]+Cla[ \t]+=[ \t]*([\d]+).[ \t]+Conf[ \t]+=[ \t]*([\d]+).[ \t]+Learn[ \t]+=[ \t]*([\d]+).[ \t]+.*([\d]+)[ \t]+MB[ \t]*([\d]+)[ \t]+MB[ \t]+([\d]+[.][\d]+)[ \t]+sec'
     mx = re.finditer(xx, output, re.M|re.I)
+
+    # xx2 = r'[ \t]*LStart(P)[ \t]*=[ \t]*[\d]+[ \t]*LDelta(Q)[ \t]*=[ \t]*[\d]+ [ \t]*LRatio(R)[ \t]*=[ \t]*[\d]+ [ \t]*ReduceDB[ \t]*=[ \t]*[\d]+[ \t]*Vars[ \t]*=[ \t]*([\d]+)[ \t]*Used[ \t]*=[ \t]*[\d]+[ \t]*([\d]+[.][\d]+ %)'
+    # m4 = re.finditer(xx2, output, re.M|re.I)
+    next_var, next_clause = -1, -1
+    # for m41 in m4:
+    #     if DEBUG:
+    #         print(m21.group(1)) 
+    #     next_var, next_clause = int(m21.group(1)), -1
 
     xx1 = r'No[ \t]+output[ \t]+asserted[ \t]+in[ \t]+([\d]+)[ \t]+frames[.]*'
     m2 = re.finditer(xx1, output, re.M|re.I)
@@ -203,7 +214,7 @@ def parse_bmc3(output, t=0, scale = 1):
         #tm = float(m1.group(7))
         tt1 = sm1[7]*scale
         if DEBUG:
-            print(sm1)   
+            print('sm1',sm1)   
         if sm1[2] > 0:# or (frame_count > 0): # and sm1[0] <= frame_count):   
             tt = sm1[7]*scale #if t == 0  else t
             to = max(0, sm1[7] - pretm)
@@ -233,7 +244,7 @@ def parse_bmc3(output, t=0, scale = 1):
         sm_res =  abc_result(frame=sm1.frame, var=sm1.var, cla=sm1.cla, conf = sm1.conf, mem = sm1.mem, to=sm1.to, asrt=asrt, tt= sm1.tt, ld=sm1.ld)
     else:
         sm_res = sm
-    res =  asrt, sm_res, ar_tab, tt1
+    res =  asrt, sm_res, ar_tab, tt1 #, (next_var, -1)
     return res
 
 def pdr(ofname, t):

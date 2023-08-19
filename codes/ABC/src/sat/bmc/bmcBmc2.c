@@ -722,7 +722,7 @@ int Saig_BmcSolveTargets( Saig_Bmc_t * p, int nStart, int nTimeOut, int * pnOuts
     int i, k, VarNum, Lit, status, RetValue;
     abctime lastFrametime = 0;
      // [DGhosh] added on 29/06/2023    
-    int unDefTryOnce = 0;
+    int unDefTryOnce = 1;
 
     assert( Vec_PtrSize(p->vTargets) > 0 );
     if ( p->pSat && p->pSat->qtail != p->pSat->qhead )
