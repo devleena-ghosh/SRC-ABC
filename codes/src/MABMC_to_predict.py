@@ -1032,6 +1032,7 @@ def main(argv):
 		to_plot = [[],[]]
 		res_seq = []
 		total_t = 0
+		ac = 0
 		for ss in seq:
 			ac, tp, rw, tt, t, frame =  ss
 			to_plot[0].append(frame)
@@ -1039,6 +1040,7 @@ def main(argv):
 			ftt = min(TIMEOUT - total_t, math.ceil(tp))
 			res_seq.append((int(ac), math.ceil(ftt)))
 			total_t += ftt
+
 		if total_t < TIMEOUT:
 			ftt = (TIMEOUT - total_t)
 			res_seq.append((int(ac), math.ceil(ftt)))
