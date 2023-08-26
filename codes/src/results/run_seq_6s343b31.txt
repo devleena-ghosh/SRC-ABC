@@ -1,0 +1,117 @@
+---- Running sequence (bmc3g, 60);(bmc3g, 343);(bmc3g, 3197) ---- ../benchmark/HWMCC_15_17/6s343b31_n.aig
+run_engine -- 3 0 60 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s343b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s343b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T    60 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s343b31_n:[0m i/o =  205/    1  lat = 4603  and =  41858  lev = 47
+Running "bmc3". PI/PO/Reg = 205/1/4603. And =  41858. Lev =    47. ObjNums = 25092.
+Params: FramesMax = 0. Start = 0. ConfLimit = 0. TimeOut = 60. SolveAll = 0.
+   0 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   0 MB     0.06 sec 
+   1 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   0 MB     0.06 sec 
+   2 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   0 MB     0.06 sec 
+   3 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   0 MB     0.06 sec 
+   4 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   0 MB     0.06 sec 
+   5 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    1 MB   0 MB     0.06 sec 
+   6 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    1 MB   0 MB     0.06 sec 
+   7 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    1 MB   0 MB     0.06 sec 
+   8 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    1 MB   0 MB     0.06 sec 
+   9 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    1 MB   0 MB     0.06 sec 
+  10 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    1 MB   0 MB     0.06 sec 
+  11 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    1 MB   0 MB     0.06 sec 
+  12 + : Var =   13697. Cla =    52853. Conf =      0. Learn =      0.    1 MB   0 MB     0.09 sec 
+  13 + : Var =   22316. Cla =    87847. Conf =      0. Learn =      0.    1 MB   0 MB     0.11 sec 
+  14 + : Var =   40584. Cla =   166090. Conf =   1553. Learn =   1534.    1 MB   0 MB     0.30 sec 
+  15 + : Var =   54699. Cla =   228025. Conf =   7649. Learn =   3847.    2 MB   0 MB     1.02 sec 
+  16 + : Var =   69015. Cla =   291542. Conf =  16555. Learn =   7753.    2 MB   0 MB     2.48 sec 
+  17 + : Var =   83829. Cla =   357755. Conf =  32582. Learn =  16333.    2 MB   0 MB     5.32 sec 
+  18 + : Var =   99935. Cla =   429795. Conf =  55350. Learn =  16767.    2 MB   0 MB     9.71 sec 
+  19 + : Var =  115640. Cla =   500488. Conf =  77868. Learn =  24289.    2 MB   0 MB    14.17 sec 
+  20 + : Var =  131373. Cla =   571382. Conf = 103984. Learn =  32816.    2 MB   0 MB    19.71 sec 
+  21 + : Var =  147108. Cla =   642335. Conf = 142791. Learn =  28633.    2 MB   0 MB    27.83 sec 
+  22 + : Var =  162851. Cla =   713320. Conf = 191351. Learn =  51728.    2 MB   0 MB    38.45 sec 
+  23 + : Var =  178632. Cla =   784458. Conf = 250424. Learn =  52266.    2 MB   0 MB    51.37 sec 
+Runtime:  CNF = 0.5 sec (0.8 %)  UNSAT = 50.9 sec (84.8 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 8.6 sec (14.3 %)
+LStart(P) = 0  LDelta(Q) = 0  LRatio(R) = 0  ReduceDB = 0  Vars = 194461  Used = 0 (0.00 %)
+Buffs = 4267. Dups = 0.   Hash hits = 1786.  Hash misses = 191167.  UniProps = 0.
+No output asserted in 24 frames. Resource limit reached (timeout 60 sec). Time =    60.04 sec
+[1;37m../benchmark/HWMCC_15_17/6s343b31_n:[0m i/o =  205/    1  lat = 4603  and =  41858  lev = 47
+
+24
+starting abc_result(frame=12, var=13697, cla=52853, conf=0, mem=1, to=0.09, asrt=-1, tt=0.09, ld=12)
+abc_result(frame=23, var=178632, cla=784458, conf=250424, mem=2, to=12.919999999999995, asrt=-1, tt=51.37, ld=23)
+run_engine -- 3 24 343 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s343b31_n.aig; print_stats; &get; bmc3 -g -S    24 -T   343 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s343b31_n.aig; print_stats; &get; bmc3 -g -S    24 -T   343 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s343b31_n:[0m i/o =  205/    1  lat = 4603  and =  41858  lev = 47
+Running "bmc3". PI/PO/Reg = 205/1/4603. And =  41858. Lev =    47. ObjNums = 25092.
+Params: FramesMax = 0. Start = 24. ConfLimit = 0. TimeOut = 343. SolveAll = 0.
+  24 + : Var =  194415. Cla =   856559. Conf = 284690. Learn =  53307.    2 MB   0 MB    53.57 sec 
+  25 + : Var =  210268. Cla =   927967. Conf = 338865. Learn =  71702.    2 MB   0 MB    61.77 sec 
+  26 + : Var =  226134. Cla =   999442. Conf = 418371. Learn =  71805.    3 MB   0 MB    74.38 sec 
+  27 + : Var =  242004. Cla =  1070951. Conf = 482873. Learn =  46698.    3 MB   0 MB    84.52 sec 
+  28 + : Var =  257881. Cla =  1142516. Conf = 563219. Learn =  78137.    3 MB   0 MB    96.30 sec 
+  29 + : Var =  273758. Cla =  1214117. Conf = 642900. Learn = 106903.    3 MB   0 MB   107.50 sec 
+  30 + : Var =  289635. Cla =  1285724. Conf = 744877. Learn =  99554.    3 MB   0 MB   122.38 sec 
+  31 + : Var =  305512. Cla =  1357331. Conf = 857171. Learn =  93495.    3 MB   0 MB   140.39 sec 
+  32 + : Var =  321389. Cla =  1428938. Conf =1008267. Learn = 117148.    3 MB   0 MB   169.98 sec 
+  33 + : Var =  337266. Cla =  1500545. Conf =1147375. Learn = 119040.    3 MB   0 MB   196.44 sec 
+  34 + : Var =  353143. Cla =  1572152. Conf =1313299. Learn = 120590.    3 MB   0 MB   227.44 sec 
+  35 + : Var =  369020. Cla =  1643759. Conf =1456326. Learn = 176492.    3 MB   0 MB   253.11 sec 
+  36 + : Var =  384897. Cla =  1715366. Conf =1629737. Learn = 155912.    4 MB   0 MB   289.13 sec 
+  37 + : Var =  400774. Cla =  1786973. Conf =1791065. Learn = 208315.    4 MB   0 MB   318.87 sec 
+Runtime:  CNF = 1.0 sec (0.3 %)  UNSAT = 317.8 sec (92.7 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 24.1 sec (7.0 %)
+LStart(P) = 0  LDelta(Q) = 0  LRatio(R) = 0  ReduceDB = 0  Vars = 416651  Used = 0 (0.00 %)
+Buffs = 4330. Dups = 0.   Hash hits = 1800.  Hash misses = 410515.  UniProps = 0.
+No output asserted in 0 frames. Resource limit reached (timeout 343 sec). Time =   343.10 sec
+[1;37m../benchmark/HWMCC_15_17/6s343b31_n:[0m i/o =  205/    1  lat = 4603  and =  41858  lev = 47
+
+0
+starting abc_result(frame=24, var=194415, cla=856559, conf=284690, mem=2, to=53.57, asrt=-1, tt=53.57, ld=24)
+abc_result(frame=37, var=400774, cla=1786973, conf=1791065, mem=4, to=29.74000000000001, asrt=-1, tt=318.87, ld=37)
+run_engine -- 3 38 3197 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s343b31_n.aig; print_stats; &get; bmc3 -g -S    38 -T  3197 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s343b31_n.aig; print_stats; &get; bmc3 -g -S    38 -T  3197 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s343b31_n:[0m i/o =  205/    1  lat = 4603  and =  41858  lev = 47
+Running "bmc3". PI/PO/Reg = 205/1/4603. And =  41858. Lev =    47. ObjNums = 25092.
+Params: FramesMax = 0. Start = 38. ConfLimit = 0. TimeOut = 3197. SolveAll = 0.
+  38 + : Var =  416597. Cla =  1858582. Conf =1681698. Learn = 246738.    4 MB   0 MB   534.95 sec 
+  39 + : Var =  432480. Cla =  1930213. Conf =1797865. Learn = 264155.    4 MB   0 MB   562.56 sec 
+  40 + : Var =  448363. Cla =  2001844. Conf =1901039. Learn = 258989.    4 MB   0 MB   585.71 sec 
+  41 + : Var =  464240. Cla =  2073451. Conf =2035218. Learn = 269733.    4 MB   0 MB   622.00 sec 
+  42 + : Var =  480117. Cla =  2145058. Conf =2164742. Learn = 272528.    4 MB   0 MB   652.77 sec 
+  43 + : Var =  495994. Cla =  2216665. Conf =2302554. Learn = 278942.    4 MB   0 MB   687.66 sec 
+  44 + : Var =  511871. Cla =  2288272. Conf =2444789. Learn = 285458.    4 MB   0 MB   719.05 sec 
+  45 + : Var =  527748. Cla =  2359879. Conf =2618681. Learn = 317200.    4 MB   0 MB   760.06 sec 
+  46 + : Var =  543625. Cla =  2431486. Conf =2788313. Learn = 345231.    4 MB   0 MB   798.33 sec 
+  47 + : Var =  559502. Cla =  2503093. Conf =2981311. Learn = 385400.    5 MB   0 MB   846.21 sec 
+  48 + : Var =  575379. Cla =  2574700. Conf =3186613. Learn = 276058.    5 MB   0 MB   898.41 sec 
+  49 + : Var =  591256. Cla =  2646307. Conf =3389946. Learn = 316618.    5 MB   0 MB   951.96 sec 
+  50 + : Var =  607133. Cla =  2717914. Conf =3627904. Learn = 384684.    5 MB   0 MB  1012.25 sec 
+  51 + : Var =  623010. Cla =  2789521. Conf =3930492. Learn = 341258.    5 MB   0 MB  1090.13 sec 
+  52 + : Var =  638887. Cla =  2861128. Conf =4232765. Learn = 455140.    5 MB   0 MB  1167.23 sec 
+  53 + : Var =  654764. Cla =  2932735. Conf =4561905. Learn = 409345.    5 MB   0 MB  1257.73 sec 
+  54 + : Var =  670641. Cla =  3004342. Conf =4933835. Learn = 385392.    5 MB   0 MB  1365.16 sec 
+  55 + : Var =  686518. Cla =  3075949. Conf =5268079. Learn = 506036.    5 MB   0 MB  1459.90 sec 
+  56 + : Var =  702395. Cla =  3147556. Conf =5665342. Learn = 479696.    5 MB   0 MB  1579.28 sec 
+  57 + : Var =  718272. Cla =  3219163. Conf =6117702. Learn = 492444.    6 MB   0 MB  1725.00 sec 
+  58 + : Var =  734149. Cla =  3290770. Conf =6521238. Learn = 448179.    6 MB   0 MB  1851.02 sec 
+  59 + : Var =  750026. Cla =  3362377. Conf =6891187. Learn = 567711.    6 MB   0 MB  1971.24 sec 
+  60 + : Var =  765903. Cla =  3433984. Conf =7361647. Learn = 556632.    6 MB   0 MB  2132.25 sec 
+  61 + : Var =  781780. Cla =  3505591. Conf =7763397. Learn = 710886.    6 MB   0 MB  2269.26 sec 
+  62 + : Var =  797657. Cla =  3577198. Conf =8222745. Learn = 646785.    6 MB   0 MB  2425.21 sec 
+  63 + : Var =  813534. Cla =  3648805. Conf =8708906. Learn = 611663.    6 MB   0 MB  2586.53 sec 
+  64 + : Var =  829411. Cla =  3720412. Conf =9230450. Learn = 590710.    6 MB   0 MB  2764.01 sec 
+  65 + : Var =  845288. Cla =  3792019. Conf =9875990. Learn = 663158.    6 MB   0 MB  2997.66 sec 
+  66 + : Var =  861165. Cla =  3863626. Conf =10413312. Learn = 623618.    6 MB   0 MB  3188.55 sec 
+Runtime:  CNF = 2.4 sec (0.1 %)  UNSAT = 3186.1 sec (99.6 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 9.0 sec (0.3 %)
+LStart(P) = 0  LDelta(Q) = 0  LRatio(R) = 0  ReduceDB = 0  Vars = 877042  Used = 0 (0.00 %)
+Buffs = 4446. Dups = 0.   Hash hits = 1829.  Hash misses = 865019.  UniProps = 0.
+No output asserted in 0 frames. Resource limit reached (timeout 3197 sec). Time =  3197.79 sec
+[1;37m../benchmark/HWMCC_15_17/6s343b31_n:[0m i/o =  205/    1  lat = 4603  and =  41858  lev = 47
+
+0
+starting abc_result(frame=38, var=416597, cla=1858582, conf=1681698, mem=4, to=534.95, asrt=-1, tt=534.95, ld=38)
+abc_result(frame=66, var=861165, cla=3863626, conf=10413312, mem=6, to=190.89000000000033, asrt=-1, tt=3188.55, ld=66)
+############### TIMEOUT: 66, 3558.79 ###################

@@ -1484,8 +1484,7 @@ int Saig_ManBmcScalable( Aig_Man_t * pAig, Saig_ParBmc_t * pPars )
     abctime newTimeOut = pPars->nTimeOut ? 1.2*(pPars->nTimeOut) * CLOCKS_PER_SEC + Abc_Clock(): 0;
     // [DGhosh] added on 29/06/2023    
     int unDefTryOnce = 0;
-    // int prevVar = 1;
-    // int nextVar = 1;
+    abctime prevFrameTime = 0, frameTime = 0, remainTime = 0.0;
     // create BMC manager
     p = Saig_Bmc3ManStart( pAig, pPars->nTimeOutOne, pPars->nConfLimit, pPars->fUseSatoko, pPars->fUseGlucose );
     p->pPars = pPars;
@@ -1597,9 +1596,9 @@ int Saig_ManBmcScalable( Aig_Man_t * pAig, Saig_ParBmc_t * pPars )
                     Abc_Print( 1, "Reached gap timeout (%d seconds).\n",  pPars->nTimeOutGap );
                     goto finish;
                 }
-                // if ( nTimeToStop && Abc_Clock() > nTimeToStop )
+                if ( nTimeToStop && Abc_Clock() > nTimeToStop )
 
-                if ( currTimeOut && Abc_Clock() > currTimeOut )
+                //if ( currTimeOut && Abc_Clock() > currTimeOut )
                 {
                     // nextVar = p->pSat ? sat_solver_nvars(p->pSat) : p->pSat3 ? bmcg_sat_solver_varnum(p->pSat3) : satoko_varnum(p->pSat2);
                     // printf(" nextVar %d, prevVar %d", nextVar, prevVar);
@@ -1647,6 +1646,7 @@ int Saig_ManBmcScalable( Aig_Man_t * pAig, Saig_ParBmc_t * pPars )
         {
             if ( i >= Saig_ManPoNum(pAig) )
                 break;
+
             // check for timeout
             if ( pPars->nTimeOutGap && pPars->timeLastSolved && Abc_Clock() > pPars->timeLastSolved + pPars->nTimeOutGap * CLOCKS_PER_SEC )
             {
@@ -1774,6 +1774,7 @@ int Saig_ManBmcScalable( Aig_Man_t * pAig, Saig_ParBmc_t * pPars )
                 RetValue = 0;
                 fFirst = 0;
                 //prevVar = (double)p->nSatVars;
+
                 if ( !pPars->fSolveAll )
                 {
                     if ( pPars->fVerbose )
@@ -1915,22 +1916,22 @@ int Saig_ManBmcScalable( Aig_Man_t * pAig, Saig_ParBmc_t * pPars )
                 //    // }
 
                 // }
-                if (nTimeUndec/(1.0*nTimeToStop) > 0.2 && !unDefTryOnce){
-                    printf("Running Once again status: %d nTimeUndec:%ld nTimeOut:%ld tryOnce:%d\n", status, nTimeUndec, nTimeToStop, unDefTryOnce);
-                    nTimeUndec -= clkSatRun;
-                    p->pPars->nFramesMax = f+1;
-                    if ( nTimeToStop )
-                    {
-                        if ( p->pSat2 )
-                            currTimeOut = satoko_set_runtime_limit( p->pSat2, newTimeOut );
-                        else if ( p->pSat3 )
-                            currTimeOut = bmcg_sat_solver_set_runtime_limit( p->pSat3, newTimeOut );
-                        else
-                            currTimeOut = sat_solver_set_runtime_limit( p->pSat, newTimeOut );
-                    }
-                    unDefTryOnce += 1;
-                    goto loopOnce;
-                }
+                // if (nTimeUndec/(1.0*nTimeToStop) > 0.2 && !unDefTryOnce){
+                //     printf("Running Once again status: %d nTimeUndec:%ld nTimeOut:%ld tryOnce:%d\n", status, nTimeUndec, nTimeToStop, unDefTryOnce);
+                //     nTimeUndec -= clkSatRun;
+                //     p->pPars->nFramesMax = f+1;
+                //     if ( nTimeToStop )
+                //     {
+                //         if ( p->pSat2 )
+                //             currTimeOut = satoko_set_runtime_limit( p->pSat2, newTimeOut );
+                //         else if ( p->pSat3 )
+                //             currTimeOut = bmcg_sat_solver_set_runtime_limit( p->pSat3, newTimeOut );
+                //         else
+                //             currTimeOut = sat_solver_set_runtime_limit( p->pSat, newTimeOut );
+                //     }
+                //     unDefTryOnce += 1;
+                //     goto loopOnce;
+                // }
                 //----
                 assert( status == l_Undef );
                 if ( pPars->nFramesJump )
@@ -1943,6 +1944,7 @@ int Saig_ManBmcScalable( Aig_Man_t * pAig, Saig_ParBmc_t * pPars )
                 if ( p->pTime4Outs == NULL )
                     goto finish;
             }
+
         }
         if ( pPars->fVerbose ) 
         {
@@ -1979,18 +1981,33 @@ int Saig_ManBmcScalable( Aig_Man_t * pAig, Saig_ParBmc_t * pPars )
             Abc_Print( 1, "\n" );
             fflush( stdout );
         }
+
+        // DGhosh [24/08/2023]
+        if ( nTimeToStop && Abc_Clock() < nTimeToStop){ //pPars->nTimeOut && Abc_Clock() < updatedTimeStop){
+            prevFrameTime = frameTime ;
+            frameTime = (float)(Abc_Clock() - clkTotal)/(float)(CLOCKS_PER_SEC) - prevFrameTime;
+            remainTime = pPars->nTimeOut - (float)(Abc_Clock() - clkTotal)/(float)(CLOCKS_PER_SEC);
+            //printf("prevFrameTime = %ld, frameTime = %ld, remainTime = %ld\n", prevFrameTime, frameTime, remainTime);
+
+            if (0 < remainTime && remainTime < 0.5 * frameTime){
+                if ( pPars->fVerbose ) 
+                    Abc_Print( 1,"Not enough time to complete next frame %d, %ld\n", f, remainTime);
+                goto finish;
+            }
+        }
         // if(unDefTryOnce){
         //     break;
         // }
     }
     // consider the next timeframe
+    //
     if ( nJumpFrame && pPars->nStart == 0 )
         pPars->iFrame = nJumpFrame - pPars->nFramesJump;
     else if ( RetValue == -1 && pPars->nStart == 0 )
         pPars->iFrame = f-1;
-        if (unDefTryOnce && status == l_True){
-             pPars->iFrame = f;
-        }
+        //if (unDefTryOnce && status == l_True){
+          //   pPars->iFrame = f;
+        //}
 //ABC_PRT( "CNF generation runtime", clkOther );
 finish:
     if ( pPars->fVerbose )

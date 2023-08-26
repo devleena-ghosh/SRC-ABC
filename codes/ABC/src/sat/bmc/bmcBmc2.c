@@ -768,15 +768,16 @@ int Saig_BmcSolveTargets( Saig_Bmc_t * p, int nStart, int nTimeOut, int * pnOuts
                 // propagate units
                 sat_solver_compress( p->pSat );
             }
-            lastFrametime = Abc_Clock();
+            //lastFrametime = Abc_Clock();
             // [DG 03/07/2023]
-            if (unDefTryOnce){
-                break;
-            }
+            //if (unDefTryOnce){
+            //    break;
+            //}
             continue;
         }
         if ( RetValue == l_Undef ) {// undecided
-            // [DGhosh] added on 28/06/2023  
+            // [DGhosh] added on 28/06/2023 
+/*
 
             abctime nTimeToStop = 0;
             if ( p->pSat2 ){
@@ -851,6 +852,9 @@ int Saig_BmcSolveTargets( Saig_Bmc_t * p, int nStart, int nTimeOut, int * pnOuts
                 return l_Undef;
             }
             //----
+*/
+             return l_Undef;
+
         }
         // generate counter-example
         Saig_BmcDeriveFailed( p, i );
@@ -909,6 +913,8 @@ int Saig_BmcPerform( Aig_Man_t * pAig, int nStart, int nFramesMax, int nNodesMax
     abctime updatedTimeStop =  nTimeOut ? nTimeOut * CLOCKS_PER_SEC + Abc_Clock(): 0;
     abctime clk = Abc_Clock(), clk2, clkTotal = Abc_Clock();
     int Status = -1;
+
+    abctime prevFrameTime = 0, frameTime = 0, remainTime = 0.0;
     //float prev_time = 0.0, cur_time = 0.0, time_per_frame = 0.0, time_per_frame_ratio = 1.0;
 /*
     Vec_Ptr_t * vSimInfo;
@@ -964,7 +970,8 @@ int Saig_BmcPerform( Aig_Man_t * pAig, int nStart, int nFramesMax, int nNodesMax
         time_per_frame_ratio = prev_time_frame > 0 ? 
                 ((time_per_frame/prev_time_frame)> 1: time_per_frame/prev_time_frame: time_per_frame_ratio): time_per_frame_ratio;
         */
-        // ---
+        //
+
         if ( fVerbose )
         {
             // [DG 04/07/2023]
@@ -990,16 +997,16 @@ int Saig_BmcPerform( Aig_Man_t * pAig, int nStart, int nFramesMax, int nNodesMax
             break;
         // check the timeout
 
-        updatedTimeStop = nTimeToStop;
+        /*updatedTimeStop = nTimeToStop;
         // [DGhosh] added on 28/06/2023
         if ( p->pSat2 )
             updatedTimeStop = satoko_get_runtime_limit(p->pSat2); //->nRuntimeLimit;
         else
             updatedTimeStop = sat_solver_get_runtime_limit(p->pSat);
         // printf("updatedTimeStop : %ld, nTimeToStop: %ld p->iFrameLast: %d, p->iOutputLast: %d\n", updatedTimeStop, nTimeToStop, p->iFrameLast, p->iOutputLast );
-        updatedTimeStop = updatedTimeStop > nTimeToStop ? updatedTimeStop: nTimeToStop;
+        updatedTimeStop = updatedTimeStop > nTimeToStop ? updatedTimeStop: nTimeToStop;*/
         // ------
-        if ( nTimeOut && Abc_Clock() > updatedTimeStop) //nTimeToStop )
+        if ( nTimeOut && Abc_Clock() > nTimeToStop) //updatedTimeStop) //nTimeToStop )
         {
             if ( !fSilent )
                 printf( "Reached timeout (%d seconds).\n",  nTimeOut );
@@ -1007,6 +1014,22 @@ int Saig_BmcPerform( Aig_Man_t * pAig, int nStart, int nFramesMax, int nNodesMax
                 *piFrames = p->iFrameLast-1;
             Saig_BmcManStop( p );
             return Status;
+        }
+        // DGhosh [24/08/2023]
+        if ( nTimeOut && Abc_Clock() < nTimeToStop){
+            prevFrameTime = frameTime ;
+            frameTime = (float)(Abc_Clock() - clkTotal)/(float)(CLOCKS_PER_SEC) - prevFrameTime;
+            remainTime = nTimeOut - (float)(Abc_Clock() - clkTotal)/(float)(CLOCKS_PER_SEC);
+            //printf("prevFrameTime = %ld, frameTime = %ld, remainTime = %ld\n", prevFrameTime, frameTime, remainTime);
+
+            if (0 < remainTime && remainTime < 0.5 * frameTime){
+                if ( !fSilent )
+                    printf("Not enough time to complete next frame %d, %ld\n", p->iFrameLast, remainTime);
+                if ( piFrames )
+                *piFrames = p->iFrameLast-1;
+                Saig_BmcManStop( p );
+                return Status;
+            }
         }
     }
 
@@ -1022,13 +1045,13 @@ int Saig_BmcPerform( Aig_Man_t * pAig, int nStart, int nFramesMax, int nNodesMax
         if ( piFrames )
             *piFrames = p->iFrameFail - 1;
     }
-    else if ( RetValue == l_False || RetValue == l_Undef )
+    else //if ( RetValue == l_False || RetValue == l_Undef )
     {
         // if (piFrames  && p->iFrameLast > *piFrames){
         //     }
 
             // [DGhosh] added on 28/06/2023
-        if (RetValue == l_False){
+        /*if (RetValue == l_False){
             // printf("Frames reached %d \n ", p->iFramePrev);
             if ( !fSilent )
                 Abc_Print( 1, "No output failed in %d frames.  ", Abc_MaxInt(p->iFramePrev, 0) );
@@ -1040,7 +1063,7 @@ int Saig_BmcPerform( Aig_Man_t * pAig, int nStart, int nFramesMax, int nNodesMax
                     *piFrames = p->iFramePrev;
             }
         }
-        else{
+        else{*/
             if ( !fSilent )
                 Abc_Print( 1, "No output failed in %d frames.  ", Abc_MaxInt(p->iFramePrev-1, 0) );
             if ( piFrames )
@@ -1050,7 +1073,7 @@ int Saig_BmcPerform( Aig_Man_t * pAig, int nStart, int nFramesMax, int nNodesMax
                 else
                     *piFrames = p->iFramePrev - 1;
             }
-        }
+       // }
     }
     if ( !fSilent )
     {
