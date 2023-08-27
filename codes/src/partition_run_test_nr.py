@@ -36,7 +36,7 @@ ST2 = 300
 
 Actions = {0:'bmc2', 1:'bmc3g', 2:'bmc3', 3:'bmc3s', 4:'bmc3j', 5:'bmcu', 6:'bmc3r'}
 
-k = 4 # arms
+k = 7 # arms
 
 def get_fname(fn):
 	fname = os.path.join(PATH, fn)
@@ -466,7 +466,7 @@ def main(argv):
 					 # format(Actions[i], sd1, tot1, w1, sd2, tot2, w2, sd3, tot3, w3, sd4, tot4, w4)	
 		# string += '{0}  {1}  {2:0.2f}  {3:0.2f}  {4}  {5:0.2f}  {6:0.2f}  {7}  {8:0.2f}  {9:0.2f}\n'.format(Actions[i], sd1, tot1, w1, sd2, tot2, w2, sd3, tot3, w3) 
 
-		string += '{0} \n'.format(Actions[i]) 
+		string += '\n{0}'.format(Actions[i]) 
 
 		if 1 in Parts:
 			tr1, part1, rows1 = part_res(i, fname, ofname, To, Part_names[0], 1)
@@ -494,7 +494,7 @@ def main(argv):
 			Action_partitions.update({3:res1})
 
 		if 4 in Parts:
-			tr4, part4, rows4 = part_res(i, fname, ofname, To3, Part_names[4], 4)
+			tr4, part4, rows4 = part_res(i, fname, ofname, To3, Part_names[3], 4)
 			frames4, clauses4, mems4, times4, rewards4, cu_rewards4, ttimes4 = part4
 			string += tr4	
 			res1 = Action_partitions[4]
@@ -594,6 +594,7 @@ def main(argv):
 				pre_tm = tm
 				jk += 1
 			return ffms, ttms
+			#return frames, times
 
 		fig3 , ax = plt.subplots()
 		# plt.subplot(2, 2, 1)
@@ -617,16 +618,16 @@ def main(argv):
 		# plt.subplot(2, 2, 1)
 		if 1 in Parts:
 			# ffms, ttms = ttms_ffms(frames1, times1)
-			ax.plot(ttimes1, frames1, 'b', label=Part_names[0])
+			ax.plot(frames1, ttimes1, 'b', label=Part_names[0])
 		if 2 in Parts:
 			# ffms, ttms = ttms_ffms(frames2, times2)
-			ax.plot(ttimes2, frames2, 'r', label=Part_names[1])
+			ax.plot(frames2, ttimes2,'r', label=Part_names[1])
 		if 3 in Parts:
 			# ffms, ttms = ttms_ffms(frames3, times3)
-			ax.plot(ttimes3, frames3, 'g', label=Part_names[2])
+			ax.plot(frames3, ttimes3, 'g', label=Part_names[2])
 		if 4 in Parts:
 			# ffms, ttms = ttms_ffms(frames4, times4)
-			ax.plot(ttimes4, frames4, 'c', label=Part_names[3])
+			ax.plot(frames4, ttimes4, 'c', label=Part_names[3])
 		# plt.legend(bbox_to_anchor=(1.3, 0.5))
 		ax.set_xlabel("Depth")
 		ax.set_ylabel("times")
@@ -720,6 +721,8 @@ def main(argv):
 
 	print('@@@@@@@@@@@@@@@@ RESULTS @@@@@@@@@@@@@@@@@')
 	print(string)
+	print('@@@@@@@@@@@@@@@@ RESULTS end @@@@@@@@@@@@@@@@@')
+	sys.stdout.flush()
 
 	colors = cm.rainbow(np.linspace(0, 1, k))
 	for p in Action_partitions.keys():

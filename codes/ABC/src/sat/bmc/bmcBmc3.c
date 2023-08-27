@@ -1983,18 +1983,18 @@ int Saig_ManBmcScalable( Aig_Man_t * pAig, Saig_ParBmc_t * pPars )
         }
 
         // DGhosh [24/08/2023]
-        if ( nTimeToStop && Abc_Clock() < nTimeToStop){ //pPars->nTimeOut && Abc_Clock() < updatedTimeStop){
-            prevFrameTime = frameTime ;
-            frameTime = (float)(Abc_Clock() - clkTotal)/(float)(CLOCKS_PER_SEC) - prevFrameTime;
-            remainTime = pPars->nTimeOut - (float)(Abc_Clock() - clkTotal)/(float)(CLOCKS_PER_SEC);
-            //printf("prevFrameTime = %ld, frameTime = %ld, remainTime = %ld\n", prevFrameTime, frameTime, remainTime);
+        // if ( nTimeToStop && Abc_Clock() < nTimeToStop){ //pPars->nTimeOut && Abc_Clock() < updatedTimeStop){
+        //     prevFrameTime = frameTime ;
+        //     frameTime = (float)(Abc_Clock() - clkTotal)/(float)(CLOCKS_PER_SEC) - prevFrameTime;
+        //     remainTime = pPars->nTimeOut - (float)(Abc_Clock() - clkTotal)/(float)(CLOCKS_PER_SEC);
+        //     //printf("prevFrameTime = %ld, frameTime = %ld, remainTime = %ld\n", prevFrameTime, frameTime, remainTime);
 
-            if (0 < remainTime && remainTime < 0.5 * frameTime){
-                if ( pPars->fVerbose ) 
-                    Abc_Print( 1,"Not enough time to complete next frame %d, %ld\n", f, remainTime);
-                goto finish;
-            }
-        }
+        //     if (0 < remainTime && remainTime < 0.5 * frameTime){
+        //         if ( pPars->fVerbose ) 
+        //             Abc_Print( 1,"Not enough time to complete next frame %d, %ld\n", f, remainTime);
+        //         goto finish;
+        //     }
+        // }
         // if(unDefTryOnce){
         //     break;
         // }

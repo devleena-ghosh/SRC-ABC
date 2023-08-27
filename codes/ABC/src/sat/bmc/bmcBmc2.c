@@ -1016,21 +1016,21 @@ int Saig_BmcPerform( Aig_Man_t * pAig, int nStart, int nFramesMax, int nNodesMax
             return Status;
         }
         // DGhosh [24/08/2023]
-        if ( nTimeOut && Abc_Clock() < nTimeToStop){
-            prevFrameTime = frameTime ;
-            frameTime = (float)(Abc_Clock() - clkTotal)/(float)(CLOCKS_PER_SEC) - prevFrameTime;
-            remainTime = nTimeOut - (float)(Abc_Clock() - clkTotal)/(float)(CLOCKS_PER_SEC);
-            //printf("prevFrameTime = %ld, frameTime = %ld, remainTime = %ld\n", prevFrameTime, frameTime, remainTime);
+        // if ( nTimeOut && Abc_Clock() < nTimeToStop){
+        //     prevFrameTime = frameTime ;
+        //     frameTime = (float)(Abc_Clock() - clkTotal)/(float)(CLOCKS_PER_SEC) - prevFrameTime;
+        //     remainTime = nTimeOut - (float)(Abc_Clock() - clkTotal)/(float)(CLOCKS_PER_SEC);
+        //     //printf("prevFrameTime = %ld, frameTime = %ld, remainTime = %ld\n", prevFrameTime, frameTime, remainTime);
 
-            if (0 < remainTime && remainTime < 0.5 * frameTime){
-                if ( !fSilent )
-                    printf("Not enough time to complete next frame %d, %ld\n", p->iFrameLast, remainTime);
-                if ( piFrames )
-                *piFrames = p->iFrameLast-1;
-                Saig_BmcManStop( p );
-                return Status;
-            }
-        }
+        //     if (0 < remainTime && remainTime < 0.5 * frameTime){
+        //         if ( !fSilent )
+        //             printf("Not enough time to complete next frame %d, %ld, %ld\n", p->iFrameLast, remainTime, frameTime);
+        //         if ( piFrames )
+        //         *piFrames = p->iFrameLast-1;
+        //         Saig_BmcManStop( p );
+        //         return Status;
+        //     }
+        // }
     }
 
     // [DGhosh] added on 28/06/2023

@@ -1,0 +1,344 @@
+Input file is : benchmark/HWMCC_15_17/6s3434b31.aig
+../benchmark/HWMCC_15_17/6s3434b31.aig ../benchmark/HWMCC_15_17/6s3434b31_n.aig
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31.aig; print_stats; &get; &dc2;&put;dretime;&get;&lcorr;&dc2;&put;dretime;&get;&scorr;&fraig;&dc2;&put;dretime;&put; print_stats; write ../benchmark/HWMCC_15_17/6s3434b31_n.aig".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31.aig". 
+Error: Empty network.
+
+Simplified model ../benchmark/HWMCC_15_17/6s3434b31_n.aig
+filename 6s3434b31
+[120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120] [300, 300, 300, 300, 300, 300] [60, 60, 120, 240, 480, 840]
+[120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120] [300, 300, 300, 300, 300, 300] [60, 60, 120, 240, 480, 840]
+##################################
+---- Running sequence (bmc3g, 1800) ---- ../benchmark/HWMCC_15_17/6s3434b31_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T  1800 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T  1800 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3g, 300);(bmc3g, 300);(bmc3g, 300);(bmc3g, 300);(bmc3g, 300);(bmc3g, 300) ---- ../benchmark/HWMCC_15_17/6s3434b31_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T   300 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T   300 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T   300 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T   300 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T   300 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T   300 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3g, 60);(bmc3g, 60);(bmc3g, 120);(bmc3g, 240);(bmc3g, 480);(bmc3g, 840) ---- ../benchmark/HWMCC_15_17/6s3434b31_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T    60 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T    60 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T   120 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T   120 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T   240 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T   240 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T   480 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T   480 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T   840 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -g -S     0 -T   840 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3, 1800) ---- ../benchmark/HWMCC_15_17/6s3434b31_n.aig
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -S     0 -T  1800 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3, 300);(bmc3, 300);(bmc3, 300);(bmc3, 300);(bmc3, 300);(bmc3, 300) ---- ../benchmark/HWMCC_15_17/6s3434b31_n.aig
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -S     0 -T   300 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -S     0 -T   300 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -S     0 -T   300 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -S     0 -T   300 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -S     0 -T   300 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -S     0 -T   300 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3, 60);(bmc3, 60);(bmc3, 120);(bmc3, 240);(bmc3, 480);(bmc3, 840) ---- ../benchmark/HWMCC_15_17/6s3434b31_n.aig
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -S     0 -T    60 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -S     0 -T    60 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -S     0 -T   120 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -S     0 -T   240 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -S     0 -T   480 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -S     0 -T   840 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3s, 1800) ---- ../benchmark/HWMCC_15_17/6s3434b31_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T  1800 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T  1800 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3s, 300);(bmc3s, 300);(bmc3s, 300);(bmc3s, 300);(bmc3s, 300);(bmc3s, 300) ---- ../benchmark/HWMCC_15_17/6s3434b31_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T   300 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T   300 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T   300 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T   300 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T   300 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T   300 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3s, 60);(bmc3s, 60);(bmc3s, 120);(bmc3s, 240);(bmc3s, 480);(bmc3s, 840) ---- ../benchmark/HWMCC_15_17/6s3434b31_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T    60 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T    60 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T   120 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T   120 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T   240 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T   240 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T   480 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T   480 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T   840 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s3434b31_n.aig; print_stats; &get; bmc3 -s -S     0 -T   840 -F 0 -v -L stdout; print_stats".
+
+Cannot open input file "../benchmark/HWMCC_15_17/6s3434b31_n.aig". 
+Error: Empty network.
+
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+@@@@@@@@@@@@@@@@ RESULTS @@@@@@@@@@@@@@@@@
+Engine frames time wasted frames time wasted frames  time wasted  frames  time wasted
+
+bmc3g	 0  1800.00  1800.00		 0  1800.00  1800.00		 0  1800.00  1800.00	
+bmc3	 0  1800.00  1800.00		 0  1800.00  1800.00		 0  1800.00  1800.00	
+bmc3s	 0  1800.00  1800.00		 0  1800.00  1800.00		 0  1800.00  1800.00	
+Code Running duration:  0.0019065760903888278  hrs
