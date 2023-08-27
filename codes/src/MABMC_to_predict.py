@@ -18,7 +18,7 @@ DEBUG = True
 DEBUG = False
 OPT = True
 T = 60 
-TIMEOUT = 3600/2.0
+TIMEOUT = 3600 #/2.0
 SC = 2
 DIFF = 1 # BMC depth absolute
 DIFF = 0 # BMC depth relative
@@ -630,7 +630,7 @@ class bandit:
 			# fragmentation
 			tt = math.ceil(sm.tt) #sm.tt if sm.asrt > 0 else self.timeout[i] #sm.tt if sm.asrt > 0  else math.ceil(sm.tt) # self.timeout[i]
 
-			tp = self.timeout[i]
+			tp = sm.tt #self.timeout[i]
 			if self.timeout[i] < sm.tt or self.frameout[i]-1 == sm.ld or self.frameout[i] == sm.ld or sm.asrt > 0:
 				tp = sm.tt
 

@@ -130,7 +130,7 @@ def parse_bmc2(output, sd,t=0):
             print(sm1[2] > 0)
             print(( asrt > 0 and sm1[0] <= asrt))
             print((frame_count > 0 and sm1[0] <= frame_count+1 and frame_count >= sd))
-        if sm1[2] > 0 and ( asrt > 0 and sm1[0] <= asrt) or (frame_count > 0 and sm1[0] <= frame_count+1 and frame_count >= sd): 
+        if (sm1[2] > 0 and (( asrt > 0 and sm1[0] <= asrt) or (frame_count > 0 and sm1[0] <= frame_count+1 and frame_count >= sd))): 
              
             tt = sm1[7] #if t == 0  else t
             to = max(0,tt - pretm)
@@ -215,7 +215,7 @@ def parse_bmc3(output, t=0, scale = 1):
         tt1 = sm1[7]*scale
         if DEBUG:
             print('sm1',sm1)   
-        if sm1[2] > 0:# or (frame_count > 0): # and sm1[0] <= frame_count):   
+        if frame_count > 0 or sm1[2] > 0:# or (frame_count > 0): # and sm1[0] <= frame_count):   
             tt = sm1[7]*scale #if t == 0  else t
             to = max(0, sm1[7] - pretm)
 

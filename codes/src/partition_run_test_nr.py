@@ -423,7 +423,7 @@ def main(argv):
 	with open(filename, 'w+') as csvfile: 
 		print('filename', fname)
 
-	k_action = range(1, k)
+	k_action = range(0, k)
 	pdfname = "plots/plot_Partition_2608_all_{0}_{1}_{2}.pdf".format(fname, TIMEOUT, len(Parts))
 
 	count1 = int(TIMEOUT/ST1)
