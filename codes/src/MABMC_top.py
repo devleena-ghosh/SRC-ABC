@@ -612,7 +612,7 @@ class bandit:
 			print('Next time out', self.timeout[i], 'frame_out', self.frameout[i], 'for chosen action', a, Actions[a], 'ocount', ocount, \
 				'explore', explore, 'ending', ending)
 
-			if (self.timeout[i]/self.timeout[i-1] < (100/600.0) and (totalTime + self.timeout[i] - TIMEOUT) < 10.0) \
+			if (self.timeout[i-1]> 0 and self.timeout[i]/self.timeout[i-1] < (100/600.0) and (totalTime + self.timeout[i] - TIMEOUT) < 10.0) \
 			     or self.timeout[i]< 10.0 or repeated_blocker > 5:
 				end_frame = self.states, asrt, totalTime, seq, MAX_mem
 				print('BMC-depth reached ', self.states, 'totalTime', totalTime)
