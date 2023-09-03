@@ -560,3 +560,20 @@ No output asserted in 0 frames. Resource limit reached (timeout 120 sec). Time =
 
 0
 abc_result(frame=157, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=157)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -g -S   158 -T   120 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -g -S   158 -T   120 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+Running "bmc3". PI/PO/Reg = 149/1/559. And =   6943. Lev =    30. ObjNums =  4446.
+Params: FramesMax = 0. Start = 158. ConfLimit = 0. TimeOut = 120. SolveAll = 0.
+ 158 + : Var =  166465. Cla =   613751. Conf = 355484. Learn =  98436.    3 MB   0 MB   120.60 sec 
+Reached timeout (120 seconds).
+Runtime:  CNF = 0.4 sec (0.3 %)  UNSAT = 120.2 sec (99.7 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 0.0 sec (0.0 %)
+LStart(P) = 0  LDelta(Q) = 0  LRatio(R) = 0  ReduceDB = 0  Vars = 166465 Used = 0 (0.00 %) Clauses = 4693519293038460928
+Buffs = 54145. Dups = 0.   Hash hits = 7373.  Hash misses = 145428.  UniProps = 0.
+No output asserted in 0 frames. Resource limit reached (timeout 120 sec). Time =   120.63 sec
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+
+0
+starting abc_result(frame=158, var=166465, cla=613751, conf=355484, mem=3, to=120.6, asrt=-1, tt=120.6, ld=158)
+abc_result(frame=158, var=166465, cla=613751, conf=355484, mem=3, to=120.6, asrt=-1, tt=120.6, ld=158)

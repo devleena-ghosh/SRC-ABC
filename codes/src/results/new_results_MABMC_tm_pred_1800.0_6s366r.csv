@@ -1,0 +1,2 @@
+Design,Bandit-policy,BMC-depth,status,time(s),total(s),memory-current(MB),memory-peak MB),MAX-mem(BMC)(MB),sequence
+6s366r,ucb1,70,timeout,74.00,2232.27,1.71,67,2.28,"[(3, 5, 0.9993663076313265, 5, 0, 60.0), (3, 69, 3.665492941618542, 74, 5, 120.0)]"
