@@ -18,7 +18,7 @@ DEBUG = True
 DEBUG = False
 OPT = True
 T = 60 
-TIMEOUT = 3600 #/2.0
+TIMEOUT = 3600/2.0
 SC = 2
 DIFF = 1 # BMC depth absolute
 DIFF = 0 # BMC depth relative
@@ -51,6 +51,7 @@ M = int(len(Actions))
 
 def run_engine(ofname, a, sd, t=0, f=0):
 	print('run_engine --', a, sd, t, f)
+	sys.stdout.flush()
 	if a == 0:    #ABC bmc2
 		asrt, sm, ar_tab, tt1 = bmc2(ofname, sd, t=t, f=f)
 	elif a == 1: #ABC bmc3
@@ -119,23 +120,39 @@ class bandit:
 		frm  = -1
 		prev = 0, 0, 0, 0
 		pre_dif = 1.0
-		partition_flag = 0
+		diff = 1.0
+		partition_flag = 1
 		for frm in ar_tab.keys():
 			sm1 = ar_tab[frm]
 			if sm1.cla > 0 and (sm1.cla not in ctrain): # and (sm1.tt - prev[3] > 0):
+				pre_dif= diff
 				diff = sm1.tt-prev[-1]
 				if prev[0] <= sm1.frame-1 and prev[-1] > sm1.tt: #or prev[2] < sm1.conf:
-					partition_flag = 0
+					partition_flag = 1
 					# print('current ', sm1.frame, sm1.cla, sm1.conf, sm1.tt)
 					# print('prev', prev)	
 					ftrain, ctrain, conftrain, ttrain = [], [], [], []
+
 				if prev[0] == sm1.frame-1 and ((prev[-1]> 5.0 and prev[2] < sm1.conf) or
-				#  and
 				(prev[-1]> 5.0 and (sm1.tt/prev[-1] > 10.0 or (diff/pre_dif > 10.0))) or \
-					(prev[-1]> 60.0 and (sm1.tt/prev[-1] > 1.1 or (diff/pre_dif > 1.2)))):
-					partition_flag = 1
-				if flag and prev[-1]> 60.0: #and r_flag == 0 
-					print(Actions[a], 'current (', sm1.frame, sm1.cla, sm1.conf, sm1.tt,  ') prev', prev, sm1.tt/prev[-1], partition_flag)	
+					(prev[-1]> 60.0 and (sm1.tt/prev[-1] > 1.1 or (diff/pre_dif > 1.2) or m1.cla < 0.8*prev[1]))):
+					partition_flag = 0
+
+				# if prev[0] <= sm1.frame-1 and prev[-1] > sm1.tt: #or prev[2] < sm1.conf:
+				# 	partition_flag = 0 # does not apply partition
+				# 	# print('current ', sm1.frame, sm1.cla, sm1.conf, sm1.tt)
+				# 	# print('prev', prev)	
+				# 	ftrain, ctrain, conftrain, ttrain = [], [], [], []
+
+				# #if prev[0] == sm1.frame-1 and prev[1] > 0 and sm1.cla < 0.8*prev[1]: 
+				# if prev[0] == sm1.frame-1 and ((prev[-1]> 5.0 and prev[2] < sm1.conf) or
+				# (prev[-1]> 5.0 and (sm1.tt/prev[-1] > 10.0 or (diff/pre_dif > 10.0))) or \
+				# 	(prev[-1]> 60.0 and (sm1.tt/prev[-1] > 1.1 or (diff/pre_dif > 1.2)))):
+				# 	partition_flag = 1 # apply partition
+
+				# if flag and prev[-1]> 60.0 and partition_flag: #and r_flag == 0 
+				# 	print(Actions[a], 'current (', sm1.frame, sm1.cla, sm1.conf, sm1.tt,  ') prev', prev, sm1.cla/prev[1], partition_flag)	
+
 				ftrain.append(sm1.frame)
 				ctrain.append(sm1.cla)# - prev[1])
 				conftrain.append(sm1.conf)# - prev[2])
@@ -161,51 +178,6 @@ class bandit:
 		# print('Training data', (ftrain), (ttrain), (ttrain1))
 		
 		if len(ftrain) > 0:
-
-			# f_test = np.arange(last_frm+1, last_frm+int(nd)+1, 1)
-
-			# regr1 = MLPRegressor(random_state=1, max_iter=500).fit(np.array(ftrain).reshape(-1, 1), np.array(ctrain))
-			# regr2 = MLPRegressor(random_state=1, max_iter=500).fit(np.array(ctrain).reshape(-1, 1), np.array(conftrain))
-			# regr3 = MLPRegressor(random_state=1, max_iter=500).fit(np.array(conftrain).reshape(-1, 1), np.array(ttrain))
-			# next_tm = max(regr3.predict(regr2.predict(regr1.predict(np.array(f_test).reshape(-1, 1)).reshape(-1, 1)).reshape(-1, 1)))
-
-			# if flag:
-			# 	print('Neural network prediction', f_test, next_tm)
-
-			# next_tm1 = max(regr3.predict(regr2.predict(regr1.predict(np.array([last_frm+1]).reshape(1, -1)).reshape(-1, 1)).reshape(-1, 1)))
-
-			# if flag:
-			# 	print('Neural network prediction 1 frame', last_frm+1, next_tm1)
-
-			# ndt = int(nd)+1
-
-			# fpt1 = (ndt)/(next_tm) if next_tm > 0 else next_tm1
-			# if flag:
-			# 	print('Neural network prediction frame per time', fpt1)
-
-		
-
-			# ## inverse pred
-			# i_next_to = last_tm*2.0 #if partition_flag == 0 else 
-			# # i_cla = ifcls(ifconf(i_next_to))
-			# # i_frame = iffrm(i_cla)
-			# i_frame = int(fpt1*i_next_to)
-			# #---
-			# if r_flag:
-			# 	# next_tm = np.max(new_to) #ttrain[-1]+  np.sum(new_to)
-			# 	# ndt = int(nd)+1
-			# 	if flag:
-			# 		print(r_flag, 'NN Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), f_test)
-			# else:
-			# 	#next_tm = ttrain[-1] + i_next_to #np.sum(new_to)
-			# 	ndt = max(nd, i_frame-last_frm)+ 1 #- ftrain[-1]+1
-			# 	new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
-			# 	next_tm = max(regr3.predict(regr2.predict(regr1.predict(np.array(new_frames).reshape(-1, 1)).reshape(-1, 1)).reshape(-1, 1))) #last_tm + 
-			# 	if partition_flag:
-			# 		next_tm, ndt = -1, -1 
-			# 	if flag:
-			# 		print(r_flag, 'NN Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), new_frames, i_frame)
-			
 
 			# predict number of new clauses then predict timeout for next frame
 			fcla = interpolate.interp1d(ftrain, ctrain, fill_value = 'extrapolate')
@@ -258,7 +230,7 @@ class bandit:
 				# changed on 10/08
 				#new_to = fto(new_cla)
 				new_to = fto(fconf(fcla(new_frames)))
-				if partition_flag:
+				if partition_flag == 1:
 					next_tm, ndt = -1, -1 
 				
 				else:
@@ -268,7 +240,7 @@ class bandit:
 					new_cla = fcla(new_frames)
 					new_conf = fconf(new_cla)
 					#next_tm = np.max(new_to) #np.sum(new_to)
-					if flag:
+					if DEBUG and flag:
 						print('new frames', np.arange(last_frm+1, last_frm+int(nd)+1, 1))
 						print(r_flag, 'Prediction ', new_frames, new_cla, new_conf, conftrain[-1], new_conf/conftrain[-1])
 					ndt = int(nd)+1
@@ -334,7 +306,7 @@ class bandit:
 					reward += np.exp(-0.2*pen/t) if (pen > 0 and t > 0) else 0 # reward based on future prediction
 			
 				if sd > sm.frame:
-					reward = -5.0 * np.exp(t/MAX_TIME) # no exploration --> penalty
+					reward = -0.5 * np.exp(t/MAX_TIME) # no exploration --> penalty
 		else:
 			sm =  abc_result(frame=sd, conf=0, var=0, cla=0, mem = -1, to=-1, asrt = asrt, tt = tt1,ld= sd)
 			if asrt > 0:
@@ -480,10 +452,12 @@ class bandit:
 		max_conf = 0
 		r_exp = 0
 
+		bc = 0
+		nflag = 1
 		repeated_blocker = 0
 
 		av = []
-		repeat_count= self.k
+		repeat_count= 2*self.k
 		M = int(2*self.k/3.0)
 
 		def blocker(sm, i):
@@ -496,7 +470,7 @@ class bandit:
 
 		def ending_explore(i, r_exp=0):
 			if explore:
-				if (i%repeat_count == repeat_count -1):
+				if (i == repeat_count-1):# == repeat_count -1):
 					return True
 				if r_exp > 0:
 					return False
@@ -513,7 +487,7 @@ class bandit:
 			''' ----- select engine for iteration i '''
 			if i < (repeat_count):
 				a = i%(self.k)
-				print('Initial exploring select', a, Actions[a])
+				print(i, self.k, 'Initial exploring select', a, Actions[a])
 				
 				ocount = 0
 				pcount = 0
@@ -522,7 +496,7 @@ class bandit:
 			else:
 				if explore:
 					a = self.pull(av, count=r_exp)
-					print('exploring select', a, Actions[a], 'already explored', av)
+					print(i, self.k, M,'Transient exploring select', a, Actions[a], 'already explored', av)
 					if ocount == 0:
 						av = [a]
 					else:
@@ -532,7 +506,7 @@ class bandit:
 					self.frameout[i] = 0
 				else:
 					a = self.pull(av, count=-1)
-					print('exploiting select', a, Actions[a])
+					print(i, self.k, M,'Transient exploiting select', a, Actions[a])
 					av = [a]
 					ocount = 0
 					pcount += 1
@@ -544,10 +518,14 @@ class bandit:
 					next_timeout = T
 						
 				else:
-					if blocker(sm, i) and repeated_blocker > 2:
+					next_timeout = self.timeout[i-1] #* SC
+					
+					if (i <= repeat_count and i%self.k == 0) or (i > repeat_count and i%M == 0):
 						next_timeout = self.timeout[i-1] * SC
-					else:
-						next_timeout = self.timeout[i-1] 
+
+					if (blocker(sm, i) and repeated_blocker > 2 and nflag): #or ending_explore(i):
+						next_timeout = self.timeout[i-1] * SC
+						nflag = 0
 
 					self.frameout[i] = 0 #-1
 
@@ -555,9 +533,10 @@ class bandit:
 				# if self.timeout[i] > TIMEOUT - (totalTime + self.timeout[i]):
 				# 	ending = 1
 
-				print(i%M, 'Calculating time out explore', self.timeout[i], next_timeout, 'total till now', totalTime)
+				print(i, M, i%M, 'Calculating time out explore', self.timeout[i], next_timeout, 'total till now', totalTime)
 
 			else: # for exploitation
+				nflag = 1
 				# max_next_to = -1
 				next_to, next_fo = -1, -1
 				if a in next_time.keys():
@@ -571,16 +550,20 @@ class bandit:
 					self.frameout[i] = self.states + next_fo
 					next_timeout = max(next_to, self.timeout[i-1])# * SC)
 
-				elif next_to <= 0:
-					next_timeout = (TIMEOUT - totalTime)	
-					self.frameout[i] = 0
-
 					if blocker(sm,i):
 						next_timeout = self.timeout[i-1] * SC
 						self.frameout[i] = 0
+
+				elif next_to <= 0: # no more partition
+					next_timeout = (TIMEOUT - totalTime)	
+					self.frameout[i] = 0
+					all_ending = True
+					ending = True
+
 				# self.timeout[i] = 
 
-				if blocker(sm, i) and self.timeout[i-1] > 0.25*TIMEOUT:
+				# blocker but time-slots > 900s... no more exploration
+				if blocker(sm, i) and self.timeout[i-1] > 0.25*TIMEOUT: 
 					next_timeout = TIMEOUT - totalTime
 					self.frameout[i] = 0
 					all_ending = True
@@ -630,9 +613,9 @@ class bandit:
 			# fragmentation
 			tt = math.ceil(sm.tt) #sm.tt if sm.asrt > 0 else self.timeout[i] #sm.tt if sm.asrt > 0  else math.ceil(sm.tt) # self.timeout[i]
 
-			tp = sm.tt #self.timeout[i]
+			tp = self.timeout[i] if (ending and all_ending) else tt #self.timeout[i]
 			if self.timeout[i] < sm.tt or self.frameout[i]-1 == sm.ld or self.frameout[i] == sm.ld or sm.asrt > 0:
-				tp = sm.tt
+				tp = math.ceil(sm.tt)
 
 			all_time += tp #sm.tt if sm.asrt > 0 else tp
 
@@ -675,7 +658,7 @@ class bandit:
 					max_conf = max(max_conf, sm.cla)
 
 					print('# exploring --', i, 'explore', explore, 'best_sd', best_sd, 'max_conf', max_conf)
-					if (ending_explore(i) or int(MAX_TIMEOUT - all_time) <= 0 or sm.asrt > 0): #enter_critical and ocount >= M-1) or (i < repeat_count and sm.asrt > 0) or (enter_critical and sm.asrt > 0):
+					if (ending_explore(i) or (i < repeat_count and i%self.k == self.k-1) or int(MAX_TIMEOUT - all_time) <= 0 or sm.asrt > 0): #enter_critical and ocount >= M-1) or (i < repeat_count and sm.asrt > 0) or (enter_critical and sm.asrt > 0):
 						# end of exploration --- pick the best one
 						print('#  at the end of exploration')
 						# sd = sm.frame+1 if sm.frame > 0 else sm.frame
@@ -742,6 +725,9 @@ class bandit:
 					ocount = 0
 					print('#  Starting exploring --', i, ocount, pcount, r_exp)
 				
+			# elif not ending and explore and self.timeout[i-1] > 0.25*TIMEOUT: 
+			# 	explore = False
+			# 	print('#  Ending exploring --', i, ocount, pcount)
 
 			elif ending_explore(i, r_exp):
 				explore = False
@@ -856,9 +842,9 @@ class ucb1_bandit(bandit):
 
 		# self.k_reward[a] = reward
 
-		#self.k_ucb_reward = self.k_reward + self.c * np.sqrt((np.log(self.n)) / self.k_n)
+		self.k_ucb_reward = self.k_reward + self.c * np.sqrt((np.log(self.n)) / self.k_n)
 
-		print('Action {0} reward {1}'.format(a, reward))
+		print('Action {0} reward {1} All reward {2}'.format(a, reward, self.k_ucb_reward))
 
 		return a, reward, sm
 

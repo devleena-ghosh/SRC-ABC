@@ -337,13 +337,13 @@ def get_reward(asrt, ar_tab): #frames, clauses, mems, times, ttimes ):
 		#reward = sm.cla/(10000 * sm.to) if sm.to > 0 else sm.to
 
 		#reward 2
-		nt, nd = get_next_time(frames[0:j], clauses[0:j], confs[0:j], ttimes[0:j])
+		# nt, nd = get_next_time(frames[0:j], clauses[0:j], confs[0:j], ttimes[0:j])
 		cu_re2 += to/(1+frame)
 		rewards[1].append(cu_re2)
 		cu_avg1 = -0.5*cu_re2/(j+1)
 		cu_avg2 = 0.5*(frame)
-		cu_avg3 = -0.2*nt/nd if (nt > -1 and nd > 0 and not math.isnan(nt)) else 0
-		cu_rewards[1].append(np.exp(cu_avg1 + cu_avg2 + cu_avg3))
+		# cu_avg3 = -0.2*nt/nd if (nt > -1 and nd > 0 and not math.isnan(nt)) else 0
+		cu_rewards[1].append(np.exp(cu_avg1) + np.exp(cu_avg2))# + cu_avg3))
 
 
 		# reward3 = to/(1+frame) 
@@ -413,7 +413,7 @@ def main(argv):
 	ofname = get_fname(inputfile)
 
 	# Parts = [2] 
-	Parts = [1, 3, 4]
+	Parts = [1, 2, 3, 4]
 
 	Part_names = ['Un-partitioned', 'Equal partition (small)', 'Equal partition (larger)', 'Increasing partition (fixed)']
 
@@ -423,7 +423,7 @@ def main(argv):
 	with open(filename, 'w+') as csvfile: 
 		print('filename', fname)
 
-	k_action = range(0, k)
+	k_action = range(1, k)
 	pdfname = "plots/plot_Partition_2608_all_{0}_{1}_{2}.pdf".format(fname, TIMEOUT, len(Parts))
 
 	count1 = int(TIMEOUT/ST1)
@@ -859,7 +859,7 @@ def main(argv):
 		# axes[0][0].legend()
 
 		plt.xlabel("Depth")
-		plt.ylabel("Cumulative Reward- 1")
+		plt.ylabel("Cumulative Reward")
 		plt.legend()
 		figs.append(fig)
 		

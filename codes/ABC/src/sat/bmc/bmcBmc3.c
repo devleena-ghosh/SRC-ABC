@@ -802,15 +802,16 @@ void Saig_Bmc3ManStop( Gia_ManBmc_t * p )
     {
         //[17/08] DGhosh 
         int nUsedVars = p->pSat ? sat_solver_count_usedvars(p->pSat) : 0;
-        Abc_Print( 1, "LStart(P) = %d  LDelta(Q) = %d  LRatio(R) = %d  ReduceDB = %d  Vars = %d Used = %d (%.2f %%)\n", 
+        Abc_Print( 1, "LStart(P) = %d  LDelta(Q) = %d  LRatio(R) = %d  ReduceDB = %d  Vars = %d Used = %d (%.2f %%) Clauses = %ld\n", 
             p->pSat ? p->pSat->nLearntStart     : 0, 
             p->pSat ? p->pSat->nLearntDelta     : 0, 
             p->pSat ? p->pSat->nLearntRatio     : 0, 
             p->pSat ? p->pSat->nDBreduces       : 0, 
             p->pSat ? sat_solver_nvars(p->pSat) : p->pSat3 ? bmcg_sat_solver_varnum(p->pSat3) : satoko_varnum(p->pSat2), 
-            //(double)(p->pSat ? p->pSat->stats.clauses   : p->pSat3 ? bmcg_sat_solver_clausenum(p->pSat3)   : satoko_clausenum(p->pSat2)),
             nUsedVars, 
-            100.0*nUsedVars/(p->pSat ? sat_solver_nvars(p->pSat) : p->pSat3 ? bmcg_sat_solver_varnum(p->pSat3) : satoko_varnum(p->pSat2)) );
+            100.0*nUsedVars/(p->pSat ? sat_solver_nvars(p->pSat) : p->pSat3 ? bmcg_sat_solver_varnum(p->pSat3) : satoko_varnum(p->pSat2)),
+            (double)(p->pSat ? p->pSat->stats.clauses   : p->pSat3 ? bmcg_sat_solver_clausenum(p->pSat3)   : satoko_clausenum(p->pSat2))
+            );
         Abc_Print( 1, "Buffs = %d. Dups = %d.   Hash hits = %d.  Hash misses = %d.  UniProps = %d.\n", 
             p->nBufNum, p->nDupNum, p->nHashHit, p->nHashMiss, p->nUniProps );
     }

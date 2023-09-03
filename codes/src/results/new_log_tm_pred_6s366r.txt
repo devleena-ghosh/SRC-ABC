@@ -1,0 +1,53 @@
+Input file is : benchmark/HWMCC_15_17/6s366r.aig
+6s366r
+iters 10000
+---------------- Running bandit ucb1 ------------------
+---- episodes  0
+------Iteration 0 start ------
+Total time till now -- starting:  0 repeated_blocker 0
+0 7 Initial exploring select 0 bmc2
+0 4 0 Calculating time out explore 60.0 60 total till now 0
+Next time out 60.0 frame_out 0.0 for chosen action 0 bmc2 ocount 0 explore True ending 0
+../benchmark/HWMCC_15_17/6s366r.aig ../benchmark/HWMCC_15_17/6s366r_n.aig
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s366r.aig; print_stats; &get; &dc2;&put;dretime;&get;&lcorr;&dc2;&put;dretime;&get;&scorr;&fraig;&dc2;&put;dretime;&put; print_stats; write ../benchmark/HWMCC_15_17/6s366r_n.aig".
+
+[1;37m../benchmark/HWMCC_15_17/6s366r:[0m i/o =   86/    1  lat = 1998  and =  11654  lev = 17
+[1;37m../benchmark/HWMCC_15_17/6s366r:[0m i/o =   86/    1  lat = 1572  and =   9426  lev = 16
+
+Simplified model ../benchmark/HWMCC_15_17/6s366r_n.aig
+run_engine -- 0 0 60 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s366r_n.aig; print_stats; &get; bmc2 -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s366r_n.aig; print_stats; &get; bmc2 -S     0 -T    60 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s366r_n:[0m i/o =   86/    1  lat = 1572  and =   9426  lev = 16
+Running "bmc2". AIG:  PI/PO/Reg = 86/1/1572.  Node =   9426. Lev =    16.
+Params: FramesMax = 0. NodesDelta = 2000. ConfMaxOne = 0. ConfMaxAll = 0.
+   0 : F =   25. O =   0.  And =    1947. Var =     788. Conf =    106.  Cla =   2672. Learn =    103.   1 MB     0.02 sec
+   1 : F =   30. O =   0.  And =    3979. Var =    1619. Conf =   2198.  Cla =   5484. Learn =   2184.   1 MB     0.05 sec
+   2 : F =   35. O =   0.  And =    6418. Var =    3268. Conf =   7646.  Cla =  11344. Learn =   7624.   2 MB     0.18 sec
+   3 : F =   39. O =   0.  And =    8650. Var =    4517. Conf =  19877.  Cla =  15694. Learn =  14367.   2 MB     0.57 sec
+   4 : F =   43. O =   0.  And =   11106. Var =    5859. Conf =  44345.  Cla =  20404. Learn =  27376.   2 MB     1.52 sec
+   5 : F =   46. O =   0.  And =   13092. Var =    7012. Conf =  81098.  Cla =  24372. Learn =  39641.   2 MB     3.09 sec
+   6 : F =   49. O =   0.  And =   15210. Var =    8227. Conf = 123691.  Cla =  28553. Learn =  47461.   2 MB     5.08 sec
+   7 : F =   52. O =   0.  And =   17448. Var =    9503. Conf = 245735.  Cla =  32954. Learn =  84735.   3 MB    12.25 sec
+   8 : F =   55. O =   0.  And =   19818. Var =   10834. Conf = 592341.  Cla =  37546. Learn = 118484.   3 MB    38.35 sec
+   9 : F =   58. O =   0.  And =   22308. Var =   12224. Conf = 834432.  Cla =  42373. Learn = 136087.   3 MB    60.00 sec
+No output failed in 54 frames.  Time =    60.00 sec
+Reached timeout (60 seconds).
+[1;37m../benchmark/HWMCC_15_17/6s366r_n:[0m i/o =   86/    1  lat = 1572  and =   9426  lev = 16
+
+get_next_time: Prediction for action (0, 'bmc2'), for time 508.15000000000003, frames 55
+In reward 0 55 508.15000000000003 55
+cal_reward 0 55 0.9612567261704601 abc_result(frame=55, var=10834, cla=37546, conf=592341, mem=3, to=26.1, asrt=-1, tt=38.35, ld=54)
+Action 0 reward 0.9612567261704601 All reward [0.96125673        nan        nan        nan        nan        nan
+        nan]
+get_next_time: Prediction for action (0, 'bmc2'), for time 508.15000000000003, frames 55
+get_next_time: Prediction for action (0, 'bmc2'), for time 508.15000000000003, frames 55
+get_next_time: Prediction for action (0, 'bmc2'), for time 508.15000000000003, frames 55
+get_next_time: Prediction for action (0, 'bmc2'), for time 508.15000000000003, frames 55
+get_next_time: Prediction for action (0, 'bmc2'), for time 508.15000000000003, frames 55
+get_next_time: Prediction for action (0, 'bmc2'), for time 508.15000000000003, frames 55
+get_next_time: Prediction for action (0, 'bmc2'), for time 508.15000000000003, frames 55
+get_next_time: Prediction for action (0, 'bmc2'), for time 508.15000000000003, frames 55
+get_next_time: Prediction for action (0, 'bmc2'), for time 508.15000000000003, frames 55
+------- ## --------- Starting with depth 0  Ending depth 54

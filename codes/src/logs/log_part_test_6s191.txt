@@ -1,0 +1,420 @@
+Input file is : benchmark/HWMCC_15_17/6s191.aig
+../benchmark/HWMCC_15_17/6s191.aig ../benchmark/HWMCC_15_17/6s191_n.aig
+	 
+Simplified model ../benchmark/HWMCC_15_17/6s191_n.aig
+filename 6s191
+[120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120] [300, 300, 300, 300, 300, 300] [60, 60, 120, 240, 480, 840]
+[120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120] [300, 300, 300, 300, 300, 300] [60, 60, 120, 240, 480, 840]
+##################################
+---- Running sequence (bmc2, 1800) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc2 -S     0 -T  1800 -F 0 -v -L stdout; print_stats"
+	 
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc2, 300);(bmc2, 300);(bmc2, 300);(bmc2, 300);(bmc2, 300);(bmc2, 300) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc2 -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc2 -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc2 -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc2 -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc2 -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc2 -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc2, 60);(bmc2, 60);(bmc2, 120);(bmc2, 240);(bmc2, 480);(bmc2, 840) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc2 -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc2 -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc2 -S     0 -T   120 -F 0 -v -L stdout; print_stats"
+	 
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc2 -S     0 -T   240 -F 0 -v -L stdout; print_stats"
+	 
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc2 -S     0 -T   480 -F 0 -v -L stdout; print_stats"
+	 
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc2 -S     0 -T   840 -F 0 -v -L stdout; print_stats"
+	 
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3g, 1800) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -g -S     0 -T  1800 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3g, 300);(bmc3g, 300);(bmc3g, 300);(bmc3g, 300);(bmc3g, 300);(bmc3g, 300) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -g -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -g -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -g -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -g -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -g -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -g -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3g, 60);(bmc3g, 60);(bmc3g, 120);(bmc3g, 240);(bmc3g, 480);(bmc3g, 840) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -g -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -g -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -g -S     0 -T   120 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -g -S     0 -T   240 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -g -S     0 -T   480 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -g -S     0 -T   840 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3, 1800) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3, 300);(bmc3, 300);(bmc3, 300);(bmc3, 300);(bmc3, 300);(bmc3, 300) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3, 60);(bmc3, 60);(bmc3, 120);(bmc3, 240);(bmc3, 480);(bmc3, 840) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3s, 1800) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -s -S     0 -T  1800 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3s, 300);(bmc3s, 300);(bmc3s, 300);(bmc3s, 300);(bmc3s, 300);(bmc3s, 300) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -s -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -s -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -s -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -s -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -s -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -s -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3s, 60);(bmc3s, 60);(bmc3s, 120);(bmc3s, 240);(bmc3s, 480);(bmc3s, 840) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -s -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -s -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -s -S     0 -T   120 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -s -S     0 -T   240 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -s -S     0 -T   480 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -s -S     0 -T   840 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3j, 1800) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3  -S     0 -T  1800 -F 0 -J 2 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3j, 300);(bmc3j, 300);(bmc3j, 300);(bmc3j, 300);(bmc3j, 300);(bmc3j, 300) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3  -S     0 -T   300 -F 0 -J 2 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3  -S     0 -T   300 -F 0 -J 2 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3  -S     0 -T   300 -F 0 -J 2 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3  -S     0 -T   300 -F 0 -J 2 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3  -S     0 -T   300 -F 0 -J 2 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3  -S     0 -T   300 -F 0 -J 2 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3j, 60);(bmc3j, 60);(bmc3j, 120);(bmc3j, 240);(bmc3j, 480);(bmc3j, 840) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3  -S     0 -T    60 -F 0 -J 2 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3  -S     0 -T    60 -F 0 -J 2 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3  -S     0 -T   120 -F 0 -J 2 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3  -S     0 -T   240 -F 0 -J 2 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3  -S     0 -T   480 -F 0 -J 2 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3  -S     0 -T   840 -F 0 -J 2 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmcu, 1800) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -u -S     0 -T  1800 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmcu, 300);(bmcu, 300);(bmcu, 300);(bmcu, 300);(bmcu, 300);(bmcu, 300) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -u -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -u -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -u -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -u -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -u -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -u -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmcu, 60);(bmcu, 60);(bmcu, 120);(bmcu, 240);(bmcu, 480);(bmcu, 840) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -u -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -u -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -u -S     0 -T   120 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -u -S     0 -T   240 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -u -S     0 -T   480 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -u -S     0 -T   840 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3r, 1800) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -r -S     0 -T  1800 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3r, 300);(bmc3r, 300);(bmc3r, 300);(bmc3r, 300);(bmc3r, 300);(bmc3r, 300) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -r -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -r -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -r -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -r -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -r -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -r -S     0 -T   300 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+##################################
+---- Running sequence (bmc3r, 60);(bmc3r, 60);(bmc3r, 120);(bmc3r, 240);(bmc3r, 480);(bmc3r, 840) ---- ../benchmark/HWMCC_15_17/6s191_n.aig
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -r -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -r -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -r -S     0 -T   120 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -r -S     0 -T   240 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -r -S     0 -T   480 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s191_n.aig; print_stats; &get; bmc3 -r -S     0 -T   840 -F 0 -v -L stdout; print_stats"
+	 
+-1
+abc_result(frame=0, var=0, cla=0, conf=0, mem=-1, to=-1, asrt=-1, tt=0, ld=0)
+############### TIMEOUT: 0, 0 ###################
+@@@@@@@@@@@@@@@@ RESULTS @@@@@@@@@@@@@@@@@
+Engine frames time wasted frames time wasted frames  time wasted  frames  time wasted
+
+bmc2	 0  1800.00  1800.00		 0  1800.00  1800.00		 0  1800.00  1800.00	
+bmc3g	 0  1800.00  1800.00		 0  1800.00  1800.00		 0  1800.00  1800.00	
+bmc3	 0  1800.00  1800.00		 0  1800.00  1800.00		 0  1800.00  1800.00	
+bmc3s	 0  1800.00  1800.00		 0  1800.00  1800.00		 0  1800.00  1800.00	
+bmc3j	 0  1800.00  1800.00		 0  1800.00  1800.00		 0  1800.00  1800.00	
+bmcu	 0  1800.00  1800.00		 0  1800.00  1800.00		 0  1800.00  1800.00	
+bmc3r	 0  1800.00  1800.00		 0  1800.00  1800.00		 0  1800.00  1800.00	
+@@@@@@@@@@@@@@@@ RESULTS end @@@@@@@@@@@@@@@@@
+Code Running duration:  0.00325829717848036  hrs

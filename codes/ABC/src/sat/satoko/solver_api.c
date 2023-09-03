@@ -343,7 +343,7 @@ int satoko_solve(solver_t *s)
     solver_cancel_until(s, vec_uint_size(s->assumptions));
 
     // [DGhosh] added on 22/06/2023  
-    printf("satoko_solve status %d\n", status);
+    //printf("satoko_solve status %d\n", status);
     return status;
 }
 

@@ -1,0 +1,1783 @@
+Input file is : benchmark/HWMCC_15_17/6s160.aig
+6s160
+iters 10000
+---------------- Running bandit ucb1 ------------------
+---- episodes  0
+------Iteration 0 start ------
+Total time till now -- starting:  0 repeated_blocker 0
+0 7 Initial exploring select 0 bmc2
+0 4 0 Calculating time out explore 60.0 60 total till now 0
+Next time out 60.0 frame_out 0.0 for chosen action 0 bmc2 ocount 0 explore True ending 0
+../benchmark/HWMCC_15_17/6s160.aig ../benchmark/HWMCC_15_17/6s160_n.aig
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s160.aig; print_stats; &get; &dc2;&put;dretime;&get;&lcorr;&dc2;&put;dretime;&get;&scorr;&fraig;&dc2;&put;dretime;&put; print_stats; write ../benchmark/HWMCC_15_17/6s160_n.aig".
+
+[1;37m../benchmark/HWMCC_15_17/6s160:[0m i/o =  149/    1  lat =  559  and =   8619  lev = 92
+[1;37m../benchmark/HWMCC_15_17/6s160:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+
+Simplified model ../benchmark/HWMCC_15_17/6s160_n.aig
+run_engine -- 0 0 60 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc2 -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc2 -S     0 -T    60 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+Running "bmc2". AIG:  PI/PO/Reg = 149/1/559.  Node =   6943. Lev =    30.
+Params: FramesMax = 0. NodesDelta = 2000. ConfMaxOne = 0. ConfMaxAll = 0.
+   0 : F =    7. O =   0.  And =    2434. Var =    1298. Conf =      5.  Cla =   4255. Learn =      4.   0 MB     0.02 sec
+   1 : F =   11. O =   0.  And =    5755. Var =    3120. Conf =     20.  Cla =  10411. Learn =     18.   0 MB     0.04 sec
+   2 : F =   15. O =   0.  And =    9592. Var =    5237. Conf =     80.  Cla =  17853. Learn =     77.   1 MB     0.05 sec
+   3 : F =   19. O =   0.  And =   13928. Var =    7652. Conf =    235.  Cla =  26408. Learn =    231.   1 MB     0.08 sec
+   4 : F =   23. O =   0.  And =   18686. Var =   10310. Conf =    562.  Cla =  35927. Learn =    556.   1 MB     0.14 sec
+   5 : F =   27. O =   0.  And =   23853. Var =   13245. Conf =   1070.  Cla =  46406. Learn =   1063.   1 MB     0.25 sec
+   6 : F =   31. O =   0.  And =   29443. Var =   16411. Conf =   1886.  Cla =  57799. Learn =   1875.   1 MB     0.42 sec
+   7 : F =   35. O =   0.  And =   35441. Var =   19772. Conf =   3145.  Cla =  70051. Learn =   3129.   1 MB     0.67 sec
+   8 : F =   39. O =   0.  And =   41849. Var =   23396. Conf =   5203.  Cla =  83011. Learn =   5182.   1 MB     1.13 sec
+   9 : F =   43. O =   0.  And =   48680. Var =   27304. Conf =   8312.  Cla =  96944. Learn =   8288.   1 MB     1.89 sec
+  10 : F =   47. O =   0.  And =   55915. Var =   31424. Conf =  12381.  Cla = 111787. Learn =   9901.   2 MB     2.85 sec
+  11 : F =   51. O =   0.  And =   63381. Var =   35711. Conf =  16635.  Cla = 127310. Learn =  14148.   2 MB     4.00 sec
+  12 : F =   55. O =   0.  And =   70923. Var =   40080. Conf =  22241.  Cla = 143250. Learn =  16079.   2 MB     5.97 sec
+  13 : F =   59. O =   0.  And =   78466. Var =   44468. Conf =  28408.  Cla = 159336. Learn =  17290.   2 MB     8.16 sec
+  14 : F =   63. O =   0.  And =   86009. Var =   48857. Conf =  37786.  Cla = 175423. Learn =  20462.   2 MB    11.12 sec
+  15 : F =   67. O =   0.  And =   93552. Var =   53247. Conf =  46922.  Cla = 191508. Learn =  29594.   2 MB    14.66 sec
+  16 : F =   71. O =   0.  And =  101095. Var =   57646. Conf =  58206.  Cla = 207614. Learn =  33439.   2 MB    19.55 sec
+  17 : F =   75. O =   0.  And =  108638. Var =   62045. Conf =  75570.  Cla = 223718. Learn =  32214.   2 MB    27.34 sec
+  18 : F =   79. O =   0.  And =  116181. Var =   66457. Conf =  95622.  Cla = 239860. Learn =  41152.   3 MB    36.90 sec
+  19 : F =   83. O =   0.  And =  123724. Var =   70873. Conf = 119769.  Cla = 256008. Learn =  52851.   3 MB    49.23 sec
+  20 : F =   87. O =   0.  And =  131267. Var =   75278. Conf = 142592.  Cla = 272125. Learn =  47717.   3 MB    60.03 sec
+No output failed in 82 frames.  Time =    60.03 sec
+Reached timeout (60 seconds).
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+
+cal_reward 0 83 0.9825894690302572 abc_result(frame=83, var=70873, cla=256008, conf=119769, mem=3, to=12.329999999999998, asrt=-1, tt=49.23, ld=82)
+Action 0 reward 0.9825894690302572 All reward [0.98258947        nan        nan        nan        nan        nan
+        nan]
+------- ## --------- Starting with depth 0  Ending depth 82
+bmc2 Training for action 0 82 20 20 20 20
+bmc2 Last frame (83, 256008, 119769, 49.23) 1
+Next frame 84 Next time out 52.3125
+0 Prediction for action (0, 'bmc2'), for time 301.99499999999995, frames 83 165 27
+Next time out {0: (301.99499999999995, 83), 1: (-1, -1), 2: (-1, -1), 3: (-1, -1), 4: (-1, -1), 5: (-1, -1), 6: (-1, -1)}
+True Partitions for engines [1, 1, 1, 1, 1, 1, 1]
+# exploring -- 0 explore True best_sd 82 max_conf 256008
+Total time till now:  0 Current time out  60.0
+
+#### iter  0 0 bmc2 current state 0 time taken 50 60.0 totalTime 0 ss (0, 50, 0.9825894690302572, 0, 60.0, 0) abc_result(frame=83, var=70873, cla=256008, conf=119769, mem=3, to=12.329999999999998, asrt=-1, tt=49.23, ld=82)
+--------- Iteration 0 end ------
+------Iteration 1 start ------
+Total time till now -- starting:  0 repeated_blocker 0
+1 7 Initial exploring select 1 bmc3
+1 4 1 Calculating time out explore 60.0 60.0 total till now 0
+Next time out 60.0 frame_out 0.0 for chosen action 1 bmc3 ocount 0 explore True ending 0
+run_engine -- 1 0 60 0
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -S     0 -T    60 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+Running "bmc3". PI/PO/Reg = 149/1/559. And =   6943. Lev =    30. ObjNums =  4446.
+Params: FramesMax = 0. Start = 0. ConfLimit = 0. TimeOut = 60. SolveAll = 0.
+   0 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   1 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   2 + : Var =     401. Cla =     1095. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   3 + : Var =     401. Cla =     1095. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   4 + : Var =     401. Cla =     1095. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   5 + : Var =     401. Cla =     1095. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   6 + : Var =    2306. Cla =     6730. Conf =      8. Learn =      7.    0 MB   4 MB     0.03 sec 
+   7 + : Var =    2306. Cla =     6730. Conf =      8. Learn =      7.    0 MB   4 MB     0.03 sec 
+   8 + : Var =    2306. Cla =     6730. Conf =      8. Learn =      7.    0 MB   4 MB     0.03 sec 
+   9 + : Var =    2306. Cla =     6730. Conf =      8. Learn =      7.    0 MB   4 MB     0.03 sec 
+  10 + : Var =    5063. Cla =    15356. Conf =     17. Learn =     15.    0 MB   4 MB     0.03 sec 
+  11 + : Var =    5063. Cla =    15356. Conf =     17. Learn =     15.    0 MB   4 MB     0.03 sec 
+  12 + : Var =    5063. Cla =    15356. Conf =     17. Learn =     15.    0 MB   4 MB     0.03 sec 
+  13 + : Var =    5063. Cla =    15356. Conf =     17. Learn =     15.    0 MB   4 MB     0.03 sec 
+  14 + : Var =    8015. Cla =    25161. Conf =     72. Learn =     68.    0 MB   5 MB     0.04 sec 
+  15 + : Var =    8015. Cla =    25161. Conf =     72. Learn =     68.    0 MB   5 MB     0.04 sec 
+  16 + : Var =    8015. Cla =    25161. Conf =     72. Learn =     68.    0 MB   5 MB     0.04 sec 
+  17 + : Var =    8015. Cla =    25161. Conf =     72. Learn =     68.    0 MB   5 MB     0.04 sec 
+  18 + : Var =   11209. Cla =    36049. Conf =    184. Learn =    178.    0 MB   5 MB     0.05 sec 
+  19 + : Var =   11209. Cla =    36049. Conf =    184. Learn =    178.    0 MB   5 MB     0.05 sec 
+  20 + : Var =   11209. Cla =    36049. Conf =    184. Learn =    178.    0 MB   5 MB     0.05 sec 
+  21 + : Var =   11209. Cla =    36049. Conf =    184. Learn =    178.    0 MB   5 MB     0.05 sec 
+  22 + : Var =   14610. Cla =    47785. Conf =    493. Learn =    485.    0 MB   5 MB     0.09 sec 
+  23 + : Var =   14610. Cla =    47785. Conf =    493. Learn =    485.    0 MB   5 MB     0.09 sec 
+  24 + : Var =   14610. Cla =    47785. Conf =    493. Learn =    485.    0 MB   5 MB     0.09 sec 
+  25 + : Var =   14610. Cla =    47785. Conf =    493. Learn =    485.    0 MB   5 MB     0.09 sec 
+  26 + : Var =   18195. Cla =    60386. Conf =    923. Learn =    912.    0 MB   6 MB     0.15 sec 
+  27 + : Var =   18195. Cla =    60386. Conf =    923. Learn =    912.    0 MB   6 MB     0.15 sec 
+  28 + : Var =   18195. Cla =    60386. Conf =    923. Learn =    912.    0 MB   6 MB     0.15 sec 
+  29 + : Var =   18195. Cla =    60386. Conf =    923. Learn =    912.    1 MB   6 MB     0.15 sec 
+  30 + : Var =   21963. Cla =    73792. Conf =   1600. Learn =   1587.    1 MB   6 MB     0.26 sec 
+  31 + : Var =   21963. Cla =    73792. Conf =   1600. Learn =   1587.    1 MB   6 MB     0.26 sec 
+  32 + : Var =   21963. Cla =    73792. Conf =   1600. Learn =   1587.    1 MB   6 MB     0.26 sec 
+  33 + : Var =   21963. Cla =    73792. Conf =   1600. Learn =   1587.    1 MB   6 MB     0.26 sec 
+  34 + : Var =   25921. Cla =    88006. Conf =   2792. Learn =   2777.    1 MB   7 MB     0.52 sec 
+  35 + : Var =   25921. Cla =    88006. Conf =   2792. Learn =   2777.    1 MB   7 MB     0.52 sec 
+  36 + : Var =   25921. Cla =    88006. Conf =   2792. Learn =   2777.    1 MB   7 MB     0.52 sec 
+  37 + : Var =   25921. Cla =    88006. Conf =   2792. Learn =   2777.    1 MB   7 MB     0.52 sec 
+  38 + : Var =   30068. Cla =   103063. Conf =   4491. Learn =   4474.    1 MB   8 MB     0.88 sec 
+  39 + : Var =   30068. Cla =   103063. Conf =   4491. Learn =   4474.    1 MB   8 MB     0.88 sec 
+  40 + : Var =   30068. Cla =   103063. Conf =   4491. Learn =   4474.    1 MB   8 MB     0.88 sec 
+  41 + : Var =   30068. Cla =   103063. Conf =   4491. Learn =   4474.    1 MB   8 MB     0.88 sec 
+  42 + : Var =   34375. Cla =   118901. Conf =   7350. Learn =   7331.    1 MB   9 MB     1.53 sec 
+  43 + : Var =   34375. Cla =   118901. Conf =   7350. Learn =   7331.    1 MB   9 MB     1.53 sec 
+  44 + : Var =   34375. Cla =   118901. Conf =   7350. Learn =   7331.    1 MB   9 MB     1.53 sec 
+  45 + : Var =   34375. Cla =   118901. Conf =   7350. Learn =   7331.    1 MB   9 MB     1.53 sec 
+  46 + : Var =   38835. Cla =   135537. Conf =  11925. Learn =   9940.    1 MB   9 MB     2.69 sec 
+  47 + : Var =   38835. Cla =   135537. Conf =  11925. Learn =   9940.    1 MB   9 MB     2.69 sec 
+  48 + : Var =   38835. Cla =   135537. Conf =  11925. Learn =   9940.    1 MB   9 MB     2.69 sec 
+  49 + : Var =   38835. Cla =   135537. Conf =  11925. Learn =   9940.    1 MB   9 MB     2.69 sec 
+  50 + : Var =   43390. Cla =   152579. Conf =  17282. Learn =  12951.    1 MB  12 MB     3.94 sec 
+  51 + : Var =   43390. Cla =   152579. Conf =  17282. Learn =  12951.    1 MB  12 MB     3.94 sec 
+  52 + : Var =   43390. Cla =   152579. Conf =  17282. Learn =  12951.    1 MB  12 MB     3.94 sec 
+  53 + : Var =   43390. Cla =   152579. Conf =  17282. Learn =  12951.    1 MB  12 MB     3.94 sec 
+  54 + : Var =   47960. Cla =   169631. Conf =  22949. Learn =  15872.    1 MB  13 MB     5.48 sec 
+  55 + : Var =   47960. Cla =   169631. Conf =  22949. Learn =  15872.    1 MB  13 MB     5.48 sec 
+  56 + : Var =   47960. Cla =   169631. Conf =  22949. Learn =  15872.    1 MB  13 MB     5.48 sec 
+  57 + : Var =   47960. Cla =   169631. Conf =  22949. Learn =  15872.    1 MB  13 MB     5.48 sec 
+  58 + : Var =   52530. Cla =   186688. Conf =  29646. Learn =  16019.    1 MB  15 MB     7.36 sec 
+  59 + : Var =   52530. Cla =   186688. Conf =  29646. Learn =  16019.    1 MB  15 MB     7.36 sec 
+  60 + : Var =   52530. Cla =   186688. Conf =  29646. Learn =  16019.    1 MB  15 MB     7.36 sec 
+  61 + : Var =   52530. Cla =   186688. Conf =  29646. Learn =  16019.    1 MB  15 MB     7.36 sec 
+  62 + : Var =   57100. Cla =   203801. Conf =  37089. Learn =  20128.    1 MB  17 MB     9.44 sec 
+  63 + : Var =   57100. Cla =   203801. Conf =  37089. Learn =  20128.    1 MB  17 MB     9.44 sec 
+  64 + : Var =   57100. Cla =   203801. Conf =  37089. Learn =  20128.    1 MB  17 MB     9.44 sec 
+  65 + : Var =   57100. Cla =   203801. Conf =  37089. Learn =  20128.    1 MB  17 MB     9.44 sec 
+  66 + : Var =   61670. Cla =   220914. Conf =  45503. Learn =  23203.    1 MB  18 MB    11.97 sec 
+  67 + : Var =   61670. Cla =   220914. Conf =  45503. Learn =  23203.    1 MB  18 MB    11.97 sec 
+  68 + : Var =   61670. Cla =   220914. Conf =  45503. Learn =  23203.    1 MB  18 MB    11.97 sec 
+  69 + : Var =   61670. Cla =   220914. Conf =  45503. Learn =  23203.    1 MB  18 MB    11.97 sec 
+  70 + : Var =   66240. Cla =   238027. Conf =  54601. Learn =  22055.    1 MB  19 MB    14.81 sec 
+  71 + : Var =   66240. Cla =   238027. Conf =  54601. Learn =  22055.    1 MB  19 MB    14.81 sec 
+  72 + : Var =   66240. Cla =   238027. Conf =  54601. Learn =  22055.    1 MB  19 MB    14.81 sec 
+  73 + : Var =   66240. Cla =   238027. Conf =  54601. Learn =  22055.    1 MB  19 MB    14.81 sec 
+  74 + : Var =   70810. Cla =   255140. Conf =  65682. Learn =  28205.    1 MB  21 MB    18.45 sec 
+  75 + : Var =   70810. Cla =   255140. Conf =  65682. Learn =  28205.    1 MB  21 MB    18.45 sec 
+  76 + : Var =   70810. Cla =   255140. Conf =  65682. Learn =  28205.    1 MB  21 MB    18.45 sec 
+  77 + : Var =   70810. Cla =   255140. Conf =  65682. Learn =  28205.    1 MB  21 MB    18.45 sec 
+  78 + : Var =   75380. Cla =   272253. Conf =  77434. Learn =  28580.    1 MB  21 MB    22.43 sec 
+  79 + : Var =   75380. Cla =   272253. Conf =  77434. Learn =  28580.    1 MB  21 MB    22.43 sec 
+  80 + : Var =   75380. Cla =   272253. Conf =  77434. Learn =  28580.    1 MB  21 MB    22.43 sec 
+  81 + : Var =   75380. Cla =   272253. Conf =  77434. Learn =  28580.    1 MB  21 MB    22.43 sec 
+  82 + : Var =   79950. Cla =   289366. Conf =  94758. Learn =  34039.    1 MB  23 MB    30.12 sec 
+  83 + : Var =   79950. Cla =   289366. Conf =  94758. Learn =  34039.    1 MB  23 MB    30.12 sec 
+  84 + : Var =   79950. Cla =   289366. Conf =  94758. Learn =  34039.    1 MB  23 MB    30.12 sec 
+  85 + : Var =   79950. Cla =   289366. Conf =  94758. Learn =  34039.    1 MB  23 MB    30.12 sec 
+  86 + : Var =   84520. Cla =   306479. Conf = 115910. Learn =  41995.    1 MB  26 MB    40.03 sec 
+  87 + : Var =   84520. Cla =   306479. Conf = 115910. Learn =  41995.    1 MB  26 MB    40.03 sec 
+  88 + : Var =   84520. Cla =   306479. Conf = 115910. Learn =  41995.    2 MB  26 MB    40.03 sec 
+  89 + : Var =   84520. Cla =   306479. Conf = 115910. Learn =  41995.    2 MB  26 MB    40.03 sec 
+  90 + : Var =   89090. Cla =   323592. Conf = 142790. Learn =  44766.    2 MB  26 MB    50.84 sec 
+  91 + : Var =   89090. Cla =   323592. Conf = 142790. Learn =  44766.    2 MB  26 MB    50.84 sec 
+  92 + : Var =   89090. Cla =   323592. Conf = 142790. Learn =  44766.    2 MB  26 MB    50.84 sec 
+  93 + : Var =   89090. Cla =   323592. Conf = 142790. Learn =  44766.    2 MB  26 MB    50.84 sec 
+Runtime:  CNF = 0.1 sec (0.2 %)  UNSAT = 50.7 sec (84.4 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 9.2 sec (15.3 %)
+LStart(P) = 10000  LDelta(Q) = 2000  LRatio(R) = 80  ReduceDB = 21  Vars = 93660 Used = 90307 (96.42 %) Clauses = 4689596879795650560
+Buffs = 31766. Dups = 0.   Hash hits = 4183.  Hash misses = 81167.  UniProps = 0.
+No output asserted in 94 frames. Resource limit reached (timeout 60 sec). Time =    60.05 sec
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+
+94
+starting abc_result(frame=0, var=1, cla=0, conf=0, mem=4, to=0.03, asrt=-1, tt=0.03, ld=0)
+cal_reward 0 93 0.9963262625523672 abc_result(frame=93, var=89090, cla=323592, conf=142790, mem=26, to=0, asrt=-1, tt=50.84, ld=93)
+Action 1 reward 0.9963262625523672 All reward [2.64769869 2.66143548        inf        inf        inf        inf
+        inf]
+------- ## --------- Starting with depth 0  Ending depth 93
+bmc2 Training for action 0 93 20 20 20 20
+bmc2 Last frame (83, 256008, 119769, 49.23) 1
+Next frame 84 Next time out 52.3125
+0 Prediction for action (0, 'bmc2'), for time 335.9024999999999, frames 94 176 27
+bmc3 Training for action 1 93 23 23 23 23
+bmc3 Last frame (90, 323592, 142790, 50.84) 1
+Next frame 94 Next time out 61.650000000000006
+0 Prediction for action (1, 'bmc3'), for time 310.2800000000001, frames 94 186 30
+Next time out {0: (335.9024999999999, 94), 1: (310.2800000000001, 94), 2: (-1, -1), 3: (-1, -1), 4: (-1, -1), 5: (-1, -1), 6: (-1, -1)}
+True Partitions for engines [1, 1, 1, 1, 1, 1, 1]
+# exploring -- 1 explore True best_sd 93 max_conf 323592
+Total time till now:  0 Current time out  60.0
+
+#### iter  1 1 bmc3 current state 0 time taken 51 60.0 totalTime 0 ss (1, 51, 0.9963262625523672, 0, 60.0, 0) abc_result(frame=93, var=89090, cla=323592, conf=142790, mem=26, to=0, asrt=-1, tt=50.84, ld=93)
+--------- Iteration 1 end ------
+------Iteration 2 start ------
+Total time till now -- starting:  0 repeated_blocker 0
+2 7 Initial exploring select 2 bmc3s
+2 4 2 Calculating time out explore 60.0 60.0 total till now 0
+Next time out 60.0 frame_out 0.0 for chosen action 2 bmc3s ocount 0 explore True ending 0
+run_engine -- 2 0 60 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -s -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -s -S     0 -T    60 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+Running "bmc3". PI/PO/Reg = 149/1/559. And =   6943. Lev =    30. ObjNums =  4446.
+Params: FramesMax = 0. Start = 0. ConfLimit = 0. TimeOut = 60. SolveAll = 0.
+   0 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   0 MB     0.03 sec 
+   1 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   0 MB     0.03 sec 
+satoko_solve status -1
+   2 + : Var =     401. Cla =     1092. Conf =      1. Learn =      0.    0 MB   0 MB     0.03 sec 
+   3 + : Var =     401. Cla =     1092. Conf =      1. Learn =      0.    0 MB   0 MB     0.03 sec 
+   4 + : Var =     401. Cla =     1092. Conf =      1. Learn =      0.    0 MB   0 MB     0.03 sec 
+   5 + : Var =     401. Cla =     1092. Conf =      1. Learn =      0.    0 MB   0 MB     0.03 sec 
+satoko_solve status -1
+   6 + : Var =    2306. Cla =     6724. Conf =      6. Learn =      4.    0 MB   0 MB     0.03 sec 
+   7 + : Var =    2306. Cla =     6724. Conf =      6. Learn =      4.    0 MB   0 MB     0.03 sec 
+   8 + : Var =    2306. Cla =     6724. Conf =      6. Learn =      4.    0 MB   0 MB     0.03 sec 
+   9 + : Var =    2306. Cla =     6724. Conf =      6. Learn =      4.    0 MB   0 MB     0.03 sec 
+satoko_solve status -1
+  10 + : Var =    5063. Cla =    15347. Conf =     28. Learn =     25.    0 MB   0 MB     0.03 sec 
+  11 + : Var =    5063. Cla =    15347. Conf =     28. Learn =     25.    0 MB   0 MB     0.04 sec 
+  12 + : Var =    5063. Cla =    15347. Conf =     28. Learn =     25.    0 MB   0 MB     0.04 sec 
+  13 + : Var =    5063. Cla =    15347. Conf =     28. Learn =     25.    0 MB   0 MB     0.04 sec 
+satoko_solve status -1
+  14 + : Var =    8015. Cla =    25149. Conf =    102. Learn =     98.    0 MB   0 MB     0.04 sec 
+  15 + : Var =    8015. Cla =    25149. Conf =    102. Learn =     98.    0 MB   0 MB     0.04 sec 
+  16 + : Var =    8015. Cla =    25149. Conf =    102. Learn =     98.    0 MB   0 MB     0.04 sec 
+  17 + : Var =    8015. Cla =    25149. Conf =    102. Learn =     98.    0 MB   0 MB     0.04 sec 
+satoko_solve status -1
+  18 + : Var =   11209. Cla =    36014. Conf =    275. Learn =    268.    0 MB   0 MB     0.06 sec 
+  19 + : Var =   11209. Cla =    36014. Conf =    275. Learn =    268.    0 MB   0 MB     0.06 sec 
+  20 + : Var =   11209. Cla =    36014. Conf =    275. Learn =    268.    0 MB   0 MB     0.07 sec 
+  21 + : Var =   11209. Cla =    36014. Conf =    275. Learn =    268.    0 MB   0 MB     0.07 sec 
+satoko_solve status -1
+  22 + : Var =   14610. Cla =    47286. Conf =    598. Learn =    588.    0 MB   0 MB     0.11 sec 
+  23 + : Var =   14610. Cla =    47286. Conf =    598. Learn =    588.    0 MB   0 MB     0.11 sec 
+  24 + : Var =   14610. Cla =    47286. Conf =    598. Learn =    588.    0 MB   0 MB     0.11 sec 
+  25 + : Var =   14610. Cla =    47286. Conf =    598. Learn =    588.    0 MB   0 MB     0.11 sec 
+satoko_solve status -1
+  26 + : Var =   18195. Cla =    59552. Conf =   1059. Learn =   1046.    0 MB   0 MB     0.17 sec 
+  27 + : Var =   18195. Cla =    59552. Conf =   1059. Learn =   1046.    0 MB   0 MB     0.17 sec 
+  28 + : Var =   18195. Cla =    59552. Conf =   1059. Learn =   1046.    0 MB   0 MB     0.17 sec 
+  29 + : Var =   18195. Cla =    59552. Conf =   1059. Learn =   1046.    1 MB   0 MB     0.17 sec 
+satoko_solve status -1
+  30 + : Var =   21963. Cla =    72935. Conf =   1732. Learn =   1717.    1 MB   0 MB     0.28 sec 
+  31 + : Var =   21963. Cla =    72935. Conf =   1732. Learn =   1717.    1 MB   0 MB     0.28 sec 
+  32 + : Var =   21963. Cla =    72935. Conf =   1732. Learn =   1717.    1 MB   0 MB     0.28 sec 
+  33 + : Var =   21963. Cla =    72935. Conf =   1732. Learn =   1717.    1 MB   0 MB     0.29 sec 
+satoko_solve status -1
+  34 + : Var =   25921. Cla =    87123. Conf =   2812. Learn =   2795.    1 MB   0 MB     0.53 sec 
+  35 + : Var =   25921. Cla =    87123. Conf =   2812. Learn =   2795.    1 MB   0 MB     0.53 sec 
+  36 + : Var =   25921. Cla =    87123. Conf =   2812. Learn =   2795.    1 MB   0 MB     0.53 sec 
+  37 + : Var =   25921. Cla =    87123. Conf =   2812. Learn =   2795.    1 MB   0 MB     0.53 sec 
+satoko_solve status -1
+  38 + : Var =   30068. Cla =   102151. Conf =   4750. Learn =   4731.    1 MB   0 MB     0.95 sec 
+  39 + : Var =   30068. Cla =   102151. Conf =   4750. Learn =   4731.    1 MB   0 MB     0.95 sec 
+  40 + : Var =   30068. Cla =   102151. Conf =   4750. Learn =   4731.    1 MB   0 MB     0.95 sec 
+  41 + : Var =   30068. Cla =   102151. Conf =   4750. Learn =   4731.    1 MB   0 MB     0.95 sec 
+satoko_solve status -1
+  42 + : Var =   34375. Cla =   117958. Conf =   7153. Learn =   3767.    1 MB   0 MB     1.58 sec 
+  43 + : Var =   34375. Cla =   117958. Conf =   7153. Learn =   3767.    1 MB   0 MB     1.58 sec 
+  44 + : Var =   34375. Cla =   117958. Conf =   7153. Learn =   3767.    1 MB   0 MB     1.58 sec 
+  45 + : Var =   34375. Cla =   117958. Conf =   7153. Learn =   3767.    1 MB   0 MB     1.58 sec 
+satoko_solve status -1
+  46 + : Var =   38835. Cla =   134258. Conf =  10593. Learn =   7204.    1 MB   0 MB     2.59 sec 
+  47 + : Var =   38835. Cla =   134258. Conf =  10593. Learn =   7204.    1 MB   0 MB     2.59 sec 
+  48 + : Var =   38835. Cla =   134258. Conf =  10593. Learn =   7204.    1 MB   0 MB     2.59 sec 
+  49 + : Var =   38835. Cla =   134258. Conf =  10593. Learn =   7204.    1 MB   0 MB     2.59 sec 
+satoko_solve status -1
+  50 + : Var =   43390. Cla =   142573. Conf =  14492. Learn =  11100.    1 MB   0 MB     3.56 sec 
+  51 + : Var =   43390. Cla =   142573. Conf =  14492. Learn =  11100.    1 MB   0 MB     3.56 sec 
+  52 + : Var =   43390. Cla =   142573. Conf =  14492. Learn =  11100.    1 MB   0 MB     3.56 sec 
+  53 + : Var =   43390. Cla =   142573. Conf =  14492. Learn =  11100.    1 MB   0 MB     3.56 sec 
+satoko_solve status -1
+  54 + : Var =   47960. Cla =   157914. Conf =  19605. Learn =  16208.    1 MB   0 MB     5.44 sec 
+  55 + : Var =   47960. Cla =   157914. Conf =  19605. Learn =  16208.    1 MB   0 MB     5.44 sec 
+  56 + : Var =   47960. Cla =   157914. Conf =  19605. Learn =  16208.    1 MB   0 MB     5.44 sec 
+  57 + : Var =   47960. Cla =   157914. Conf =  19605. Learn =  16208.    1 MB   0 MB     5.44 sec 
+satoko_solve status -1
+  58 + : Var =   52530. Cla =   174935. Conf =  26468. Learn =  11673.    1 MB   0 MB     7.64 sec 
+  59 + : Var =   52530. Cla =   174935. Conf =  26468. Learn =  11673.    1 MB   0 MB     7.64 sec 
+  60 + : Var =   52530. Cla =   174935. Conf =  26468. Learn =  11673.    1 MB   0 MB     7.64 sec 
+  61 + : Var =   52530. Cla =   174935. Conf =  26468. Learn =  11673.    1 MB   0 MB     7.64 sec 
+satoko_solve status -1
+  62 + : Var =   57100. Cla =   192036. Conf =  32827. Learn =  18030.    1 MB   0 MB     9.59 sec 
+  63 + : Var =   57100. Cla =   192036. Conf =  32827. Learn =  18030.    1 MB   0 MB     9.59 sec 
+  64 + : Var =   57100. Cla =   192036. Conf =  32827. Learn =  18030.    1 MB   0 MB     9.59 sec 
+  65 + : Var =   57100. Cla =   192036. Conf =  32827. Learn =  18030.    1 MB   0 MB     9.59 sec 
+satoko_solve status -1
+  66 + : Var =   61670. Cla =   209054. Conf =  39957. Learn =  25154.    1 MB   0 MB    11.91 sec 
+  67 + : Var =   61670. Cla =   209054. Conf =  39957. Learn =  25154.    1 MB   0 MB    11.91 sec 
+  68 + : Var =   61670. Cla =   209054. Conf =  39957. Learn =  25154.    1 MB   0 MB    11.91 sec 
+  69 + : Var =   61670. Cla =   209054. Conf =  39957. Learn =  25154.    1 MB   0 MB    11.91 sec 
+satoko_solve status -1
+  70 + : Var =   66240. Cla =   226127. Conf =  47377. Learn =  32571.    1 MB   0 MB    14.61 sec 
+  71 + : Var =   66240. Cla =   226127. Conf =  47377. Learn =  32571.    1 MB   0 MB    14.61 sec 
+  72 + : Var =   66240. Cla =   226127. Conf =  47377. Learn =  32571.    1 MB   0 MB    14.61 sec 
+  73 + : Var =   66240. Cla =   226127. Conf =  47377. Learn =  32571.    1 MB   0 MB    14.61 sec 
+satoko_solve status -1
+  74 + : Var =   70810. Cla =   239642. Conf =  60128. Learn =  45316.    1 MB   0 MB    20.47 sec 
+  75 + : Var =   70810. Cla =   239642. Conf =  60128. Learn =  45316.    1 MB   0 MB    20.47 sec 
+  76 + : Var =   70810. Cla =   239642. Conf =  60128. Learn =  45316.    1 MB   0 MB    20.47 sec 
+  77 + : Var =   70810. Cla =   239642. Conf =  60128. Learn =  45316.    1 MB   0 MB    20.47 sec 
+satoko_solve status -1
+  78 + : Var =   75380. Cla =   256658. Conf =  75381. Learn =  31013.    1 MB   0 MB    27.09 sec 
+  79 + : Var =   75380. Cla =   256658. Conf =  75381. Learn =  31013.    1 MB   0 MB    27.09 sec 
+  80 + : Var =   75380. Cla =   256658. Conf =  75381. Learn =  31013.    1 MB   0 MB    27.09 sec 
+  81 + : Var =   75380. Cla =   256658. Conf =  75381. Learn =  31013.    1 MB   0 MB    27.09 sec 
+satoko_solve status -1
+  82 + : Var =   79950. Cla =   273724. Conf =  89341. Learn =  44968.    1 MB   0 MB    33.63 sec 
+  83 + : Var =   79950. Cla =   273724. Conf =  89341. Learn =  44968.    1 MB   0 MB    33.63 sec 
+  84 + : Var =   79950. Cla =   273724. Conf =  89341. Learn =  44968.    1 MB   0 MB    33.63 sec 
+  85 + : Var =   79950. Cla =   273724. Conf =  89341. Learn =  44968.    1 MB   0 MB    33.63 sec 
+satoko_solve status -1
+  86 + : Var =   84520. Cla =   290806. Conf = 103726. Learn =  59351.    1 MB   0 MB    41.54 sec 
+  87 + : Var =   84520. Cla =   290806. Conf = 103726. Learn =  59351.    1 MB   0 MB    41.54 sec 
+  88 + : Var =   84520. Cla =   290806. Conf = 103726. Learn =  59351.    2 MB   0 MB    41.54 sec 
+  89 + : Var =   84520. Cla =   290806. Conf = 103726. Learn =  59351.    2 MB   0 MB    41.54 sec 
+satoko_solve status -1
+  90 + : Var =   89090. Cla =   307833. Conf = 122017. Learn =  77636.    2 MB   0 MB    52.32 sec 
+  91 + : Var =   89090. Cla =   307833. Conf = 122017. Learn =  77636.    2 MB   0 MB    52.32 sec 
+  92 + : Var =   89090. Cla =   307833. Conf = 122017. Learn =  77636.    2 MB   0 MB    52.32 sec 
+  93 + : Var =   89090. Cla =   307833. Conf = 122017. Learn =  77636.    2 MB   0 MB    52.32 sec 
+satoko_solve status 0
+Runtime:  CNF = 0.1 sec (0.2 %)  UNSAT = 52.2 sec (86.8 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 7.7 sec (12.9 %)
+LStart(P) = 0  LDelta(Q) = 0  LRatio(R) = 0  ReduceDB = 0  Vars = 93660 Used = 0 (0.00 %) Clauses = 4689274482370543616
+Buffs = 31766. Dups = 0.   Hash hits = 4183.  Hash misses = 81167.  UniProps = 0.
+No output asserted in 94 frames. Resource limit reached (timeout 60 sec). Time =    60.08 sec
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+
+94
+starting abc_result(frame=0, var=1, cla=0, conf=0, mem=0, to=0.03, asrt=-1, tt=0.03, ld=0)
+cal_reward 0 93 0.9962000502519851 abc_result(frame=93, var=89090, cla=307833, conf=122017, mem=2, to=0, asrt=-1, tt=52.32, ld=93)
+Action 2 reward 0.9962000502519851 All reward [3.07888362 3.09262041 3.0924942         inf        inf        inf
+        inf]
+------- ## --------- Starting with depth 0  Ending depth 93
+bmc2 Training for action 0 93 20 20 20 20
+bmc2 Last frame (83, 256008, 119769, 49.23) 1
+Next frame 84 Next time out 52.3125
+0 Prediction for action (0, 'bmc2'), for time 335.9024999999999, frames 94 176 27
+bmc3 Training for action 1 93 23 23 23 23
+bmc3 Last frame (90, 323592, 142790, 50.84) 1
+Next frame 94 Next time out 61.650000000000006
+0 Prediction for action (1, 'bmc3'), for time 310.2800000000001, frames 94 186 30
+bmc3s Training for action 2 93 23 23 23 23
+bmc3s Last frame (90, 307833, 122017, 52.32) 1
+Next frame 94 Next time out 63.1
+0 Prediction for action (2, 'bmc3s'), for time 311.04, frames 94 186 31
+Next time out {0: (335.9024999999999, 94), 1: (310.2800000000001, 94), 2: (311.04, 94), 3: (-1, -1), 4: (-1, -1), 5: (-1, -1), 6: (-1, -1)}
+True Partitions for engines [1, 1, 1, 1, 1, 1, 1]
+# exploring -- 2 explore True best_sd 93 max_conf 323592
+Total time till now:  0 Current time out  60.0
+
+#### iter  2 2 bmc3s current state 0 time taken 53 60.0 totalTime 0 ss (2, 53, 0.9962000502519851, 0, 60.0, 0) abc_result(frame=93, var=89090, cla=307833, conf=122017, mem=2, to=0, asrt=-1, tt=52.32, ld=93)
+--------- Iteration 2 end ------
+------Iteration 3 start ------
+Total time till now -- starting:  0 repeated_blocker 0
+3 7 Initial exploring select 3 bmc3g
+3 4 3 Calculating time out explore 60.0 60.0 total till now 0
+Next time out 60.0 frame_out 0.0 for chosen action 3 bmc3g ocount 0 explore True ending 0
+run_engine -- 3 0 60 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -g -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -g -S     0 -T    60 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+Running "bmc3". PI/PO/Reg = 149/1/559. And =   6943. Lev =    30. ObjNums =  4446.
+Params: FramesMax = 0. Start = 0. ConfLimit = 0. TimeOut = 60. SolveAll = 0.
+   0 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   0 MB     0.03 sec 
+   1 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   0 MB     0.03 sec 
+   2 + : Var =     401. Cla =     1095. Conf =      1. Learn =      0.    0 MB   0 MB     0.04 sec 
+   3 + : Var =     401. Cla =     1095. Conf =      1. Learn =      0.    0 MB   0 MB     0.04 sec 
+   4 + : Var =     401. Cla =     1095. Conf =      1. Learn =      0.    0 MB   0 MB     0.04 sec 
+   5 + : Var =     401. Cla =     1095. Conf =      1. Learn =      0.    0 MB   0 MB     0.04 sec 
+   6 + : Var =    2306. Cla =     6730. Conf =      5. Learn =      3.    0 MB   0 MB     0.04 sec 
+   7 + : Var =    2306. Cla =     6730. Conf =      5. Learn =      3.    0 MB   0 MB     0.04 sec 
+   8 + : Var =    2306. Cla =     6730. Conf =      5. Learn =      3.    0 MB   0 MB     0.04 sec 
+   9 + : Var =    2306. Cla =     6730. Conf =      5. Learn =      3.    0 MB   0 MB     0.04 sec 
+  10 + : Var =    5063. Cla =    15356. Conf =     13. Learn =     10.    0 MB   0 MB     0.05 sec 
+  11 + : Var =    5063. Cla =    15356. Conf =     13. Learn =     10.    0 MB   0 MB     0.05 sec 
+  12 + : Var =    5063. Cla =    15356. Conf =     13. Learn =     10.    0 MB   0 MB     0.05 sec 
+  13 + : Var =    5063. Cla =    15356. Conf =     13. Learn =     10.    0 MB   0 MB     0.05 sec 
+  14 + : Var =    8015. Cla =    25161. Conf =     68. Learn =     63.    0 MB   0 MB     0.06 sec 
+  15 + : Var =    8015. Cla =    25161. Conf =     68. Learn =     63.    0 MB   0 MB     0.06 sec 
+  16 + : Var =    8015. Cla =    25161. Conf =     68. Learn =     63.    0 MB   0 MB     0.06 sec 
+  17 + : Var =    8015. Cla =    25161. Conf =     68. Learn =     63.    0 MB   0 MB     0.06 sec 
+  18 + : Var =   11209. Cla =    36049. Conf =    217. Learn =    210.    0 MB   0 MB     0.08 sec 
+  19 + : Var =   11209. Cla =    36049. Conf =    217. Learn =    210.    0 MB   0 MB     0.08 sec 
+  20 + : Var =   11209. Cla =    36049. Conf =    217. Learn =    210.    0 MB   0 MB     0.08 sec 
+  21 + : Var =   11209. Cla =    36049. Conf =    217. Learn =    210.    0 MB   0 MB     0.08 sec 
+  22 + : Var =   14610. Cla =    47785. Conf =    646. Learn =    637.    0 MB   0 MB     0.14 sec 
+  23 + : Var =   14610. Cla =    47785. Conf =    646. Learn =    637.    0 MB   0 MB     0.14 sec 
+  24 + : Var =   14610. Cla =    47785. Conf =    646. Learn =    637.    0 MB   0 MB     0.14 sec 
+  25 + : Var =   14610. Cla =    47785. Conf =    646. Learn =    637.    0 MB   0 MB     0.14 sec 
+  26 + : Var =   18195. Cla =    60386. Conf =   1174. Learn =   1163.    0 MB   0 MB     0.22 sec 
+  27 + : Var =   18195. Cla =    60386. Conf =   1174. Learn =   1163.    0 MB   0 MB     0.22 sec 
+  28 + : Var =   18195. Cla =    60386. Conf =   1174. Learn =   1163.    0 MB   0 MB     0.22 sec 
+  29 + : Var =   18195. Cla =    60386. Conf =   1174. Learn =   1163.    1 MB   0 MB     0.22 sec 
+  30 + : Var =   21963. Cla =    73797. Conf =   1978. Learn =   1963.    1 MB   0 MB     0.34 sec 
+  31 + : Var =   21963. Cla =    73797. Conf =   1978. Learn =   1963.    1 MB   0 MB     0.34 sec 
+  32 + : Var =   21963. Cla =    73797. Conf =   1978. Learn =   1963.    1 MB   0 MB     0.34 sec 
+  33 + : Var =   21963. Cla =    73797. Conf =   1978. Learn =   1963.    1 MB   0 MB     0.34 sec 
+  34 + : Var =   25921. Cla =    88011. Conf =   3516. Learn =   2503.    1 MB   0 MB     0.60 sec 
+  35 + : Var =   25921. Cla =    88011. Conf =   3516. Learn =   2503.    1 MB   0 MB     0.60 sec 
+  36 + : Var =   25921. Cla =    88011. Conf =   3516. Learn =   2503.    1 MB   0 MB     0.60 sec 
+  37 + : Var =   25921. Cla =    88011. Conf =   3516. Learn =   2503.    1 MB   0 MB     0.60 sec 
+  38 + : Var =   30068. Cla =   102575. Conf =   5566. Learn =   4539.    1 MB   0 MB     0.99 sec 
+  39 + : Var =   30068. Cla =   102575. Conf =   5566. Learn =   4539.    1 MB   0 MB     0.99 sec 
+  40 + : Var =   30068. Cla =   102575. Conf =   5566. Learn =   4539.    1 MB   0 MB     0.99 sec 
+  41 + : Var =   30068. Cla =   102575. Conf =   5566. Learn =   4539.    1 MB   0 MB     0.99 sec 
+  42 + : Var =   34375. Cla =   117901. Conf =   8676. Learn =   4857.    1 MB   0 MB     1.65 sec 
+  43 + : Var =   34375. Cla =   117901. Conf =   8676. Learn =   4857.    1 MB   0 MB     1.65 sec 
+  44 + : Var =   34375. Cla =   117901. Conf =   8676. Learn =   4857.    1 MB   0 MB     1.65 sec 
+  45 + : Var =   34375. Cla =   117901. Conf =   8676. Learn =   4857.    1 MB   0 MB     1.65 sec 
+  46 + : Var =   38835. Cla =   133477. Conf =  12927. Learn =   9105.    1 MB   0 MB     2.66 sec 
+  47 + : Var =   38835. Cla =   133477. Conf =  12927. Learn =   9105.    1 MB   0 MB     2.66 sec 
+  48 + : Var =   38835. Cla =   133477. Conf =  12927. Learn =   9105.    1 MB   0 MB     2.66 sec 
+  49 + : Var =   38835. Cla =   133477. Conf =  12927. Learn =   9105.    1 MB   0 MB     2.66 sec 
+  50 + : Var =   43390. Cla =   149689. Conf =  18475. Learn =   9666.    1 MB   0 MB     3.84 sec 
+  51 + : Var =   43390. Cla =   149689. Conf =  18475. Learn =   9666.    1 MB   0 MB     3.84 sec 
+  52 + : Var =   43390. Cla =   149689. Conf =  18475. Learn =   9666.    1 MB   0 MB     3.84 sec 
+  53 + : Var =   43390. Cla =   149689. Conf =  18475. Learn =   9666.    1 MB   0 MB     3.84 sec 
+  54 + : Var =   47960. Cla =   166447. Conf =  23569. Learn =  14756.    1 MB   0 MB     4.91 sec 
+  55 + : Var =   47960. Cla =   166447. Conf =  23569. Learn =  14756.    1 MB   0 MB     4.91 sec 
+  56 + : Var =   47960. Cla =   166447. Conf =  23569. Learn =  14756.    1 MB   0 MB     4.92 sec 
+  57 + : Var =   47960. Cla =   166447. Conf =  23569. Learn =  14756.    1 MB   0 MB     4.92 sec 
+  58 + : Var =   52530. Cla =   183499. Conf =  29571. Learn =  13365.    1 MB   0 MB     6.36 sec 
+  59 + : Var =   52530. Cla =   183499. Conf =  29571. Learn =  13365.    1 MB   0 MB     6.36 sec 
+  60 + : Var =   52530. Cla =   183499. Conf =  29571. Learn =  13365.    1 MB   0 MB     6.36 sec 
+  61 + : Var =   52530. Cla =   183499. Conf =  29571. Learn =  13365.    1 MB   0 MB     6.36 sec 
+  62 + : Var =   57100. Cla =   200612. Conf =  38636. Learn =  12544.    1 MB   0 MB     8.80 sec 
+  63 + : Var =   57100. Cla =   200612. Conf =  38636. Learn =  12544.    1 MB   0 MB     8.80 sec 
+  64 + : Var =   57100. Cla =   200612. Conf =  38636. Learn =  12544.    1 MB   0 MB     8.80 sec 
+  65 + : Var =   57100. Cla =   200612. Conf =  38636. Learn =  12544.    1 MB   0 MB     8.80 sec 
+  66 + : Var =   61670. Cla =   217725. Conf =  46480. Learn =  20386.    1 MB   0 MB    10.86 sec 
+  67 + : Var =   61670. Cla =   217725. Conf =  46480. Learn =  20386.    1 MB   0 MB    10.86 sec 
+  68 + : Var =   61670. Cla =   217725. Conf =  46480. Learn =  20386.    1 MB   0 MB    10.86 sec 
+  69 + : Var =   61670. Cla =   217725. Conf =  46480. Learn =  20386.    1 MB   0 MB    10.86 sec 
+  70 + : Var =   66240. Cla =   234838. Conf =  55866. Learn =  17316.    1 MB   0 MB    13.20 sec 
+  71 + : Var =   66240. Cla =   234838. Conf =  55866. Learn =  17316.    1 MB   0 MB    13.20 sec 
+  72 + : Var =   66240. Cla =   234838. Conf =  55866. Learn =  17316.    1 MB   0 MB    13.20 sec 
+  73 + : Var =   66240. Cla =   234838. Conf =  55866. Learn =  17316.    1 MB   0 MB    13.20 sec 
+  74 + : Var =   70810. Cla =   251956. Conf =  67069. Learn =  28512.    1 MB   0 MB    16.40 sec 
+  75 + : Var =   70810. Cla =   251956. Conf =  67069. Learn =  28512.    1 MB   0 MB    16.40 sec 
+  76 + : Var =   70810. Cla =   251956. Conf =  67069. Learn =  28512.    1 MB   0 MB    16.40 sec 
+  77 + : Var =   70810. Cla =   251956. Conf =  67069. Learn =  28512.    1 MB   0 MB    16.40 sec 
+  78 + : Var =   75380. Cla =   269069. Conf =  78638. Learn =  25168.    1 MB   0 MB    19.91 sec 
+  79 + : Var =   75380. Cla =   269069. Conf =  78638. Learn =  25168.    1 MB   0 MB    19.91 sec 
+  80 + : Var =   75380. Cla =   269069. Conf =  78638. Learn =  25168.    1 MB   0 MB    19.91 sec 
+  81 + : Var =   75380. Cla =   269069. Conf =  78638. Learn =  25168.    1 MB   0 MB    19.91 sec 
+  82 + : Var =   79950. Cla =   286187. Conf =  93389. Learn =  22256.    1 MB   0 MB    24.13 sec 
+  83 + : Var =   79950. Cla =   286187. Conf =  93389. Learn =  22256.    1 MB   0 MB    24.13 sec 
+  84 + : Var =   79950. Cla =   286187. Conf =  93389. Learn =  22256.    1 MB   0 MB    24.13 sec 
+  85 + : Var =   79950. Cla =   286187. Conf =  93389. Learn =  22256.    1 MB   0 MB    24.13 sec 
+  86 + : Var =   84520. Cla =   303300. Conf = 104898. Learn =  33763.    1 MB   0 MB    27.92 sec 
+  87 + : Var =   84520. Cla =   303300. Conf = 104898. Learn =  33763.    1 MB   0 MB    27.92 sec 
+  88 + : Var =   84520. Cla =   303300. Conf = 104898. Learn =  33763.    2 MB   0 MB    27.92 sec 
+  89 + : Var =   84520. Cla =   303300. Conf = 104898. Learn =  33763.    2 MB   0 MB    27.92 sec 
+  90 + : Var =   89090. Cla =   320413. Conf = 122149. Learn =  31209.    2 MB   0 MB    34.00 sec 
+  91 + : Var =   89090. Cla =   320413. Conf = 122149. Learn =  31209.    2 MB   0 MB    34.00 sec 
+  92 + : Var =   89090. Cla =   320413. Conf = 122149. Learn =  31209.    2 MB   0 MB    34.00 sec 
+  93 + : Var =   89090. Cla =   320413. Conf = 122149. Learn =  31209.    2 MB   0 MB    34.00 sec 
+  94 + : Var =   93660. Cla =   337526. Conf = 144517. Learn =  31449.    2 MB   0 MB    43.25 sec 
+  95 + : Var =   93660. Cla =   337526. Conf = 144517. Learn =  31449.    2 MB   0 MB    43.25 sec 
+  96 + : Var =   93660. Cla =   337526. Conf = 144517. Learn =  31449.    2 MB   0 MB    43.25 sec 
+  97 + : Var =   93660. Cla =   337526. Conf = 144517. Learn =  31449.    2 MB   0 MB    43.25 sec 
+  98 + : Var =   98230. Cla =   354639. Conf = 161864. Learn =  48790.    2 MB   0 MB    50.51 sec 
+  99 + : Var =   98230. Cla =   354639. Conf = 161864. Learn =  48790.    2 MB   0 MB    50.51 sec 
+ 100 + : Var =   98230. Cla =   354639. Conf = 161864. Learn =  48790.    2 MB   0 MB    50.52 sec 
+ 101 + : Var =   98230. Cla =   354639. Conf = 161864. Learn =  48790.    2 MB   0 MB    50.52 sec 
+ 102 + : Var =  102800. Cla =   371752. Conf = 182663. Learn =  45435.    2 MB   0 MB    57.92 sec 
+ 103 + : Var =  102800. Cla =   371752. Conf = 182663. Learn =  45435.    2 MB   0 MB    57.92 sec 
+ 104 + : Var =  102800. Cla =   371752. Conf = 182663. Learn =  45435.    2 MB   0 MB    57.92 sec 
+ 105 + : Var =  102800. Cla =   371752. Conf = 182663. Learn =  45435.    2 MB   0 MB    57.92 sec 
+Runtime:  CNF = 0.3 sec (0.4 %)  UNSAT = 57.6 sec (95.9 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 2.2 sec (3.6 %)
+LStart(P) = 0  LDelta(Q) = 0  LRatio(R) = 0  ReduceDB = 0  Vars = 107370 Used = 0 (0.00 %) Clauses = 4690424262295552000
+Buffs = 36104. Dups = 0.   Hash hits = 4783.  Hash misses = 93275.  UniProps = 0.
+No output asserted in 106 frames. Resource limit reached (timeout 60 sec). Time =    60.11 sec
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+
+106
+starting abc_result(frame=0, var=1, cla=0, conf=0, mem=0, to=0.03, asrt=-1, tt=0.03, ld=0)
+cal_reward 0 105 0.9965286981796612 abc_result(frame=105, var=102800, cla=371752, conf=182663, mem=2, to=0, asrt=-1, tt=57.92, ld=105)
+Action 3 reward 0.9965286981796612 All reward [3.33740951 3.35114631 3.3510201  3.35134874        inf        inf
+        inf]
+------- ## --------- Starting with depth 0  Ending depth 105
+bmc2 Training for action 0 105 20 20 20 20
+bmc2 Last frame (83, 256008, 119769, 49.23) 1
+Next frame 84 Next time out 52.3125
+0 Prediction for action (0, 'bmc2'), for time 372.8924999999999, frames 106 188 27
+bmc3 Training for action 1 105 23 23 23 23
+bmc3 Last frame (90, 323592, 142790, 50.84) 1
+Next frame 94 Next time out 61.650000000000006
+0 Prediction for action (1, 'bmc3'), for time 342.71000000000004, frames 106 198 31
+bmc3s Training for action 2 105 23 23 23 23
+bmc3s Last frame (90, 307833, 122017, 52.32) 1
+Next frame 94 Next time out 63.1
+0 Prediction for action (2, 'bmc3s'), for time 343.38000000000005, frames 106 198 32
+bmc3g Training for action 3 105 26 26 26 26
+bmc3g Last frame (102, 371752, 182663, 57.92) 1
+Next frame 106 Next time out 65.33000000000001
+0 Prediction for action (3, 'bmc3g'), for time 257.9900000000001, frames 106 210 47
+Next time out {0: (372.8924999999999, 106), 1: (342.71000000000004, 106), 2: (343.38000000000005, 106), 3: (257.9900000000001, 106), 4: (-1, -1), 5: (-1, -1), 6: (-1, -1)}
+True Partitions for engines [1, 1, 1, 1, 1, 1, 1]
+# exploring -- 3 explore True best_sd 105 max_conf 371752
+Total time till now:  0 Current time out  60.0
+
+#### iter  3 3 bmc3g current state 0 time taken 58 60.0 totalTime 0 ss (3, 58, 0.9965286981796612, 0, 60.0, 0) abc_result(frame=105, var=102800, cla=371752, conf=182663, mem=2, to=0, asrt=-1, tt=57.92, ld=105)
+--------- Iteration 3 end ------
+------Iteration 4 start ------
+Total time till now -- starting:  0 repeated_blocker 0
+4 7 Initial exploring select 4 bmcu
+4 4 0 Calculating time out explore 60.0 60.0 total till now 0
+Next time out 60.0 frame_out 0.0 for chosen action 4 bmcu ocount 0 explore True ending 0
+run_engine -- 4 0 60 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -u -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -u -S     0 -T    60 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+Running "bmc3". PI/PO/Reg = 149/1/559. And =   6943. Lev =    30. ObjNums =  4446.
+Params: FramesMax = 0. Start = 0. ConfLimit = 0. TimeOut = 60. SolveAll = 0.
+   0 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   1 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   2 + : Var =     401. Cla =     1095. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   3 + : Var =     401. Cla =     1095. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   4 + : Var =     401. Cla =     1095. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   5 + : Var =     401. Cla =     1095. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   6 + : Var =    2306. Cla =     6730. Conf =      8. Learn =      7.    0 MB   4 MB     0.03 sec 
+   7 + : Var =    2306. Cla =     6730. Conf =      8. Learn =      7.    0 MB   4 MB     0.03 sec 
+   8 + : Var =    2306. Cla =     6730. Conf =      8. Learn =      7.    0 MB   4 MB     0.03 sec 
+   9 + : Var =    2306. Cla =     6730. Conf =      8. Learn =      7.    0 MB   4 MB     0.03 sec 
+  10 + : Var =    5063. Cla =    15356. Conf =     17. Learn =     15.    0 MB   4 MB     0.04 sec 
+  11 + : Var =    5063. Cla =    15356. Conf =     17. Learn =     15.    0 MB   4 MB     0.04 sec 
+  12 + : Var =    5063. Cla =    15356. Conf =     17. Learn =     15.    0 MB   4 MB     0.04 sec 
+  13 + : Var =    5063. Cla =    15356. Conf =     17. Learn =     15.    0 MB   4 MB     0.04 sec 
+  14 + : Var =    8015. Cla =    25161. Conf =     72. Learn =     68.    0 MB   5 MB     0.04 sec 
+  15 + : Var =    8015. Cla =    25161. Conf =     72. Learn =     68.    0 MB   5 MB     0.04 sec 
+  16 + : Var =    8015. Cla =    25161. Conf =     72. Learn =     68.    0 MB   5 MB     0.04 sec 
+  17 + : Var =    8015. Cla =    25161. Conf =     72. Learn =     68.    0 MB   5 MB     0.04 sec 
+  18 + : Var =   11209. Cla =    36049. Conf =    184. Learn =    178.    0 MB   5 MB     0.06 sec 
+  19 + : Var =   11209. Cla =    36049. Conf =    184. Learn =    178.    0 MB   5 MB     0.06 sec 
+  20 + : Var =   11209. Cla =    36049. Conf =    184. Learn =    178.    0 MB   5 MB     0.06 sec 
+  21 + : Var =   11209. Cla =    36049. Conf =    184. Learn =    178.    0 MB   5 MB     0.06 sec 
+  22 + : Var =   14610. Cla =    47785. Conf =    493. Learn =    485.    0 MB   5 MB     0.10 sec 
+  23 + : Var =   14610. Cla =    47785. Conf =    493. Learn =    485.    0 MB   5 MB     0.10 sec 
+  24 + : Var =   14610. Cla =    47785. Conf =    493. Learn =    485.    0 MB   5 MB     0.10 sec 
+  25 + : Var =   14610. Cla =    47785. Conf =    493. Learn =    485.    0 MB   5 MB     0.10 sec 
+  26 + : Var =   18195. Cla =    60386. Conf =    923. Learn =    912.    0 MB   6 MB     0.16 sec 
+  27 + : Var =   18195. Cla =    60386. Conf =    923. Learn =    912.    0 MB   6 MB     0.16 sec 
+  28 + : Var =   18195. Cla =    60386. Conf =    923. Learn =    912.    0 MB   6 MB     0.16 sec 
+  29 + : Var =   18195. Cla =    60386. Conf =    923. Learn =    912.    1 MB   6 MB     0.16 sec 
+  30 + : Var =   21963. Cla =    73792. Conf =   1600. Learn =   1587.    1 MB   6 MB     0.27 sec 
+  31 + : Var =   21963. Cla =    73792. Conf =   1600. Learn =   1587.    1 MB   6 MB     0.27 sec 
+  32 + : Var =   21963. Cla =    73792. Conf =   1600. Learn =   1587.    1 MB   6 MB     0.27 sec 
+  33 + : Var =   21963. Cla =    73792. Conf =   1600. Learn =   1587.    1 MB   6 MB     0.27 sec 
+  34 + : Var =   25921. Cla =    88006. Conf =   2792. Learn =   2777.    1 MB   7 MB     0.47 sec 
+  35 + : Var =   25921. Cla =    88006. Conf =   2792. Learn =   2777.    1 MB   7 MB     0.47 sec 
+  36 + : Var =   25921. Cla =    88006. Conf =   2792. Learn =   2777.    1 MB   7 MB     0.47 sec 
+  37 + : Var =   25921. Cla =    88006. Conf =   2792. Learn =   2777.    1 MB   7 MB     0.47 sec 
+  38 + : Var =   30068. Cla =   103063. Conf =   4491. Learn =   4474.    1 MB   8 MB     0.84 sec 
+  39 + : Var =   30068. Cla =   103063. Conf =   4491. Learn =   4474.    1 MB   8 MB     0.84 sec 
+  40 + : Var =   30068. Cla =   103063. Conf =   4491. Learn =   4474.    1 MB   8 MB     0.84 sec 
+  41 + : Var =   30068. Cla =   103063. Conf =   4491. Learn =   4474.    1 MB   8 MB     0.84 sec 
+  42 + : Var =   34375. Cla =   118901. Conf =   7350. Learn =   7331.    1 MB   9 MB     1.49 sec 
+  43 + : Var =   34375. Cla =   118901. Conf =   7350. Learn =   7331.    1 MB   9 MB     1.49 sec 
+  44 + : Var =   34375. Cla =   118901. Conf =   7350. Learn =   7331.    1 MB   9 MB     1.50 sec 
+  45 + : Var =   34375. Cla =   118901. Conf =   7350. Learn =   7331.    1 MB   9 MB     1.50 sec 
+  46 + : Var =   38835. Cla =   135537. Conf =  11925. Learn =   9940.    1 MB   9 MB     2.69 sec 
+  47 + : Var =   38835. Cla =   135537. Conf =  11925. Learn =   9940.    1 MB   9 MB     2.69 sec 
+  48 + : Var =   38835. Cla =   135537. Conf =  11925. Learn =   9940.    1 MB   9 MB     2.69 sec 
+  49 + : Var =   38835. Cla =   135537. Conf =  11925. Learn =   9940.    1 MB   9 MB     2.69 sec 
+  50 + : Var =   43390. Cla =   152579. Conf =  17282. Learn =  12951.    1 MB  12 MB     4.00 sec 
+  51 + : Var =   43390. Cla =   152579. Conf =  17282. Learn =  12951.    1 MB  12 MB     4.00 sec 
+  52 + : Var =   43390. Cla =   152579. Conf =  17282. Learn =  12951.    1 MB  12 MB     4.00 sec 
+  53 + : Var =   43390. Cla =   152579. Conf =  17282. Learn =  12951.    1 MB  12 MB     4.00 sec 
+  54 + : Var =   47960. Cla =   169631. Conf =  22949. Learn =  15872.    1 MB  13 MB     5.48 sec 
+  55 + : Var =   47960. Cla =   169631. Conf =  22949. Learn =  15872.    1 MB  13 MB     5.48 sec 
+  56 + : Var =   47960. Cla =   169631. Conf =  22949. Learn =  15872.    1 MB  13 MB     5.48 sec 
+  57 + : Var =   47960. Cla =   169631. Conf =  22949. Learn =  15872.    1 MB  13 MB     5.48 sec 
+  58 + : Var =   52530. Cla =   186688. Conf =  29646. Learn =  16019.    1 MB  15 MB     7.31 sec 
+  59 + : Var =   52530. Cla =   186688. Conf =  29646. Learn =  16019.    1 MB  15 MB     7.31 sec 
+  60 + : Var =   52530. Cla =   186688. Conf =  29646. Learn =  16019.    1 MB  15 MB     7.32 sec 
+  61 + : Var =   52530. Cla =   186688. Conf =  29646. Learn =  16019.    1 MB  15 MB     7.32 sec 
+  62 + : Var =   57100. Cla =   203801. Conf =  37089. Learn =  20128.    1 MB  17 MB     9.49 sec 
+  63 + : Var =   57100. Cla =   203801. Conf =  37089. Learn =  20128.    1 MB  17 MB     9.49 sec 
+  64 + : Var =   57100. Cla =   203801. Conf =  37089. Learn =  20128.    1 MB  17 MB     9.49 sec 
+  65 + : Var =   57100. Cla =   203801. Conf =  37089. Learn =  20128.    1 MB  17 MB     9.49 sec 
+  66 + : Var =   61670. Cla =   220914. Conf =  45503. Learn =  23203.    1 MB  18 MB    12.06 sec 
+  67 + : Var =   61670. Cla =   220914. Conf =  45503. Learn =  23203.    1 MB  18 MB    12.06 sec 
+  68 + : Var =   61670. Cla =   220914. Conf =  45503. Learn =  23203.    1 MB  18 MB    12.06 sec 
+  69 + : Var =   61670. Cla =   220914. Conf =  45503. Learn =  23203.    1 MB  18 MB    12.06 sec 
+  70 + : Var =   66240. Cla =   238027. Conf =  54601. Learn =  22055.    1 MB  19 MB    15.03 sec 
+  71 + : Var =   66240. Cla =   238027. Conf =  54601. Learn =  22055.    1 MB  19 MB    15.03 sec 
+  72 + : Var =   66240. Cla =   238027. Conf =  54601. Learn =  22055.    1 MB  19 MB    15.03 sec 
+  73 + : Var =   66240. Cla =   238027. Conf =  54601. Learn =  22055.    1 MB  19 MB    15.03 sec 
+  74 + : Var =   70810. Cla =   255140. Conf =  65682. Learn =  28205.    1 MB  21 MB    18.80 sec 
+  75 + : Var =   70810. Cla =   255140. Conf =  65682. Learn =  28205.    1 MB  21 MB    18.80 sec 
+  76 + : Var =   70810. Cla =   255140. Conf =  65682. Learn =  28205.    1 MB  21 MB    18.80 sec 
+  77 + : Var =   70810. Cla =   255140. Conf =  65682. Learn =  28205.    1 MB  21 MB    18.80 sec 
+  78 + : Var =   75380. Cla =   272253. Conf =  77434. Learn =  28580.    1 MB  21 MB    22.82 sec 
+  79 + : Var =   75380. Cla =   272253. Conf =  77434. Learn =  28580.    1 MB  21 MB    22.82 sec 
+  80 + : Var =   75380. Cla =   272253. Conf =  77434. Learn =  28580.    1 MB  21 MB    22.82 sec 
+  81 + : Var =   75380. Cla =   272253. Conf =  77434. Learn =  28580.    1 MB  21 MB    22.82 sec 
+  82 + : Var =   79950. Cla =   289366. Conf =  94758. Learn =  34039.    1 MB  23 MB    30.48 sec 
+  83 + : Var =   79950. Cla =   289366. Conf =  94758. Learn =  34039.    1 MB  23 MB    30.48 sec 
+  84 + : Var =   79950. Cla =   289366. Conf =  94758. Learn =  34039.    1 MB  23 MB    30.48 sec 
+  85 + : Var =   79950. Cla =   289366. Conf =  94758. Learn =  34039.    1 MB  23 MB    30.48 sec 
+  86 + : Var =   84520. Cla =   306479. Conf = 115910. Learn =  41995.    1 MB  26 MB    40.45 sec 
+  87 + : Var =   84520. Cla =   306479. Conf = 115910. Learn =  41995.    1 MB  26 MB    40.45 sec 
+  88 + : Var =   84520. Cla =   306479. Conf = 115910. Learn =  41995.    2 MB  26 MB    40.45 sec 
+  89 + : Var =   84520. Cla =   306479. Conf = 115910. Learn =  41995.    2 MB  26 MB    40.45 sec 
+  90 + : Var =   89090. Cla =   323592. Conf = 142790. Learn =  44766.    2 MB  26 MB    50.95 sec 
+  91 + : Var =   89090. Cla =   323592. Conf = 142790. Learn =  44766.    2 MB  26 MB    50.95 sec 
+  92 + : Var =   89090. Cla =   323592. Conf = 142790. Learn =  44766.    2 MB  26 MB    50.95 sec 
+  93 + : Var =   89090. Cla =   323592. Conf = 142790. Learn =  44766.    2 MB  26 MB    50.95 sec 
+Runtime:  CNF = 0.1 sec (0.2 %)  UNSAT = 50.8 sec (84.5 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 9.2 sec (15.2 %)
+LStart(P) = 10000  LDelta(Q) = 2000  LRatio(R) = 80  ReduceDB = 21  Vars = 93660 Used = 90306 (96.42 %) Clauses = 4689596879795650560
+Buffs = 31766. Dups = 0.   Hash hits = 4183.  Hash misses = 81167.  UniProps = 0.
+No output asserted in 94 frames. Resource limit reached (timeout 60 sec). Time =    60.13 sec
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+
+94
+starting abc_result(frame=0, var=1, cla=0, conf=0, mem=4, to=0.03, asrt=-1, tt=0.03, ld=0)
+cal_reward 0 93 0.9963123822511767 abc_result(frame=93, var=89090, cla=323592, conf=142790, mem=26, to=0, asrt=-1, tt=50.95, ld=93)
+Action 4 reward 0.9963123822511767 All reward [3.51986195 3.53359874 3.53347253 3.53380118 3.53358486        inf
+        inf]
+------- ## --------- Starting with depth 0  Ending depth 93
+bmc2 Training for action 0 93 20 20 20 20
+bmc2 Last frame (83, 256008, 119769, 49.23) 1
+Next frame 84 Next time out 52.3125
+0 Prediction for action (0, 'bmc2'), for time 335.9024999999999, frames 94 176 27
+bmc3 Training for action 1 93 23 23 23 23
+bmc3 Last frame (90, 323592, 142790, 50.84) 1
+Next frame 94 Next time out 61.650000000000006
+0 Prediction for action (1, 'bmc3'), for time 310.2800000000001, frames 94 186 30
+bmc3s Training for action 2 93 23 23 23 23
+bmc3s Last frame (90, 307833, 122017, 52.32) 1
+Next frame 94 Next time out 63.1
+0 Prediction for action (2, 'bmc3s'), for time 311.04, frames 94 186 31
+bmc3g Training for action 3 93 26 26 26 26
+bmc3g Last frame (102, 371752, 182663, 57.92) 1
+Next frame 106 Next time out 65.33000000000001
+0 Prediction for action (3, 'bmc3g'), for time 235.76000000000008, frames 94 198 46
+bmcu Training for action 4 93 23 23 23 23
+bmcu Last frame (90, 323592, 142790, 50.95) 1
+Next frame 94 Next time out 61.45
+0 Prediction for action (4, 'bmcu'), for time 302.95, frames 94 186 31
+Next time out {0: (335.9024999999999, 94), 1: (310.2800000000001, 94), 2: (311.04, 94), 3: (235.76000000000008, 94), 4: (302.95, 94), 5: (-1, -1), 6: (-1, -1)}
+True Partitions for engines [1, 1, 1, 1, 1, 1, 1]
+# exploring -- 4 explore True best_sd 105 max_conf 371752
+Total time till now:  0 Current time out  60.0
+
+#### iter  4 4 bmcu current state 0 time taken 51 60.0 totalTime 0 ss (4, 51, 0.9963123822511767, 0, 60.0, 0) abc_result(frame=93, var=89090, cla=323592, conf=142790, mem=26, to=0, asrt=-1, tt=50.95, ld=93)
+--------- Iteration 4 end ------
+------Iteration 5 start ------
+Total time till now -- starting:  0 repeated_blocker 0
+5 7 Initial exploring select 5 bmc3r
+5 4 1 Calculating time out explore 60.0 60.0 total till now 0
+Next time out 60.0 frame_out 0.0 for chosen action 5 bmc3r ocount 0 explore True ending 0
+run_engine -- 5 0 60 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -r -S     0 -T    60 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -r -S     0 -T    60 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+Running "bmc3". PI/PO/Reg = 149/1/559. And =   6943. Lev =    30. ObjNums =  4446.
+Params: FramesMax = 0. Start = 0. ConfLimit = 0. TimeOut = 60. SolveAll = 0.
+   0 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   1 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   2 + : Var =     401. Cla =     1095. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   3 + : Var =     401. Cla =     1095. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   4 + : Var =     401. Cla =     1095. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   5 + : Var =     401. Cla =     1095. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   6 + : Var =    2306. Cla =     6730. Conf =      8. Learn =      7.    0 MB   4 MB     0.03 sec 
+   7 + : Var =    2306. Cla =     6730. Conf =      8. Learn =      7.    0 MB   4 MB     0.03 sec 
+   8 + : Var =    2306. Cla =     6730. Conf =      8. Learn =      7.    0 MB   4 MB     0.03 sec 
+   9 + : Var =    2306. Cla =     6730. Conf =      8. Learn =      7.    0 MB   4 MB     0.03 sec 
+  10 + : Var =    5063. Cla =    15356. Conf =     17. Learn =     15.    0 MB   4 MB     0.03 sec 
+  11 + : Var =    5063. Cla =    15356. Conf =     17. Learn =     15.    0 MB   4 MB     0.03 sec 
+  12 + : Var =    5063. Cla =    15356. Conf =     17. Learn =     15.    0 MB   4 MB     0.03 sec 
+  13 + : Var =    5063. Cla =    15356. Conf =     17. Learn =     15.    0 MB   4 MB     0.03 sec 
+  14 + : Var =    8015. Cla =    25161. Conf =     72. Learn =     68.    0 MB   5 MB     0.04 sec 
+  15 + : Var =    8015. Cla =    25161. Conf =     72. Learn =     68.    0 MB   5 MB     0.04 sec 
+  16 + : Var =    8015. Cla =    25161. Conf =     72. Learn =     68.    0 MB   5 MB     0.04 sec 
+  17 + : Var =    8015. Cla =    25161. Conf =     72. Learn =     68.    0 MB   5 MB     0.04 sec 
+  18 + : Var =   11209. Cla =    36049. Conf =    184. Learn =    178.    0 MB   5 MB     0.05 sec 
+  19 + : Var =   11209. Cla =    36049. Conf =    184. Learn =    178.    0 MB   5 MB     0.05 sec 
+  20 + : Var =   11209. Cla =    36049. Conf =    184. Learn =    178.    0 MB   5 MB     0.05 sec 
+  21 + : Var =   11209. Cla =    36049. Conf =    184. Learn =    178.    0 MB   5 MB     0.05 sec 
+  22 + : Var =   14610. Cla =    47785. Conf =    505. Learn =    497.    0 MB   5 MB     0.08 sec 
+  23 + : Var =   14610. Cla =    47785. Conf =    505. Learn =    497.    0 MB   5 MB     0.08 sec 
+  24 + : Var =   14610. Cla =    47785. Conf =    505. Learn =    497.    0 MB   5 MB     0.08 sec 
+  25 + : Var =   14610. Cla =    47785. Conf =    505. Learn =    497.    0 MB   5 MB     0.08 sec 
+  26 + : Var =   18195. Cla =    60386. Conf =    927. Learn =    917.    0 MB   6 MB     0.14 sec 
+  27 + : Var =   18195. Cla =    60386. Conf =    927. Learn =    917.    0 MB   6 MB     0.14 sec 
+  28 + : Var =   18195. Cla =    60386. Conf =    927. Learn =    917.    0 MB   6 MB     0.14 sec 
+  29 + : Var =   18195. Cla =    60386. Conf =    927. Learn =    917.    1 MB   6 MB     0.14 sec 
+  30 + : Var =   21963. Cla =    73797. Conf =   1618. Learn =   1606.    1 MB   6 MB     0.23 sec 
+  31 + : Var =   21963. Cla =    73797. Conf =   1618. Learn =   1606.    1 MB   6 MB     0.23 sec 
+  32 + : Var =   21963. Cla =    73797. Conf =   1618. Learn =   1606.    1 MB   6 MB     0.23 sec 
+  33 + : Var =   21963. Cla =    73797. Conf =   1618. Learn =   1606.    1 MB   6 MB     0.23 sec 
+  34 + : Var =   25921. Cla =    88011. Conf =   3128. Learn =   3114.    1 MB   7 MB     0.49 sec 
+  35 + : Var =   25921. Cla =    88011. Conf =   3128. Learn =   3114.    1 MB   7 MB     0.49 sec 
+  36 + : Var =   25921. Cla =    88011. Conf =   3128. Learn =   3114.    1 MB   7 MB     0.49 sec 
+  37 + : Var =   25921. Cla =    88011. Conf =   3128. Learn =   3114.    1 MB   7 MB     0.49 sec 
+  38 + : Var =   30068. Cla =   103068. Conf =   4770. Learn =   4752.    1 MB   8 MB     0.90 sec 
+  39 + : Var =   30068. Cla =   103068. Conf =   4770. Learn =   4752.    1 MB   8 MB     0.90 sec 
+  40 + : Var =   30068. Cla =   103068. Conf =   4770. Learn =   4752.    1 MB   8 MB     0.90 sec 
+  41 + : Var =   30068. Cla =   103068. Conf =   4770. Learn =   4752.    1 MB   8 MB     0.90 sec 
+  42 + : Var =   34375. Cla =   118906. Conf =   8034. Learn =   8014.    1 MB   9 MB     1.69 sec 
+  43 + : Var =   34375. Cla =   118906. Conf =   8034. Learn =   8014.    1 MB   9 MB     1.69 sec 
+  44 + : Var =   34375. Cla =   118906. Conf =   8034. Learn =   8014.    1 MB   9 MB     1.69 sec 
+  45 + : Var =   34375. Cla =   118906. Conf =   8034. Learn =   8014.    1 MB   9 MB     1.69 sec 
+  46 + : Var =   38835. Cla =   135542. Conf =  11140. Learn =   9153.    1 MB   9 MB     2.42 sec 
+  47 + : Var =   38835. Cla =   135542. Conf =  11140. Learn =   9153.    1 MB   9 MB     2.42 sec 
+  48 + : Var =   38835. Cla =   135542. Conf =  11140. Learn =   9153.    1 MB   9 MB     2.42 sec 
+  49 + : Var =   38835. Cla =   135542. Conf =  11140. Learn =   9153.    1 MB   9 MB     2.42 sec 
+  50 + : Var =   43390. Cla =   152584. Conf =  15468. Learn =  11121.    1 MB  12 MB     3.53 sec 
+  51 + : Var =   43390. Cla =   152584. Conf =  15468. Learn =  11121.    1 MB  12 MB     3.53 sec 
+  52 + : Var =   43390. Cla =   152584. Conf =  15468. Learn =  11121.    1 MB  12 MB     3.53 sec 
+  53 + : Var =   43390. Cla =   152584. Conf =  15468. Learn =  11121.    1 MB  12 MB     3.53 sec 
+  54 + : Var =   47960. Cla =   169702. Conf =  22061. Learn =  14955.    1 MB  13 MB     5.18 sec 
+  55 + : Var =   47960. Cla =   169702. Conf =  22061. Learn =  14955.    1 MB  13 MB     5.18 sec 
+  56 + : Var =   47960. Cla =   169702. Conf =  22061. Learn =  14955.    1 MB  13 MB     5.18 sec 
+  57 + : Var =   47960. Cla =   169702. Conf =  22061. Learn =  14955.    1 MB  13 MB     5.18 sec 
+  58 + : Var =   52530. Cla =   186815. Conf =  31968. Learn =  18166.    1 MB  18 MB     7.59 sec 
+  59 + : Var =   52530. Cla =   186815. Conf =  31968. Learn =  18166.    1 MB  18 MB     7.59 sec 
+  60 + : Var =   52530. Cla =   186815. Conf =  31968. Learn =  18166.    1 MB  18 MB     7.59 sec 
+  61 + : Var =   52530. Cla =   186815. Conf =  31968. Learn =  18166.    1 MB  18 MB     7.59 sec 
+  62 + : Var =   57100. Cla =   203933. Conf =  44416. Learn =  22382.    1 MB  19 MB    11.87 sec 
+  63 + : Var =   57100. Cla =   203933. Conf =  44416. Learn =  22382.    1 MB  19 MB    11.87 sec 
+  64 + : Var =   57100. Cla =   203933. Conf =  44416. Learn =  22382.    1 MB  19 MB    11.87 sec 
+  65 + : Var =   57100. Cla =   203933. Conf =  44416. Learn =  22382.    1 MB  19 MB    11.87 sec 
+  66 + : Var =   61670. Cla =   221046. Conf =  52846. Learn =  21187.    1 MB  18 MB    14.87 sec 
+  67 + : Var =   61670. Cla =   221046. Conf =  52846. Learn =  21187.    1 MB  18 MB    14.87 sec 
+  68 + : Var =   61670. Cla =   221046. Conf =  52846. Learn =  21187.    1 MB  18 MB    14.87 sec 
+  69 + : Var =   61670. Cla =   221046. Conf =  52846. Learn =  21187.    1 MB  18 MB    14.87 sec 
+  70 + : Var =   66240. Cla =   238159. Conf =  63622. Learn =  23957.    1 MB  20 MB    18.70 sec 
+  71 + : Var =   66240. Cla =   238159. Conf =  63622. Learn =  23957.    1 MB  20 MB    18.70 sec 
+  72 + : Var =   66240. Cla =   238159. Conf =  63622. Learn =  23957.    1 MB  20 MB    18.70 sec 
+  73 + : Var =   66240. Cla =   238159. Conf =  63622. Learn =  23957.    1 MB  20 MB    18.71 sec 
+  74 + : Var =   70810. Cla =   255277. Conf =  75959. Learn =  30347.    1 MB  22 MB    23.24 sec 
+  75 + : Var =   70810. Cla =   255277. Conf =  75959. Learn =  30347.    1 MB  22 MB    23.24 sec 
+  76 + : Var =   70810. Cla =   255277. Conf =  75959. Learn =  30347.    1 MB  22 MB    23.24 sec 
+  77 + : Var =   70810. Cla =   255277. Conf =  75959. Learn =  30347.    1 MB  22 MB    23.24 sec 
+  78 + : Var =   75380. Cla =   272390. Conf =  92596. Learn =  34902.    1 MB  23 MB    29.66 sec 
+  79 + : Var =   75380. Cla =   272390. Conf =  92596. Learn =  34902.    1 MB  23 MB    29.66 sec 
+  80 + : Var =   75380. Cla =   272390. Conf =  92596. Learn =  34902.    1 MB  23 MB    29.66 sec 
+  81 + : Var =   75380. Cla =   272390. Conf =  92596. Learn =  34902.    1 MB  23 MB    29.66 sec 
+  82 + : Var =   79950. Cla =   289503. Conf = 117327. Learn =  39476.    1 MB  26 MB    40.56 sec 
+  83 + : Var =   79950. Cla =   289503. Conf = 117327. Learn =  39476.    1 MB  26 MB    40.56 sec 
+  84 + : Var =   79950. Cla =   289503. Conf = 117327. Learn =  39476.    1 MB  26 MB    40.56 sec 
+  85 + : Var =   79950. Cla =   289503. Conf = 117327. Learn =  39476.    1 MB  26 MB    40.56 sec 
+  86 + : Var =   84520. Cla =   306616. Conf = 135952. Learn =  43905.    1 MB  26 MB    50.44 sec 
+  87 + : Var =   84520. Cla =   306616. Conf = 135952. Learn =  43905.    1 MB  26 MB    50.44 sec 
+  88 + : Var =   84520. Cla =   306616. Conf = 135952. Learn =  43905.    2 MB  26 MB    50.44 sec 
+  89 + : Var =   84520. Cla =   306616. Conf = 135952. Learn =  43905.    2 MB  26 MB    50.44 sec 
+Runtime:  CNF = 0.1 sec (0.2 %)  UNSAT = 50.3 sec (83.7 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 9.6 sec (16.0 %)
+LStart(P) = 10000  LDelta(Q) = 2000  LRatio(R) = 80  ReduceDB = 19  Vars = 89090 Used = 86869 (97.51 %) Clauses = 4689305234336382976
+Buffs = 30320. Dups = 0.   Hash hits = 3983.  Hash misses = 77131.  UniProps = 0.
+No output asserted in 90 frames. Resource limit reached (timeout 60 sec). Time =    60.09 sec
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+
+90
+starting abc_result(frame=0, var=1, cla=0, conf=0, mem=4, to=0.03, asrt=-1, tt=0.03, ld=0)
+cal_reward 0 89 0.9960447745651142 abc_result(frame=89, var=84520, cla=306616, conf=135952, mem=26, to=0, asrt=-1, tt=50.44, ld=89)
+Action 5 reward 0.9960447745651142 All reward [3.65972187 3.67345866 3.67333245 3.6736611  3.67344478 3.67317717
+        inf]
+------- ## --------- Starting with depth 0  Ending depth 89
+bmc2 Training for action 0 89 20 20 20 20
+bmc2 Last frame (83, 256008, 119769, 49.23) 1
+Next frame 84 Next time out 52.3125
+0 Prediction for action (0, 'bmc2'), for time 323.57249999999993, frames 90 172 27
+bmc3 Training for action 1 89 23 23 23 23
+bmc3 Last frame (90, 323592, 142790, 50.84) 1
+Next frame 94 Next time out 61.650000000000006
+0 Prediction for action (1, 'bmc3'), for time 299.47, frames 90 182 30
+bmc3s Training for action 2 89 23 23 23 23
+bmc3s Last frame (90, 307833, 122017, 52.32) 1
+Next frame 94 Next time out 63.1
+0 Prediction for action (2, 'bmc3s'), for time 300.26000000000005, frames 90 182 31
+bmc3g Training for action 3 89 26 26 26 26
+bmc3g Last frame (102, 371752, 182663, 57.92) 1
+Next frame 106 Next time out 65.33000000000001
+0 Prediction for action (3, 'bmc3g'), for time 228.35000000000008, frames 90 194 45
+bmcu Training for action 4 89 23 23 23 23
+bmcu Last frame (90, 323592, 142790, 50.95) 1
+Next frame 94 Next time out 61.45
+0 Prediction for action (4, 'bmcu'), for time 292.45, frames 90 182 31
+bmc3r Training for action 5 89 22 22 22 22
+bmc3r Last frame (86, 306616, 135952, 50.44) 1
+Next frame 90 Next time out 60.31999999999999
+0 Prediction for action (5, 'bmc3r'), for time 277.6799999999999, frames 90 178 32
+Next time out {0: (323.57249999999993, 90), 1: (299.47, 90), 2: (300.26000000000005, 90), 3: (228.35000000000008, 90), 4: (292.45, 90), 5: (277.6799999999999, 90), 6: (-1, -1)}
+True Partitions for engines [1, 1, 1, 1, 1, 1, 1]
+# exploring -- 5 explore True best_sd 105 max_conf 371752
+Total time till now:  0 Current time out  60.0
+
+#### iter  5 5 bmc3r current state 0 time taken 51 60.0 totalTime 0 ss (5, 51, 0.9960447745651142, 0, 60.0, 0) abc_result(frame=89, var=84520, cla=306616, conf=135952, mem=26, to=0, asrt=-1, tt=50.44, ld=89)
+--------- Iteration 5 end ------
+------Iteration 6 start ------
+Total time till now -- starting:  0 repeated_blocker 0
+6 7 Initial exploring select 6 bmc3j2
+6 4 2 Calculating time out explore 60.0 60.0 total till now 0
+Next time out 60.0 frame_out 0.0 for chosen action 6 bmc3j2 ocount 0 explore True ending 0
+run_engine -- 6 0 60 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3  -S     0 -T    60 -F 0 -J 2 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3  -S     0 -T    60 -F 0 -J 2 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+Running "bmc3". PI/PO/Reg = 149/1/559. And =   6943. Lev =    30. ObjNums =  4446.
+Params: FramesMax = 0. Start = 0. ConfLimit = 0. TimeOut = 60. SolveAll = 0.
+   0 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   1 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   2 + : Var =     401. Cla =     1095. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   3 + : Var =     401. Cla =     1095. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   4 + : Var =     401. Cla =     1095. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   5 + : Var =     401. Cla =     1095. Conf =      0. Learn =      0.    0 MB   4 MB     0.03 sec 
+   6 + : Var =    2306. Cla =     6730. Conf =      8. Learn =      7.    0 MB   4 MB     0.03 sec 
+   7 + : Var =    2306. Cla =     6730. Conf =      8. Learn =      7.    0 MB   4 MB     0.03 sec 
+   8 + : Var =    2306. Cla =     6730. Conf =      8. Learn =      7.    0 MB   4 MB     0.03 sec 
+   9 + : Var =    2306. Cla =     6730. Conf =      8. Learn =      7.    0 MB   4 MB     0.03 sec 
+  10 + : Var =    5063. Cla =    15356. Conf =     17. Learn =     15.    0 MB   4 MB     0.03 sec 
+  11 + : Var =    5063. Cla =    15356. Conf =     17. Learn =     15.    0 MB   4 MB     0.03 sec 
+  12 + : Var =    5063. Cla =    15356. Conf =     17. Learn =     15.    0 MB   4 MB     0.03 sec 
+  13 + : Var =    5063. Cla =    15356. Conf =     17. Learn =     15.    0 MB   4 MB     0.03 sec 
+  14 + : Var =    8015. Cla =    25161. Conf =     72. Learn =     68.    0 MB   5 MB     0.04 sec 
+  15 + : Var =    8015. Cla =    25161. Conf =     72. Learn =     68.    0 MB   5 MB     0.04 sec 
+  16 + : Var =    8015. Cla =    25161. Conf =     72. Learn =     68.    0 MB   5 MB     0.04 sec 
+  17 + : Var =    8015. Cla =    25161. Conf =     72. Learn =     68.    0 MB   5 MB     0.04 sec 
+  18 + : Var =   11209. Cla =    36049. Conf =    184. Learn =    178.    0 MB   5 MB     0.05 sec 
+  19 + : Var =   11209. Cla =    36049. Conf =    184. Learn =    178.    0 MB   5 MB     0.05 sec 
+  20 + : Var =   11209. Cla =    36049. Conf =    184. Learn =    178.    0 MB   5 MB     0.05 sec 
+  21 + : Var =   11209. Cla =    36049. Conf =    184. Learn =    178.    0 MB   5 MB     0.05 sec 
+  22 + : Var =   14610. Cla =    47785. Conf =    493. Learn =    485.    0 MB   5 MB     0.09 sec 
+  23 + : Var =   14610. Cla =    47785. Conf =    493. Learn =    485.    0 MB   5 MB     0.09 sec 
+  24 + : Var =   14610. Cla =    47785. Conf =    493. Learn =    485.    0 MB   5 MB     0.09 sec 
+  25 + : Var =   14610. Cla =    47785. Conf =    493. Learn =    485.    0 MB   5 MB     0.09 sec 
+  26 + : Var =   18195. Cla =    60386. Conf =    923. Learn =    912.    0 MB   6 MB     0.15 sec 
+  27 + : Var =   18195. Cla =    60386. Conf =    923. Learn =    912.    0 MB   6 MB     0.15 sec 
+  28 + : Var =   18195. Cla =    60386. Conf =    923. Learn =    912.    0 MB   6 MB     0.15 sec 
+  29 + : Var =   18195. Cla =    60386. Conf =    923. Learn =    912.    1 MB   6 MB     0.15 sec 
+  30 + : Var =   21963. Cla =    73792. Conf =   1600. Learn =   1587.    1 MB   6 MB     0.25 sec 
+  31 + : Var =   21963. Cla =    73792. Conf =   1600. Learn =   1587.    1 MB   6 MB     0.25 sec 
+  32 + : Var =   21963. Cla =    73792. Conf =   1600. Learn =   1587.    1 MB   6 MB     0.25 sec 
+  33 + : Var =   21963. Cla =    73792. Conf =   1600. Learn =   1587.    1 MB   6 MB     0.26 sec 
+  34 + : Var =   25921. Cla =    88006. Conf =   2792. Learn =   2777.    1 MB   7 MB     0.47 sec 
+  35 + : Var =   25921. Cla =    88006. Conf =   2792. Learn =   2777.    1 MB   7 MB     0.47 sec 
+  36 + : Var =   25921. Cla =    88006. Conf =   2792. Learn =   2777.    1 MB   7 MB     0.47 sec 
+  37 + : Var =   25921. Cla =    88006. Conf =   2792. Learn =   2777.    1 MB   7 MB     0.47 sec 
+  38 + : Var =   30068. Cla =   103063. Conf =   4491. Learn =   4474.    1 MB   8 MB     0.84 sec 
+  39 + : Var =   30068. Cla =   103063. Conf =   4491. Learn =   4474.    1 MB   8 MB     0.84 sec 
+  40 + : Var =   30068. Cla =   103063. Conf =   4491. Learn =   4474.    1 MB   8 MB     0.84 sec 
+  41 + : Var =   30068. Cla =   103063. Conf =   4491. Learn =   4474.    1 MB   8 MB     0.84 sec 
+  42 + : Var =   34375. Cla =   118901. Conf =   7350. Learn =   7331.    1 MB   9 MB     1.49 sec 
+  43 + : Var =   34375. Cla =   118901. Conf =   7350. Learn =   7331.    1 MB   9 MB     1.49 sec 
+  44 + : Var =   34375. Cla =   118901. Conf =   7350. Learn =   7331.    1 MB   9 MB     1.49 sec 
+  45 + : Var =   34375. Cla =   118901. Conf =   7350. Learn =   7331.    1 MB   9 MB     1.49 sec 
+  46 + : Var =   38835. Cla =   135537. Conf =  11925. Learn =   9940.    1 MB   9 MB     2.70 sec 
+  47 + : Var =   38835. Cla =   135537. Conf =  11925. Learn =   9940.    1 MB   9 MB     2.70 sec 
+  48 + : Var =   38835. Cla =   135537. Conf =  11925. Learn =   9940.    1 MB   9 MB     2.70 sec 
+  49 + : Var =   38835. Cla =   135537. Conf =  11925. Learn =   9940.    1 MB   9 MB     2.70 sec 
+  50 + : Var =   43390. Cla =   152579. Conf =  17282. Learn =  12951.    1 MB  12 MB     4.05 sec 
+  51 + : Var =   43390. Cla =   152579. Conf =  17282. Learn =  12951.    1 MB  12 MB     4.05 sec 
+  52 + : Var =   43390. Cla =   152579. Conf =  17282. Learn =  12951.    1 MB  12 MB     4.05 sec 
+  53 + : Var =   43390. Cla =   152579. Conf =  17282. Learn =  12951.    1 MB  12 MB     4.05 sec 
+  54 + : Var =   47960. Cla =   169631. Conf =  22949. Learn =  15872.    1 MB  13 MB     5.54 sec 
+  55 + : Var =   47960. Cla =   169631. Conf =  22949. Learn =  15872.    1 MB  13 MB     5.54 sec 
+  56 + : Var =   47960. Cla =   169631. Conf =  22949. Learn =  15872.    1 MB  13 MB     5.54 sec 
+  57 + : Var =   47960. Cla =   169631. Conf =  22949. Learn =  15872.    1 MB  13 MB     5.54 sec 
+  58 + : Var =   52530. Cla =   186688. Conf =  29646. Learn =  16019.    1 MB  15 MB     7.38 sec 
+  59 + : Var =   52530. Cla =   186688. Conf =  29646. Learn =  16019.    1 MB  15 MB     7.38 sec 
+  60 + : Var =   52530. Cla =   186688. Conf =  29646. Learn =  16019.    1 MB  15 MB     7.38 sec 
+  61 + : Var =   52530. Cla =   186688. Conf =  29646. Learn =  16019.    1 MB  15 MB     7.38 sec 
+  62 + : Var =   57100. Cla =   203801. Conf =  37089. Learn =  20128.    1 MB  17 MB     9.49 sec 
+  63 + : Var =   57100. Cla =   203801. Conf =  37089. Learn =  20128.    1 MB  17 MB     9.49 sec 
+  64 + : Var =   57100. Cla =   203801. Conf =  37089. Learn =  20128.    1 MB  17 MB     9.49 sec 
+  65 + : Var =   57100. Cla =   203801. Conf =  37089. Learn =  20128.    1 MB  17 MB     9.49 sec 
+  66 + : Var =   61670. Cla =   220914. Conf =  45503. Learn =  23203.    1 MB  18 MB    12.05 sec 
+  67 + : Var =   61670. Cla =   220914. Conf =  45503. Learn =  23203.    1 MB  18 MB    12.05 sec 
+  68 + : Var =   61670. Cla =   220914. Conf =  45503. Learn =  23203.    1 MB  18 MB    12.05 sec 
+  69 + : Var =   61670. Cla =   220914. Conf =  45503. Learn =  23203.    1 MB  18 MB    12.05 sec 
+  70 + : Var =   66240. Cla =   238027. Conf =  54601. Learn =  22055.    1 MB  19 MB    15.01 sec 
+  71 + : Var =   66240. Cla =   238027. Conf =  54601. Learn =  22055.    1 MB  19 MB    15.01 sec 
+  72 + : Var =   66240. Cla =   238027. Conf =  54601. Learn =  22055.    1 MB  19 MB    15.01 sec 
+  73 + : Var =   66240. Cla =   238027. Conf =  54601. Learn =  22055.    1 MB  19 MB    15.01 sec 
+  74 + : Var =   70810. Cla =   255140. Conf =  65682. Learn =  28205.    1 MB  21 MB    18.69 sec 
+  75 + : Var =   70810. Cla =   255140. Conf =  65682. Learn =  28205.    1 MB  21 MB    18.69 sec 
+  76 + : Var =   70810. Cla =   255140. Conf =  65682. Learn =  28205.    1 MB  21 MB    18.69 sec 
+  77 + : Var =   70810. Cla =   255140. Conf =  65682. Learn =  28205.    1 MB  21 MB    18.69 sec 
+  78 + : Var =   75380. Cla =   272253. Conf =  77434. Learn =  28580.    1 MB  21 MB    22.72 sec 
+  79 + : Var =   75380. Cla =   272253. Conf =  77434. Learn =  28580.    1 MB  21 MB    22.72 sec 
+  80 + : Var =   75380. Cla =   272253. Conf =  77434. Learn =  28580.    1 MB  21 MB    22.72 sec 
+  81 + : Var =   75380. Cla =   272253. Conf =  77434. Learn =  28580.    1 MB  21 MB    22.72 sec 
+  82 + : Var =   79950. Cla =   289366. Conf =  94758. Learn =  34039.    1 MB  23 MB    30.25 sec 
+  83 + : Var =   79950. Cla =   289366. Conf =  94758. Learn =  34039.    1 MB  23 MB    30.25 sec 
+  84 + : Var =   79950. Cla =   289366. Conf =  94758. Learn =  34039.    1 MB  23 MB    30.25 sec 
+  85 + : Var =   79950. Cla =   289366. Conf =  94758. Learn =  34039.    1 MB  23 MB    30.25 sec 
+  86 + : Var =   84520. Cla =   306479. Conf = 115910. Learn =  41995.    1 MB  26 MB    40.15 sec 
+  87 + : Var =   84520. Cla =   306479. Conf = 115910. Learn =  41995.    1 MB  26 MB    40.15 sec 
+  88 + : Var =   84520. Cla =   306479. Conf = 115910. Learn =  41995.    2 MB  26 MB    40.15 sec 
+  89 + : Var =   84520. Cla =   306479. Conf = 115910. Learn =  41995.    2 MB  26 MB    40.16 sec 
+  90 + : Var =   89090. Cla =   323592. Conf = 142790. Learn =  44766.    2 MB  26 MB    50.69 sec 
+  91 + : Var =   89090. Cla =   323592. Conf = 142790. Learn =  44766.    2 MB  26 MB    50.69 sec 
+  92 + : Var =   89090. Cla =   323592. Conf = 142790. Learn =  44766.    2 MB  26 MB    50.69 sec 
+  93 + : Var =   89090. Cla =   323592. Conf = 142790. Learn =  44766.    2 MB  26 MB    50.69 sec 
+  94 - : Var =   93660. Cla =   340705. Conf = 165867. Learn =  49822.    2 MB  29 MB    60.00 sec 
+Reached timeout (60 seconds).
+Runtime:  CNF = 0.1 sec (0.2 %)  UNSAT = 50.5 sec (84.2 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 9.3 sec (15.5 %)
+LStart(P) = 10000  LDelta(Q) = 2000  LRatio(R) = 80  ReduceDB = 21  Vars = 93660 Used = 90307 (96.42 %) Clauses = 4689596879795650560
+Buffs = 31766. Dups = 0.   Hash hits = 4183.  Hash misses = 81167.  UniProps = 0.
+No output asserted in 94 frames. Resource limit reached (timeout 60 sec). Time =    60.01 sec
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+
+94
+starting abc_result(frame=0, var=1, cla=0, conf=0, mem=4, to=0.03, asrt=-1, tt=0.03, ld=0)
+cal_reward 0 93 0.996331571995472 abc_result(frame=93, var=89090, cla=323592, conf=142790, mem=26, to=0, asrt=-1, tt=50.69, ld=93)
+Action 6 reward 0.996331571995472 All reward [3.77250714 3.78624393 3.78611772 3.78644637 3.78623005 3.78596244
+ 3.78624924]
+------- ## --------- Starting with depth 0  Ending depth 93
+bmc2 Training for action 0 93 20 20 20 20
+bmc2 Last frame (83, 256008, 119769, 49.23) 1
+Next frame 84 Next time out 52.3125
+0 Prediction for action (0, 'bmc2'), for time 335.9024999999999, frames 94 176 27
+bmc3 Training for action 1 93 23 23 23 23
+bmc3 Last frame (90, 323592, 142790, 50.84) 1
+Next frame 94 Next time out 61.650000000000006
+0 Prediction for action (1, 'bmc3'), for time 310.2800000000001, frames 94 186 30
+bmc3s Training for action 2 93 23 23 23 23
+bmc3s Last frame (90, 307833, 122017, 52.32) 1
+Next frame 94 Next time out 63.1
+0 Prediction for action (2, 'bmc3s'), for time 311.04, frames 94 186 31
+bmc3g Training for action 3 93 26 26 26 26
+bmc3g Last frame (102, 371752, 182663, 57.92) 1
+Next frame 106 Next time out 65.33000000000001
+0 Prediction for action (3, 'bmc3g'), for time 235.76000000000008, frames 94 198 46
+bmcu Training for action 4 93 23 23 23 23
+bmcu Last frame (90, 323592, 142790, 50.95) 1
+Next frame 94 Next time out 61.45
+0 Prediction for action (4, 'bmcu'), for time 302.95, frames 94 186 31
+bmc3r Training for action 5 93 22 22 22 22
+bmc3r Last frame (86, 306616, 135952, 50.44) 1
+Next frame 90 Next time out 60.31999999999999
+0 Prediction for action (5, 'bmc3r'), for time 287.5599999999999, frames 94 182 32
+bmc3j2 Training for action 6 93 23 23 23 23
+bmc3j2 Last frame (90, 323592, 142790, 50.69) 1
+Next frame 94 Next time out 61.23
+0 Prediction for action (6, 'bmc3j2'), for time 303.65, frames 94 186 31
+Next time out {0: (335.9024999999999, 94), 1: (310.2800000000001, 94), 2: (311.04, 94), 3: (235.76000000000008, 94), 4: (302.95, 94), 5: (287.5599999999999, 94), 6: (303.65, 94)}
+True Partitions for engines [1, 1, 1, 1, 1, 1, 1]
+# exploring -- 6 explore True best_sd 105 max_conf 371752
+#  at the end of exploration
+Adding ss -- ending_explore (3, 58, 0.9965286981796612, 58, 0, 60.0) Current state 105
+Total time till now:  58 Current time out  60.0
+
+#### iter  6 6 bmc3j2 current state 105 time taken 51 60.0 totalTime 58 ss (3, 58, 0.9965286981796612, 58, 0, 60.0) abc_result(frame=93, var=89090, cla=323592, conf=142790, mem=26, to=0, asrt=-1, tt=50.69, ld=93)
+--------- Iteration 6 end ------
+------Iteration 7 start ------
+Total time till now -- starting:  58 repeated_blocker 0
+7 7 Initial exploring select 0 bmc2
+7 4 3 Calculating time out explore 120.0 120.0 total till now 58
+Next time out 120.0 frame_out 0.0 for chosen action 0 bmc2 ocount 0 explore True ending 0
+run_engine -- 0 106 120 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc2 -S   106 -T   120 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc2 -S   106 -T   120 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+Running "bmc2". AIG:  PI/PO/Reg = 149/1/559.  Node =   6943. Lev =    30.
+Params: FramesMax = 0. NodesDelta = 2000. ConfMaxOne = 0. ConfMaxAll = 0.
+   0 : F =    7. O =   0.  And =    2434. Var =    1298. Conf =      0.  Cla =   4255. Learn =      0.   0 MB     0.02 sec
+   1 : F =   11. O =   0.  And =    5755. Var =    3120. Conf =      0.  Cla =  10411. Learn =      0.   0 MB     0.02 sec
+   2 : F =   15. O =   0.  And =    9592. Var =    5237. Conf =      0.  Cla =  17853. Learn =      0.   1 MB     0.03 sec
+   3 : F =   19. O =   0.  And =   13928. Var =    7652. Conf =      0.  Cla =  26408. Learn =      0.   1 MB     0.04 sec
+   4 : F =   23. O =   0.  And =   18686. Var =   10310. Conf =      0.  Cla =  35927. Learn =      0.   1 MB     0.05 sec
+   5 : F =   27. O =   0.  And =   23853. Var =   13245. Conf =      0.  Cla =  46430. Learn =      0.   1 MB     0.07 sec
+   6 : F =   31. O =   0.  And =   29443. Var =   16411. Conf =      0.  Cla =  57834. Learn =      0.   1 MB     0.08 sec
+   7 : F =   35. O =   0.  And =   35441. Var =   19772. Conf =      0.  Cla =  70088. Learn =      0.   1 MB     0.10 sec
+   8 : F =   39. O =   0.  And =   41849. Var =   23396. Conf =      0.  Cla =  83283. Learn =      0.   1 MB     0.11 sec
+   9 : F =   43. O =   0.  And =   48680. Var =   27304. Conf =      0.  Cla =  97474. Learn =      0.   1 MB     0.13 sec
+  10 : F =   47. O =   0.  And =   55915. Var =   31424. Conf =      0.  Cla = 112553. Learn =      0.   2 MB     0.15 sec
+  11 : F =   51. O =   0.  And =   63381. Var =   35711. Conf =      0.  Cla = 128267. Learn =      0.   2 MB     0.17 sec
+  12 : F =   55. O =   0.  And =   70923. Var =   40080. Conf =      0.  Cla = 144301. Learn =      0.   2 MB     0.19 sec
+  13 : F =   59. O =   0.  And =   78466. Var =   44468. Conf =      0.  Cla = 160391. Learn =      0.   2 MB     0.21 sec
+  14 : F =   63. O =   0.  And =   86009. Var =   48857. Conf =      0.  Cla = 176480. Learn =      0.   2 MB     0.23 sec
+  15 : F =   67. O =   0.  And =   93552. Var =   53247. Conf =      0.  Cla = 192567. Learn =      0.   2 MB     0.26 sec
+  16 : F =   71. O =   0.  And =  101095. Var =   57646. Conf =      0.  Cla = 208675. Learn =      0.   2 MB     0.28 sec
+  17 : F =   75. O =   0.  And =  108638. Var =   62045. Conf =      0.  Cla = 224781. Learn =      0.   2 MB     0.30 sec
+  18 : F =   79. O =   0.  And =  116181. Var =   66457. Conf =      0.  Cla = 240925. Learn =      0.   3 MB     0.32 sec
+  19 : F =   83. O =   0.  And =  123724. Var =   70873. Conf =      0.  Cla = 257075. Learn =      0.   3 MB     0.35 sec
+  20 : F =   87. O =   0.  And =  131267. Var =   75278. Conf =      0.  Cla = 273194. Learn =      0.   3 MB     0.38 sec
+  21 : F =   91. O =   0.  And =  138810. Var =   79685. Conf =      0.  Cla = 289315. Learn =      0.   3 MB     0.41 sec
+  22 : F =   95. O =   0.  And =  146353. Var =   84105. Conf =      0.  Cla = 305466. Learn =      0.   3 MB     0.44 sec
+  23 : F =   99. O =   0.  And =  153896. Var =   88519. Conf =      0.  Cla = 321602. Learn =      0.   3 MB     0.47 sec
+  24 : F =  103. O =   0.  And =  161439. Var =   92944. Conf =      0.  Cla = 337769. Learn =      0.   3 MB     0.50 sec
+  25 : F =  107. O =   0.  And =  168982. Var =   97368. Conf = 211987.  Cla = 353926. Learn =  65082.   3 MB    86.09 sec
+  26 : F =  111. O =   0.  And =  176525. Var =  101798. Conf = 283072.  Cla = 370096. Learn =  69231.   4 MB   120.08 sec
+No output failed in 106 frames.  Time =   120.08 sec
+Reached timeout (120 seconds).
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+
+cal_reward 106 107 1.6775222974995652 abc_result(frame=107, var=97368, cla=353926, conf=211987, mem=3, to=85.59, asrt=-1, tt=86.09, ld=106)
+Action 0 reward 1.6775222974995652 All reward [3.36938986 3.88038004 3.88025382 3.88058247 3.88036616 3.88009855
+ 3.88038535]
+------- ## --------- Starting with depth 105  Ending depth 106
+bmc2 Training for action 0 5 21 21 21 21
+bmc2 Last frame (107, 353926, 211987, 86.09) 1
+Next frame 108 Next time out 87.62583333333332
+0 Prediction for action (0, 'bmc2'), for time 178.24, frames 66 167 11
+bmc3 Training for action 1 5 23 23 23 23
+bmc3 Last frame (90, 323592, 142790, 50.84) 1
+Next frame 94 Next time out 61.650000000000006
+0 Prediction for action (1, 'bmc3'), for time 112.99750000000002, frames 26 113 8
+bmc3s Training for action 2 5 23 23 23 23
+bmc3s Last frame (90, 307833, 122017, 52.32) 1
+Next frame 94 Next time out 63.1
+0 Prediction for action (2, 'bmc3s'), for time 114.305, frames 26 113 8
+bmc3g Training for action 3 5 26 26 26 26
+bmc3g Last frame (102, 371752, 182663, 57.92) 1
+Next frame 106 Next time out 65.33000000000001
+0 Prediction for action (3, 'bmc3g'), for time 119.05250000000004, frames 36 135 9
+bmcu Training for action 4 5 23 23 23 23
+bmcu Last frame (90, 323592, 142790, 50.95) 1
+Next frame 94 Next time out 61.45
+0 Prediction for action (4, 'bmcu'), for time 111.325, frames 26 113 8
+bmc3r Training for action 5 5 22 22 22 22
+bmc3r Last frame (86, 306616, 135952, 50.44) 1
+Next frame 90 Next time out 60.31999999999999
+0 Prediction for action (5, 'bmc3r'), for time 107.24999999999997, frames 26 109 8
+bmc3j2 Training for action 6 5 23 23 23 23
+bmc3j2 Last frame (90, 323592, 142790, 50.69) 1
+Next frame 94 Next time out 61.23
+0 Prediction for action (6, 'bmc3j2'), for time 111.29499999999999, frames 26 113 8
+Next time out {0: (178.24, 66), 1: (112.99750000000002, 26), 2: (114.305, 26), 3: (119.05250000000004, 36), 4: (111.325, 26), 5: (107.24999999999997, 26), 6: (111.29499999999999, 26)}
+True Partitions for engines [1, 1, 1, 1, 1, 1, 1]
+# exploring -- 7 explore True best_sd 106 max_conf 371752
+Total time till now:  58 Current time out  120.0
+
+#### iter  7 0 bmc2 current state 105 time taken 87 120.0 totalTime 58 ss (0, 87, 1.6775222974995652, 58, 120.0, 105) abc_result(frame=107, var=97368, cla=353926, conf=211987, mem=3, to=85.59, asrt=-1, tt=86.09, ld=106)
+--------- Iteration 7 end ------
+------Iteration 8 start ------
+Total time till now -- starting:  58 repeated_blocker 0
+8 7 Initial exploring select 1 bmc3
+8 4 0 Calculating time out explore 120.0 120.0 total till now 58
+Next time out 120.0 frame_out 0.0 for chosen action 1 bmc3 ocount 0 explore True ending 0
+run_engine -- 1 106 120 0
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -S   106 -T   120 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+Running "bmc3". PI/PO/Reg = 149/1/559. And =   6943. Lev =    30. ObjNums =  4446.
+Params: FramesMax = 0. Start = 106. ConfLimit = 0. TimeOut = 120. SolveAll = 0.
+ 106 + : Var =  107172. Cla =   391594. Conf = 153393. Learn =  42091.    2 MB  33 MB    48.34 sec 
+ 107 + : Var =  107172. Cla =   391594. Conf = 153393. Learn =  42091.    2 MB  33 MB    48.34 sec 
+ 108 + : Var =  107172. Cla =   391594. Conf = 153393. Learn =  42091.    2 MB  33 MB    48.34 sec 
+ 109 + : Var =  107172. Cla =   391594. Conf = 153393. Learn =  42091.    2 MB  33 MB    48.34 sec 
+ 110 + : Var =  111742. Cla =   408707. Conf = 213686. Learn =  56760.    2 MB  38 MB    71.27 sec 
+ 111 + : Var =  111742. Cla =   408707. Conf = 213686. Learn =  56760.    2 MB  38 MB    71.27 sec 
+ 112 + : Var =  111742. Cla =   408707. Conf = 213686. Learn =  56760.    2 MB  38 MB    71.28 sec 
+ 113 + : Var =  111742. Cla =   408707. Conf = 213686. Learn =  56760.    2 MB  38 MB    71.28 sec 
+ 114 + : Var =  116312. Cla =   425820. Conf = 291196. Learn =  66923.    2 MB  41 MB   102.26 sec 
+ 115 + : Var =  116312. Cla =   425820. Conf = 291196. Learn =  66923.    2 MB  41 MB   102.26 sec 
+ 116 + : Var =  116312. Cla =   425820. Conf = 291196. Learn =  66923.    2 MB  41 MB   102.26 sec 
+ 117 + : Var =  116312. Cla =   425820. Conf = 291196. Learn =  66923.    2 MB  41 MB   102.26 sec 
+Runtime:  CNF = 0.1 sec (0.1 %)  UNSAT = 102.1 sec (85.0 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 17.8 sec (14.8 %)
+LStart(P) = 10000  LDelta(Q) = 2000  LRatio(R) = 80  ReduceDB = 34  Vars = 120882 Used = 117943 (97.57 %) Clauses = 4691353143462592512
+Buffs = 39958. Dups = 0.   Hash hits = 5373.  Hash misses = 105185.  UniProps = 0.
+No output asserted in 0 frames. Resource limit reached (timeout 120 sec). Time =   120.09 sec
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+
+0
+starting abc_result(frame=106, var=107172, cla=391594, conf=153393, mem=33, to=48.34, asrt=-1, tt=48.34, ld=106)
+cal_reward 106 117 2.031339390127158 abc_result(frame=117, var=116312, cla=425820, conf=291196, mem=41, to=0, asrt=-1, tt=102.26, ld=117)
+Action 1 reward 2.031339390127158 All reward [3.42635003 3.61012697 3.96080766 3.96113631 3.96092    3.96065239
+ 3.96093919]
+------- ## --------- Starting with depth 105  Ending depth 117
+bmc2 Training for action 0 12 21 21 21 21
+bmc2 Last frame (107, 353926, 211987, 86.09) 1
+Next frame 108 Next time out 87.62583333333332
+0 Prediction for action (0, 'bmc2'), for time 173.63250000000002, frames 63 164 21
+bmc3 Training for action 1 12 3 3 3 3
+bmc3 Last frame (114, 425820, 291196, 102.26) 1
+Next frame 118 Next time out 133.25
+0 Prediction for action (1, 'bmc3'), for time 218.47250000000003, frames 13 129 12
+bmc3s Training for action 2 12 23 23 23 23
+bmc3s Last frame (90, 307833, 122017, 52.32) 1
+Next frame 94 Next time out 63.1
+0 Prediction for action (2, 'bmc3s'), for time 106.22, frames 23 110 14
+bmc3g Training for action 3 12 26 26 26 26
+bmc3g Last frame (102, 371752, 182663, 57.92) 1
+Next frame 106 Next time out 65.33000000000001
+0 Prediction for action (3, 'bmc3g'), for time 122.75750000000002, frames 38 137 17
+bmcu Training for action 4 12 23 23 23 23
+bmcu Last frame (90, 323592, 142790, 50.95) 1
+Next frame 94 Next time out 61.45
+0 Prediction for action (4, 'bmcu'), for time 103.45, frames 23 110 14
+bmc3r Training for action 5 12 22 22 22 22
+bmc3r Last frame (86, 306616, 135952, 50.44) 1
+Next frame 90 Next time out 60.31999999999999
+0 Prediction for action (5, 'bmc3r'), for time 112.18999999999997, frames 28 111 14
+bmc3j2 Training for action 6 12 23 23 23 23
+bmc3j2 Last frame (90, 323592, 142790, 50.69) 1
+Next frame 94 Next time out 61.23
+0 Prediction for action (6, 'bmc3j2'), for time 103.38999999999999, frames 23 110 14
+Next time out {0: (173.63250000000002, 63), 1: (218.47250000000003, 13), 2: (106.22, 23), 3: (122.75750000000002, 38), 4: (103.45, 23), 5: (112.18999999999997, 28), 6: (103.38999999999999, 23)}
+True Partitions for engines [1, 1, 1, 1, 1, 1, 1]
+# exploring -- 8 explore True best_sd 117 max_conf 425820
+Total time till now:  58 Current time out  120.0
+
+#### iter  8 1 bmc3 current state 105 time taken 103 120.0 totalTime 58 ss (1, 103, 2.031339390127158, 58, 120.0, 105) abc_result(frame=117, var=116312, cla=425820, conf=291196, mem=41, to=0, asrt=-1, tt=102.26, ld=117)
+--------- Iteration 8 end ------
+------Iteration 9 start ------
+Total time till now -- starting:  58 repeated_blocker 0
+9 7 Initial exploring select 2 bmc3s
+9 4 1 Calculating time out explore 120.0 120.0 total till now 58
+Next time out 120.0 frame_out 0.0 for chosen action 2 bmc3s ocount 0 explore True ending 0
+run_engine -- 2 106 120 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -s -S   106 -T   120 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -s -S   106 -T   120 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+Running "bmc3". PI/PO/Reg = 149/1/559. And =   6943. Lev =    30. ObjNums =  4446.
+Params: FramesMax = 0. Start = 106. ConfLimit = 0. TimeOut = 120. SolveAll = 0.
+satoko_solve status -1
+ 106 + : Var =  107172. Cla =   377504. Conf = 103007. Learn =  39260.    2 MB   0 MB    35.28 sec 
+ 107 + : Var =  107172. Cla =   377504. Conf = 103007. Learn =  39260.    2 MB   0 MB    35.28 sec 
+ 108 + : Var =  107172. Cla =   377504. Conf = 103007. Learn =  39260.    2 MB   0 MB    35.28 sec 
+ 109 + : Var =  107172. Cla =   377504. Conf = 103007. Learn =  39260.    2 MB   0 MB    35.28 sec 
+satoko_solve status -1
+ 110 + : Var =  111742. Cla =   389480. Conf = 173210. Learn = 109450.    2 MB   0 MB    63.50 sec 
+ 111 + : Var =  111742. Cla =   389480. Conf = 173210. Learn = 109450.    2 MB   0 MB    63.50 sec 
+ 112 + : Var =  111742. Cla =   389480. Conf = 173210. Learn = 109450.    2 MB   0 MB    63.50 sec 
+ 113 + : Var =  111742. Cla =   389480. Conf = 173210. Learn = 109450.    2 MB   0 MB    63.50 sec 
+satoko_solve status -1
+ 114 + : Var =  116312. Cla =   406505. Conf = 240030. Learn = 176265.    2 MB   0 MB   102.18 sec 
+ 115 + : Var =  116312. Cla =   406505. Conf = 240030. Learn = 176265.    2 MB   0 MB   102.18 sec 
+ 116 + : Var =  116312. Cla =   406505. Conf = 240030. Learn = 176265.    2 MB   0 MB   102.18 sec 
+ 117 + : Var =  116312. Cla =   406505. Conf = 240030. Learn = 176265.    2 MB   0 MB   102.18 sec 
+satoko_solve status 0
+Runtime:  CNF = 0.1 sec (0.1 %)  UNSAT = 102.0 sec (85.0 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 17.8 sec (14.8 %)
+LStart(P) = 0  LDelta(Q) = 0  LRatio(R) = 0  ReduceDB = 0  Vars = 120882 Used = 0 (0.00 %) Clauses = 4691020146058199040
+Buffs = 39958. Dups = 0.   Hash hits = 5373.  Hash misses = 105185.  UniProps = 0.
+No output asserted in 0 frames. Resource limit reached (timeout 120 sec). Time =   120.01 sec
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+
+0
+starting abc_result(frame=106, var=107172, cla=377504, conf=103007, mem=2, to=35.28, asrt=-1, tt=35.28, ld=106)
+cal_reward 106 117 2.026258349930139 abc_result(frame=117, var=116312, cla=406505, conf=240030, mem=2, to=0, asrt=-1, tt=102.18, ld=117)
+Action 2 reward 2.026258349930139 All reward [3.47602191 3.65979885 3.65719523 4.03138296 4.03116664 4.03089903
+ 4.03118583]
+------- ## --------- Starting with depth 105  Ending depth 117
+bmc2 Training for action 0 12 21 21 21 21
+bmc2 Last frame (107, 353926, 211987, 86.09) 1
+Next frame 108 Next time out 87.62583333333332
+0 Prediction for action (0, 'bmc2'), for time 173.63250000000002, frames 63 164 21
+bmc3 Training for action 1 12 3 3 3 3
+bmc3 Last frame (114, 425820, 291196, 102.26) 1
+Next frame 118 Next time out 133.25
+0 Prediction for action (1, 'bmc3'), for time 218.47250000000003, frames 13 129 12
+bmc3s Training for action 2 12 3 3 3 3
+bmc3s Last frame (114, 406505, 240030, 102.18) 1
+Next frame 118 Next time out 140.86
+0 Prediction for action (2, 'bmc3s'), for time 247.23000000000005, frames 13 129 10
+bmc3g Training for action 3 12 26 26 26 26
+bmc3g Last frame (102, 371752, 182663, 57.92) 1
+Next frame 106 Next time out 65.33000000000001
+0 Prediction for action (3, 'bmc3g'), for time 122.75750000000002, frames 38 137 17
+bmcu Training for action 4 12 23 23 23 23
+bmcu Last frame (90, 323592, 142790, 50.95) 1
+Next frame 94 Next time out 61.45
+0 Prediction for action (4, 'bmcu'), for time 103.45, frames 23 110 14
+bmc3r Training for action 5 12 22 22 22 22
+bmc3r Last frame (86, 306616, 135952, 50.44) 1
+Next frame 90 Next time out 60.31999999999999
+0 Prediction for action (5, 'bmc3r'), for time 112.18999999999997, frames 28 111 14
+bmc3j2 Training for action 6 12 23 23 23 23
+bmc3j2 Last frame (90, 323592, 142790, 50.69) 1
+Next frame 94 Next time out 61.23
+0 Prediction for action (6, 'bmc3j2'), for time 103.38999999999999, frames 23 110 14
+Next time out {0: (173.63250000000002, 63), 1: (218.47250000000003, 13), 2: (247.23000000000005, 13), 3: (122.75750000000002, 38), 4: (103.45, 23), 5: (112.18999999999997, 28), 6: (103.38999999999999, 23)}
+True Partitions for engines [1, 1, 1, 1, 1, 1, 1]
+# exploring -- 9 explore True best_sd 117 max_conf 425820
+Total time till now:  58 Current time out  120.0
+
+#### iter  9 2 bmc3s current state 105 time taken 103 120.0 totalTime 58 ss (2, 103, 2.026258349930139, 58, 120.0, 105) abc_result(frame=117, var=116312, cla=406505, conf=240030, mem=2, to=0, asrt=-1, tt=102.18, ld=117)
+--------- Iteration 9 end ------
+------Iteration 10 start ------
+Total time till now -- starting:  58 repeated_blocker 0
+10 7 Initial exploring select 3 bmc3g
+10 4 2 Calculating time out explore 120.0 120.0 total till now 58
+Next time out 120.0 frame_out 0.0 for chosen action 3 bmc3g ocount 0 explore True ending 0
+run_engine -- 3 106 120 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -g -S   106 -T   120 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -g -S   106 -T   120 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+Running "bmc3". PI/PO/Reg = 149/1/559. And =   6943. Lev =    30. ObjNums =  4446.
+Params: FramesMax = 0. Start = 106. ConfLimit = 0. TimeOut = 120. SolveAll = 0.
+ 106 + : Var =  107172. Cla =   391594. Conf = 101291. Learn =  37279.    2 MB   0 MB    26.13 sec 
+ 107 + : Var =  107172. Cla =   391594. Conf = 101291. Learn =  37279.    2 MB   0 MB    26.13 sec 
+ 108 + : Var =  107172. Cla =   391594. Conf = 101291. Learn =  37279.    2 MB   0 MB    26.13 sec 
+ 109 + : Var =  107172. Cla =   391594. Conf = 101291. Learn =  37279.    2 MB   0 MB    26.13 sec 
+ 110 + : Var =  111742. Cla =   408707. Conf = 161480. Learn =  32509.    2 MB   0 MB    42.68 sec 
+ 111 + : Var =  111742. Cla =   408707. Conf = 161480. Learn =  32509.    2 MB   0 MB    42.68 sec 
+ 112 + : Var =  111742. Cla =   408707. Conf = 161480. Learn =  32509.    2 MB   0 MB    42.68 sec 
+ 113 + : Var =  111742. Cla =   408707. Conf = 161480. Learn =  32509.    2 MB   0 MB    42.68 sec 
+ 114 + : Var =  116312. Cla =   425820. Conf = 195706. Learn =  39313.    2 MB   0 MB    56.00 sec 
+ 115 + : Var =  116312. Cla =   425820. Conf = 195706. Learn =  39313.    2 MB   0 MB    56.00 sec 
+ 116 + : Var =  116312. Cla =   425820. Conf = 195706. Learn =  39313.    2 MB   0 MB    56.00 sec 
+ 117 + : Var =  116312. Cla =   425820. Conf = 195706. Learn =  39313.    2 MB   0 MB    56.00 sec 
+ 118 + : Var =  120882. Cla =   442933. Conf = 222527. Learn =  37838.    2 MB   0 MB    65.87 sec 
+ 119 + : Var =  120882. Cla =   442933. Conf = 222527. Learn =  37838.    2 MB   0 MB    65.87 sec 
+ 120 + : Var =  120882. Cla =   442933. Conf = 222527. Learn =  37838.    2 MB   0 MB    65.87 sec 
+ 121 + : Var =  120882. Cla =   442933. Conf = 222527. Learn =  37838.    2 MB   0 MB    65.87 sec 
+ 122 + : Var =  125452. Cla =   460046. Conf = 246759. Learn =  62064.    2 MB   0 MB    75.54 sec 
+ 123 + : Var =  125452. Cla =   460046. Conf = 246759. Learn =  62064.    2 MB   0 MB    75.54 sec 
+ 124 + : Var =  125452. Cla =   460046. Conf = 246759. Learn =  62064.    2 MB   0 MB    75.54 sec 
+ 125 + : Var =  125452. Cla =   460046. Conf = 246759. Learn =  62064.    2 MB   0 MB    75.54 sec 
+ 126 + : Var =  130022. Cla =   477159. Conf = 272397. Learn =  55083.    2 MB   0 MB    84.22 sec 
+ 127 + : Var =  130022. Cla =   477159. Conf = 272397. Learn =  55083.    2 MB   0 MB    84.22 sec 
+ 128 + : Var =  130022. Cla =   477159. Conf = 272397. Learn =  55083.    2 MB   0 MB    84.22 sec 
+ 129 + : Var =  130022. Cla =   477159. Conf = 272397. Learn =  55083.    2 MB   0 MB    84.22 sec 
+ 130 + : Var =  134592. Cla =   494272. Conf = 297710. Learn =  47712.    2 MB   0 MB    93.62 sec 
+ 131 + : Var =  134592. Cla =   494272. Conf = 297710. Learn =  47712.    2 MB   0 MB    93.63 sec 
+ 132 + : Var =  134592. Cla =   494272. Conf = 297710. Learn =  47712.    2 MB   0 MB    93.63 sec 
+ 133 + : Var =  134592. Cla =   494272. Conf = 297710. Learn =  47712.    2 MB   0 MB    93.63 sec 
+ 134 + : Var =  139162. Cla =   511385. Conf = 329363. Learn =  79362.    2 MB   0 MB   105.49 sec 
+ 135 + : Var =  139162. Cla =   511385. Conf = 329363. Learn =  79362.    2 MB   0 MB   105.49 sec 
+ 136 + : Var =  139162. Cla =   511385. Conf = 329363. Learn =  79362.    2 MB   0 MB   105.49 sec 
+ 137 + : Var =  139162. Cla =   511385. Conf = 329363. Learn =  79362.    2 MB   0 MB   105.50 sec 
+Runtime:  CNF = 0.3 sec (0.3 %)  UNSAT = 105.2 sec (87.6 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 14.6 sec (12.1 %)
+LStart(P) = 0  LDelta(Q) = 0  LRatio(R) = 0  ReduceDB = 0  Vars = 143732 Used = 0 (0.00 %) Clauses = 4692786975344689152
+Buffs = 47188. Dups = 0.   Hash hits = 6373.  Hash misses = 125365.  UniProps = 0.
+No output asserted in 0 frames. Resource limit reached (timeout 120 sec). Time =   120.09 sec
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+
+0
+starting abc_result(frame=106, var=107172, cla=391594, conf=101291, mem=2, to=26.13, asrt=-1, tt=26.13, ld=106)
+cal_reward 106 137 2.1453752116073295 abc_result(frame=137, var=139162, cla=511385, conf=329363, mem=2, to=0.010000000000005116, asrt=-1, tt=105.5, ld=137)
+Action 3 reward 2.1453752116073295 All reward [3.51998523 3.70376217 3.70115855 3.7608813  4.09334017 4.09307256
+ 4.09335936]
+------- ## --------- Starting with depth 105  Ending depth 137
+bmc2 Training for action 0 32 21 21 21 21
+bmc2 Last frame (107, 353926, 211987, 86.09) 1
+Next frame 108 Next time out 87.62583333333332
+0 Prediction for action (0, 'bmc2'), for time 173.63250000000002, frames 63 164 42
+bmc3 Training for action 1 32 3 3 3 3
+bmc3 Last frame (114, 425820, 291196, 102.26) 1
+Next frame 118 Next time out 133.25
+0 Prediction for action (1, 'bmc3'), for time 373.4225000000001, frames 33 149 18
+bmc3s Training for action 2 32 3 3 3 3
+bmc3s Last frame (114, 406505, 240030, 102.18) 1
+Next frame 118 Next time out 140.86
+0 Prediction for action (2, 'bmc3s'), for time 440.63000000000005, frames 33 149 15
+bmc3g Training for action 3 32 8 8 8 8
+bmc3g Last frame (134, 511385, 329363, 105.49) 1
+Next frame 138 Next time out 117.35999999999999
+0 Prediction for action (3, 'bmc3g'), for time 224.18999999999988, frames 43 174 33
+bmcu Training for action 4 32 23 23 23 23
+bmcu Last frame (90, 323592, 142790, 50.95) 1
+Next frame 94 Next time out 61.45
+0 Prediction for action (4, 'bmcu'), for time 142.825, frames 33 125 23
+bmc3r Training for action 5 32 22 22 22 22
+bmc3r Last frame (86, 306616, 135952, 50.44) 1
+Next frame 90 Next time out 60.31999999999999
+0 Prediction for action (5, 'bmc3r'), for time 136.88999999999996, frames 33 121 24
+bmc3j2 Training for action 6 32 23 23 23 23
+bmc3j2 Last frame (90, 323592, 142790, 50.69) 1
+Next frame 94 Next time out 61.23
+0 Prediction for action (6, 'bmc3j2'), for time 142.915, frames 33 125 23
+Next time out {0: (173.63250000000002, 63), 1: (373.4225000000001, 33), 2: (440.63000000000005, 33), 3: (224.18999999999988, 43), 4: (142.825, 33), 5: (136.88999999999996, 33), 6: (142.915, 33)}
+True Partitions for engines [1, 1, 1, 1, 1, 1, 1]
+# exploring -- 10 explore True best_sd 137 max_conf 511385
+Total time till now:  58 Current time out  120.0
+
+#### iter  10 3 bmc3g current state 105 time taken 106 120.0 totalTime 58 ss (3, 106, 2.1453752116073295, 58, 120.0, 105) abc_result(frame=137, var=139162, cla=511385, conf=329363, mem=2, to=0.010000000000005116, asrt=-1, tt=105.5, ld=137)
+--------- Iteration 10 end ------
+------Iteration 11 start ------
+Total time till now -- starting:  58 repeated_blocker 0
+11 7 Initial exploring select 4 bmcu
+11 4 3 Calculating time out explore 120.0 120.0 total till now 58
+Next time out 120.0 frame_out 0.0 for chosen action 4 bmcu ocount 0 explore True ending 0
+run_engine -- 4 106 120 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -u -S   106 -T   120 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -u -S   106 -T   120 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+Running "bmc3". PI/PO/Reg = 149/1/559. And =   6943. Lev =    30. ObjNums =  4446.
+Params: FramesMax = 0. Start = 106. ConfLimit = 0. TimeOut = 120. SolveAll = 0.
+ 106 + : Var =  107172. Cla =   391594. Conf = 153393. Learn =  42091.    2 MB  33 MB    50.77 sec 
+ 107 + : Var =  107172. Cla =   391594. Conf = 153393. Learn =  42091.    2 MB  33 MB    50.77 sec 
+ 108 + : Var =  107172. Cla =   391594. Conf = 153393. Learn =  42091.    2 MB  33 MB    50.77 sec 
+ 109 + : Var =  107172. Cla =   391594. Conf = 153393. Learn =  42091.    2 MB  33 MB    50.77 sec 
+ 110 + : Var =  111742. Cla =   408707. Conf = 213686. Learn =  56760.    2 MB  38 MB    75.13 sec 
+ 111 + : Var =  111742. Cla =   408707. Conf = 213686. Learn =  56760.    2 MB  38 MB    75.13 sec 
+ 112 + : Var =  111742. Cla =   408707. Conf = 213686. Learn =  56760.    2 MB  38 MB    75.13 sec 
+ 113 + : Var =  111742. Cla =   408707. Conf = 213686. Learn =  56760.    2 MB  38 MB    75.13 sec 
+ 114 + : Var =  116312. Cla =   425820. Conf = 291196. Learn =  66923.    2 MB  41 MB   107.77 sec 
+ 115 + : Var =  116312. Cla =   425820. Conf = 291196. Learn =  66923.    2 MB  41 MB   107.77 sec 
+ 116 + : Var =  116312. Cla =   425820. Conf = 291196. Learn =  66923.    2 MB  41 MB   107.78 sec 
+ 117 + : Var =  116312. Cla =   425820. Conf = 291196. Learn =  66923.    2 MB  41 MB   107.78 sec 
+Runtime:  CNF = 0.1 sec (0.1 %)  UNSAT = 107.6 sec (89.7 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 12.2 sec (10.2 %)
+LStart(P) = 10000  LDelta(Q) = 2000  LRatio(R) = 80  ReduceDB = 33  Vars = 120882 Used = 117913 (97.54 %) Clauses = 4691353143462592512
+Buffs = 39958. Dups = 0.   Hash hits = 5373.  Hash misses = 105185.  UniProps = 0.
+No output asserted in 0 frames. Resource limit reached (timeout 120 sec). Time =   120.01 sec
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+
+0
+starting abc_result(frame=106, var=107172, cla=391594, conf=153393, mem=33, to=50.77, asrt=-1, tt=50.77, ld=106)
+cal_reward 106 117 2.030125147270077 abc_result(frame=117, var=116312, cla=425820, conf=291196, mem=41, to=0, asrt=-1, tt=107.78, ld=117)
+Action 4 reward 2.030125147270077 All reward [3.55936369 3.74314063 3.74053701 3.80025976 3.74252657 4.14876211
+ 4.14904891]
+------- ## --------- Starting with depth 105  Ending depth 117
+bmc2 Training for action 0 12 21 21 21 21
+bmc2 Last frame (107, 353926, 211987, 86.09) 1
+Next frame 108 Next time out 87.62583333333332
+0 Prediction for action (0, 'bmc2'), for time 173.63250000000002, frames 63 164 21
+bmc3 Training for action 1 12 3 3 3 3
+bmc3 Last frame (114, 425820, 291196, 102.26) 1
+Next frame 118 Next time out 133.25
+0 Prediction for action (1, 'bmc3'), for time 218.47250000000003, frames 13 129 12
+bmc3s Training for action 2 12 3 3 3 3
+bmc3s Last frame (114, 406505, 240030, 102.18) 1
+Next frame 118 Next time out 140.86
+0 Prediction for action (2, 'bmc3s'), for time 247.23000000000005, frames 13 129 10
+bmc3g Training for action 3 12 8 8 8 8
+bmc3g Last frame (134, 511385, 329363, 105.49) 1
+Next frame 138 Next time out 117.35999999999999
+0 Prediction for action (3, 'bmc3g'), for time 224.18999999999988, frames 43 174 18
+bmcu Training for action 4 12 3 3 3 3
+bmcu Last frame (114, 425820, 291196, 107.77) 1
+Next frame 118 Next time out 140.41
+0 Prediction for action (4, 'bmcu'), for time 230.17, frames 13 129 12
+bmc3r Training for action 5 12 22 22 22 22
+bmc3r Last frame (86, 306616, 135952, 50.44) 1
+Next frame 90 Next time out 60.31999999999999
+0 Prediction for action (5, 'bmc3r'), for time 112.18999999999997, frames 28 111 14
+bmc3j2 Training for action 6 12 23 23 23 23
+bmc3j2 Last frame (90, 323592, 142790, 50.69) 1
+Next frame 94 Next time out 61.23
+0 Prediction for action (6, 'bmc3j2'), for time 103.38999999999999, frames 23 110 14
+Next time out {0: (173.63250000000002, 63), 1: (218.47250000000003, 13), 2: (247.23000000000005, 13), 3: (224.18999999999988, 43), 4: (230.17, 13), 5: (112.18999999999997, 28), 6: (103.38999999999999, 23)}
+True Partitions for engines [1, 1, 1, 1, 1, 1, 1]
+# exploring -- 11 explore True best_sd 137 max_conf 511385
+Total time till now:  58 Current time out  120.0
+
+#### iter  11 4 bmcu current state 105 time taken 108 120.0 totalTime 58 ss (4, 108, 2.030125147270077, 58, 120.0, 105) abc_result(frame=117, var=116312, cla=425820, conf=291196, mem=41, to=0, asrt=-1, tt=107.78, ld=117)
+--------- Iteration 11 end ------
+------Iteration 12 start ------
+Total time till now -- starting:  58 repeated_blocker 0
+12 7 Initial exploring select 5 bmc3r
+12 4 0 Calculating time out explore 120.0 120.0 total till now 58
+Next time out 120.0 frame_out 0.0 for chosen action 5 bmc3r ocount 0 explore True ending 0
+run_engine -- 5 106 120 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -r -S   106 -T   120 -F 0 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -r -S   106 -T   120 -F 0 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+Running "bmc3". PI/PO/Reg = 149/1/559. And =   6943. Lev =    30. ObjNums =  4446.
+Params: FramesMax = 0. Start = 106. ConfLimit = 0. TimeOut = 120. SolveAll = 0.
+ 106 + : Var =  107172. Cla =   391594. Conf = 195874. Learn =  53576.    2 MB  41 MB    68.06 sec 
+ 107 + : Var =  107172. Cla =   391594. Conf = 195874. Learn =  53576.    2 MB  41 MB    68.06 sec 
+ 108 + : Var =  107172. Cla =   391594. Conf = 195874. Learn =  53576.    2 MB  41 MB    68.06 sec 
+ 109 + : Var =  107172. Cla =   391594. Conf = 195874. Learn =  53576.    2 MB  41 MB    68.06 sec 
+ 110 + : Var =  111742. Cla =   408707. Conf = 271470. Learn =  58532.    2 MB  42 MB   100.33 sec 
+ 111 + : Var =  111742. Cla =   408707. Conf = 271470. Learn =  58532.    2 MB  42 MB   100.33 sec 
+ 112 + : Var =  111742. Cla =   408707. Conf = 271470. Learn =  58532.    2 MB  42 MB   100.33 sec 
+ 113 + : Var =  111742. Cla =   408707. Conf = 271470. Learn =  58532.    2 MB  42 MB   100.33 sec 
+Runtime:  CNF = 0.1 sec (0.1 %)  UNSAT = 100.2 sec (83.5 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 19.7 sec (16.4 %)
+LStart(P) = 10000  LDelta(Q) = 2000  LRatio(R) = 80  ReduceDB = 31  Vars = 116312 Used = 114010 (98.02 %) Clauses = 4691059144361246720
+Buffs = 38512. Dups = 0.   Hash hits = 5173.  Hash misses = 101149.  UniProps = 0.
+No output asserted in 0 frames. Resource limit reached (timeout 120 sec). Time =   120.03 sec
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+
+0
+starting abc_result(frame=106, var=107172, cla=391594, conf=195874, mem=41, to=68.06, asrt=-1, tt=68.06, ld=106)
+cal_reward 106 113 2.0126995007766926 abc_result(frame=113, var=111742, cla=408707, conf=271470, mem=42, to=0, asrt=-1, tt=100.33, ld=113)
+Action 5 reward 2.0126995007766926 All reward [3.59498385 3.7787608  3.77615717 3.83587993 3.77814674 3.76930011
+ 4.19942343]
+------- ## --------- Starting with depth 105  Ending depth 113
+bmc2 Training for action 0 8 21 21 21 21
+bmc2 Last frame (107, 353926, 211987, 86.09) 1
+Next frame 108 Next time out 87.62583333333332
+0 Prediction for action (0, 'bmc2'), for time 175.16833333333332, frames 64 165 15
+bmc3 Training for action 1 8 3 3 3 3
+bmc3 Last frame (114, 425820, 291196, 102.26) 1
+Next frame 118 Next time out 133.25
+0 Prediction for action (1, 'bmc3'), for time 226.22000000000003, frames 19 130 9
+bmc3s Training for action 2 8 3 3 3 3
+bmc3s Last frame (114, 406505, 240030, 102.18) 1
+Next frame 118 Next time out 140.86
+0 Prediction for action (2, 'bmc3s'), for time 208.55000000000004, frames 9 125 8
+bmc3g Training for action 3 8 8 8 8 8
+bmc3g Last frame (134, 511385, 329363, 105.49) 1
+Next frame 138 Next time out 117.35999999999999
+0 Prediction for action (3, 'bmc3g'), for time 212.3199999999999, frames 39 170 13
+bmcu Training for action 4 8 3 3 3 3
+bmcu Last frame (114, 425820, 291196, 107.77) 1
+Next frame 118 Next time out 140.41
+0 Prediction for action (4, 'bmcu'), for time 238.32999999999998, frames 19 130 9
+bmc3r Training for action 5 8 24 24 24 24
+bmc3r Last frame (110, 408707, 271470, 100.33) 1
+Next frame 114 Next time out 143.35666666666663
+0 Prediction for action (5, 'bmc3r'), for time 218.65333333333328, frames 9 121 8
+bmc3j2 Training for action 6 8 23 23 23 23
+bmc3j2 Last frame (90, 323592, 142790, 50.69) 1
+Next frame 94 Next time out 61.23
+0 Prediction for action (6, 'bmc3j2'), for time 106.025, frames 24 111 11
+Next time out {0: (175.16833333333332, 64), 1: (226.22000000000003, 19), 2: (208.55000000000004, 9), 3: (212.3199999999999, 39), 4: (238.32999999999998, 19), 5: (218.65333333333328, 9), 6: (106.025, 24)}
+True Partitions for engines [1, 1, 1, 1, 1, 1, 1]
+# exploring -- 12 explore True best_sd 137 max_conf 511385
+Total time till now:  58 Current time out  120.0
+
+#### iter  12 5 bmc3r current state 105 time taken 101 120.0 totalTime 58 ss (5, 101, 2.0126995007766926, 58, 120.0, 105) abc_result(frame=113, var=111742, cla=408707, conf=271470, mem=42, to=0, asrt=-1, tt=100.33, ld=113)
+--------- Iteration 12 end ------
+------Iteration 13 start ------
+Total time till now -- starting:  58 repeated_blocker 0
+13 7 Initial exploring select 6 bmc3j2
+13 4 1 Calculating time out explore 120.0 120.0 total till now 58
+Next time out 120.0 frame_out 0.0 for chosen action 6 bmc3j2 ocount 0 explore True ending 0
+run_engine -- 6 106 120 0
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3  -S   106 -T   120 -F 0 -J 2 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3  -S   106 -T   120 -F 0 -J 2 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+Running "bmc3". PI/PO/Reg = 149/1/559. And =   6943. Lev =    30. ObjNums =  4446.
+Params: FramesMax = 0. Start = 106. ConfLimit = 0. TimeOut = 120. SolveAll = 0.
+ 106 + : Var =  107172. Cla =   391594. Conf = 153393. Learn =  42091.    2 MB  33 MB    53.94 sec 
+ 107 + : Var =  107172. Cla =   391594. Conf = 153393. Learn =  42091.    2 MB  33 MB    53.94 sec 
+ 108 + : Var =  107172. Cla =   391594. Conf = 153393. Learn =  42091.    2 MB  33 MB    53.94 sec 
+ 109 + : Var =  107172. Cla =   391594. Conf = 153393. Learn =  42091.    2 MB  33 MB    53.94 sec 
+ 110 + : Var =  111742. Cla =   408707. Conf = 213686. Learn =  56760.    2 MB  38 MB    78.24 sec 
+ 111 + : Var =  111742. Cla =   408707. Conf = 213686. Learn =  56760.    2 MB  38 MB    78.24 sec 
+ 112 + : Var =  111742. Cla =   408707. Conf = 213686. Learn =  56760.    2 MB  38 MB    78.24 sec 
+ 113 + : Var =  111742. Cla =   408707. Conf = 213686. Learn =  56760.    2 MB  38 MB    78.24 sec 
+ 114 + : Var =  116312. Cla =   425820. Conf = 291196. Learn =  66923.    2 MB  41 MB   112.77 sec 
+ 115 + : Var =  116312. Cla =   425820. Conf = 291196. Learn =  66923.    2 MB  41 MB   112.77 sec 
+ 116 + : Var =  116312. Cla =   425820. Conf = 291196. Learn =  66923.    2 MB  41 MB   112.77 sec 
+ 117 + : Var =  116312. Cla =   425820. Conf = 291196. Learn =  66923.    2 MB  41 MB   112.77 sec 
+ 118 - : Var =  120882. Cla =   442933. Conf = 309632. Learn =  72972.    2 MB  44 MB   120.05 sec 
+Reached timeout (120 seconds).
+Runtime:  CNF = 0.1 sec (0.1 %)  UNSAT = 112.6 sec (93.8 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 7.3 sec (6.1 %)
+LStart(P) = 10000  LDelta(Q) = 2000  LRatio(R) = 80  ReduceDB = 32  Vars = 120882 Used = 117870 (97.51 %) Clauses = 4691353143462592512
+Buffs = 39958. Dups = 0.   Hash hits = 5373.  Hash misses = 105185.  UniProps = 0.
+No output asserted in 0 frames. Resource limit reached (timeout 120 sec). Time =   120.06 sec
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+
+0
+starting abc_result(frame=106, var=107172, cla=391594, conf=153393, mem=33, to=53.94, asrt=-1, tt=53.94, ld=106)
+cal_reward 106 117 2.029423073818192 abc_result(frame=117, var=116312, cla=425820, conf=291196, mem=41, to=0, asrt=-1, tt=112.77, ld=117)
+Action 6 reward 2.029423073818192 All reward [3.62747066 3.8112476  3.80864398 3.86836673 3.81063354 3.80178692
+ 3.8102921 ]
+------- ## --------- Starting with depth 105  Ending depth 117
+bmc2 Training for action 0 12 21 21 21 21
+bmc2 Last frame (107, 353926, 211987, 86.09) 1
+Next frame 108 Next time out 87.62583333333332
+0 Prediction for action (0, 'bmc2'), for time 173.63250000000002, frames 63 164 21
+bmc3 Training for action 1 12 3 3 3 3
+bmc3 Last frame (114, 425820, 291196, 102.26) 1
+Next frame 118 Next time out 133.25
+0 Prediction for action (1, 'bmc3'), for time 218.47250000000003, frames 13 129 12
+bmc3s Training for action 2 12 3 3 3 3
+bmc3s Last frame (114, 406505, 240030, 102.18) 1
+Next frame 118 Next time out 140.86
+0 Prediction for action (2, 'bmc3s'), for time 247.23000000000005, frames 13 129 10
+bmc3g Training for action 3 12 8 8 8 8
+bmc3g Last frame (134, 511385, 329363, 105.49) 1
+Next frame 138 Next time out 117.35999999999999
+0 Prediction for action (3, 'bmc3g'), for time 224.18999999999988, frames 43 174 18
+bmcu Training for action 4 12 3 3 3 3
+bmcu Last frame (114, 425820, 291196, 107.77) 1
+Next frame 118 Next time out 140.41
+0 Prediction for action (4, 'bmcu'), for time 230.17, frames 13 129 12
+bmc3r Training for action 5 12 24 24 24 24
+bmc3r Last frame (110, 408707, 271470, 100.33) 1
+Next frame 114 Next time out 143.35666666666663
+0 Prediction for action (5, 'bmc3r'), for time 261.67999999999995, frames 13 125 9
+bmc3j2 Training for action 6 12 26 26 26 26
+bmc3j2 Last frame (114, 425820, 291196, 112.77) 1
+Next frame 118 Next time out 147.3
+0 Prediction for action (6, 'bmc3j2'), for time 242.2575, frames 13 129 12
+Next time out {0: (173.63250000000002, 63), 1: (218.47250000000003, 13), 2: (247.23000000000005, 13), 3: (224.18999999999988, 43), 4: (230.17, 13), 5: (261.67999999999995, 13), 6: (242.2575, 13)}
+True Partitions for engines [1, 1, 1, 1, 1, 1, 1]
+# exploring -- 13 explore True best_sd 137 max_conf 511385
+#  at the end of exploration
+Adding ss -- ending_explore (3, 106, 2.1453752116073295, 164, 58, 120.0) Current state 137
+Total time till now:  164 Current time out  120.0
+#  Ending exploring -- 13 0 0
+
+#### iter  13 6 bmc3j2 current state 137 time taken 113 120.0 totalTime 164 ss (3, 106, 2.1453752116073295, 164, 58, 120.0) abc_result(frame=117, var=116312, cla=425820, conf=291196, mem=41, to=0, asrt=-1, tt=112.77, ld=117)
+--------- Iteration 13 end ------
+------Iteration 14 start ------
+Total time till now -- starting:  164 repeated_blocker 0
+Action 3 All reward [1.33005588 1.51383283 1.5112292  1.57095195 1.51321876 1.50437214
+ 1.51287732]
+14 7 4 Transient exploiting select 3 bmc3g
+Calculating time out exploit 224.18999999999988 predicted 224.18999999999988 43 previous 120.0 total till now 164
+Next time out 224.18999999999988 frame_out 180.0 for chosen action 3 bmc3g ocount 0 explore False ending 0
+run_engine -- 3 138 224 180
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -g -S   138 -T   224 -F 180 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -g -S   138 -T   224 -F 180 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+Running "bmc3". PI/PO/Reg = 149/1/559. And =   6943. Lev =    30. ObjNums =  4446.
+Params: FramesMax = 180. Start = 138. ConfLimit = 0. TimeOut = 224. SolveAll = 0.
+ 138 + : Var =  143660. Cla =   528306. Conf = 285332. Learn =  63474.    2 MB   0 MB    99.19 sec 
+ 139 + : Var =  143660. Cla =   528306. Conf = 285332. Learn =  63474.    2 MB   0 MB    99.19 sec 
+ 140 + : Var =  143660. Cla =   528306. Conf = 285332. Learn =  63474.    2 MB   0 MB    99.19 sec 
+ 141 + : Var =  143660. Cla =   528306. Conf = 285332. Learn =  63474.    2 MB   0 MB    99.19 sec 
+ 142 + : Var =  148230. Cla =   545419. Conf = 402637. Learn =  65610.    2 MB   0 MB   147.00 sec 
+ 143 + : Var =  148230. Cla =   545419. Conf = 402637. Learn =  65610.    2 MB   0 MB   147.00 sec 
+ 144 + : Var =  148230. Cla =   545419. Conf = 402637. Learn =  65610.    2 MB   0 MB   147.00 sec 
+ 145 + : Var =  148230. Cla =   545419. Conf = 402637. Learn =  65610.    2 MB   0 MB   147.00 sec 
+ 146 + : Var =  152800. Cla =   562532. Conf = 482438. Learn =  98355.    2 MB   0 MB   179.34 sec 
+ 147 + : Var =  152800. Cla =   562532. Conf = 482438. Learn =  98355.    3 MB   0 MB   179.34 sec 
+ 148 + : Var =  152800. Cla =   562532. Conf = 482438. Learn =  98355.    3 MB   0 MB   179.34 sec 
+ 149 + : Var =  152800. Cla =   562532. Conf = 482438. Learn =  98355.    3 MB   0 MB   179.34 sec 
+ 150 + : Var =  157370. Cla =   579645. Conf = 554218. Learn = 126957.    3 MB   0 MB   210.35 sec 
+ 151 + : Var =  157370. Cla =   579645. Conf = 554218. Learn = 126957.    3 MB   0 MB   210.35 sec 
+ 152 + : Var =  157370. Cla =   579645. Conf = 554218. Learn = 126957.    3 MB   0 MB   210.35 sec 
+ 153 + : Var =  157370. Cla =   579645. Conf = 554218. Learn = 126957.    3 MB   0 MB   210.35 sec 
+Runtime:  CNF = 0.5 sec (0.2 %)  UNSAT = 209.8 sec (93.6 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 13.8 sec (6.2 %)
+LStart(P) = 0  LDelta(Q) = 0  LRatio(R) = 0  ReduceDB = 0  Vars = 161940 Used = 0 (0.00 %) Clauses = 4693373324279939072
+Buffs = 52804. Dups = 0.   Hash hits = 7173.  Hash misses = 141437.  UniProps = 0.
+No output asserted in 0 frames. Resource limit reached (timeout 224 sec). Time =   224.18 sec
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+
+0
+starting abc_result(frame=138, var=143660, cla=528306, conf=285332, mem=2, to=99.19, asrt=-1, tt=99.19, ld=138)
+cal_reward 138 153 2.0304336586122567 abc_result(frame=153, var=157370, cla=579645, conf=554218, mem=3, to=0, asrt=-1, tt=210.35, ld=153)
+Action 3 reward 2.0304336586122567 All reward [3.65730757 3.84108451 3.83848088 3.62430557 3.84047045 3.83162382
+ 3.84012901]
+------- ## --------- Starting with depth 137  Ending depth 153
+bmc2 Training for action 0 16 21 21 21 21
+bmc2 Last frame (107, 353926, 211987, 86.09) 1
+Next frame 108 Next time out 87.62583333333332
+0 Prediction for action (0, 'bmc2'), for time 172.09666666666664, frames 62 163 26
+bmc3 Training for action 1 16 3 3 3 3
+bmc3 Last frame (114, 425820, 291196, 102.26) 1
+Next frame 118 Next time out 133.25
+0 Prediction for action (1, 'bmc3'), for time 249.46250000000003, frames 17 133 13
+bmc3s Training for action 2 16 3 3 3 3
+bmc3s Last frame (114, 406505, 240030, 102.18) 1
+Next frame 118 Next time out 140.86
+0 Prediction for action (2, 'bmc3s'), for time 285.9100000000001, frames 17 133 12
+bmc3g Training for action 3 16 4 4 4 4
+bmc3g Last frame (150, 579645, 554218, 210.35) 1
+Next frame 154 Next time out 241.35999999999999
+0 Prediction for action (3, 'bmc3g'), for time 435.1724999999999, frames 32 179 19
+bmcu Training for action 4 16 3 3 3 3
+bmcu Last frame (114, 425820, 291196, 107.77) 1
+Next frame 118 Next time out 140.41
+0 Prediction for action (4, 'bmcu'), for time 262.81, frames 17 133 13
+bmc3r Training for action 5 16 24 24 24 24
+bmc3r Last frame (110, 408707, 271470, 100.33) 1
+Next frame 114 Next time out 143.35666666666663
+0 Prediction for action (5, 'bmc3r'), for time 304.7066666666666, frames 17 129 11
+bmc3j2 Training for action 6 16 26 26 26 26
+bmc3j2 Last frame (114, 425820, 291196, 112.77) 1
+Next frame 118 Next time out 147.3
+0 Prediction for action (6, 'bmc3j2'), for time 276.7875, frames 17 133 13
+Next time out {0: (172.09666666666664, 62), 1: (249.46250000000003, 17), 2: (285.9100000000001, 17), 3: (435.1724999999999, 32), 4: (262.81, 17), 5: (304.7066666666666, 17), 6: (276.7875, 17)}
+True Partitions for engines [1, 1, 1, 1, 1, 1, 1]
+Adding ss -- exploitation (3, 211, 2.0304336586122567, 375, 224.18999999999988, 137)
+Total time till now:  375 Current time out  224.18999999999988
+
+#### iter  14 3 bmc3g current state 153 time taken 211 224.18999999999988 totalTime 375 ss (3, 211, 2.0304336586122567, 375, 224.18999999999988, 137) abc_result(frame=153, var=157370, cla=579645, conf=554218, mem=3, to=0, asrt=-1, tt=210.35, ld=153)
+--------- Iteration 14 end ------
+------Iteration 15 start ------
+Total time till now -- starting:  375 repeated_blocker 0
+Action 3 All reward [1.33005588 1.51383283 1.5112292  1.72411252 1.51321876 1.50437214
+ 1.51287732]
+15 7 4 Transient exploiting select 3 bmc3g
+Calculating time out exploit 435.1724999999999 predicted 435.1724999999999 32 previous 224.18999999999988 total till now 375
+Next time out 435.1724999999999 frame_out 185.0 for chosen action 3 bmc3g ocount 0 explore False ending 0
+run_engine -- 3 154 435 185
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -g -S   154 -T   435 -F 185 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -g -S   154 -T   435 -F 185 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+Running "bmc3". PI/PO/Reg = 149/1/559. And =   6943. Lev =    30. ObjNums =  4446.
+Params: FramesMax = 185. Start = 154. ConfLimit = 0. TimeOut = 435. SolveAll = 0.
+ 154 + : Var =  161904. Cla =   596662. Conf = 341345. Learn =  84668.    3 MB   0 MB   108.44 sec 
+ 155 + : Var =  161904. Cla =   596662. Conf = 341345. Learn =  84668.    3 MB   0 MB   108.44 sec 
+ 156 + : Var =  161904. Cla =   596662. Conf = 341345. Learn =  84668.    3 MB   0 MB   108.44 sec 
+ 157 + : Var =  161904. Cla =   596662. Conf = 341345. Learn =  84668.    3 MB   0 MB   108.44 sec 
+ 158 + : Var =  166474. Cla =   613775. Conf = 505307. Learn = 106437.    3 MB   0 MB   163.53 sec 
+ 159 + : Var =  166474. Cla =   613775. Conf = 505307. Learn = 106437.    3 MB   0 MB   163.53 sec 
+ 160 + : Var =  166474. Cla =   613775. Conf = 505307. Learn = 106437.    3 MB   0 MB   163.53 sec 
+ 161 + : Var =  166474. Cla =   613775. Conf = 505307. Learn = 106437.    3 MB   0 MB   163.53 sec 
+ 162 + : Var =  171044. Cla =   630888. Conf = 590065. Learn = 131987.    3 MB   0 MB   194.36 sec 
+ 163 + : Var =  171044. Cla =   630888. Conf = 590065. Learn = 131987.    3 MB   0 MB   194.36 sec 
+ 164 + : Var =  171044. Cla =   630888. Conf = 590065. Learn = 131987.    3 MB   0 MB   194.36 sec 
+ 165 + : Var =  171044. Cla =   630888. Conf = 590065. Learn = 131987.    3 MB   0 MB   194.36 sec 
+ 166 + : Var =  175614. Cla =   648001. Conf = 652472. Learn = 139664.    3 MB   0 MB   218.69 sec 
+ 167 + : Var =  175614. Cla =   648001. Conf = 652472. Learn = 139664.    3 MB   0 MB   218.69 sec 
+ 168 + : Var =  175614. Cla =   648001. Conf = 652472. Learn = 139664.    3 MB   0 MB   218.69 sec 
+ 169 + : Var =  175614. Cla =   648001. Conf = 652472. Learn = 139664.    3 MB   0 MB   218.69 sec 
+ 170 + : Var =  180184. Cla =   665114. Conf = 705595. Learn = 124605.    3 MB   0 MB   238.91 sec 
+ 171 + : Var =  180184. Cla =   665114. Conf = 705595. Learn = 124605.    3 MB   0 MB   238.91 sec 
+ 172 + : Var =  180184. Cla =   665114. Conf = 705595. Learn = 124605.    3 MB   0 MB   238.91 sec 
+ 173 + : Var =  180184. Cla =   665114. Conf = 705595. Learn = 124605.    3 MB   0 MB   238.91 sec 
+ 174 + : Var =  184754. Cla =   682227. Conf = 757222. Learn = 116897.    3 MB   0 MB   258.15 sec 
+ 175 + : Var =  184754. Cla =   682227. Conf = 757222. Learn = 116897.    3 MB   0 MB   258.15 sec 
+ 176 + : Var =  184754. Cla =   682227. Conf = 757222. Learn = 116897.    3 MB   0 MB   258.15 sec 
+ 177 + : Var =  184754. Cla =   682227. Conf = 757222. Learn = 116897.    3 MB   0 MB   258.15 sec 
+ 178 + : Var =  189324. Cla =   699340. Conf = 819482. Learn = 106622.    3 MB   0 MB   282.31 sec 
+ 179 + : Var =  189324. Cla =   699340. Conf = 819482. Learn = 106622.    3 MB   0 MB   282.31 sec 
+ 180 + : Var =  189324. Cla =   699340. Conf = 819482. Learn = 106622.    3 MB   0 MB   282.31 sec 
+ 181 + : Var =  189324. Cla =   699340. Conf = 819482. Learn = 106622.    3 MB   0 MB   282.31 sec 
+ 182 + : Var =  193894. Cla =   716453. Conf = 882520. Learn = 101761.    3 MB   0 MB   307.43 sec 
+ 183 + : Var =  193894. Cla =   716453. Conf = 882520. Learn = 101761.    3 MB   0 MB   307.43 sec 
+ 184 + : Var =  193894. Cla =   716453. Conf = 882520. Learn = 101761.    3 MB   0 MB   307.43 sec 
+Runtime:  CNF = 0.5 sec (0.2 %)  UNSAT = 306.9 sec (99.8 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 0.0 sec (0.0 %)
+LStart(P) = 0  LDelta(Q) = 0  LRatio(R) = 0  ReduceDB = 0  Vars = 193894 Used = 0 (0.00 %) Clauses = 4694401496500928512
+Buffs = 62842. Dups = 0.   Hash hits = 8573.  Hash misses = 169653.  UniProps = 0.
+No output asserted in 0 frames. Resource limit reached (conf limit 0). Time =   307.47 sec
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+
+0
+starting abc_result(frame=154, var=161904, cla=596662, conf=341345, mem=3, to=108.44, asrt=-1, tt=108.44, ld=154)
+cal_reward 154 184 2.08210868552851 abc_result(frame=184, var=193894, cla=716453, conf=882520, mem=3, to=0, asrt=-1, tt=307.43, ld=184)
+Action 3 reward 2.08210868552851 All reward [3.68487593 3.86865287 3.86604925 3.47872079 3.86803881 3.85919218
+ 3.86769737]
+------- ## --------- Starting with depth 153  Ending depth 184
+bmc2 Training for action 0 31 21 21 21 21
+bmc2 Last frame (107, 353926, 211987, 86.09) 1
+Next frame 108 Next time out 87.62583333333332
+0 Prediction for action (0, 'bmc2'), for time 172.09666666666664, frames 62 163 41
+bmc3 Training for action 1 31 3 3 3 3
+bmc3 Last frame (114, 425820, 291196, 102.26) 1
+Next frame 118 Next time out 133.25
+0 Prediction for action (1, 'bmc3'), for time 365.6750000000001, frames 32 148 17
+bmc3s Training for action 2 31 3 3 3 3
+bmc3s Last frame (114, 406505, 240030, 102.18) 1
+Next frame 118 Next time out 140.86
+0 Prediction for action (2, 'bmc3s'), for time 430.9600000000001, frames 32 148 15
+bmc3g Training for action 3 31 8 8 8 8
+bmc3g Last frame (182, 716453, 882520, 307.43) 1
+Next frame 185 Next time out 326.27
+0 Prediction for action (3, 'bmc3g'), for time 640.2700000000001, frames 57 235 38
+bmcu Training for action 4 31 3 3 3 3
+bmcu Last frame (114, 425820, 291196, 107.77) 1
+Next frame 118 Next time out 140.41
+0 Prediction for action (4, 'bmcu'), for time 385.21000000000004, frames 32 148 17
+bmc3r Training for action 5 31 24 24 24 24
+bmc3r Last frame (110, 408707, 271470, 100.33) 1
+Next frame 114 Next time out 143.35666666666663
+0 Prediction for action (5, 'bmc3r'), for time 466.05666666666656, frames 32 144 13
+bmc3j2 Training for action 6 31 26 26 26 26
+bmc3j2 Last frame (114, 425820, 291196, 112.77) 1
+Next frame 118 Next time out 147.3
+0 Prediction for action (6, 'bmc3j2'), for time 406.2750000000001, frames 32 148 17
+Next time out {0: (172.09666666666664, 62), 1: (365.6750000000001, 32), 2: (430.9600000000001, 32), 3: (640.2700000000001, 57), 4: (385.21000000000004, 32), 5: (466.05666666666656, 32), 6: (406.2750000000001, 32)}
+True Partitions for engines [1, 1, 1, 1, 1, 1, 1]
+Adding ss -- exploitation (3, 308, 2.08210868552851, 683, 435.1724999999999, 153)
+Total time till now:  683 Current time out  435.1724999999999
+
+#### iter  15 3 bmc3g current state 184 time taken 308 435.1724999999999 totalTime 683 ss (3, 308, 2.08210868552851, 683, 435.1724999999999, 153) abc_result(frame=184, var=193894, cla=716453, conf=882520, mem=3, to=0, asrt=-1, tt=307.43, ld=184)
+--------- Iteration 15 end ------
+------Iteration 16 start ------
+Total time till now -- starting:  683 repeated_blocker 0
+Action 3 All reward [1.33005588 1.51383283 1.5112292  1.81361156 1.51321876 1.50437214
+ 1.51287732]
+16 7 4 Transient exploiting select 3 bmc3g
+Calculating time out exploit 640.2700000000001 predicted 640.2700000000001 57 previous 435.1724999999999 total till now 683
+Next time out 640.2700000000001 frame_out 241.0 for chosen action 3 bmc3g ocount 0 explore False ending 0
+run_engine -- 3 185 640 241
+../ABC/abc -c "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -g -S   185 -T   640 -F 241 -v -L stdout; print_stats"
+	 ABC command line: "read ../benchmark/HWMCC_15_17/6s160_n.aig; print_stats; &get; bmc3 -g -S   185 -T   640 -F 241 -v -L stdout; print_stats".
+
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+Running "bmc3". PI/PO/Reg = 149/1/559. And =   6943. Lev =    30. ObjNums =  4446.
+Params: FramesMax = 241. Start = 185. ConfLimit = 0. TimeOut = 640. SolveAll = 0.
+ 185 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    3 MB   0 MB     0.05 sec 
+ 186 + : Var =  198392. Cla =   733374. Conf = 469338. Learn = 104038.    3 MB   0 MB   154.09 sec 
+ 187 + : Var =  198392. Cla =   733374. Conf = 469338. Learn = 104038.    3 MB   0 MB   154.09 sec 
+ 188 + : Var =  198392. Cla =   733374. Conf = 469338. Learn = 104038.    3 MB   0 MB   154.09 sec 
+ 189 + : Var =  198392. Cla =   733374. Conf = 469338. Learn = 104038.    3 MB   0 MB   154.09 sec 
+ 190 + : Var =  202962. Cla =   750487. Conf = 533165. Learn = 105603.    3 MB   0 MB   175.53 sec 
+ 191 + : Var =  202962. Cla =   750487. Conf = 533165. Learn = 105603.    3 MB   0 MB   175.54 sec 
+ 192 + : Var =  202962. Cla =   750487. Conf = 533165. Learn = 105603.    3 MB   0 MB   175.54 sec 
+ 193 + : Var =  202962. Cla =   750487. Conf = 533165. Learn = 105603.    3 MB   0 MB   175.54 sec 
+ 194 + : Var =  207532. Cla =   767600. Conf = 616176. Learn = 121567.    3 MB   0 MB   208.86 sec 
+ 195 + : Var =  207532. Cla =   767600. Conf = 616176. Learn = 121567.    3 MB   0 MB   208.86 sec 
+ 196 + : Var =  207532. Cla =   767600. Conf = 616176. Learn = 121567.    3 MB   0 MB   208.86 sec 
+ 197 + : Var =  207532. Cla =   767600. Conf = 616176. Learn = 121567.    3 MB   0 MB   208.86 sec 
+ 198 + : Var =  212102. Cla =   784713. Conf = 655811. Learn = 161198.    3 MB   0 MB   225.40 sec 
+ 199 + : Var =  212102. Cla =   784713. Conf = 655811. Learn = 161198.    3 MB   0 MB   225.40 sec 
+ 200 + : Var =  212102. Cla =   784713. Conf = 655811. Learn = 161198.    3 MB   0 MB   225.40 sec 
+ 201 + : Var =  212102. Cla =   784713. Conf = 655811. Learn = 161198.    3 MB   0 MB   225.40 sec 
+ 202 + : Var =  216672. Cla =   801826. Conf = 703159. Learn = 141227.    3 MB   0 MB   245.05 sec 
+ 203 + : Var =  216672. Cla =   801826. Conf = 703159. Learn = 141227.    3 MB   0 MB   245.05 sec 
+ 204 + : Var =  216672. Cla =   801826. Conf = 703159. Learn = 141227.    3 MB   0 MB   245.05 sec 
+ 205 + : Var =  216672. Cla =   801826. Conf = 703159. Learn = 141227.    3 MB   0 MB   245.05 sec 
+ 206 + : Var =  221242. Cla =   818939. Conf = 744966. Learn = 111468.    4 MB   0 MB   262.53 sec 
+ 207 + : Var =  221242. Cla =   818939. Conf = 744966. Learn = 111468.    4 MB   0 MB   262.53 sec 
+ 208 + : Var =  221242. Cla =   818939. Conf = 744966. Learn = 111468.    4 MB   0 MB   262.53 sec 
+ 209 + : Var =  221242. Cla =   818939. Conf = 744966. Learn = 111468.    4 MB   0 MB   262.53 sec 
+ 210 + : Var =  225812. Cla =   836052. Conf = 788792. Learn = 155285.    4 MB   0 MB   281.86 sec 
+ 211 + : Var =  225812. Cla =   836052. Conf = 788792. Learn = 155285.    4 MB   0 MB   281.86 sec 
+ 212 + : Var =  225812. Cla =   836052. Conf = 788792. Learn = 155285.    4 MB   0 MB   281.86 sec 
+ 213 + : Var =  225812. Cla =   836052. Conf = 788792. Learn = 155285.    4 MB   0 MB   281.86 sec 
+ 214 + : Var =  230382. Cla =   853165. Conf = 831928. Learn = 122964.    4 MB   0 MB   299.75 sec 
+ 215 + : Var =  230382. Cla =   853165. Conf = 831928. Learn = 122964.    4 MB   0 MB   299.75 sec 
+ 216 + : Var =  230382. Cla =   853165. Conf = 831928. Learn = 122964.    4 MB   0 MB   299.75 sec 
+ 217 + : Var =  230382. Cla =   853165. Conf = 831928. Learn = 122964.    4 MB   0 MB   299.75 sec 
+ 218 + : Var =  234952. Cla =   870278. Conf = 902113. Learn = 193145.    4 MB   0 MB   332.32 sec 
+ 219 + : Var =  234952. Cla =   870278. Conf = 902113. Learn = 193145.    4 MB   0 MB   332.32 sec 
+ 220 + : Var =  234952. Cla =   870278. Conf = 902113. Learn = 193145.    4 MB   0 MB   332.33 sec 
+ 221 + : Var =  234952. Cla =   870278. Conf = 902113. Learn = 193145.    4 MB   0 MB   332.33 sec 
+ 222 + : Var =  239522. Cla =   887391. Conf = 956672. Learn = 165931.    4 MB   0 MB   356.34 sec 
+ 223 + : Var =  239522. Cla =   887391. Conf = 956672. Learn = 165931.    4 MB   0 MB   356.34 sec 
+ 224 + : Var =  239522. Cla =   887391. Conf = 956672. Learn = 165931.    4 MB   0 MB   356.34 sec 
+ 225 + : Var =  239522. Cla =   887391. Conf = 956672. Learn = 165931.    4 MB   0 MB   356.34 sec 
+ 226 + : Var =  244092. Cla =   904504. Conf = 999402. Learn = 208656.    4 MB   0 MB   374.83 sec 
+ 227 + : Var =  244092. Cla =   904504. Conf = 999402. Learn = 208656.    4 MB   0 MB   374.83 sec 
+ 228 + : Var =  244092. Cla =   904504. Conf = 999402. Learn = 208656.    4 MB   0 MB   374.83 sec 
+ 229 + : Var =  244092. Cla =   904504. Conf = 999402. Learn = 208656.    4 MB   0 MB   374.83 sec 
+ 230 + : Var =  248662. Cla =   921617. Conf =1046291. Learn = 172706.    4 MB   0 MB   394.60 sec 
+ 231 + : Var =  248662. Cla =   921617. Conf =1046291. Learn = 172706.    4 MB   0 MB   394.60 sec 
+ 232 + : Var =  248662. Cla =   921617. Conf =1046291. Learn = 172706.    4 MB   0 MB   394.60 sec 
+ 233 + : Var =  248662. Cla =   921617. Conf =1046291. Learn = 172706.    4 MB   0 MB   394.60 sec 
+ 234 + : Var =  253232. Cla =   938730. Conf =1091971. Learn = 218384.    4 MB   0 MB   415.00 sec 
+ 235 + : Var =  253232. Cla =   938730. Conf =1091971. Learn = 218384.    4 MB   0 MB   415.00 sec 
+ 236 + : Var =  253232. Cla =   938730. Conf =1091971. Learn = 218384.    4 MB   0 MB   415.00 sec 
+ 237 + : Var =  253232. Cla =   938730. Conf =1091971. Learn = 218384.    4 MB   0 MB   415.00 sec 
+ 238 + : Var =  257802. Cla =   955843. Conf =1155636. Learn = 192858.    4 MB   0 MB   441.99 sec 
+ 239 + : Var =  257802. Cla =   955843. Conf =1155636. Learn = 192858.    4 MB   0 MB   441.99 sec 
+ 240 + : Var =  257802. Cla =   955843. Conf =1155636. Learn = 192858.    4 MB   0 MB   441.99 sec 
+Runtime:  CNF = 0.7 sec (0.2 %)  UNSAT = 441.2 sec (99.8 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 0.0 sec (0.0 %)
+LStart(P) = 0  LDelta(Q) = 0  LRatio(R) = 0  ReduceDB = 0  Vars = 257802 Used = 0 (0.00 %) Clauses = 4696457840942907392
+Buffs = 82918. Dups = 0.   Hash hits = 11373.  Hash misses = 226085.  UniProps = 0.
+No output asserted in 0 frames. Resource limit reached (conf limit 0). Time =   442.04 sec
+[1;37m../benchmark/HWMCC_15_17/6s160_n:[0m i/o =  149/    1  lat =  559  and =   6943  lev = 30
+
+0
+starting abc_result(frame=186, var=198392, cla=733374, conf=469338, mem=3, to=154.09, asrt=-1, tt=154.09, ld=186)
+cal_reward 185 240 2.1398081838094987 abc_result(frame=240, var=257802, cla=955843, conf=1155636, mem=4, to=0, asrt=-1, tt=441.99, ld=240)
+Action 3 reward 2.1398081838094987 All reward [3.71048162 3.89425856 3.89165494 3.38436431 3.8936445  3.88479787
+ 3.89330306]
+------- ## --------- Starting with depth 184  Ending depth 240
+bmc2 Training for action 0 56 21 21 21 21
+bmc2 Last frame (107, 353926, 211987, 86.09) 1
+Next frame 108 Next time out 87.62583333333332
+0 Prediction for action (0, 'bmc2'), for time 172.09666666666664, frames 57 163 57
+bmc3 Training for action 1 56 3 3 3 3
+bmc3 Last frame (114, 425820, 291196, 102.26) 1
+Next frame 118 Next time out 133.25
+0 Prediction for action (1, 'bmc3'), for time 559.3625000000002, frames 57 173 20
+bmc3s Training for action 2 56 3 3 3 3
+bmc3s Last frame (114, 406505, 240030, 102.18) 1
+Next frame 118 Next time out 140.86
+0 Prediction for action (2, 'bmc3s'), for time 672.7100000000002, frames 57 173 17
+bmc3g Training for action 3 56 14 14 14 14
+bmc3g Last frame (238, 955843, 1155636, 441.99) 1
+Next frame 241 Next time out 462.2325
+0 Prediction for action (3, 'bmc3g'), for time 900.8200000000002, frames 72 306 60
+bmcu Training for action 4 56 3 3 3 3
+bmcu Last frame (114, 425820, 291196, 107.77) 1
+Next frame 118 Next time out 140.41
+0 Prediction for action (4, 'bmcu'), for time 589.21, frames 57 173 20
+bmc3r Training for action 5 56 24 24 24 24
+bmc3r Last frame (110, 408707, 271470, 100.33) 1
+Next frame 114 Next time out 143.35666666666663
+0 Prediction for action (5, 'bmc3r'), for time 734.9733333333334, frames 57 169 15
+bmc3j2 Training for action 6 56 26 26 26 26
+bmc3j2 Last frame (114, 425820, 291196, 112.77) 1
+Next frame 118 Next time out 147.3
+0 Prediction for action (6, 'bmc3j2'), for time 622.0875, frames 57 173 20
+Next time out {0: (172.09666666666664, 57), 1: (559.3625000000002, 57), 2: (672.7100000000002, 57), 3: (900.8200000000002, 72), 4: (589.21, 57), 5: (734.9733333333334, 57), 6: (622.0875, 57)}
+True Partitions for engines [1, 1, 1, 1, 1, 1, 1]
+Adding ss -- exploitation (3, 442, 2.1398081838094987, 1125, 640.2700000000001, 184)
+Total time till now:  1125 Current time out  640.2700000000001
+
+#### iter  16 3 bmc3g current state 240 time taken 442 640.2700000000001 totalTime 1125 ss (3, 442, 2.1398081838094987, 1125, 640.2700000000001, 184) abc_result(frame=240, var=257802, cla=955843, conf=1155636, mem=4, to=0, asrt=-1, tt=441.99, ld=240)
+--------- Iteration 16 end ------
+------Iteration 17 start ------
+Total time till now -- starting:  1125 repeated_blocker 0
+Action 3 All reward [1.33005588 1.51383283 1.5112292  1.87885089 1.51321876 1.50437214
+ 1.51287732]
+17 7 4 Transient exploiting select 3 bmc3g
+Calculating time out exploit 900.8200000000002 predicted 900.8200000000002 72 previous 640.2700000000001 total till now 1125
+Next time out 675.0 frame_out 312.0 for chosen action 3 bmc3g ocount 0 explore False ending 0
+run_engine -- 3 241 675 312
