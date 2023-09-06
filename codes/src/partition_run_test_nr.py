@@ -302,7 +302,7 @@ def get_reward(asrt, ar_tab): #frames, clauses, mems, times, ttimes ):
 	frames, clauses, confs, mems, times, ttimes = [ar_tab[ky].frame for ky in ar_tab.keys()], [ar_tab[ky].cla for ky in ar_tab.keys()], \
 	[ar_tab[ky].conf for ky in ar_tab.keys()], \
 	[ar_tab[ky].mem for ky in ar_tab.keys()], [ar_tab[ky].to for ky in ar_tab.keys()], [ar_tab[ky].tt for ky in ar_tab.keys()]
-
+	sd = frames[0]
 	for j in range(len(frames)):
 		frame = frames[j]
 		cla = clauses[j]
@@ -341,7 +341,7 @@ def get_reward(asrt, ar_tab): #frames, clauses, mems, times, ttimes ):
 		cu_re2 += to/(1+frame)
 		rewards[1].append(cu_re2)
 		cu_avg1 = -0.5*cu_re2/(j+1)
-		cu_avg2 = 0.5*(frame)
+		cu_avg2 = 0.5*((1)/(1+frame))
 		# cu_avg3 = -0.2*nt/nd if (nt > -1 and nd > 0 and not math.isnan(nt)) else 0
 		cu_rewards[1].append(np.exp(cu_avg1) + np.exp(cu_avg2))# + cu_avg3))
 

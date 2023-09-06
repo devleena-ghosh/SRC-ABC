@@ -106,7 +106,7 @@ class bandit:
 		self.partition_flag = [1 for i in range(k)]
 
 		fn = (fname.split('/')[-1]).split('.')[0]
-		self.csvfilename = 'results/new_dist_MABMC_tm_pred_{0}.csv'.format(fn)
+		self.csvfilename = 'todaes_results/new_dist_MABMC_tm_pred_{0}.csv'.format(fn)
 		
 		self.engine_res = [{} for i in range(k)]
 
@@ -890,7 +890,7 @@ class ucb1_bandit(bandit):
 
 		self.k_ucb_reward = self.k_reward + self.c * np.sqrt((np.log(self.n)) / self.k_n)
 
-		print('Action {0} reward {1} All reward {2}'.format(a, reward, self.k_ucb_reward))
+		print('Action {0} reward {1} All reward {2}'.format(a, reward, self.k_reward))
 
 		return a, reward, sm
 
@@ -964,7 +964,7 @@ def main(argv):
 
 	fname = (inputfile.split('/')[-1]).split('.')[0]
 	print(fname)
-	filename = "results/new_results_MABMC_tm_pred_{0}_{1}.csv".format(TIMEOUT, fname)
+	filename = "todaes_results/new_results_MABMC_tm_pred_{0}_{1}.csv".format(TIMEOUT, fname)
 	ofname = os.path.join(PATH, (inputfile.split('.')[0])+'_n.'+( inputfile.split('.')[1]))
 	# # header = ['Design', 'Frame', 'Clauses', 'Mem', 'time']
 	# # writing to csv file 
@@ -987,7 +987,7 @@ def main(argv):
 	labels = [r'ucb1']
 
 	if PLOT:
-		pp = PdfPages("results/new_results_MABMC_tm_pred_{0}.pdf".format(fname)) #, DIFF, '_FIX' if DIFF else ''))
+		pp = PdfPages("todaes_results/new_results_MABMC_tm_pred_{0}.pdf".format(fname)) #, DIFF, '_FIX' if DIFF else ''))
 	j = 0
 	all_rewards = []
 	all_selection = []
