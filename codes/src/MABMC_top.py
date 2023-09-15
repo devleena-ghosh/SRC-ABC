@@ -257,18 +257,23 @@ class bandit:
 					print(r_flag, 'Prediction ', new_frames, new_cla, new_conf, conftrain[-1], new_conf/conftrain[-1])
 				ndt = int(nd)+1
 				# if flag:
+				iiflg = 0
 				while (SC*ttrain[-1] >= next_tm and new_conf[-1] < 2*conftrain[-1] ): # atleast 5% increment in clauses #next_tm < self.timeout[self.n]: #*SC:
 					new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
 					new_cla = fcla(new_frames)
 					new_conf = fconf(new_cla)
 					new_to = fto(new_conf)
 					next_tm = np.max(new_to) #np.sum(new_to)
-					ndt += 5
+					ndt += int(nd)/2
+					iiflg += 1
+					if iiflg > 2:
+						print(iiflg, 'Prediction for {0} frames'.format(ndt), new_frames, new_cla, new_to)
+						break
 					if DEBUG:
-						print('Prediction for {0} frames'.format(ndt), new_frames, new_cla, new_to)
+						print(iiflg, 'Prediction for {0} frames'.format(ndt), new_frames, new_cla, new_to)
 
 				if flag:
-					print(r_flag, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), new_frames[-1], i_frame)
+					print(r_flag, iiflg, 'Prediction for action {0}, for time {1}, frames {2}'.format((a,Actions[a]), next_tm, ndt), new_frames[-1], i_frame)
 				
 		# if r_flag:
 
@@ -613,7 +618,7 @@ class bandit:
 				'explore', explore, 'ending', ending)
 
 			if (self.timeout[i-1]> 0 and self.timeout[i]/self.timeout[i-1] < (100/600.0) and (totalTime + self.timeout[i] - TIMEOUT) < 10.0) \
-			     or self.timeout[i]< 10.0 or repeated_blocker > 5:
+			     or (self.timeout[i]< 10.0 and repeated_blocker > 5):
 				end_frame = self.states, asrt, totalTime, seq, MAX_mem
 				print('BMC-depth reached ', self.states, 'totalTime', totalTime)
 				print('Stopping iteration - condition with timeout < ', 1.0)
@@ -651,19 +656,20 @@ class bandit:
 				# count = 0
 				# print(i, 'sm', 'conf', sm.conf, 'cla', sm.cla, max(F*conf_begin_phase, 1e5), 'conf_begin_phase', conf_begin_phase, 'ocount', ocount, 'enter_critical', enter_critical, 'exit_critical', exit_critical, 'critical', critical, 'iter', (i+1)%self.k, 'repeat_count', repeat_count, 'M', M)
 				# if not explore: # and sm and reward > 0:
-				next_time = {}
-				self.partition_flag = [1 for i in range(self.k)]
-				for a2 in range(self.k):
-					next_tm, ndt = self.get_next_time(a2, sm.ld, r_flag =0, flag = 1)
-						# next_time.update({new_frames[0]: new_to[0]})
-						# print('predicted time out for next frame', new_frames, new_to)
-					# else:
-					#     next_to = -1
-					#if ndt > 0:
-					next_time.update({a2:(next_tm, ndt)})
-				partition_flag = not(all(ele == 0 for ele in self.partition_flag))
-				print('Next time out', next_time)
-				print(partition_flag, 'Partitions for engines', self.partition_flag)
+				if (ending_explore(i) or (i < repeat_count and i%self.k == self.k-1)):
+					next_time = {}
+					self.partition_flag = [1 for i in range(self.k)]
+					for a2 in range(self.k):
+						next_tm, ndt = self.get_next_time(a2, sm.ld, r_flag =0, flag = 1)
+							# next_time.update({new_frames[0]: new_to[0]})
+							# print('predicted time out for next frame', new_frames, new_to)
+						# else:
+						#     next_to = -1
+						#if ndt > 0:
+						next_time.update({a2:(next_tm, ndt)})
+					partition_flag = not(all(ele == 0 for ele in self.partition_flag))
+					print('Next time out', next_time)
+					print(partition_flag, 'Partitions for engines', self.partition_flag)
 
 
 				if explore:

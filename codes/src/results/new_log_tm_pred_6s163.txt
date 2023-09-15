@@ -3759,3 +3759,7 @@ bmcu Last frame (492, 38830010, 21547, 60.39) 0
 Next frame 493 Next time out 60.85
 @@@@ PARTITION NOT NEEDED FOR ENGINE bmcu!!
 0 Prediction for action (4, 'bmcu'), for time 409.53000000000065, frames 760 1251 224
+bmc3r Training for action 5 759 710 710 710 710
+bmc3r Last frame (759, 62762904, 16424, 60.11) 0
+Next frame 760 Next time out 59.99
+@@@@ PARTITION NOT NEEDED FOR ENGINE bmc3r!!
