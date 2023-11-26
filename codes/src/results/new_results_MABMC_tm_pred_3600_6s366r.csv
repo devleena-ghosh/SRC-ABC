@@ -1,6 +1,0 @@
-Design,Bandit-policy,BMC-depth,status,time(s),total(s),memory-current(MB),memory-peak MB),MAX-mem(BMC)(MB),sequence
-6s366r,ucb1,72,timeout,3600.00,39125.89,1.73,28,2.30,"[(6, 60.0, 0.9976215192907808, 60.0, 0, 60.0), (3, 97.43, 2.6146602810319264, 157.43, 94.89999999999998, 69), (3, 759.1999999999998, 3.543917112307058, 916.6299999999999, 759.1999999999998, 70), (2, 2683.37, 2.955091852643988, 3600.0, 916.6299999999999, 2683.37)]"
-Design,Bandit-policy,BMC-depth,status,time(s),total(s),memory-current(MB),memory-peak MB),MAX-mem(BMC)(MB),sequence
-6s366r,ucb1,73,timeout,2840.00,9763.45,1.71,67,2.28,"[(3, 9, 0.9989090452522381, 9, 0, 60.0), (3, 67, 3.5753654541259845, 76, 9, 120.0), (3, 2764, 1.9720627473475285, 2840, 3524.0, 70)]"
-Design,Bandit-policy,BMC-depth,status,time(s),total(s),memory-current(MB),memory-peak MB),MAX-mem(BMC)(MB),sequence
-6s366r,ucb1,70,timeout,84.00,2228.40,1.80,67,2.37,"[(3, 7, 0.9991744102958738, 7, 0, 60.0), (3, 77, 1.9929824850403968, 84, 7, 120.0)]"

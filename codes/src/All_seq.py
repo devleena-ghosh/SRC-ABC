@@ -22,7 +22,7 @@ DIFF = 2 # function of depth, time, memory
 PDR = False
 MAX_FRAME = 1e4
 MAX_CLAUSE = 1e10
-MAX_TIME = 3600
+MAX_TIME = 1800
 
 def runseq(fn, seq):
 

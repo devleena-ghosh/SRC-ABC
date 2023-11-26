@@ -1,4 +1,0 @@
-Design,Bandit-policy,BMC-depth,status,time(s),total(s),memory-current(MB),memory-peak MB),MAX-mem(BMC)(MB),sequence
-6s119,ucb1,54,timeout,6663.19,7278.75,1.94,86,2.50,"[('bmc2', 77.02, 0.9510566559515288, 77.02, 0, 60.0), ('bmc2', 6586.17, 1.0250721357408954, 6663.1900000000005, 3522.98, 47)]"
-Design,Bandit-policy,BMC-depth,status,time(s),total(s),memory-current(MB),memory-peak MB),MAX-mem(BMC)(MB),sequence
-6s119,ucb1,49,timeout,271.00,2488.09,1.91,93,2.48,"[(3, 38, 0.9907267372132426, 38, 0, 60.0), (3, 233, 1.620834800084388, 271, 38, 240.0)]"

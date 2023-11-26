@@ -25,18 +25,18 @@ DIFF = 2 # function of depth, time, memory
 # DIFF = 3 # function number of clauses/time diff
 #DIFF = Enum ('DIFF', ['F1', 'F2', 'F3'])
 PDR = False
-MAX_FRAME = 1e4
+MAX_FRAME = 1e6
 MAX_CLAUSE = 1e9
 MAX_TIME = 3600
 MAX_MEM = 4000
-TIMEOUT = 1800
+TIMEOUT = 3600
 
 ST1 = 120
 ST2 = 300
 
 Actions = {0:'bmc2', 1:'bmc3g', 2:'bmc3', 3:'bmc3s', 4:'bmc3j', 5:'bmcu', 6:'bmc3r'}
 
-k = 7 # arms
+k = 4 # arms
 
 def get_fname(fn):
 	fname = os.path.join(PATH, fn)
@@ -341,7 +341,7 @@ def get_reward(asrt, ar_tab): #frames, clauses, mems, times, ttimes ):
 		cu_re2 += to/(1+frame)
 		rewards[1].append(cu_re2)
 		cu_avg1 = -0.5*cu_re2/(j+1)
-		cu_avg2 = 0.5*((1)/(1+frame))
+		cu_avg2 = 0.5*((1)/(MAX_FRAME))
 		# cu_avg3 = -0.2*nt/nd if (nt > -1 and nd > 0 and not math.isnan(nt)) else 0
 		cu_rewards[1].append(np.exp(cu_avg1) + np.exp(cu_avg2))# + cu_avg3))
 
@@ -423,7 +423,7 @@ def main(argv):
 	with open(filename, 'w+') as csvfile: 
 		print('filename', fname)
 
-	k_action = range(1, k)
+	k_action = range(0, k)
 	pdfname = "plots/plot_Partition_2608_all_{0}_{1}_{2}.pdf".format(fname, TIMEOUT, len(Parts))
 
 	count1 = int(TIMEOUT/ST1)
@@ -549,7 +549,7 @@ def main(argv):
 		# ax2.set_ylabel("Rewards")
 
 		plt.title(Actions[i]+"-- Depth vs clauses")
-		plt.legend()
+		plt.legend(fontsize="12")
 
 		fig2 , ax = plt.subplots()
 		# plt.subplot(2, 2, 1)
@@ -579,7 +579,7 @@ def main(argv):
 		# ax2.set_ylabel("Rewards")
 
 		plt.title(Actions[i]+"-- Depth vs memory")
-		plt.legend()
+		plt.legend(fontsize="12")
 
 		def ttms_ffms(frames, times):
 			ttms = []
@@ -644,7 +644,7 @@ def main(argv):
 		# ax2.set_ylabel("Rewards")
 
 		plt.title(Actions[i]+"-- Times vs Depth")
-		plt.legend()
+		plt.legend(fontsize="12")
 		
 		fig4 = plt.figure()
 		plt.subplot(2, 2, 1)
@@ -660,7 +660,7 @@ def main(argv):
 		plt.xlabel("Depth")
 		plt.ylabel("Reward1")
 		plt.title(Actions[i]+" -- Depth vs Reward1")
-		plt.legend()
+		plt.legend(fontsize="12")
 
 
 		plt.subplot(2, 2, 2)
@@ -676,7 +676,7 @@ def main(argv):
 		plt.xlabel("Depth")
 		plt.ylabel("Reward2")
 		plt.title(Actions[i]+" -- Depth vs Reward2")
-		plt.legend()
+		plt.legend(fontsize="12")
 
 
 		plt.subplot(2, 2, 3)
@@ -692,7 +692,7 @@ def main(argv):
 		plt.xlabel("Depth")
 		plt.ylabel("Reward2")
 		plt.title(Actions[i]+" -- Depth vs Reward3")
-		plt.legend()
+		plt.legend(fontsize="12")
 
 		plt.subplot(2, 2, 4)
 		if 1 in Parts:
@@ -707,7 +707,7 @@ def main(argv):
 		plt.xlabel("Depth")
 		plt.ylabel("Reward2")
 		plt.title(Actions[i]+" -- Depth vs clauses")
-		plt.legend()
+		plt.legend(fontsize="12")
 
 		figs.append(fig1)
 		figs.append(fig2)
@@ -752,7 +752,7 @@ def main(argv):
 
 		plt.xlabel("Times")
 		plt.ylabel("Depth")
-		plt.legend()
+		plt.legend(fontsize="12")
 		figs.append(fig)
 
 		fig = plt.figure(figsize=(12,8))
@@ -779,7 +779,7 @@ def main(argv):
 
 		plt.xlabel("Depth")
 		plt.ylabel("Clauses")
-		plt.legend()
+		plt.legend(fontsize="12")
 		figs.append(fig)
 
 		fig = plt.figure(figsize=(12,8))
@@ -806,7 +806,7 @@ def main(argv):
 
 		plt.xlabel("Depth")
 		plt.ylabel("Memory")
-		plt.legend()
+		plt.legend(fontsize="12")
 		figs.append(fig)
 
 		fig = plt.figure(figsize=(12,8))
@@ -833,7 +833,7 @@ def main(argv):
 
 		plt.xlabel("Depth")
 		plt.ylabel("Cumulative Reward- 0")
-		plt.legend()
+		plt.legend(fontsize="12")
 		figs.append(fig)
 
 		fig = plt.figure(figsize=(12,8))
@@ -859,8 +859,8 @@ def main(argv):
 		# axes[0][0].legend()
 
 		plt.xlabel("Depth")
-		plt.ylabel("Cumulative Reward")
-		plt.legend()
+		plt.ylabel("Reward function")
+		plt.legend(fontsize="15")
 		figs.append(fig)
 		
 		fig = plt.figure(figsize=(12,8))
@@ -886,8 +886,8 @@ def main(argv):
 		# axes[0][0].legend()
 
 		plt.xlabel("Depth")
-		plt.ylabel("Reward function")
-		plt.legend()
+		plt.ylabel("Reward function 2")
+		plt.legend(fontsize="12")
 		# axes[1][0].set_xlabel("Depth")
 		# axes[1][0].set_ylabel("Clauses")
 		# # axes[1][0].legend()

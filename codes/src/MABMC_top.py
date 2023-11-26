@@ -28,7 +28,7 @@ DIFF = 3 # function number of frames/time diff
 FIXED = False
 FIXED = True
 PDR = False
-MAX_FRAME = 1e9
+MAX_FRAME = 1e5
 MAX_CLAUSE = 1e9
 MAX_TIME = TIMEOUT
 MAX_MEM = 2000
@@ -258,16 +258,16 @@ class bandit:
 				ndt = int(nd)+1
 				# if flag:
 				iiflg = 0
-				while (SC*ttrain[-1] >= next_tm and new_conf[-1] < 2*conftrain[-1] ): # atleast 5% increment in clauses #next_tm < self.timeout[self.n]: #*SC:
+				while (SC*ttrain[-1] >= next_tm):# and new_conf[-1] < 2*conftrain[-1] ): # atleast 5% increment in clauses #next_tm < self.timeout[self.n]: #*SC:
 					new_frames = np.arange(last_frm+1, last_frm+int(ndt), 1)
 					new_cla = fcla(new_frames)
 					new_conf = fconf(new_cla)
 					new_to = fto(new_conf)
 					next_tm = np.max(new_to) #np.sum(new_to)
-					ndt += int(nd)/2
+					ndt += max(5, int(nd)/2)+1
 					iiflg += 1
-					if iiflg > 2:
-						print(iiflg, 'Prediction for {0} frames'.format(ndt), new_frames, new_cla, new_to)
+					if iiflg >= 5:
+						print(iiflg, 'Prediction for {0} frames'.format(ndt), new_frames, new_cla, new_to, 'next_tm', next_tm, 'ndt', ndt)
 						break
 					if DEBUG:
 						print(iiflg, 'Prediction for {0} frames'.format(ndt), new_frames, new_cla, new_to)
@@ -306,6 +306,7 @@ class bandit:
 				reward = 0
 				ky = sd
 				cn = 0
+				md = MAX_FRAME
 				for ky in ar_tab_old.keys():
 					if (ed > -1 and sd <= ky <= ed) or sd <= ky:
 						tm = ar_tab_old[ky].to
@@ -313,6 +314,7 @@ class bandit:
 						#reward += 2*np.exp(-c1*mem/(1+ky) - c2*tm/(1+ky))    
 						reward += (1*tm/(1+ky))
 						cn += 1
+					md = max(md, ky)
 				wa = (reward/cn) if cn > 0 else 0
 
 				# nt, nd = self.get_next_time(a, sm.ld, r_flag = 1, flag = 0)
@@ -320,7 +322,8 @@ class bandit:
 
 				reward = np.exp(-0.5*wa)  # + nd/nt)#(reward + np.exp(-pen/MAX_TIME))/cn
 				if sd > 0:
-					reward += np.exp(0.5*(ky-sd)/(1+sd)) # total number of frames explored --> more frames more reward
+					reward += np.exp(0.5*(ky-sd)/(md))
+					#np.exp(0.5*(ky-sd)/(1+sd)) # total number of frames explored --> more frames more reward
 					# reward += np.exp(-0.2*nt/nd) if (nt > -1 and nd > 0 and not math.isnan(nt)) else 0 # reward based on future prediction
 					# reward += np.exp(-0.2*pen/t) if (pen > 0 and t > 0) else 0 # reward based on future prediction
 			
@@ -498,6 +501,8 @@ class bandit:
 					return False
 				if (i > repeat_count and i%M == M -1):
 					return True
+			if all_ending:
+				return True
 			return False
 
 		for i in range(4*self.iters):
@@ -566,11 +571,11 @@ class bandit:
 				# 	if max_next_to < next_to:
 				# 		max_next_to = next_to
 				# if i > 0:
-				next_timeout = self.timeout[i-1] # default
+				next_timeout = self.timeout[i-1] * SC # default
 
 				if next_to > 0: # predicted time 
 					self.frameout[i] = self.states + next_fo
-					next_timeout = max(next_to, self.timeout[i-1])# * SC)
+					next_timeout = max(next_to, self.timeout[i-1] * SC)
 
 					if blocker(sm,i):
 						next_timeout = self.timeout[i-1] * SC
@@ -604,18 +609,23 @@ class bandit:
 
 			# --- completing engine selection ----- #
 				
-			# if int(MAX_TIMEOUT - all_time) <= 0:		
-			# 	a = self.pull(av, count=r_exp)
-			# 	self.timeout[i] = min(0.5*MAX_TIMEOUT, TIMEOUT - totalTime)
-			# 	self.frameout[i] = 0
-			# 	print('More than {0} hrs spent in learning --- closing iterations now'.format(MAX_TIMEOUT/TIMEOUT))
-			# 	all_ending = True
-			# 	# break
-			# 	# if self.timeout[i] > 3000:
-			# 	# 	self.stt
+			if int(MAX_TIMEOUT - all_time) <= 0:		
+				a = self.pull(av, count=-1)
+				self.timeout[i] = (TIMEOUT - totalTime)
+				self.frameout[i] = 0
+				print('More than {0} hrs spent in learning --- closing iterations now'.format(MAX_TIMEOUT/TIMEOUT))
+				all_ending = True
+				ending = True
+				# break
+				# if self.timeout[i] > 3000:
+				# 	self.stt
 
 			print('Next time out', self.timeout[i], 'frame_out', self.frameout[i], 'for chosen action', a, Actions[a], 'ocount', ocount, \
 				'explore', explore, 'ending', ending)
+
+			if (blocker(sm, i) and repeated_blocker > 5 and self.timeout[i] > TIMEOUT/2.0):
+				ending = True
+				all_ending = True
 
 			if (self.timeout[i-1]> 0 and self.timeout[i]/self.timeout[i-1] < (100/600.0) and (totalTime + self.timeout[i] - TIMEOUT) < 10.0) \
 			     or (self.timeout[i]< 10.0 and repeated_blocker > 5):
@@ -644,7 +654,7 @@ class bandit:
 			if self.timeout[i] < sm.tt or self.frameout[i]-1 == sm.ld or self.frameout[i] == sm.ld or sm.asrt > 0:
 				tp = math.ceil(sm.tt)
 
-			all_time += tp #sm.tt if sm.asrt > 0 else tp
+			all_time += self.timeout[i] #sm.tt if sm.asrt > 0 else tp
 
 			sd = self.states
 			pre_state = self.states
@@ -692,7 +702,7 @@ class bandit:
 					max_conf = max(max_conf, sm.cla)
 
 					print('# exploring --', i, 'explore', explore, 'best_sd', best_sd, 'max_conf', max_conf)
-					if (ending_explore(i) or (i < repeat_count and i%self.k == self.k-1) or int(MAX_TIMEOUT - all_time) <= 0 or sm.asrt > 0): #enter_critical and ocount >= M-1) or (i < repeat_count and sm.asrt > 0) or (enter_critical and sm.asrt > 0):
+					if (ending_explore(i) or (i < repeat_count and i%self.k == self.k-1) or (int(MAX_TIMEOUT - all_time) <= 0 and all_ending) or sm.asrt > 0): #enter_critical and ocount >= M-1) or (i < repeat_count and sm.asrt > 0) or (enter_critical and sm.asrt > 0):
 						# end of exploration --- pick the best one
 						print('#  at the end of exploration')
 						# sd = sm.frame+1 if sm.frame > 0 else sm.frame
